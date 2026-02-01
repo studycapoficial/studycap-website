@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>StudyCap - Estude com Inteligência</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#2e1065">
+  <meta name="description" content="O app definitivo para organizar seus estudos, com IA integrada e método Pomodoro.">
+  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #8b5cf6;
+      --primary-hover: #7c3aed;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --glass-bg: rgba(15, 23, 42, 0.6);
+      --glass-border: rgba(255, 255, 255, 0.08);
+    }
+
+    * { box-sizing: border-box; scroll-behavior: smooth; }
+    
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: #020617;
+      color: var(--text-main);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* --- FUNDO ANIMADO --- */
+    .ambient-light {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      z-index: -1;
+      overflow: hidden;
+    }
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      opacity: 0.5;
+      animation: float 10s infinite ease-in-out alternate;
+    }
+    .orb-1 { width: 500px; height: 500px; background: #4c1d95; top: -10%; left: -10%; }
+    .orb-2 { width: 400px; height: 400px; background: #2563eb; bottom: 0; right: -10%; animation-duration: 14s; }
+    
+    @keyframes float {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(40px, 40px); }
+    }
+
+    /* --- CONTAINER --- */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* --- NAV --- */
+    nav {
+      padding: 24px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+
+    .logo-img {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      margin-left: 24px;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: #fff; }
+
+    /* --- HERO SECTION --- */
+    .hero {
+      text-align: center;
+      padding: 80px 0 40px;
+      position: relative;
+    }
+
+    h1 {
+      font-size: 3.5rem;
+      line-height: 1.1;
+      margin-bottom: 20px;
+      background: linear-gradient(to right, #fff, #a5b4fc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -1px;
+    }
+
+    .subtitle {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto 40px;
+    }
+
+    /* BOTÕES DAS LOJAS */
+    .store-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      margin-bottom: 60px;
+      flex-wrap: wrap;
+    }
+
+    .btn-store {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      padding: 12px 24px;
+      border-radius: 12px;
+      color: white;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: all 0.3s;
+      font-weight: 500;
+    }
+
+    .btn-store:hover {
+      background: rgba(255,255,255,0.2);
+      transform: translateY(-2px);
+    }
+    
+    .btn-icon { font-size: 1.5rem; }
+
+    /* --- MOCKUP DO CELULAR --- */
+    .phone-mockup {
+      width: 280px;
+      height: 560px;
+      background: #000;
+      margin: 0 auto;
+      border-radius: 40px;
+      border: 8px solid #1e293b;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+      z-index: 10;
+    }
+
+    .notch {
+      position: absolute;
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 25px;
+      background: #1e293b;
+      border-bottom-left-radius: 16px;
+      border-bottom-right-radius: 16px;
+      z-index: 20;
+    }
+
+    .screen-content {
+      width: 100%;
+      height: 100%;
+      /* AQUI VOCÊ PODE POR SEU PRINT REAL DEPOIS */
+      background: linear-gradient(180deg, #2e1065 0%, #0f172a 100%); 
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.2);
+      font-size: 0.8rem;
+      text-align: center;
+      padding: 20px;
+    }
+    
+    .screen-content img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    /* --- FEATURES --- */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      margin: 80px 0;
+    }
+
+    .card {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      padding: 30px;
+      border-radius: 20px;
+      transition: transform 0.2s;
+    }
+
+    .card:hover { transform: translateY(-5px); }
+
+    .card-icon {
+      width: 50px;
+      height: 50px;
+      background: rgba(139, 92, 246, 0.2);
+      color: #c4b5fd;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+    }
+
+    .card h3 { margin: 0 0 10px 0; font-size: 1.2rem; }
+    .card p { color: var(--text-muted); margin: 0; font-size: 0.95rem; }
+
+    /* --- SUPORTE --- */
+    .support-section {
+      text-align: center;
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(15, 23, 42, 0.4));
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      padding: 60px 20px;
+      margin-bottom: 80px;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background: var(--primary);
+      color: white;
+      padding: 14px 32px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 600;
+      margin-top: 20px;
+      transition: background 0.2s;
+    }
+    .btn-primary:hover { background: var(--primary-hover); }
+
+    /* --- FOOTER --- */
+    footer {
+      border-top: 1px solid var(--glass-border);
+      padding: 40px 0;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+    .footer-links a:hover { color: var(--primary); }
+
+    /* MOBILE */
+    @media (max-width: 768px) {
+      h1 { font-size: 2.5rem; }
+      .nav-links { display: none; } /* Simplificado para mobile */
+      nav { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="ambient-light">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+  </div>
+
+  <div class="container">
+    
+    <nav>
+      <div class="logo-area">
+        <img src="Mari.png" alt="Logo" class="logo-img">
+        StudyCap
+      </div>
+      <div class="nav-links">
+        <a href="#features">Funcionalidades</a>
+        <a href="#support">Suporte</a>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <h1>Estude de forma<br>inteligente.</h1>
+      <p class="subtitle">Organize suas notas, use Inteligência Artificial e domine o método Pomodoro. Tudo em um só lugar.</p>
+      
+      <div class="store-buttons">
+        <a href="#" class="btn-store">
+          <span class="btn-icon">🤖</span> Google Play
+        </a>
+        <a href="#" class="btn-store">
+          <span class="btn-icon">🍎</span> App Store
+        </a>
+      </div>
+
+      <div class="phone-mockup">
+        <div class="notch"></div>
+        <div class="screen-content">
+           <div>
+             <img src="Mari.png" style="width: 60px; height: 60px; margin-bottom: 10px; opacity: 0.5;">
+             <br>Visualização do App
+           </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="features" class="features">
+      <div class="card">
+        <div class="card-icon">🧠</div>
+        <h3>Mari IA</h3>
+        <p>Tire dúvidas instantaneamente com nossa inteligência artificial focada em educação e produtividade.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">📝</div>
+        <h3>Notas Sincronizadas</h3>
+        <p>Crie, edite e organize suas anotações com suporte a imagens e áudio, acessível de qualquer lugar.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">⏱️</div>
+        <h3>Foco Pomodoro</h3>
+        <p>Timer integrado para sessões de estudo focadas, com estatísticas de desempenho.</p>
+      </div>
+    </section>
+
+    <section id="support" class="support-section">
+      <h2>Precisa de ajuda?</h2>
+      <p style="max-width: 600px; margin: 10px auto 30px; color: #cbd5e1;">
+        Nossa equipe de suporte está pronta para resolver qualquer problema ou ouvir suas sugestões para melhorar o StudyCap.
+      </p>
+      <a href="mailto:studycapoficial@gmail.com" class="btn-primary">
+        Entrar em Contato
+      </a>
+      <p style="margin-top: 20px; font-size: 0.9rem; opacity: 0.7;">
+        Ou envie para: studycapoficial@gmail.com
+      </p>
+    </section>
+
+    <footer>
+      <div class="footer-links">
+        <a href="politica_privacidade.html">Política de Privacidade</a>
+        <a href="exclusao_conta.html">Exclusão de Conta</a>
+        <a href="#">Termos de Uso</a>
+      </div>
+      <p>© 2026 StudyCap. Todos os direitos reservados.</p>
+    </footer>
+
+  </div>
+
+</body>
+</html>
