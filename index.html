@@ -79,7 +79,7 @@
       width: 40px;
       height: 40px;
       border-radius: 10px;
-      object-fit: cover;
+      object-fit: cover; /* Garante que a logo não distorça */
     }
 
     .nav-links a {
@@ -148,7 +148,7 @@
     /* --- MOCKUP DO CELULAR --- */
     .phone-mockup {
       width: 280px;
-      height: 560px;
+      height: 580px; /* Ajustei altura para prints modernos */
       background: #000;
       margin: 0 auto;
       border-radius: 40px;
@@ -174,20 +174,18 @@
     .screen-content {
       width: 100%;
       height: 100%;
-      /* AQUI VOCÊ PODE POR SEU PRINT REAL DEPOIS */
-      background: linear-gradient(180deg, #2e1065 0%, #0f172a 100%); 
+      background: #000;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: rgba(255,255,255,0.2);
-      font-size: 0.8rem;
-      text-align: center;
-      padding: 20px;
     }
     
-<div class="screen-content">
-   <img src="print.png" alt="Tela do App">
-</div>
+    /* Configuração da Imagem do Print */
+    .screen-content img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Faz o print preencher todo o celular */
+        display: block;
     }
 
     /* --- FEATURES --- */
@@ -273,7 +271,7 @@
     /* MOBILE */
     @media (max-width: 768px) {
       h1 { font-size: 2.5rem; }
-      .nav-links { display: none; } /* Simplificado para mobile */
+      .nav-links { display: none; }
       nav { justify-content: center; }
     }
   </style>
@@ -314,10 +312,7 @@
       <div class="phone-mockup">
         <div class="notch"></div>
         <div class="screen-content">
-           <div>
-             <img src="Mari.png" style="width: 60px; height: 60px; margin-bottom: 10px; opacity: 0.5;">
-             <br>Visualização do App
-           </div>
+           <img src="print.jpg" alt="Tela do App">
         </div>
       </div>
     </section>
