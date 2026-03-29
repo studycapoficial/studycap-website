@@ -8,277 +8,245 @@
   <meta name="description" content="O app definitivo para organizar seus estudos, com IA integrada e método Pomodoro.">
   
   <link rel="icon" href="Mari.png" type="image/png">
-  
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <style>
     :root {
       --primary: #8b5cf6;
-      --primary-hover: #7c3aed;
-      --text-main: #ffffff; /* Branco puro para maior contraste */
-      --text-muted: #d1d5db; /* Cinza mais claro para melhor leitura */
-      --glass-bg: rgba(255, 255, 255, 0.05); /* Fundo de vidro mais claro */
-      --glass-border: rgba(255, 255, 255, 0.1); /* Borda mais clara */
+      --primary-glow: rgba(139, 92, 246, 0.5);
+      --accent: #3b82f6;
+      --text-main: #ffffff;
+      --text-muted: #a1a1aa;
+      --glass: rgba(255, 255, 255, 0.03);
+      --glass-border: rgba(255, 255, 255, 0.08);
     }
 
-    * { box-sizing: border-box; scroll-behavior: smooth; }
+    * { box-sizing: border-box; scroll-behavior: smooth; margin: 0; padding: 0; }
     
     body {
-      margin: 0;
       font-family: 'Inter', sans-serif;
-      background: linear-gradient(135deg, #1e1e2e 0%, #2d2b55 100%); /* Degradê de fundo original */
+      background-color: #030014;
       color: var(--text-main);
       overflow-x: hidden;
       line-height: 1.6;
     }
 
-    /* --- FUNDO ANIMADO --- */
-    .ambient-light {
+    /* --- EFEITO DE NEVE / PARTÍCULAS --- */
+    .snow-container {
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
       z-index: -1;
-      overflow: hidden;
       pointer-events: none;
-    }
-    .orb {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(120px); /* Blur aumentado para um efeito mais suave */
-      opacity: 0.4;
-    }
-    .orb-1 { width: 600px; height: 600px; background: #7c3aed; top: -15%; left: -15%; }
-    .orb-2 { width: 500px; height: 500px; background: #3b82f6; bottom: -10%; right: -10%; }
-    
-    /* --- CONTAINER --- */
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 20px;
+      background: radial-gradient(circle at 50% -20%, #1e1b4b, #030014);
     }
 
-    /* --- NAV --- */
+    .snowflake {
+      position: absolute;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.3;
+      filter: blur(1px);
+      animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(-10vh) translateX(0); }
+      100% { transform: translateY(110vh) translateX(20px); }
+    }
+
+    /* --- LUZES AMBIENTAIS (AURORA) --- */
+    .aurora {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      filter: blur(100px);
+      opacity: 0.4;
+      pointer-events: none;
+    }
+    .aurora-1 { width: 50vw; height: 50vw; background: var(--primary); top: -10%; left: -10%; animation: pulse 8s infinite alternate; }
+    .aurora-2 { width: 40vw; height: 40vw; background: var(--accent); bottom: -10%; right: -10%; animation: pulse 10s infinite alternate-reverse; }
+
+    @keyframes pulse {
+      from { opacity: 0.2; transform: scale(1); }
+      to { opacity: 0.5; transform: scale(1.2); }
+    }
+
+    /* --- CONTEÚDO --- */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
     nav {
-      padding: 24px 0;
+      height: 100px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
     
-    .logo-area {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-weight: 700;
-      font-size: 1.2rem;
-    }
-
-    .logo-img {
-      width: 40px;
-      height: 40px;
-      border-radius: 10px;
-      object-fit: cover;
-    }
+    .logo-area { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 1.5rem; letter-spacing: -1px; }
+    .logo-img { width: 42px; height: 42px; border-radius: 10px; box-shadow: 0 0 20px var(--primary-glow); }
 
     .nav-links a {
       color: var(--text-muted);
       text-decoration: none;
-      margin-left: 24px;
-      font-size: 0.95rem;
-      transition: color 0.2s;
+      margin-left: 30px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: 0.3s;
     }
-    .nav-links a:hover { color: #fff; }
+    .nav-links a:hover { color: var(--primary); text-shadow: 0 0 10px var(--primary-glow); }
 
-    /* --- HERO SECTION --- */
-    .hero {
-      text-align: center;
-      padding: 80px 0 60px;
-      position: relative;
-      /* Brilho de fundo na seção hero */
-      background: radial-gradient(circle at top center, rgba(124, 58, 237, 0.2) 0%, rgba(0,0,0,0) 70%);
-    }
+    /* --- HERO --- */
+    .hero { text-align: center; padding: 120px 0 100px; }
 
     h1 {
-      font-size: 4rem; /* Tamanho de fonte aumentado */
-      line-height: 1.1;
+      font-size: clamp(3rem, 10vw, 5.5rem);
+      font-weight: 900;
+      line-height: 0.9;
+      letter-spacing: -4px;
       margin-bottom: 24px;
-      background: linear-gradient(to right, #ffffff, #c4b5fd); /* Degradê de texto mais brilhante */
+      background: linear-gradient(to bottom, #fff, #a5b4fc);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      letter-spacing: -1.5px;
-      font-weight: 800;
+      animation: titleIn 1s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes titleIn {
+      from { opacity: 0; transform: translateY(40px) scale(0.9); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
     }
 
     .subtitle {
       font-size: 1.25rem;
       color: var(--text-muted);
-      max-width: 650px;
-      margin: 0 auto 48px;
+      max-width: 600px;
+      margin: 0 auto 50px;
     }
 
-    /* BOTÕES DAS LOJAS */
-    .store-buttons {
-      display: flex;
-      gap: 16px;
-      justify-content: center;
-      margin-bottom: 80px;
-      flex-wrap: wrap;
-    }
+    /* --- BOTÕES --- */
+    .store-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 80px; }
 
     .btn-store {
-      background: var(--glass-bg);
+      background: var(--glass);
       border: 1px solid var(--glass-border);
       padding: 14px 28px;
-      border-radius: 14px;
+      border-radius: 18px;
       color: white;
       text-decoration: none;
       display: flex;
       align-items: center;
       gap: 12px;
-      transition: all 0.3s;
       font-weight: 600;
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(12px);
+      transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
     }
 
     .btn-store:hover {
-      background: rgba(255, 255, 255, 0.1);
-      transform: translateY(-3px);
-      box-shadow: 0 10px 20px -10px rgba(124, 58, 237, 0.3);
+      background: rgba(255, 255, 255, 0.08);
+      transform: translateY(-5px);
+      border-color: var(--primary);
+      box-shadow: 0 10px 40px -10px var(--primary-glow);
     }
 
-    .btn-store.coming-soon {
-      opacity: 0.7;
-      cursor: not-allowed;
-      background: rgba(255, 255, 255, 0.03);
-    }
-    .btn-store.coming-soon:hover {
-      transform: none;
-      box-shadow: none;
-    }
-    
-    .store-icon { 
-      width: 26px; 
-      height: 26px; 
-      object-fit: contain;
-    }
+    .btn-store.coming-soon { opacity: 0.5; filter: grayscale(1); cursor: not-allowed; }
+    .store-icon { width: 24px; height: 24px; object-fit: contain; }
 
-    /* --- IMAGEM DO MOCKUP --- */
-    .mockup-image {
-      display: block;
-      max-width: 320px;
+    /* --- MOCKUP --- */
+    .mockup-container {
+      position: relative;
+      max-width: 340px;
+      margin: 0 auto;
+    }
+    .mockup-img {
       width: 100%;
       height: auto;
-      margin: 0 auto;
-      filter: drop-shadow(0 30px 60px rgba(0,0,0,0.5));
+      filter: drop-shadow(0 0 50px rgba(139, 92, 246, 0.2));
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
     }
 
     /* --- FEATURES --- */
-    .features {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 32px;
-      margin: 100px 0;
-    }
+    .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px; margin: 100px 0; }
 
     .card {
-      background: var(--glass-bg);
+      background: var(--glass);
       border: 1px solid var(--glass-border);
-      padding: 36px;
-      border-radius: 24px;
-      transition: all 0.3s;
-      backdrop-filter: blur(10px);
+      padding: 40px;
+      border-radius: 32px;
+      backdrop-filter: blur(20px);
+      transition: 0.4s;
+      position: relative;
+      overflow: hidden;
     }
-
-    .card:hover { 
-      transform: translateY(-5px);
-      box-shadow: 0 20px 40px -20px rgba(124, 58, 237, 0.3);
-      border-color: rgba(139, 92, 246, 0.3);
+    
+    .card:hover {
+      border-color: var(--primary);
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 20px 40px -20px black;
     }
 
     .card-icon {
-      width: 56px;
-      height: 56px;
-      background: rgba(139, 92, 246, 0.15);
-      color: #c4b5fd;
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.75rem;
+      font-size: 2rem;
+      width: 60px; height: 60px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      border-radius: 16px;
+      display: grid; place-items: center;
       margin-bottom: 24px;
+      box-shadow: 0 10px 20px -5px var(--primary-glow);
     }
 
-    .card h3 { margin: 0 0 12px 0; font-size: 1.3rem; font-weight: 700; }
-    .card p { color: var(--text-muted); margin: 0; font-size: 1rem; }
+    .card h3 { font-size: 1.5rem; margin-bottom: 12px; font-weight: 700; }
+    .card p { color: var(--text-muted); font-size: 1rem; }
 
     /* --- SUPORTE --- */
     .support-section {
-      text-align: center;
-      background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(0,0,0,0));
+      background: linear-gradient(rgba(139, 92, 246, 0.05), transparent);
       border: 1px solid var(--glass-border);
-      border-radius: 32px;
-      padding: 80px 30px;
-      margin-bottom: 100px;
-      backdrop-filter: blur(10px);
+      border-radius: 40px;
+      padding: 80px 40px;
+      text-align: center;
+      margin-bottom: 120px;
     }
-
-    .support-section h2 { font-size: 2.5rem; font-weight: 800; margin-bottom: 20px; }
 
     .btn-primary {
-      display: inline-block;
+      display: inline-flex;
       background: var(--primary);
       color: white;
-      padding: 16px 36px;
-      border-radius: 14px;
+      padding: 18px 45px;
+      border-radius: 20px;
       text-decoration: none;
-      font-weight: 600;
+      font-weight: 700;
       margin-top: 30px;
-      transition: all 0.3s;
-      box-shadow: 0 10px 20px -10px rgba(124, 58, 237, 0.5);
+      box-shadow: 0 10px 30px var(--primary-glow);
+      transition: 0.3s;
     }
-    .btn-primary:hover { 
-      background: var(--primary-hover);
-      transform: translateY(-3px);
-      box-shadow: 0 15px 30px -15px rgba(124, 58, 237, 0.7);
-    }
+    .btn-primary:hover { transform: scale(1.05); background: var(--primary-hover); }
 
     /* --- FOOTER --- */
-    footer {
-      border-top: 1px solid var(--glass-border);
-      padding: 50px 0;
-      text-align: center;
-      color: var(--text-muted);
-      font-size: 0.95rem;
-    }
+    footer { border-top: 1px solid var(--glass-border); padding: 60px 0; text-align: center; }
+    .footer-links { display: flex; justify-content: center; gap: 30px; margin-bottom: 30px; }
+    .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; transition: 0.2s; }
+    .footer-links a:hover { color: white; }
 
-    .footer-links {
-      display: flex;
-      justify-content: center;
-      gap: 24px;
-      margin-bottom: 24px;
-      flex-wrap: wrap;
-    }
-
-    .footer-links a {
-      color: var(--text-muted);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .footer-links a:hover { color: var(--primary); }
-
-    /* MOBILE */
     @media (max-width: 768px) {
-      h1 { font-size: 3rem; }
       .nav-links { display: none; }
-      nav { justify-content: center; }
+      h1 { letter-spacing: -2px; }
+      .hero { padding-top: 60px; }
     }
   </style>
 </head>
 <body>
 
-  <div class="ambient-light">
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-  </div>
+  <div class="snow-container" id="snow"></div>
+  <div class="aurora aurora-1"></div>
+  <div class="aurora aurora-2"></div>
 
   <div class="container">
     
@@ -294,12 +262,10 @@
     </nav>
 
     <section class="hero">
-      
       <h1>Estude de forma<br>inteligente.</h1>
       <p class="subtitle">Organize suas notas, use Inteligência Artificial e domine o método Pomodoro. Tudo em um só lugar.</p>
       
       <div class="store-buttons">
-        
         <a href="https://play.google.com/store/apps/details?id=com.alifdevstudio.studycap" class="btn-store" target="_blank">
           <img src="play_store.png" alt="Google Play" class="store-icon">
           Google Play (Em Teste)
@@ -314,54 +280,74 @@
           <img src="windows.png" alt="Windows" class="store-icon">
           Windows (Em Breve)
         </a>
-
       </div>
 
-      <img src="mockup.png" alt="StudyCap no Android" class="mockup-image">
-
+      <div class="mockup-container">
+        <img src="mockup.png" alt="App Preview" class="mockup-img">
+      </div>
     </section>
 
     <section id="features" class="features">
       <div class="card">
         <div class="card-icon">🧠</div>
         <h3>Mari IA</h3>
-        <p>Tire dúvidas instantaneamente com nossa inteligência artificial focada em educação e produtividade.</p>
+        <p>Tire dúvidas acadêmicas instantaneamente com nossa inteligência artificial integrada.</p>
       </div>
       <div class="card">
         <div class="card-icon">📝</div>
-        <h3>Notas Sincronizadas</h3>
-        <p>Crie, edite e organize suas anotações com suporte a imagens e áudio, acessível de qualquer lugar.</p>
+        <h3>Notas e Mídias</h3>
+        <p>Suporte completo para imagens, áudios e textos organizados por categorias personalizadas.</p>
       </div>
       <div class="card">
         <div class="card-icon">⏱️</div>
-        <h3>Foco Pomodoro</h3>
-        <p>Timer integrado para sessões de estudo focadas, com estatísticas de desempenho.</p>
+        <h3>Foco Absoluto</h3>
+        <p>Método Pomodoro com estatísticas semanais para você acompanhar sua evolução real.</p>
       </div>
     </section>
 
     <section id="support" class="support-section">
-      <h2>Precisa de ajuda?</h2>
-      <p style="max-width: 650px; margin: 10px auto 30px; color: var(--text-muted);">
-        Nossa equipe de suporte está pronta para resolver qualquer problema ou ouvir suas sugestões para melhorar o StudyCap.
-      </p>
-      <a href="mailto:studycapoficial@gmail.com" class="btn-primary">
-        Entrar em Contato
-      </a>
-      <p style="margin-top: 24px; font-size: 0.95rem; opacity: 0.8;">
-        Ou envie para: studycapoficial@gmail.com
-      </p>
+      <h2 style="font-size: 2.5rem; margin-bottom: 15px;">Dúvidas ou Feedback?</h2>
+      <p style="color: var(--text-muted);">Estamos em constante evolução para oferecer o melhor para seus estudos.</p>
+      <a href="mailto:studycapoficial@gmail.com" class="btn-primary">Falar com Suporte</a>
     </section>
 
     <footer>
       <div class="footer-links">
-        <a href="https://studycapoficial.github.io/studycap-privacy/">Política de Privacidade</a>
+        <a href="https://studycapoficial.github.io/studycap-privacy/">Privacidade</a>
         <a href="https://studycapoficial.github.io/studycap-delete-account/">Exclusão de Conta</a>
         <a href="#">Termos de Uso</a>
       </div>
-      <p>© 2026 StudyCap. Todos os direitos reservados.</p>
+      <p style="color: #4b5563; font-size: 0.85rem;">© 2026 StudyCap. Elevando sua produtividade ao máximo.</p>
     </footer>
 
   </div>
+
+  <script>
+    // Gerador de Neve/Partículas
+    function createSnow() {
+      const container = document.getElementById('snow');
+      const count = 50;
+      
+      for(let i = 0; i < count; i++) {
+        const flake = document.createElement('div');
+        flake.className = 'snowflake';
+        
+        const size = Math.random() * 4 + 1 + 'px';
+        const left = Math.random() * 100 + '%';
+        const duration = Math.random() * 10 + 5 + 's';
+        const delay = Math.random() * 5 + 's';
+        
+        flake.style.width = size;
+        flake.style.height = size;
+        flake.style.left = left;
+        flake.style.animationDuration = duration;
+        flake.style.animationDelay = delay;
+        
+        container.appendChild(flake);
+      }
+    }
+    createSnow();
+  </script>
 
 </body>
 </html>
