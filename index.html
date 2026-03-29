@@ -173,7 +173,12 @@
     }
 
     /* --- FEATURES --- */
-    .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px; margin: 100px 0; }
+    .features { 
+      display: grid; 
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+      gap: 32px; 
+      margin: 100px 0; 
+    }
 
     .card {
       background: var(--glass);
@@ -184,6 +189,8 @@
       transition: 0.4s;
       position: relative;
       overflow: hidden;
+      display: flex;
+      flex-direction: column;
     }
     
     .card:hover {
@@ -288,21 +295,43 @@
     </section>
 
     <section id="features" class="features">
+      
       <div class="card">
         <div class="card-icon">🧠</div>
         <h3>Mari IA</h3>
-        <p>Tire dúvidas acadêmicas instantaneamente com nossa inteligência artificial integrada.</p>
+        <p>Tire dúvidas acadêmicas instantaneamente com nossa inteligência artificial integrada ao StudyCap.</p>
       </div>
+
       <div class="card">
-        <div class="card-icon">📝</div>
-        <h3>Notas e Mídias</h3>
-        <p>Suporte completo para imagens, áudios e textos organizados por categorias personalizadas.</p>
+        <div class="card-icon">📁</div>
+        <h3>Notas & Mídias</h3>
+        <p>Separe suas anotações por matérias, anexe áudios e imagens, ou arquive conteúdos antigos para manter o foco.</p>
       </div>
+
       <div class="card">
         <div class="card-icon">⏱️</div>
         <h3>Foco Absoluto</h3>
-        <p>Método Pomodoro com estatísticas semanais para você acompanhar sua evolução real.</p>
+        <p>Método Pomodoro com tempos customizáveis para maximizar sua produtividade diária.</p>
       </div>
+
+      <div class="card">
+        <div class="card-icon">📅</div>
+        <h3>Agenda</h3>
+        <p>Anote e marque seus compromissos, provas e prazos de entrega em um calendário intuitivo e prático.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">📊</div>
+        <h3>Estatísticas</h3>
+        <p>Veja seu progresso detalhado e acompanhe suas conquistas de estudo durante todo o mês.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">☁️</div>
+        <h3>Cloud Sync</h3>
+        <p>Seus dados salvos localmente com futura integração para acessar de qualquer lugar.</p>
+      </div>
+
     </section>
 
     <section id="support" class="support-section">
@@ -323,7 +352,6 @@
   </div>
 
   <script>
-    // Gerador de Neve/Partículas
     function createSnow() {
       const container = document.getElementById('snow');
       const count = 50;
