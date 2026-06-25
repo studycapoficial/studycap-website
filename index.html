@@ -7,28 +7,31 @@
   <meta name="theme-color" content="#2e1065">
   <meta name="description" content="O app definitivo para organizar seus estudos, com IA integrada e método Pomodoro.">
   
-  <link rel="icon" href="Mari.png" type="image/png">
+  <link rel="icon" href="Nova.png" type="image/png">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <style>
     :root {
       --primary: #8b5cf6;
-      --primary-glow: rgba(139, 92, 246, 0.5);
+      --primary-hover: #7c3aed;
+      --primary-glow: rgba(139, 92, 246, 0.4);
       --accent: #3b82f6;
       --text-main: #ffffff;
-      --text-muted: #a1a1aa;
-      --glass: rgba(255, 255, 255, 0.03);
-      --glass-border: rgba(255, 255, 255, 0.08);
+      --text-muted: #94a3b8;
+      --glass: rgba(255, 255, 255, 0.02);
+      --glass-border: rgba(255, 255, 255, 0.06);
+      --bg-dark: #030014;
     }
 
     * { box-sizing: border-box; scroll-behavior: smooth; margin: 0; padding: 0; }
     
     body {
       font-family: 'Inter', sans-serif;
-      background-color: #030014;
+      background-color: var(--bg-dark);
       color: var(--text-main);
       overflow-x: hidden;
       line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
     }
 
     /* --- EFEITO DE NEVE / PARTÍCULAS --- */
@@ -37,21 +40,21 @@
       top: 0; left: 0; width: 100%; height: 100%;
       z-index: -1;
       pointer-events: none;
-      background: radial-gradient(circle at 50% -20%, #1e1b4b, #030014);
+      background: radial-gradient(circle at 50% -20%, #171233, #030014);
     }
 
     .snowflake {
       position: absolute;
       background: white;
       border-radius: 50%;
-      opacity: 0.3;
-      filter: blur(1px);
+      opacity: 0.25;
+      filter: blur(0.5px);
       animation: fall linear infinite;
     }
 
     @keyframes fall {
       0% { transform: translateY(-10vh) translateX(0); }
-      100% { transform: translateY(110vh) translateX(20px); }
+      100% { transform: translateY(110vh) translateX(30px); }
     }
 
     /* --- LUZES AMBIENTAIS (AURORA) --- */
@@ -60,164 +63,279 @@
       width: 100%;
       height: 100%;
       z-index: -1;
-      filter: blur(100px);
-      opacity: 0.4;
+      filter: blur(140px);
+      opacity: 0.35;
       pointer-events: none;
     }
-    .aurora-1 { width: 50vw; height: 50vw; background: var(--primary); top: -10%; left: -10%; animation: pulse 8s infinite alternate; }
-    .aurora-2 { width: 40vw; height: 40vw; background: var(--accent); bottom: -10%; right: -10%; animation: pulse 10s infinite alternate-reverse; }
+    .aurora-1 { width: 60vw; height: 60vw; background: var(--primary); top: -15%; left: -10%; animation: pulse 12s infinite alternate; }
+    .aurora-2 { width: 50vw; height: 50vw; background: var(--accent); bottom: -10%; right: -10%; animation: pulse 14s infinite alternate-reverse; }
 
     @keyframes pulse {
-      from { opacity: 0.2; transform: scale(1); }
-      to { opacity: 0.5; transform: scale(1.2); }
+      from { opacity: 0.15; transform: scale(0.9) translate(0, 0); }
+      to { opacity: 0.45; transform: scale(1.1) translate(5%, 5%); }
     }
 
     /* --- CONTEÚDO --- */
     .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 
+    header {
+      position: sticky;
+      top: 20px;
+      z-index: 1000;
+      margin-bottom: 40px;
+    }
+
     nav {
-      height: 100px;
+      height: 70px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      backdrop-filter: blur(10px);
-      position: sticky;
-      top: 0;
-      z-index: 100;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      background: rgba(3, 0, 20, 0.6);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 0 24px;
+      box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
     }
     
-    .logo-area { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 1.5rem; letter-spacing: -1px; }
-    .logo-img { width: 42px; height: 42px; border-radius: 10px; box-shadow: 0 0 20px var(--primary-glow); }
+    .logo-area { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 1.4rem; letter-spacing: -0.5px; }
+    .logo-img { width: 36px; height: 36px; border-radius: 8px; box-shadow: 0 0 15px var(--primary-glow); }
 
     .nav-links a {
       color: var(--text-muted);
       text-decoration: none;
-      margin-left: 30px;
+      margin-left: 24px;
       font-size: 0.9rem;
       font-weight: 500;
-      transition: 0.3s;
+      transition: all 0.3s ease;
     }
-    .nav-links a:hover { color: var(--primary); text-shadow: 0 0 10px var(--primary-glow); }
+    .nav-links a:hover { color: var(--text-main); text-shadow: 0 0 8px rgba(255,255,255,0.3); }
 
     /* --- HERO --- */
-    .hero { text-align: center; padding: 120px 0 100px; }
-
-    h1 {
-      font-size: clamp(3rem, 10vw, 5.5rem);
-      font-weight: 900;
-      line-height: 0.9;
-      letter-spacing: -4px;
-      margin-bottom: 24px;
-      background: linear-gradient(to bottom, #fff, #a5b4fc);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: titleIn 1s cubic-bezier(0.16, 1, 0.3, 1);
+    .hero { 
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      align-items: center;
+      gap: 40px;
+      padding: 60px 0 120px; 
+      text-align: left;
+      position: relative;
     }
 
-    @keyframes titleIn {
-      from { opacity: 0; transform: translateY(40px) scale(0.9); }
-      to { opacity: 1; transform: translateY(0) scale(1); }
+    .hero-content {
+      animation: contentIn 1s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 6vw, 4.8rem);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -2px;
+      margin-bottom: 24px;
+      background: linear-gradient(135deg, #ffffff 30%, #c084fc 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    @keyframes contentIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .subtitle {
-      font-size: 1.25rem;
+      font-size: 1.15rem;
       color: var(--text-muted);
-      max-width: 600px;
-      margin: 0 auto 50px;
+      max-width: 540px;
+      margin-bottom: 40px;
     }
 
     /* --- BOTÕES --- */
-    .store-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 80px; }
+    .store-buttons { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 20px; }
 
     .btn-store {
       background: var(--glass);
       border: 1px solid var(--glass-border);
-      padding: 14px 28px;
-      border-radius: 18px;
+      padding: 12px 24px;
+      border-radius: 14px;
       color: white;
       text-decoration: none;
       display: flex;
       align-items: center;
       gap: 12px;
       font-weight: 600;
+      font-size: 0.9rem;
       backdrop-filter: blur(12px);
-      transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .btn-store:hover {
-      background: rgba(255, 255, 255, 0.08);
+    .btn-store:not(.coming-soon):hover {
+      background: rgba(255, 255, 255, 0.06);
       transform: translateY(-5px);
       border-color: var(--primary);
-      box-shadow: 0 10px 40px -10px var(--primary-glow);
+      box-shadow: 0 15px 35px -10px var(--primary-glow);
     }
 
-    .btn-store.coming-soon { opacity: 0.5; filter: grayscale(1); cursor: not-allowed; }
-    .store-icon { width: 24px; height: 24px; object-fit: contain; }
+    .btn-store.coming-soon { opacity: 0.4; filter: grayscale(1); cursor: not-allowed; }
+    .store-icon { width: 20px; height: 20px; object-fit: contain; }
 
-    /* --- MOCKUP --- */
+    /* --- MOCKUP E GLOW DINÂMICO --- */
     .mockup-container {
       position: relative;
-      max-width: 340px;
-      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      animation: contentIn 1.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
+    
+    .mockup-container::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 280px; height: 280px;
+      background: var(--primary);
+      border-radius: 50%;
+      z-index: -1;
+      filter: blur(50px);
+      opacity: 0.3;
+      animation: glowShift 8s ease-in-out infinite alternate;
+      pointer-events: none;
+    }
+
+    @keyframes glowShift {
+      0% { background: var(--primary); opacity: 0.25; filter: blur(50px); }
+      100% { background: var(--accent); opacity: 0.4; filter: blur(70px); }
+    }
+
     .mockup-img {
       width: 100%;
+      max-width: 320px;
       height: auto;
-      filter: drop-shadow(0 0 50px rgba(139, 92, 246, 0.2));
+      filter: drop-shadow(0 20px 40px rgba(0,0,0,0.6));
       animation: float 6s ease-in-out infinite;
     }
 
     @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-20px); }
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-15px) rotate(0.5deg); }
     }
 
-    /* --- FEATURES --- */
+    /* --- INDICADOR DE SCROLL --- */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      opacity: 0.6;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+    .scroll-indicator.hidden { opacity: 0; }
+    .mouse {
+      width: 20px; height: 32px;
+      border: 2px solid var(--text-muted);
+      border-radius: 20px;
+      position: relative;
+    }
+    .wheel {
+      width: 4px; height: 8px;
+      background: var(--text-main);
+      border-radius: 2px;
+      position: absolute;
+      top: 6px; left: 50%;
+      transform: translateX(-50%);
+      animation: scrollWheel 1.6s ease-in-out infinite;
+    }
+    @keyframes scrollWheel {
+      0% { top: 6px; opacity: 1; }
+      100% { top: 18px; opacity: 0; }
+    }
+
+    /* --- FEATURES & SCROLL REVEAL --- */
     .features { 
       display: grid; 
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
-      gap: 32px; 
-      margin: 100px 0; 
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+      gap: 24px; 
+      margin: 40px 0 120px; 
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .card {
-      background: var(--glass);
+      background: rgba(255, 255, 255, 0.01);
       border: 1px solid var(--glass-border);
-      padding: 40px;
-      border-radius: 32px;
+      padding: 36px;
+      border-radius: 24px;
       backdrop-filter: blur(20px);
-      transition: 0.4s;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
       position: relative;
       overflow: hidden;
-      display: flex;
-      flex-direction: column;
     }
     
     .card:hover {
-      border-color: var(--primary);
-      transform: translateY(-10px) scale(1.02);
-      box-shadow: 0 20px 40px -20px black;
+      border-color: rgba(139, 92, 246, 0.4);
+      background: rgba(255, 255, 255, 0.03);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px -20px rgba(0,0,0,0.7);
     }
 
     .card-icon {
-      font-size: 2rem;
-      width: 60px; height: 60px;
-      background: linear-gradient(135deg, var(--primary), var(--accent));
-      border-radius: 16px;
+      width: 52px; height: 52px;
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(59, 130, 246, 0.2));
+      border: 1px solid rgba(139, 92, 246, 0.3);
+      border-radius: 14px;
       display: grid; place-items: center;
       margin-bottom: 24px;
-      box-shadow: 0 10px 20px -5px var(--primary-glow);
+      transition: all 0.4s ease;
     }
 
-    .card h3 { font-size: 1.5rem; margin-bottom: 12px; font-weight: 700; }
-    .card p { color: var(--text-muted); font-size: 1rem; }
+    .card:hover .card-icon {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      box-shadow: 0 0 20px var(--primary-glow);
+      border-color: transparent;
+    }
+
+    .card-icon svg {
+      width: 24px; height: 24px;
+      fill: none;
+      stroke: #c084fc;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      transition: all 0.4s ease;
+    }
+
+    .card:hover .card-icon svg { stroke: #ffffff; }
+
+    /* ANIMAÇÃO DAS ESTRELAS MARI IA */
+    .star-blink-1 { animation: starBlink 2s infinite alternate; }
+    .star-blink-2 { animation: starBlink 1.5s infinite alternate-reverse; }
+    @keyframes starBlink {
+      0% { opacity: 0.3; transform: scale(0.7); }
+      100% { opacity: 1; transform: scale(1.1); }
+    }
+
+    .card h3 { font-size: 1.35rem; margin-bottom: 12px; font-weight: 700; letter-spacing: -0.3px; }
+    .card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.5; }
 
     /* --- SUPORTE --- */
     .support-section {
-      background: linear-gradient(rgba(139, 92, 246, 0.05), transparent);
+      background: radial-gradient(circle at top, rgba(139, 92, 246, 0.08), transparent 70%);
       border: 1px solid var(--glass-border);
-      border-radius: 40px;
-      padding: 80px 40px;
+      border-radius: 32px;
+      padding: 60px 24px;
       text-align: center;
       margin-bottom: 120px;
     }
@@ -226,26 +344,48 @@
       display: inline-flex;
       background: var(--primary);
       color: white;
-      padding: 18px 45px;
-      border-radius: 20px;
+      padding: 16px 40px;
+      border-radius: 14px;
       text-decoration: none;
-      font-weight: 700;
-      margin-top: 30px;
-      box-shadow: 0 10px 30px var(--primary-glow);
-      transition: 0.3s;
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-top: 24px;
+      box-shadow: 0 10px 25px var(--primary-glow);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .btn-primary:hover { transform: scale(1.05); background: var(--primary-hover); }
+    .btn-primary:hover { transform: translateY(-4px); background: var(--primary-hover); box-shadow: 0 15px 30px rgba(139, 92, 246, 0.5); }
 
     /* --- FOOTER --- */
-    footer { border-top: 1px solid var(--glass-border); padding: 60px 0; text-align: center; }
-    .footer-links { display: flex; justify-content: center; gap: 30px; margin-bottom: 30px; }
-    .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; transition: 0.2s; }
+    footer { border-top: 1px solid var(--glass-border); padding: 48px 0; text-align: center; }
+    .footer-links { display: flex; justify-content: center; gap: 32px; margin-bottom: 24px; }
+    .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; transition: 0.2s; }
     .footer-links a:hover { color: white; }
 
-    @media (max-width: 768px) {
+    /* --- DESIGN RESPONSIVO --- */
+    @media (max-width: 968px) {
+      .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding: 40px 0 80px;
+        gap: 48px;
+      }
+      .subtitle { margin: 0 auto 32px; font-size: 1.1rem; }
+      .store-buttons { justify-content: center; gap: 12px; }
+      .mockup-container { order: 2; }
+      .hero-content { order: 1; }
+      .scroll-indicator { display: none; }
+      .features { margin: 20px 0 80px; }
+      .support-section { padding: 48px 20px; margin-bottom: 80px; }
+    }
+
+    @media (max-width: 500px) {
+      header { top: 12px; padding: 0; margin-bottom: 20px; }
+      nav { justify-content: center; height: 60px; }
       .nav-links { display: none; }
-      h1 { letter-spacing: -2px; }
-      .hero { padding-top: 60px; }
+      h1 { font-size: 2.3rem; letter-spacing: -1px; }
+      .btn-store { width: 100%; justify-content: center; }
+      .card { padding: 28px 20px; }
+      .footer-links { flex-direction: column; gap: 16px; }
     }
   </style>
 </head>
@@ -257,86 +397,110 @@
 
   <div class="container">
     
-    <nav>
-      <div class="logo-area">
-        <img src="Mari.png" alt="Logo" class="logo-img">
-        StudyCap
-      </div>
-      <div class="nav-links">
-        <a href="#features">Funcionalidades</a>
-        <a href="#support">Suporte</a>
-      </div>
-    </nav>
+    <header>
+      <nav>
+        <div class="logo-area">
+          <img src="Nova.png" alt="Logo" class="logo-img">
+          StudyCap
+        </div>
+        <div class="nav-links">
+          <a href="#features">Funcionalidades</a>
+          <a href="#support">Suporte</a>
+        </div>
+      </nav>
+    </header>
 
     <section class="hero">
-      <h1>Estude de forma<br>inteligente.</h1>
-      <p class="subtitle">Organize suas notas, use Inteligência Artificial e domine o método Pomodoro. Tudo em um só lugar.</p>
-      
-      <div class="store-buttons">
-        <a href="https://play.google.com/store/apps/details?id=com.alifdevstudio.studycap" class="btn-store" target="_blank">
-          <img src="play_store.png" alt="Google Play" class="store-icon">
-          Google Play (Em Teste)
-        </a>
+      <div class="hero-content">
+        <h1>Estude de forma<br>inteligente.</h1>
+        <p class="subtitle">Organize suas notas, use Inteligência Artificial e domine o método Pomodoro. Tudo em um só lugar.</p>
         
-        <a class="btn-store coming-soon">
-          <img src="app_store.png" alt="App Store" class="store-icon">
-          App Store (Em Breve)
-        </a>
+        <div class="store-buttons">
+          <a href="https://play.google.com/store/apps/details?id=com.alifdevstudio.studycap" class="btn-store" target="_blank">
+            <img src="play_store.png" alt="Google Play" class="store-icon">
+            Google Play (Em Teste)
+          </a>
+          
+          <a class="btn-store coming-soon">
+            <img src="app_store.png" alt="App Store" class="store-icon">
+            App Store (Em Breve)
+          </a>
 
-        <a class="btn-store coming-soon">
-          <img src="windows.png" alt="Windows" class="store-icon">
-          Windows (Em Breve)
-        </a>
+          <a class="btn-store coming-soon">
+            <img src="windows.png" alt="Windows" class="store-icon">
+            Windows (Em Breve)
+          </a>
+        </div>
       </div>
 
       <div class="mockup-container">
         <img src="mockup.png" alt="App Preview" class="mockup-img">
       </div>
+
+      <div class="scroll-indicator" id="scrollInd">
+        <div class="mouse"><div class="wheel"></div></div>
+      </div>
     </section>
 
     <section id="features" class="features">
       
-      <div class="card">
-        <div class="card-icon">🧠</div>
+      <div class="card reveal">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 2l2.4 7.2h7.6l-6 4.8 2.4 7.2-6-4.8-6 4.8 2.4-7.2-6-4.8h7.6z" />
+            <path class="star-blink-1" d="M20 4l.8 2.4h2.2l-1.8 1.4.8 2.4-1.8-1.4-1.8 1.4.8-2.4-1.8-1.4h2.2z" style="transform: scale(0.6); transform-origin: 20px 4px;"/>
+            <path class="star-blink-2" d="M4 16l.8 2.4h2.2l-1.8 1.4.8 2.4-1.8-1.4-1.8 1.4.8-2.4-1.8-1.4h2.2z" style="transform: scale(0.5); transform-origin: 4px 16px;"/>
+          </svg>
+        </div>
         <h3>Mari IA</h3>
         <p>Tire dúvidas acadêmicas instantaneamente com nossa inteligência artificial integrada ao StudyCap.</p>
       </div>
 
-      <div class="card">
-        <div class="card-icon">📁</div>
+      <div class="card reveal">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+        </div>
         <h3>Notas & Mídias</h3>
         <p>Separe suas anotações por matérias, anexe áudios e imagens, ou arquive conteúdos antigos para manter o foco.</p>
       </div>
 
-      <div class="card">
-        <div class="card-icon">⏱️</div>
+      <div class="card reveal">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
         <h3>Foco Absoluto</h3>
         <p>Método Pomodoro com tempos customizáveis para maximizar sua produtividade diária.</p>
       </div>
 
-      <div class="card">
-        <div class="card-icon">📅</div>
+      <div class="card reveal">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        </div>
         <h3>Agenda</h3>
         <p>Anote e marque seus compromissos, provas e prazos de entrega em um calendário intuitivo e prático.</p>
       </div>
 
-      <div class="card">
-        <div class="card-icon">📊</div>
+      <div class="card reveal">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        </div>
         <h3>Estatísticas</h3>
         <p>Veja seu progresso detalhado e acompanhe suas conquistas de estudo durante todo o mês.</p>
       </div>
 
-      <div class="card">
-        <div class="card-icon">☁️</div>
+      <div class="card reveal">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
+        </div>
         <h3>Cloud Sync</h3>
         <p>Seus dados salvos localmente com futura integração para acessar de qualquer lugar.</p>
       </div>
 
     </section>
 
-    <section id="support" class="support-section">
-      <h2 style="font-size: 2.5rem; margin-bottom: 15px;">Dúvidas ou Feedback?</h2>
-      <p style="color: var(--text-muted);">Estamos em constante evolução para oferecer o melhor para seus estudos.</p>
+    <section id="support" class="support-section reveal">
+      <h2 style="font-size: 2.2rem; font-weight: 800; margin-bottom: 12px; letter-spacing: -1px;">Dúvidas ou Feedback?</h2>
+      <p style="color: var(--text-muted); max-width: 500px; margin: 0 auto;">Estamos em constante evolução para oferecer o melhor para seus estudos.</p>
       <a href="mailto:studycapoficial@gmail.com" class="btn-primary">Falar com Suporte</a>
     </section>
 
@@ -346,12 +510,13 @@
         <a href="https://studycapoficial.github.io/studycap-delete-account/">Exclusão de Conta</a>
         <a href="#">Termos de Uso</a>
       </div>
-      <p style="color: #4b5563; font-size: 0.85rem;">© 2026 StudyCap. Elevando sua produtividade ao máximo.</p>
+      <p style="color: #475569; font-size: 0.85rem;">© 2026 StudyCap. Elevando sua produtividade ao máximo.</p>
     </footer>
 
   </div>
 
   <script>
+    // --- MOTOR DE PARTÍCULAS (NEVE) ---
     function createSnow() {
       const container = document.getElementById('snow');
       const count = 50;
@@ -375,6 +540,29 @@
       }
     }
     createSnow();
+
+    // --- MOTOR DE SCROLL REVEAL ---
+    const revealElements = document.querySelectorAll('.reveal');
+    const scrollInd = document.getElementById('scrollInd');
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+
+    revealElements.forEach(element => revealObserver.observe(element));
+
+    // Esconder o indicador de rolagem quando descer a página
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        scrollInd.classList.add('hidden');
+      } else {
+        scrollInd.classList.remove('hidden');
+      }
+    });
   </script>
 
 </body>
