@@ -8,7 +8,42 @@
   <meta name="description" content="O app definitivo para organizar seus estudos, com IA integrada e método Pomodoro.">
   
   <link rel="icon" href="Nova.png" type="image/png">
+  <link rel="apple-touch-icon" href="Nova.png">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Meta tags Open Graph (Exibe a imagem nos resultados do Google, WhatsApp e Redes Sociais) -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://studycap.app/">
+  <meta property="og:title" content="StudyCap - Estude com Inteligência">
+  <meta property="og:description" content="O app definitivo para organizar seus estudos, com IA integrada e método Pomodoro.">
+  <meta property="og:image" content="https://studycap.app/site.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
+  <!-- Meta tags do Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="StudyCap - Estude com Inteligência">
+  <meta name="twitter:description" content="O app definitivo para organizar seus estudos, com IA integrada e método Pomodoro.">
+  <meta name="twitter:image" content="https://studycap.app/site.png">
+
+  <!-- Dados Estruturados Schema.org (Ajuda o Google Search a identificar o Logo e a Imagem) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "StudyCap",
+    "operatingSystem": "ANDROID, WINDOWS, IOS",
+    "applicationCategory": "EducationalApplication",
+    "image": "https://studycap.app/site.png",
+    "url": "https://studycap.app/",
+    "author": {
+      "@type": "Organization",
+      "name": "StudyCap",
+      "logo": "https://studycap.app/Nova.png"
+    },
+    "description": "O app definitivo para organizar seus estudos, com IA integrada e método Pomodoro."
+  }
+  </script>
 
   <style>
     :root {
@@ -75,7 +110,7 @@
       to { opacity: 0.45; transform: scale(1.1) translate(5%, 5%); }
     }
 
-    /* --- CONTEÚDO --- */
+    /* --- CONTEÚDO E NAVEGAÇÃO --- */
     .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 
     header {
@@ -102,15 +137,60 @@
     .logo-area { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 1.4rem; letter-spacing: -0.5px; }
     .logo-img { width: 36px; height: 36px; border-radius: 8px; box-shadow: 0 0 15px var(--primary-glow); }
 
+    .nav-links { display: flex; align-items: center; gap: 24px; }
+
     .nav-links a {
       color: var(--text-muted);
       text-decoration: none;
-      margin-left: 24px;
       font-size: 0.9rem;
       font-weight: 500;
       transition: all 0.3s ease;
     }
     .nav-links a:hover { color: var(--text-main); text-shadow: 0 0 8px rgba(255,255,255,0.3); }
+
+    /* --- BOTÃO HIGHLIGHT DO INSTAGRAM --- */
+    .btn-instagram {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 18px;
+      border-radius: 50px;
+      background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
+      color: #ffffff !important;
+      font-weight: 700 !important;
+      font-size: 0.85rem !important;
+      text-decoration: none;
+      box-shadow: 0 4px 15px rgba(225, 48, 108, 0.4);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+      animation: instaGlow 2.5s infinite ease-in-out;
+    }
+
+    .btn-instagram svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+      flex-shrink: 0;
+      transition: transform 0.3s ease;
+    }
+
+    .btn-instagram:hover {
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: 0 6px 25px rgba(225, 48, 108, 0.7) !important;
+      text-shadow: none !important;
+    }
+
+    .btn-instagram:hover svg {
+      transform: rotate(8deg) scale(1.1);
+    }
+
+    @keyframes instaGlow {
+      0%, 100% {
+        box-shadow: 0 4px 15px rgba(225, 48, 108, 0.4);
+      }
+      50% {
+        box-shadow: 0 0 22px rgba(253, 29, 29, 0.85), 0 0 10px rgba(252, 176, 69, 0.6);
+      }
+    }
 
     /* --- HERO --- */
     .hero { 
@@ -380,8 +460,9 @@
 
     @media (max-width: 500px) {
       header { top: 12px; padding: 0; margin-bottom: 20px; }
-      nav { justify-content: center; height: 60px; }
-      .nav-links { display: none; }
+      nav { justify-content: space-between; height: 60px; padding: 0 16px; }
+      .nav-links a:not(.btn-instagram) { display: none; }
+      .btn-instagram { padding: 6px 12px; font-size: 0.8rem !important; }
       h1 { font-size: 2.3rem; letter-spacing: -1px; }
       .btn-store { width: 100%; justify-content: center; }
       .card { padding: 28px 20px; }
@@ -406,6 +487,12 @@
         <div class="nav-links">
           <a href="#features">Funcionalidades</a>
           <a href="#support">Suporte</a>
+          <a href="https://www.instagram.com/studycapoficial?igsh=MTMyNGZvY3BncWFueQ==" target="_blank" rel="noopener noreferrer" class="btn-instagram" title="Siga nosso Instagram">
+            <svg viewBox="0 0 24 24">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+            </svg>
+            <span>Instagram</span>
+          </a>
         </div>
       </nav>
     </header>
