@@ -12,7 +12,7 @@
   <link rel="apple-touch-icon" href="Nova.png">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-  <!-- Meta tags Open Graph (Exibe a imagem nos resultados do Google, WhatsApp e Redes Sociais) -->
+  <!-- Meta tags Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://studycap.app/">
   <meta property="og:title" content="StudyCap (Study Cap) - Estude com Inteligência">
@@ -27,7 +27,7 @@
   <meta name="twitter:description" content="StudyCap (Study Cap) é o app definitivo para organizar seus estudos, com IA integrada e método Pomodoro.">
   <meta name="twitter:image" content="https://studycap.app/site.png">
 
-  <!-- Dados Estruturados Schema.org (Ajuda o Google Search a identificar o Logo, Nome Alternativo e a Imagem) -->
+  <!-- Dados Estruturados Schema.org -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -151,6 +151,16 @@
     }
     .nav-links a:hover { color: var(--text-main); text-shadow: 0 0 8px rgba(255,255,255,0.3); }
 
+    /* BOTÃO MENU MOBILE */
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+      padding: 4px;
+    }
+
     /* --- BOTÃO HIGHLIGHT DO INSTAGRAM --- */
     .btn-instagram {
       display: inline-flex;
@@ -187,12 +197,8 @@
     }
 
     @keyframes instaGlow {
-      0%, 100% {
-        box-shadow: 0 4px 15px rgba(225, 48, 108, 0.4);
-      }
-      50% {
-        box-shadow: 0 0 22px rgba(253, 29, 29, 0.85), 0 0 10px rgba(252, 176, 69, 0.6);
-      }
+      0%, 100% { box-shadow: 0 4px 15px rgba(225, 48, 108, 0.4); }
+      50% { box-shadow: 0 0 22px rgba(253, 29, 29, 0.85), 0 0 10px rgba(252, 176, 69, 0.6); }
     }
 
     /* --- HERO --- */
@@ -201,7 +207,7 @@
       grid-template-columns: 1.2fr 0.8fr;
       align-items: center;
       gap: 40px;
-      padding: 60px 0 120px; 
+      padding: 60px 0 80px; 
       text-align: left;
       position: relative;
     }
@@ -233,7 +239,7 @@
       margin-bottom: 40px;
     }
 
-    /* --- BOTÕES --- */
+    /* --- BOTÕES STORE --- */
     .store-buttons { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 20px; }
 
     .btn-store {
@@ -262,7 +268,7 @@
     .btn-store.coming-soon { opacity: 0.4; filter: grayscale(1); cursor: not-allowed; }
     .store-icon { width: 20px; height: 20px; object-fit: contain; }
 
-    /* --- MOCKUP E GLOW DINÂMICO --- */
+    /* --- MOCKUP E GLOW --- */
     .mockup-container {
       position: relative;
       display: flex;
@@ -306,7 +312,7 @@
     /* --- INDICADOR DE SCROLL --- */
     .scroll-indicator {
       position: absolute;
-      bottom: 20px;
+      bottom: 10px;
       left: 50%;
       transform: translateX(-50%);
       display: flex;
@@ -338,12 +344,28 @@
       100% { top: 18px; opacity: 0; }
     }
 
+    .section-title-center {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .section-title-center h2 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+
+    .section-title-center p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+    }
+
     /* --- FEATURES & SCROLL REVEAL --- */
     .features { 
       display: grid; 
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
       gap: 24px; 
-      margin: 40px 0 120px; 
+      margin-bottom: 120px; 
     }
 
     .reveal {
@@ -440,7 +462,7 @@
 
     /* --- FOOTER --- */
     footer { border-top: 1px solid var(--glass-border); padding: 48px 0; text-align: center; }
-    .footer-links { display: flex; justify-content: center; gap: 32px; margin-bottom: 24px; }
+    .footer-links { display: flex; justify-content: center; gap: 32px; margin-bottom: 24px; flex-wrap: wrap; }
     .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; transition: 0.2s; }
     .footer-links a:hover { color: white; }
 
@@ -449,7 +471,7 @@
       .hero {
         grid-template-columns: 1fr;
         text-align: center;
-        padding: 40px 0 80px;
+        padding: 40px 0 60px;
         gap: 48px;
       }
       .subtitle { margin: 0 auto 32px; font-size: 1.1rem; }
@@ -457,15 +479,34 @@
       .mockup-container { order: 2; }
       .hero-content { order: 1; }
       .scroll-indicator { display: none; }
-      .features { margin: 20px 0 80px; }
+      .features { margin-bottom: 80px; }
       .support-section { padding: 48px 20px; margin-bottom: 80px; }
     }
 
-    @media (max-width: 500px) {
+    @media (max-width: 640px) {
       header { top: 12px; padding: 0; margin-bottom: 20px; }
-      nav { justify-content: space-between; height: 60px; padding: 0 16px; }
-      .nav-links a:not(.btn-instagram) { display: none; }
-      .btn-instagram { padding: 6px 12px; font-size: 0.8rem !important; }
+      nav { justify-content: space-between; height: 60px; padding: 0 16px; position: relative; }
+      
+      .mobile-menu-btn { display: block; }
+      
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background: rgba(3, 0, 20, 0.95);
+        border: 1px solid var(--glass-border);
+        border-radius: 16px;
+        padding: 20px;
+        flex-direction: column;
+        gap: 16px;
+        backdrop-filter: blur(20px);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+      }
+
+      .nav-links.active { display: flex; }
+      .btn-instagram { width: 100%; justify-content: center; }
       h1 { font-size: 2.3rem; letter-spacing: -1px; }
       .btn-store { width: 100%; justify-content: center; }
       .card { padding: 28px 20px; }
@@ -487,7 +528,13 @@
           <img src="Nova.png" alt="Logo" class="logo-img">
           StudyCap
         </div>
-        <div class="nav-links">
+
+        <button class="mobile-menu-btn" id="menuToggle" aria-label="Abrir Menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+        </button>
+
+        <div class="nav-links" id="navLinks">
+          <a href="sobre-app/index.html">Sobre</a>
           <a href="#features">Funcionalidades</a>
           <a href="#support">Suporte</a>
           <a href="https://www.instagram.com/studycapoficial?igsh=MTMyNGZvY3BncWFueQ==" target="_blank" rel="noopener noreferrer" class="btn-instagram" title="Siga nosso Instagram">
@@ -531,6 +578,12 @@
         <div class="mouse"><div class="wheel"></div></div>
       </div>
     </section>
+
+    <!-- CABEÇALHO DA SEÇÃO DE RECURSOS -->
+    <div class="section-title-center reveal">
+      <h2>Recursos Principais</h2>
+      <p>Tudo o que você precisa para alcançar seus objetivos acadêmicos</p>
+    </div>
 
     <section id="features" class="features">
       
@@ -596,6 +649,8 @@
 
     <footer>
       <div class="footer-links">
+        <a href="sobre-app/index.html">Sobre o App</a>
+        <a href="#features">Funcionalidades</a>
         <a href="./privacidade/">Privacidade</a>
         <a href="./deletar-conta/">Exclusão de Conta</a>
         <a href="#">Termos de Uso</a>
@@ -645,13 +700,28 @@
 
     revealElements.forEach(element => revealObserver.observe(element));
 
-    // Esconder o indicador de rolagem quando descer a página
+    // Esconder o indicador de rolagem ao descer a página
     window.addEventListener('scroll', () => {
       if (window.scrollY > 100) {
-        scrollInd.classList.add('hidden');
+        if (scrollInd) scrollInd.classList.add('hidden');
       } else {
-        scrollInd.classList.remove('hidden');
+        if (scrollInd) scrollInd.classList.remove('hidden');
       }
+    });
+
+    // --- MENU MOBILE TOGGLE ---
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    menuToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+
+    // Fechar menu ao clicar em algum link
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+      });
     });
   </script>
 

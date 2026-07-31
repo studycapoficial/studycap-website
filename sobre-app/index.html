@@ -1,0 +1,1716 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+
+  <title>Sobre o StudyCap | Organização e Produtividade nos Estudos</title>
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta name="theme-color" content="#02000d">
+
+  <meta
+    name="description"
+    content="Conheça a história do StudyCap, um aplicativo para organizar sua rotina de estudos com cronogramas, agenda, estatísticas, flashcards, Pomodoro, anotações e provas do ENEM."
+  >
+
+  <link rel="icon" href="../Nova.png" type="image/png">
+  <link rel="apple-touch-icon" href="../Nova.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+    :root {
+      --primary: #8b5cf6;
+      --primary-hover: #7c3aed;
+      --primary-light: #c4b5fd;
+      --primary-glow: rgba(139, 92, 246, 0.3);
+
+      --accent: #3b82f6;
+      --accent-glow: rgba(59, 130, 246, 0.2);
+
+      --success: #22c55e;
+      --success-soft: rgba(34, 197, 94, 0.1);
+
+      --warning: #f59e0b;
+      --warning-soft: rgba(245, 158, 11, 0.09);
+
+      --text-main: #ffffff;
+      --text-soft: #cbd5e1;
+      --text-muted: #94a3b8;
+      --text-dark: #475569;
+
+      --glass: rgba(255, 255, 255, 0.015);
+      --glass-hover: rgba(255, 255, 255, 0.03);
+      --glass-border: rgba(255, 255, 255, 0.055);
+
+      --bg-dark: #02000d;
+      --bg-secondary: #08021c;
+    }
+
+    * {
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      background: var(--bg-dark);
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: "Inter", sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      overflow-x: hidden;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      position: relative;
+    }
+
+    strong {
+      color: #ffffff;
+      font-weight: 700;
+    }
+
+    /* Estrutura do fundo com animação em tons de roxo vibrantes e fluidos */
+    .snow-container {
+      position: fixed;
+      inset: 0;
+      z-index: -3;
+      pointer-events: none;
+      background: radial-gradient(
+        ellipse at 50% -10%,
+        #2a1254 0%,
+        #12082b 45%,
+        #02000d 85%
+      );
+      animation: bgPulse 12s ease-in-out infinite alternate;
+    }
+
+    @keyframes bgPulse {
+      0% {
+        filter: brightness(1);
+      }
+      100% {
+        filter: brightness(1.25);
+      }
+    }
+
+    #snow-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    /* Esferas luminosas (auroras) roxas animadas */
+    .aurora {
+      position: fixed;
+      z-index: -2;
+      pointer-events: none;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.45;
+      will-change: transform, opacity;
+    }
+
+    .aurora-1 {
+      width: 65vw;
+      height: 65vw;
+      max-width: 650px;
+      max-height: 650px;
+      background: radial-gradient(circle, #a855f7 0%, #7c3aed 60%, transparent 100%);
+      top: -15%;
+      left: -15%;
+      animation: floatAurora1 14s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
+    }
+
+    .aurora-2 {
+      width: 55vw;
+      height: 55vw;
+      max-width: 550px;
+      max-height: 550px;
+      background: radial-gradient(circle, #c4b5fd 0%, #8b5cf6 50%, transparent 100%);
+      right: -10%;
+      top: 35%;
+      animation: floatAurora2 18s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
+    }
+
+    .aurora-3 {
+      width: 60vw;
+      height: 60vw;
+      max-width: 600px;
+      max-height: 600px;
+      background: radial-gradient(circle, #9333ea 0%, #4c1d95 65%, transparent 100%);
+      bottom: -15%;
+      left: 15%;
+      animation: floatAurora3 16s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
+    }
+
+    @keyframes floatAurora1 {
+      0% {
+        transform: translate3d(0, 0, 0) scale(1);
+        opacity: 0.4;
+      }
+      50% {
+        transform: translate3d(8vw, 10vh, 0) scale(1.15);
+        opacity: 0.6;
+      }
+      100% {
+        transform: translate3d(15vw, -5vh, 0) scale(0.9);
+        opacity: 0.35;
+      }
+    }
+
+    @keyframes floatAurora2 {
+      0% {
+        transform: translate3d(0, 0, 0) scale(0.95);
+        opacity: 0.35;
+      }
+      50% {
+        transform: translate3d(-10vw, -8vh, 0) scale(1.2);
+        opacity: 0.55;
+      }
+      100% {
+        transform: translate3d(-5vw, 12vh, 0) scale(1);
+        opacity: 0.4;
+      }
+    }
+
+    @keyframes floatAurora3 {
+      0% {
+        transform: translate3d(0, 0, 0) scale(1);
+        opacity: 0.3;
+      }
+      50% {
+        transform: translate3d(-12vw, -12vh, 0) scale(1.18);
+        opacity: 0.5;
+      }
+      100% {
+        transform: translate3d(6vw, -6vh, 0) scale(0.85);
+        opacity: 0.25;
+      }
+    }
+
+    /* Otimizações de renderização para telas pequenas / celular */
+    @media (max-width: 768px) {
+      .aurora {
+        filter: blur(75px);
+        opacity: 0.38;
+      }
+      .aurora-1 {
+        width: 85vw;
+        height: 85vw;
+        top: -10%;
+        left: -20%;
+      }
+      .aurora-2 {
+        width: 80vw;
+        height: 80vw;
+        top: 30%;
+        right: -25%;
+      }
+      .aurora-3 {
+        width: 85vw;
+        height: 85vw;
+        bottom: -10%;
+        left: -10%;
+      }
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    header {
+      position: sticky;
+      top: 20px;
+      z-index: 1000;
+      padding-top: 20px;
+      margin-bottom: 40px;
+    }
+
+    nav {
+      min-height: 70px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+
+      padding: 12px 24px;
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+
+      background: rgba(2, 0, 13, 0.78);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+
+      box-shadow:
+        0 14px 40px -18px rgba(0, 0, 0, 0.9),
+        inset 0 1px 0 rgba(255, 255, 255, 0.025);
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 1.4rem;
+      letter-spacing: -0.5px;
+    }
+
+    .logo-img {
+      width: 36px;
+      height: 36px;
+      object-fit: cover;
+      border-radius: 9px;
+      box-shadow: 0 0 18px var(--primary-glow);
+    }
+
+    .btn-back {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+
+      padding: 8px 16px;
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+
+      background: rgba(255, 255, 255, 0.018);
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+
+      transition:
+        color 0.3s ease,
+        border-color 0.3s ease,
+        background 0.3s ease,
+        transform 0.3s ease;
+    }
+
+    .btn-back:hover {
+      color: var(--text-main);
+      border-color: rgba(139, 92, 246, 0.55);
+      background: rgba(139, 92, 246, 0.08);
+      transform: translateX(-3px);
+    }
+
+    .btn-back svg {
+      width: 17px;
+      height: 17px;
+    }
+
+    .about-hero {
+      text-align: center;
+      padding: 72px 0 60px;
+      animation: contentIn 1s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+
+      padding: 7px 16px;
+      margin-bottom: 22px;
+
+      border: 1px solid rgba(139, 92, 246, 0.28);
+      border-radius: 30px;
+
+      background: rgba(139, 92, 246, 0.11);
+      color: #c4b5fd;
+
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .badge svg {
+      width: 15px;
+      height: 15px;
+    }
+
+    h1 {
+      max-width: 880px;
+      margin: 0 auto 22px;
+
+      font-size: clamp(2.3rem, 5vw, 4rem);
+      font-weight: 900;
+      line-height: 1.12;
+      letter-spacing: -1.8px;
+
+      background: linear-gradient(
+        135deg,
+        #ffffff 20%,
+        #ddd6fe 62%,
+        #93c5fd 100%
+      );
+
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-desc {
+      max-width: 780px;
+      margin: 0 auto;
+
+      color: var(--text-muted);
+      font-size: 1.12rem;
+      line-height: 1.8;
+    }
+
+    @keyframes contentIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .section-heading {
+      max-width: 740px;
+      margin: 92px auto 38px;
+      text-align: center;
+    }
+
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+
+      margin-bottom: 12px;
+
+      color: #c4b5fd;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .section-label svg {
+      width: 15px;
+      height: 15px;
+    }
+
+    .section-heading h2 {
+      margin-bottom: 14px;
+
+      color: #ffffff;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 850;
+      line-height: 1.2;
+      letter-spacing: -1px;
+    }
+
+    .section-heading p {
+      color: var(--text-muted);
+      font-size: 1rem;
+      line-height: 1.75;
+    }
+
+    .story-card {
+      position: relative;
+      overflow: hidden;
+
+      padding: 48px;
+      margin-bottom: 32px;
+
+      border: 1px solid var(--glass-border);
+      border-radius: 28px;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255, 255, 255, 0.018),
+          rgba(255, 255, 255, 0.006)
+        );
+
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+
+      box-shadow:
+        0 22px 55px -35px rgba(0, 0, 0, 0.95),
+        inset 0 1px 0 rgba(255, 255, 255, 0.02);
+
+      transition:
+        border-color 0.4s ease,
+        box-shadow 0.4s ease,
+        transform 0.4s ease;
+    }
+
+    .story-card::before {
+      content: "";
+      position: absolute;
+      top: -80px;
+      left: -70px;
+
+      width: 240px;
+      height: 240px;
+
+      background: radial-gradient(
+        circle,
+        rgba(139, 92, 246, 0.09),
+        transparent 70%
+      );
+
+      pointer-events: none;
+    }
+
+    .story-card:hover {
+      border-color: rgba(139, 92, 246, 0.26);
+      box-shadow: 0 24px 55px -30px rgba(0, 0, 0, 0.95);
+      transform: translateY(-2px);
+    }
+
+    .story-card h2 {
+      position: relative;
+      margin-bottom: 18px;
+
+      color: #ffffff;
+      font-size: 1.8rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    .story-card p {
+      position: relative;
+      margin-bottom: 16px;
+
+      color: var(--text-muted);
+      font-size: 1.03rem;
+      line-height: 1.85;
+    }
+
+    .story-card p:last-child {
+      margin-bottom: 0;
+    }
+
+    .origin-card {
+      display: grid;
+      grid-template-columns: 64px minmax(0, 1fr);
+      gap: 24px;
+      align-items: flex-start;
+    }
+
+    .origin-icon {
+      position: relative;
+
+      width: 64px;
+      height: 64px;
+
+      display: grid;
+      place-items: center;
+
+      border: 1px solid rgba(139, 92, 246, 0.2);
+      border-radius: 18px;
+
+      background: linear-gradient(
+        145deg,
+        rgba(139, 92, 246, 0.16),
+        rgba(59, 130, 246, 0.08)
+      );
+
+      color: #c4b5fd;
+    }
+
+    .origin-icon svg {
+      width: 29px;
+      height: 29px;
+    }
+
+    .origin-content {
+      min-width: 0;
+    }
+
+    .origin-highlight {
+      position: relative;
+
+      margin-top: 24px;
+      padding: 20px 22px;
+
+      border-left: 3px solid var(--primary);
+      border-radius: 0 15px 15px 0;
+
+      background: rgba(139, 92, 246, 0.055);
+      color: var(--text-soft);
+
+      font-size: 0.97rem;
+      line-height: 1.75;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .feature-card {
+      position: relative;
+      overflow: hidden;
+
+      min-height: 220px;
+      padding: 28px;
+
+      border: 1px solid var(--glass-border);
+      border-radius: 22px;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255, 255, 255, 0.014),
+          rgba(255, 255, 255, 0.004)
+        );
+
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+
+      box-shadow:
+        0 18px 45px -35px rgba(0, 0, 0, 0.95),
+        inset 0 1px 0 rgba(255, 255, 255, 0.018);
+
+      transition:
+        transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+        border-color 0.35s ease,
+        background 0.35s ease,
+        box-shadow 0.35s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(139, 92, 246, 0.4);
+      background: rgba(255, 255, 255, 0.024);
+      box-shadow: 0 20px 45px -30px rgba(139, 92, 246, 0.22);
+    }
+
+    .feature-icon {
+      width: 50px;
+      height: 50px;
+
+      display: grid;
+      place-items: center;
+
+      margin-bottom: 20px;
+      border: 1px solid rgba(139, 92, 246, 0.16);
+      border-radius: 14px;
+
+      background: linear-gradient(
+        135deg,
+        rgba(139, 92, 246, 0.16),
+        rgba(59, 130, 246, 0.09)
+      );
+
+      color: #c4b5fd;
+    }
+
+    .feature-icon svg {
+      width: 24px;
+      height: 24px;
+      stroke-width: 1.8;
+    }
+
+    .feature-card h3 {
+      margin-bottom: 10px;
+
+      color: #ffffff;
+      font-size: 1.18rem;
+      font-weight: 750;
+      letter-spacing: -0.25px;
+    }
+
+    .feature-card p {
+      color: var(--text-muted);
+      font-size: 0.94rem;
+      line-height: 1.72;
+    }
+
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+      margin-top: 35px;
+    }
+
+    .pillar-card {
+      padding: 32px;
+
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255, 255, 255, 0.012),
+          rgba(255, 255, 255, 0.003)
+        );
+
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+
+      transition:
+        transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+        border-color 0.4s ease,
+        background 0.4s ease;
+    }
+
+    .pillar-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(139, 92, 246, 0.48);
+      background: rgba(255, 255, 255, 0.025);
+    }
+
+    .pillar-icon {
+      width: 48px;
+      height: 48px;
+
+      display: grid;
+      place-items: center;
+
+      margin-bottom: 20px;
+      border: 1px solid rgba(139, 92, 246, 0.16);
+      border-radius: 13px;
+
+      background: linear-gradient(
+        135deg,
+        rgba(139, 92, 246, 0.16),
+        rgba(59, 130, 246, 0.09)
+      );
+
+      color: #c4b5fd;
+    }
+
+    .pillar-icon svg {
+      width: 23px;
+      height: 23px;
+      stroke-width: 1.8;
+    }
+
+    .pillar-card h3 {
+      margin-bottom: 10px;
+
+      color: #ffffff;
+      font-size: 1.18rem;
+      font-weight: 750;
+    }
+
+    .pillar-card p {
+      color: var(--text-muted);
+      font-size: 0.94rem;
+      line-height: 1.72;
+    }
+
+    .beta-card {
+      position: relative;
+      overflow: hidden;
+
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      align-items: flex-start;
+      gap: 22px;
+
+      padding: 36px;
+      margin-top: 40px;
+
+      border: 1px solid rgba(245, 158, 11, 0.18);
+      border-radius: 24px;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(245, 158, 11, 0.065),
+          rgba(139, 92, 246, 0.025)
+        );
+
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+
+      box-shadow:
+        0 22px 50px -35px rgba(0, 0, 0, 0.95),
+        inset 0 1px 0 rgba(255, 255, 255, 0.02);
+    }
+
+    .beta-icon {
+      width: 54px;
+      height: 54px;
+
+      display: grid;
+      place-items: center;
+
+      border: 1px solid rgba(245, 158, 11, 0.2);
+      border-radius: 16px;
+
+      background: var(--warning-soft);
+      color: #fbbf24;
+    }
+
+    .beta-icon svg {
+      width: 26px;
+      height: 26px;
+      stroke-width: 1.8;
+    }
+
+    .beta-content h2 {
+      margin-bottom: 12px;
+
+      color: #ffffff;
+      font-size: 1.55rem;
+      font-weight: 800;
+      letter-spacing: -0.4px;
+    }
+
+    .beta-content p {
+      margin-bottom: 12px;
+
+      color: var(--text-muted);
+      font-size: 0.98rem;
+      line-height: 1.76;
+    }
+
+    .beta-content p:last-child {
+      margin-bottom: 0;
+    }
+
+    .local-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+
+      margin-top: 10px;
+      padding: 8px 13px;
+
+      border: 1px solid rgba(34, 197, 94, 0.18);
+      border-radius: 999px;
+
+      background: var(--success-soft);
+      color: #86efac;
+
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    .local-badge svg {
+      width: 15px;
+      height: 15px;
+    }
+
+    .evolution-list {
+      display: grid;
+      gap: 14px;
+      margin-top: 26px;
+    }
+
+    .evolution-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+
+      padding: 17px 18px;
+
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+
+      background: rgba(255, 255, 255, 0.009);
+    }
+
+    .evolution-check {
+      flex-shrink: 0;
+
+      width: 28px;
+      height: 28px;
+
+      display: grid;
+      place-items: center;
+
+      border: 1px solid rgba(139, 92, 246, 0.16);
+      border-radius: 50%;
+
+      background: rgba(139, 92, 246, 0.1);
+      color: #c4b5fd;
+    }
+
+    .evolution-check svg {
+      width: 15px;
+      height: 15px;
+      stroke-width: 2.3;
+    }
+
+    .evolution-item div {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.65;
+    }
+
+    .evolution-item strong {
+      display: block;
+      margin-bottom: 2px;
+      color: #ffffff;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+
+      transition:
+        opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    footer {
+      margin-top: 92px;
+      padding: 48px 0;
+
+      border-top: 1px solid var(--glass-border);
+      text-align: center;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 26px;
+
+      margin-bottom: 24px;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: color 0.2s ease;
+    }
+
+    .footer-links a:hover {
+      color: #ffffff;
+    }
+
+    .copyright {
+      color: var(--text-dark);
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 900px) {
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .pillars-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .feature-card {
+        min-height: auto;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 16px;
+      }
+
+      header {
+        top: 10px;
+        padding-top: 10px;
+      }
+
+      nav {
+        min-height: 64px;
+        padding: 10px 14px;
+        border-radius: 16px;
+      }
+
+      .logo-area {
+        gap: 9px;
+        font-size: 1.15rem;
+      }
+
+      .logo-img {
+        width: 32px;
+        height: 32px;
+      }
+
+      .btn-back {
+        padding: 8px 10px;
+        font-size: 0.8rem;
+      }
+
+      .about-hero {
+        padding: 48px 0 35px;
+      }
+
+      h1 {
+        font-size: 2.25rem;
+        letter-spacing: -1.2px;
+      }
+
+      .hero-desc {
+        font-size: 1rem;
+      }
+
+      .story-card {
+        padding: 32px 24px;
+        border-radius: 22px;
+      }
+
+      .story-card h2 {
+        font-size: 1.55rem;
+      }
+
+      .origin-card {
+        grid-template-columns: 1fr;
+      }
+
+      .origin-icon {
+        width: 54px;
+        height: 54px;
+        border-radius: 15px;
+      }
+
+      .origin-icon svg {
+        width: 25px;
+        height: 25px;
+      }
+
+      .section-heading {
+        margin-top: 72px;
+      }
+
+      .feature-card,
+      .pillar-card {
+        padding: 25px;
+      }
+
+      .beta-card {
+        grid-template-columns: 1fr;
+        padding: 28px 24px;
+      }
+
+      .beta-icon {
+        width: 48px;
+        height: 48px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .btn-back svg {
+        display: none;
+      }
+
+      .btn-back {
+        white-space: nowrap;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      .badge {
+        font-size: 0.7rem;
+        letter-spacing: 0.8px;
+      }
+
+      .story-card {
+        padding: 28px 20px;
+      }
+
+      .origin-highlight {
+        padding: 18px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        scroll-behavior: auto !important;
+      }
+
+      .snowflake,
+      .aurora,
+      .about-hero,
+      .snow-container {
+        animation: none !important;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="snow-container" id="snow" aria-hidden="true">
+    <canvas id="snow-canvas"></canvas>
+  </div>
+  <div class="aurora aurora-1" aria-hidden="true"></div>
+  <div class="aurora aurora-2" aria-hidden="true"></div>
+  <div class="aurora aurora-3" aria-hidden="true"></div>
+
+  <div class="container">
+
+    <header>
+      <nav>
+        <a
+          href="../"
+          class="logo-area"
+          aria-label="Ir para a página inicial do StudyCap"
+        >
+          <img
+            src="../Nova.png"
+            alt="Logo do StudyCap"
+            class="logo-img"
+          >
+
+          <span>StudyCap</span>
+        </a>
+
+        <a href="../" class="btn-back">
+          <i data-lucide="arrow-left" aria-hidden="true"></i>
+          Voltar ao início
+        </a>
+      </nav>
+    </header>
+
+    <main>
+
+      <section class="about-hero">
+        <span class="badge">
+          <i data-lucide="sparkles" aria-hidden="true"></i>
+          Nossa história e propósito
+        </span>
+
+        <h1>
+          Criado para transformar a sua rotina de estudos.
+        </h1>
+
+        <p class="hero-desc">
+          O StudyCap reúne organização, produtividade, acompanhamento e
+          ferramentas de aprendizagem em um só lugar, ajudando estudantes a
+          planejarem melhor o tempo e manterem uma rotina de estudos mais
+          clara, consistente e eficiente.
+        </p>
+      </section>
+
+      <section class="story-card reveal">
+        <div class="origin-card">
+          <div class="origin-icon" aria-hidden="true">
+            <i data-lucide="lightbulb"></i>
+          </div>
+
+          <div class="origin-content">
+            <h2>Como tudo começou</h2>
+
+            <p>
+              O <strong>StudyCap</strong>, desenvolvido por
+              <strong>AlifDevStudio</strong>, começou a ganhar forma a partir
+              de uma conversa simples, mas muito importante.
+            </p>
+
+            <p>
+              A ideia surgiu quando conversei com a minha namorada. Como ela
+              sempre teve uma rotina intensa de estudos, sugeriu que eu criasse
+              um aplicativo voltado para estudantes. Decidi aceitar o desafio
+              e transformar aquela sugestão em um projeto real.
+            </p>
+
+            <p>
+              A rotina dela também ajudou a compreender quais ferramentas
+              poderiam realmente fazer diferença no dia a dia, como um
+              temporizador Pomodoro, anotações organizadas, flashcards,
+              cronogramas, agenda e formas de acompanhar o próprio progresso.
+            </p>
+
+            <div class="origin-highlight">
+              O StudyCap também nasceu como uma homenagem a ela e ao seu
+              esforço diário com os estudos. Uma ideia inspirada por alguém
+              especial, transformada em uma ferramenta pensada para ajudar
+              muitos outros estudantes.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="story-card reveal">
+        <h2>Uma experiência centralizada</h2>
+
+        <p>
+          Muitos estudantes precisam dividir sua rotina entre diferentes
+          aplicativos para criar anotações, organizar tarefas, acompanhar
+          prazos, controlar o tempo e revisar conteúdos.
+        </p>
+
+        <p>
+          O StudyCap foi criado para reunir essas necessidades em uma única
+          plataforma, capaz de acompanhar diferentes etapas do estudo — desde o
+          planejamento de uma atividade até a revisão do conteúdo e a análise
+          do progresso.
+        </p>
+
+        <p>
+          O objetivo é tornar a organização mais simples e acessível, sem
+          transformar o processo de estudar em algo complicado. Cada função é
+          pensada para ajudar o estudante a visualizar o que precisa fazer,
+          registrar o que aprendeu e compreender como sua rotina está
+          evoluindo.
+        </p>
+      </section>
+
+      <section aria-labelledby="features-title">
+        <div class="section-heading reveal">
+          <span class="section-label">
+            <i data-lucide="layout-grid" aria-hidden="true"></i>
+            Tudo em um só aplicativo
+          </span>
+
+          <h2 id="features-title">
+            Ferramentas para diferentes momentos do estudo
+          </h2>
+
+          <p>
+            O StudyCap foi pensado para acompanhar o estudante no planejamento,
+            na concentração, na organização dos conteúdos, nas revisões e na
+            preparação para provas.
+          </p>
+        </div>
+
+        <div class="features-grid">
+
+          <article class="feature-card reveal">
+            <div class="feature-icon" aria-hidden="true">
+              <i data-lucide="calendar-range"></i>
+            </div>
+
+            <h3>Cronograma de estudos</h3>
+
+            <p>
+              Planeje matérias, atividades e sessões de estudo ao longo dos
+              dias, criando uma visão mais organizada da sua rotina e dos seus
+              objetivos.
+            </p>
+          </article>
+
+          <article class="feature-card reveal">
+            <div class="feature-icon" aria-hidden="true">
+              <i data-lucide="list-tree"></i>
+            </div>
+
+            <h3>Visualização em lista ou tabela</h3>
+
+            <p>
+              Escolha como deseja visualizar suas tarefas e planejamentos. O
+              modo lista oferece uma leitura direta, enquanto o modo tabela
+              facilita a comparação e a organização das informações.
+            </p>
+          </article>
+
+          <article class="feature-card reveal">
+            <div class="feature-icon" aria-hidden="true">
+              <i data-lucide="calendar-days"></i>
+            </div>
+
+            <h3>Agenda</h3>
+
+            <p>
+              Registre compromissos, prazos, avaliações e atividades
+              importantes para reduzir esquecimentos e acompanhar melhor o que
+              está programado.
+            </p>
+          </article>
+
+          <article class="feature-card reveal">
+            <div class="feature-icon" aria-hidden="true">
+              <i data-lucide="chart-no-axes-combined"></i>
+            </div>
+
+            <h3>Estatísticas de estudo</h3>
+
+            <p>
+              Acompanhe informações sobre sua rotina, tempo dedicado e
+              frequência de estudos para identificar avanços, padrões e pontos
+              que podem ser melhorados.
+            </p>
+          </article>
+
+          <article class="feature-card reveal">
+            <div class="feature-icon" aria-hidden="true">
+              <i data-lucide="gallery-horizontal-end"></i>
+            </div>
+
+            <h3>Flashcards</h3>
+
+            <p>
+              Crie cartões de perguntas e respostas para revisar conteúdos,
+              memorizar conceitos importantes e reforçar o aprendizado de forma
+              prática.
+            </p>
+          </article>
+
+          <article class="feature-card reveal">
+            <div class="feature-icon" aria-hidden="true">
+              <i data-lucide="library-big"></i>
+            </div>
+
+            <h3>Notas e biblioteca</h3>
+
+            <p>
+              Guarde anotações em uma biblioteca geral ou organize os conteúdos
+              separadamente por matéria. Os materiais também podem ser
+              arquivados quando não estiverem mais em uso.
+            </p>
+          </article>
+
+          <article class="feature-card reveal">
+            <div class="feature-icon" aria-hidden="true">
+              <i data-lucide="timer"></i>
+            </div>
+
+            <h3>Temporizador Pomodoro</h3>
+
+            <p>
+              Utilize ciclos de foco e descanso para organizar o tempo de
+              estudo, manter a concentração e reduzir o desgaste durante
+              atividades mais longas.
+            </p>
+          </article>
+
+          <article class="feature-card reveal">
+            <div class="feature-icon" aria-hidden="true">
+              <i data-lucide="file-check-2"></i>
+            </div>
+
+            <h3>Provas e questões do ENEM</h3>
+
+            <p>
+              Acesse provas dentro do aplicativo e responda às questões para
+              praticar, revisar conteúdos e se familiarizar com o formato do
+              exame.
+            </p>
+          </article>
+
+          <article class="feature-card reveal">
+            <div class="feature-icon" aria-hidden="true">
+              <i data-lucide="bot"></i>
+            </div>
+
+            <h3>Mari IA</h3>
+
+            <p>
+              Uma assistente de estudos desenvolvida para apoiar o estudante
+              com explicações, dúvidas e organização acadêmica. A ferramenta
+              será disponibilizada gradualmente durante a evolução do
+              aplicativo.
+            </p>
+          </article>
+
+          <article class="feature-card reveal">
+            <div class="feature-icon" aria-hidden="true">
+              <i data-lucide="workflow"></i>
+            </div>
+
+            <h3>Experiência integrada</h3>
+
+            <p>
+              As ferramentas são desenvolvidas para funcionarem de maneira
+              conectada, permitindo que planejamento, estudo, registro e
+              acompanhamento façam parte de uma mesma experiência.
+            </p>
+          </article>
+
+        </div>
+      </section>
+
+      <section aria-labelledby="values-title">
+        <div class="section-heading reveal">
+          <span class="section-label">
+            <i data-lucide="layers-3" aria-hidden="true"></i>
+            Nossos pilares
+          </span>
+
+          <h2 id="values-title">
+            Tecnologia a serviço de uma rotina mais organizada
+          </h2>
+
+          <p>
+            O StudyCap busca equilibrar praticidade, organização e evolução
+            contínua para oferecer uma ferramenta realmente útil no cotidiano.
+          </p>
+        </div>
+
+        <div class="pillars-grid">
+
+          <article class="pillar-card reveal">
+            <div class="pillar-icon" aria-hidden="true">
+              <i data-lucide="target"></i>
+            </div>
+
+            <h3>Foco no essencial</h3>
+
+            <p>
+              Cada ferramenta é criada para ajudar o estudante a manter a
+              atenção no que precisa ser feito, evitando configurações
+              desnecessárias e excesso de complexidade.
+            </p>
+          </article>
+
+          <article class="pillar-card reveal">
+            <div class="pillar-icon" aria-hidden="true">
+              <i data-lucide="boxes"></i>
+            </div>
+
+            <h3>Organização centralizada</h3>
+
+            <p>
+              Planejamentos, notas, revisões, estatísticas e atividades ficam
+              reunidos em um só ambiente, facilitando o acesso às informações.
+            </p>
+          </article>
+
+          <article class="pillar-card reveal">
+            <div class="pillar-icon" aria-hidden="true">
+              <i data-lucide="zap"></i>
+            </div>
+
+            <h3>Simplicidade e fluidez</h3>
+
+            <p>
+              Uma interface limpa, rápida e intuitiva para que o tempo seja
+              usado estudando, e não tentando entender como utilizar o
+              aplicativo.
+            </p>
+          </article>
+
+        </div>
+      </section>
+
+      <section aria-labelledby="beta-title">
+        <div class="section-heading reveal">
+          <span class="section-label">
+            <i data-lucide="flask-conical" aria-hidden="true"></i>
+            Primeira versão pública
+          </span>
+
+          <h2 id="beta-title">
+            Um lançamento beta construído com responsabilidade
+          </h2>
+
+          <p>
+            A primeira versão será o início de uma evolução contínua, com
+            melhorias realizadas a partir de testes, ajustes técnicos e
+            feedbacks dos usuários.
+          </p>
+        </div>
+
+        <div class="beta-card reveal">
+          <div class="beta-icon" aria-hidden="true">
+            <i data-lucide="construction"></i>
+          </div>
+
+          <div class="beta-content">
+            <h2>Como funcionará a versão beta?</h2>
+
+            <p>
+              Durante o lançamento inicial, a <strong>Mari IA</strong> e os
+              recursos de <strong>sincronização em nuvem</strong> permanecerão
+              temporariamente desativados. Essa decisão permite que essas
+              funções sejam organizadas, testadas e preparadas adequadamente
+              antes de serem disponibilizadas ao público.
+            </p>
+
+            <p>
+              Nessa primeira etapa, os dados e arquivos criados pelo usuário
+              serão armazenados <strong>localmente no dispositivo</strong>.
+              Por isso, a remoção do aplicativo ou a limpeza dos dados poderá
+              apagar as informações salvas.
+            </p>
+
+            <p>
+              As demais ferramentas disponíveis na versão beta poderão receber
+              ajustes frequentes de desempenho, visual, estabilidade e
+              usabilidade.
+            </p>
+
+            <span class="local-badge">
+              <i data-lucide="hard-drive" aria-hidden="true"></i>
+              Armazenamento local na versão beta
+            </span>
+          </div>
+        </div>
+      </section>
+
+      <section class="story-card reveal" style="margin-top: 92px;">
+        <h2>O futuro do StudyCap</h2>
+
+        <p>
+          O StudyCap está em constante desenvolvimento. O lançamento beta não
+          representa o fim do projeto, mas o começo de uma etapa em que o
+          aplicativo poderá evoluir com base no uso real e nas necessidades dos
+          estudantes.
+        </p>
+
+        <p>
+          Nosso compromisso é melhorar continuamente a estabilidade, a
+          experiência de uso e as ferramentas já existentes, além de preparar
+          novos recursos de maneira cuidadosa e responsável.
+        </p>
+
+        <div class="evolution-list">
+
+          <div class="evolution-item">
+            <span class="evolution-check" aria-hidden="true">
+              <i data-lucide="check"></i>
+            </span>
+
+            <div>
+              <strong>Melhorias contínuas</strong>
+              Atualizações de desempenho, estabilidade, interface e
+              acessibilidade.
+            </div>
+          </div>
+
+          <div class="evolution-item">
+            <span class="evolution-check" aria-hidden="true">
+              <i data-lucide="check"></i>
+            </span>
+
+            <div>
+              <strong>Sincronização em nuvem</strong>
+              Implementação futura de recursos para proteger e sincronizar
+              informações entre dispositivos.
+            </div>
+          </div>
+
+          <div class="evolution-item">
+            <span class="evolution-check" aria-hidden="true">
+              <i data-lucide="check"></i>
+            </span>
+
+            <div>
+              <strong>Expansão para outras plataformas</strong>
+              Planejamento para disponibilizar o StudyCap futuramente em mais
+              dispositivos e sistemas.
+            </div>
+          </div>
+
+          <div class="evolution-item">
+            <span class="evolution-check" aria-hidden="true">
+              <i data-lucide="check"></i>
+            </span>
+
+            <div>
+              <strong>Estatísticas mais completas</strong>
+              Novas formas de visualizar a evolução, a frequência e o
+              desempenho nos estudos.
+            </div>
+          </div>
+
+          <div class="evolution-item">
+            <span class="evolution-check" aria-hidden="true">
+              <i data-lucide="check"></i>
+            </span>
+
+            <div>
+              <strong>Evolução da Mari IA</strong>
+              Desenvolvimento gradual da assistente para oferecer um suporte
+              acadêmico cada vez mais útil e seguro.
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+
+    <footer>
+      <div class="footer-links">
+        <a href="../">Início</a>
+        <a href="../privacidade/">Política de Privacidade</a>
+        <a href="../deletar-conta/">Exclusão de Conta</a>
+      </div>
+
+      <p class="copyright">
+        © 2026 StudyCap. Organização e produtividade para a sua rotina de estudos.
+      </p>
+    </footer>
+
+  </div>
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+  <script>
+    function initCosmicSnow() {
+      const canvas = document.getElementById("snow-canvas");
+      if (!canvas) return;
+
+      const ctx = canvas.getContext("2d");
+      if (!ctx) return;
+
+      const prefersReducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches;
+
+      if (prefersReducedMotion) {
+        canvas.style.display = "none";
+        return;
+      }
+
+      let width = (canvas.width = window.innerWidth);
+      let height = (canvas.height = window.innerHeight);
+
+      let particles = [];
+      const count = width <= 768 ? 45 : 95;
+
+      class Particle {
+        constructor() {
+          this.reset(true);
+        }
+
+        reset(initial = false) {
+          this.x = Math.random() * width;
+          this.y = initial ? Math.random() * height : -10;
+          this.radius = Math.random() * 2.4 + 0.6;
+          this.speedY = Math.random() * 0.6 + 0.25;
+          this.speedX = Math.random() * 0.2 - 0.1;
+          this.swayAngle = Math.random() * Math.PI * 2;
+          this.swaySpeed = Math.random() * 0.015 + 0.005;
+          this.baseOpacity = Math.random() * 0.55 + 0.25;
+          this.opacity = this.baseOpacity;
+          this.twinkleSpeed = Math.random() * 0.025 + 0.008;
+          this.twinkleFactor = Math.random() * Math.PI;
+
+          // Paleta inspirada na identidade do StudyCap
+          const colors = ["255, 255, 255", "196, 181, 253", "147, 197, 253"];
+          this.color = colors[Math.floor(Math.random() * colors.length)];
+          this.hasGlow = Math.random() > 0.55;
+        }
+
+        update() {
+          this.swayAngle += this.swaySpeed;
+          this.twinkleFactor += this.twinkleSpeed;
+
+          this.x += Math.sin(this.swayAngle) * 0.45 + this.speedX;
+          this.y += this.speedY;
+
+          this.opacity = this.baseOpacity + Math.sin(this.twinkleFactor) * 0.22;
+
+          if (this.y > height + 10 || this.x < -20 || this.x > width + 20) {
+            this.reset(false);
+          }
+        }
+
+        draw() {
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(${this.color}, ${Math.max(0, Math.min(1, this.opacity))})`;
+          ctx.fill();
+
+          if (this.hasGlow && this.radius > 1.6) {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.radius * 2.6, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(${this.color}, ${Math.max(0, this.opacity * 0.16)})`;
+            ctx.fill();
+          }
+        }
+      }
+
+      function createParticles() {
+        particles = [];
+        for (let i = 0; i < count; i++) {
+          particles.push(new Particle());
+        }
+      }
+
+      function animate() {
+        ctx.clearRect(0, 0, width, height);
+        for (let i = 0; i < particles.length; i++) {
+          particles[i].update();
+          particles[i].draw();
+        }
+        requestAnimationFrame(animate);
+      }
+
+      createParticles();
+      animate();
+
+      window.addEventListener("resize", () => {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+        createParticles();
+      });
+    }
+
+    function initializeScrollReveal() {
+      const revealElements = document.querySelectorAll(".reveal");
+
+      if (!("IntersectionObserver" in window)) {
+        revealElements.forEach((element) => {
+          element.classList.add("active");
+        });
+
+        return;
+      }
+
+      const revealObserver = new IntersectionObserver(
+        (entries, observer) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("active");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        {
+          threshold: 0.1,
+          rootMargin: "0px 0px -40px 0px"
+        }
+      );
+
+      revealElements.forEach((element) => {
+        revealObserver.observe(element);
+      });
+    }
+
+    initCosmicSnow();
+    initializeScrollReveal();
+
+    if (window.lucide) {
+      lucide.createIcons();
+    }
+  </script>
+
+</body>
+</html>
