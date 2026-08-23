@@ -15,6 +15,12 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
 
+  <noscript>
+    <style>
+      section { opacity: 1 !important; transform: none !important; }
+    </style>
+  </noscript>
+
   <style>
     :root {
       --primary: #8b5cf6;
@@ -441,6 +447,17 @@
 
     strong { color: #ffffff; font-weight: 600; }
 
+    /* BOX ALERTA / DESTAQUE */
+    .info-box {
+      background: rgba(59, 130, 246, 0.08);
+      border: 1px solid rgba(59, 130, 246, 0.25);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      margin: 16px 0;
+      color: #dbeafe;
+      font-size: 0.92rem;
+    }
+
     /* BOTÃO CONTATO */
     .btn-contact {
       display: inline-flex;
@@ -668,21 +685,23 @@
       <div class="nav-card">
         <div class="nav-header-box">
           <div class="nav-title">Navegação</div>
-          <span class="nav-badge">10 Seções</span>
+          <span class="nav-badge">12 Seções</span>
         </div>
         <nav id="navbar">
           <ul>
             <li><a href="#intro" class="active">Introdução</a></li>
             <li><a href="#coleta">1. Informações Coletadas</a></li>
-            <li><a href="#uso">2. Uso dos Dados</a></li>
-            <li><a href="#armazenamento">3. Armazenamento</a></li>
-            <li><a href="#terceiros">4. Serviços de Terceiros</a></li>
-            <li><a href="#pagamentos">5. Pagamentos</a></li>
-            <li><a href="#permissoes">6. Permissões</a></li>
-            <li><a href="#direitos">7. Seus Direitos</a></li>
-            <li><a href="#menores">8. Privacidade de Menores</a></li>
-            <li><a href="#alteracoes">9. Alterações</a></li>
-            <li><a href="#contato">10. Contato</a></li>
+            <li><a href="#anuncios">2. Anúncios Recompensados</a></li>
+            <li><a href="#enem">3. Simulados e Dados do ENEM</a></li>
+            <li><a href="#uso">4. Uso dos Dados</a></li>
+            <li><a href="#armazenamento">5. Armazenamento</a></li>
+            <li><a href="#terceiros">6. Serviços de Terceiros</a></li>
+            <li><a href="#pagamentos">7. Pagamentos</a></li>
+            <li><a href="#permissoes">8. Permissões</a></li>
+            <li><a href="#direitos">9. Seus Direitos</a></li>
+            <li><a href="#menores">10. Menores</a></li>
+            <li><a href="#alteracoes">11. Alterações</a></li>
+            <li><a href="#contato">12. Contato</a></li>
           </ul>
         </nav>
       </div>
@@ -695,7 +714,7 @@
         
         <div class="app-header" id="intro">
           <div class="icon-box">
-             <img src="Mari.png" alt="StudyCap Logo">
+             <img src="Mari.png" alt="StudyCap Logo" onerror="this.style.display='none'">
           </div>
           
           <div>
@@ -710,7 +729,7 @@
 
           <section id="coleta">
             <h2>1. Informações que Coletamos</h2>
-            <p>Para fornecer nossos serviços de sincronização de notas, inteligência artificial e estatísticas de estudo, coletamos os seguintes tipos de dados:</p>
+            <p>Para fornecer nossos serviços de sincronização de notas, inteligência artificial, estatísticas de estudo e simulados, coletamos os seguintes tipos de dados:</p>
             
             <h3>1.1. Dados de Identificação (Conta)</h3>
             <p>Para criar sua conta e permitir o acesso seguro em múltiplos dispositivos, utilizamos serviços de autenticação. Coletamos:</p>
@@ -720,58 +739,87 @@
               <li><strong>ID de usuário:</strong> Um identificador exclusivo gerado pelo sistema para vincular seus dados anonimamente.</li>
             </ul>
 
-            <h3>1.2. Dados de Conteúdo e Uso</h3>
+            <h3>1.2. Dados de Conteúdo, Estudos e Simulados</h3>
             <ul>
-              <li><strong>Conteúdo do Usuário:</strong> Todas as notas, tarefas, eventos da agenda, flashcards e registros de tempo (sessões Pomodoro) que você cria são armazenados em nuvem para permitir a sincronização instantânea entre seus dispositivos.</li>
+              <li><strong>Conteúdo do Usuário:</strong> Todas as notas, tarefas, eventos da agenda, flashcards e registros de tempo (sessões Pomodoro) que você cria são armazenados em nuvem para permitir a sincronização instantânea.</li>
+              <li><strong>Progresso em Simulados:</strong> Suas respostas, histórico de pontuação e estatísticas de desempenho em questões e simulados (incluindo bancas do ENEM) para acompanhamento da sua evolução nos estudos.</li>
               <li><strong>Mídia:</strong> Imagens ou arquivos anexados nas suas notas.</li>
               <li><strong>Interação com IA:</strong> Os textos enviados para a funcionalidade "Mari IA" são processados para gerar respostas contextuais de estudo.</li>
             </ul>
 
             <h3>1.3. Dados do Dispositivo e Analytics</h3>
-            <p>Utilizamos o Google Analytics para Firebase para entender como o aplicativo é utilizado e para monitorar a estabilidade do sistema. Isso pode incluir:</p>
+            <p>Utilizamos o Google Analytics para Firebase para entender como o aplicativo é utilizado e monitorar a estabilidade do sistema:</p>
             <ul>
-              <li>Modelo do dispositivo, versão do sistema operacional e identificadores anônimos de publicidade.</li>
-              <li>Logs de erro (Crashlytics) caso o app feche inesperadamente, para que possamos corrigir bugs.</li>
-              <li>Métricas de engajamento (ex: funcionalidades mais utilizadas, tempo de sessão).</li>
+              <li>Modelo do dispositivo, versão do sistema operacional e identificadores anônimos de publicidade (Advertising ID).</li>
+              <li>Logs de erro (Crashlytics) caso o app feche inesperadamente, para correção de bugs.</li>
+              <li>Métricas de engajamento (funcionalidades mais utilizadas, tempo de sessão, simulados concluídos).</li>
+            </ul>
+          </section>
+
+          <section id="anuncios">
+            <h2>2. Anúncios Recompensados (Plano Gratuito)</h2>
+            <p>Para manter o <strong>StudyCap</strong> acessível e gratuito para todos os estudantes, exibimos anúncios publicitários exclusivamente na versão gratuita do aplicativo.</p>
+            
+            <div class="info-box">
+              <strong>💡 Transparência sobre nossos anúncios:</strong> O StudyCap não utiliza banners intrusivos nem pop-ups automáticos durante o seu tempo de foco ou leitura. Nossos anúncios funcionam estritamente no modelo de <strong>Anúncios Recompensados (Rewarded Ads)</strong>.
+            </div>
+
+            <p>Isso significa que anúncios em vídeo só serão exibidos quando <strong>você optar ativamente por assisti-los</strong> para desbloquear benefícios dentro do aplicativo, tais como:</p>
+            <ul>
+              <li>Concluir ou pular etapas de uma sessão Pomodoro;</li>
+              <li>Obter créditos extras;</li>
+              <li>Desbloquear novos limites temporários de uso de funcionalidades premium.</li>
+            </ul>
+            <p>Provedores de anúncios de terceiros (como o <strong>Google AdMob</strong>) podem coletar identificadores anônimos do seu dispositivo (ID de Publicidade do Google/Apple) para servir anúncios relevantes e evitar fraudes. Usuários do plano <strong>Premium (Pago)</strong> têm navegação 100% livre de qualquer exibição de anúncios.</p>
+          </section>
+
+          <section id="enem">
+            <h2>3. Conteúdo do ENEM e Isenção de Vinculo Governamental</h2>
+            <p>O StudyCap disponibiliza um acervo de simulados e questões baseados nos exames oficiais do Exame Nacional do Ensino Médio (ENEM).</p>
+            <ul>
+              <li><strong>Origem dos Dados:</strong> As provas e questões utilizadas no aplicativo foram extraídas de materiais de domínio público e arquivos PDF disponibilizados oficialmente pelo <strong>INEP (Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira)</strong> e processadas em formato digital (JSON) para execução interativa.</li>
+              <li><strong>Isenção de Responsabilidade (Disclaimer):</strong> O StudyCap é uma ferramenta educacional desenvolvida de forma <strong>independente</strong>. O aplicativo <strong>NÃO é afiliado, endossado, patrocinado ou mantido pelo INEP, pelo Ministério da Educação (MEC) ou por qualquer órgão governamental</strong>.</li>
             </ul>
           </section>
 
           <section id="uso">
-            <h2>2. Como Usamos Seus Dados</h2>
+            <h2>4. Como Usamos Seus Dados</h2>
             <p>Utilizamos as informações coletadas estritamente para:</p>
             <ul>
-              <li><strong>Fornecer o Serviço:</strong> Sincronizar suas notas, progresso e configurações em tempo real.</li>
+              <li><strong>Fornecer o Serviço:</strong> Sincronizar suas notas, simulados, progresso e configurações em tempo real.</li>
               <li><strong>Recursos de Inteligência Artificial:</strong> Processar suas perguntas através da API do Google Gemini. <br><em>Importante: Os dados enviados via API para a "Mari IA" não são utilizados pelo Google para treinar seus modelos públicos de IA, garantindo a privacidade do seu conteúdo educacional.</em></li>
               <li><strong>Melhorias e Manutenção:</strong> Analisar estatísticas anônimas para melhorar a performance e corrigir falhas técnicas.</li>
+              <li><strong>Gestão do Sistema de Recompensas:</strong> Validar o cumprimento de visualização de anúncios antes de liberar recompensas no plano gratuito.</li>
               <li><strong>Comunicação:</strong> Enviar avisos importantes sobre sua conta, atualizações de segurança ou mudanças nos termos.</li>
             </ul>
-            <p><strong>Não vendemos seus dados pessoais para terceiros.</strong> Nosso modelo de negócios baseia-se na oferta de serviços e assinaturas premium.</p>
+            <p><strong>Não vendemos seus dados pessoais para terceiros.</strong> Nosso modelo de negócios baseia-se na oferta de assinaturas premium e anúncios recompensados voluntários.</p>
           </section>
 
           <section id="armazenamento">
-            <h2>3. Armazenamento e Transferência Internacional</h2>
+            <h2>5. Armazenamento e Transferência Internacional</h2>
             <p>O StudyCap utiliza a infraestrutura de nuvem do <strong>Google Firebase</strong>. Embora operemos no Brasil, alguns dados podem ser processados e armazenados em servidores seguros do Google localizados nos Estados Unidos ou em outras jurisdições.</p>
             <p>Essa transferência segue rigorosos padrões de segurança internacional e criptografia (tanto em trânsito quanto em repouso) para garantir que seus dados estejam protegidos contra acessos não autorizados.</p>
           </section>
 
           <section id="terceiros">
-            <h2>4. Serviços de Terceiros</h2>
+            <h2>6. Serviços de Terceiros</h2>
             <p>O StudyCap utiliza infraestrutura de terceiros confiáveis para operar. Recomendamos a leitura das políticas de privacidade desses provedores:</p>
             <ul>
               <li><strong>Google Firebase (Auth, Firestore, Storage):</strong> Para autenticação segura, banco de dados em tempo real e armazenamento de arquivos.</li>
+              <li><strong>Google AdMob:</strong> Para exibição de anúncios recompensados na versão gratuita.</li>
               <li><strong>Google Gemini API:</strong> Para prover as funcionalidades de Inteligência Artificial e chat educacional.</li>
               <li><strong>Google Analytics & Crashlytics:</strong> Para análise de dados anônimos e monitoramento de falhas.</li>
             </ul>
           </section>
 
           <section id="pagamentos">
-            <h2>5. Pagamentos e Assinaturas</h2>
+            <h2>7. Pagamentos e Assinaturas</h2>
             <p>O StudyCap oferece planos de assinatura (Premium). <strong>Nós não temos acesso, não processamos e nem armazenamos os dados do seu cartão de crédito.</strong></p>
             <p>Todas as transações financeiras são processadas diretamente pelas lojas de aplicativos (Google Play Store para Android ou Apple App Store para iOS), que garantem a segurança total e a conformidade PCI dos seus dados bancários.</p>
           </section>
 
           <section id="permissoes">
-            <h2>6. Permissões do Dispositivo</h2>
+            <h2>8. Permissões do Dispositivo</h2>
             <p>O aplicativo pode solicitar acesso a recursos nativos do seu celular apenas quando necessário para uma funcionalidade específica:</p>
             <ul>
               <li>📸 <strong>Armazenamento/Galeria:</strong> Para que você possa anexar imagens e arquivos às suas notas de estudo.</li>
@@ -782,28 +830,28 @@
           </section>
 
           <section id="direitos">
-            <h2>7. Seus Direitos (LGPD)</h2>
+            <h2>9. Seus Direitos (LGPD)</h2>
             <p>Você tem controle total sobre seus dados. De acordo com a Lei Geral de Proteção de Dados, você tem direito a:</p>
             <ul>
               <li><strong>Acesso:</strong> Solicitar uma cópia dos dados que temos sobre você.</li>
               <li><strong>Correção:</strong> Solicitar a correção de dados incompletos, inexatos ou desatualizados.</li>
               <li><strong>Exclusão de Conta:</strong> Você pode excluir sua conta e todos os seus dados permanentemente a qualquer momento. Basta acessar as configurações do aplicativo e selecionar a opção "Excluir Conta". Essa ação remove suas informações dos nossos servidores de forma irreversível.</li>
-              <li><strong>Revogação de Consentimento:</strong> Você pode revogar as permissões dadas ao aplicativo através das configurações do seu sistema operacional.</li>
+              <li><strong>Revogação de Consentimento:</strong> Você pode revogar as permissões dadas ao aplicativo e redefinir o ID de publicidade através das configurações do seu sistema operacional.</li>
             </ul>
           </section>
 
           <section id="menores">
-            <h2>8. Privacidade de Menores</h2>
+            <h2>10. Privacidade de Menores</h2>
             <p>O StudyCap não é direcionado a crianças menores de 13 anos. Não coletamos intencionalmente informações de identificação pessoal de crianças. Se tomarmos conhecimento de que coletamos dados de uma criança sem verificação do consentimento dos pais, tomaremos medidas para remover essas informações de nossos servidores.</p>
           </section>
 
           <section id="alteracoes">
-            <h2>9. Alterações nesta Política</h2>
+            <h2>11. Alterações nesta Política</h2>
             <p>Podemos atualizar nossa Política de Privacidade periodicamente para refletir melhorias no app ou mudanças legais. Recomendamos que você revise esta página regularmente. Notificaremos sobre mudanças significativas através de um aviso no próprio aplicativo.</p>
           </section>
 
           <section id="contato" style="margin-top: 60px; text-align: center;">
-            <h2>10. Ficou com dúvidas?</h2>
+            <h2>12. Ficou com dúvidas?</h2>
             <p style="text-align: center; margin-bottom: 30px;">Se você tiver dúvidas sobre esta Política ou sobre seus dados, entre em contato com nosso Encarregado de Proteção de Dados:</p>
             <a href="mailto:contatos.alif.dev@gmail.com" class="btn-contact">
               Enviar E-mail
@@ -812,7 +860,7 @@
         </div>
 
         <footer>
-          © 2026 StudyCap • <a href="#">Termos de Uso</a>
+          © 2026 StudyCap • <a href="#intro">Termos de Uso</a>
         </footer>
       </div>
     </main>
@@ -852,7 +900,7 @@
         observer.observe(section);
       });
 
-      // 3. SPY SIDEBAR NAVIGATION & HIGHLIGHT
+      // 3. SPY SIDEBAR NAVIGATION & HIGHLIGHT (CÁLCULO OFFSET CORRIGIDO)
       const allNavTargets = document.querySelectorAll('section, .app-header');
       const navLinks = document.querySelectorAll('nav a');
 
@@ -861,7 +909,8 @@
         const scrollPosition = window.pageYOffset + 200;
 
         allNavTargets.forEach(target => {
-          const top = target.offsetTop;
+          // Utiliza getBoundingClientRect para evitar imprecisões no offsetTop
+          const top = target.getBoundingClientRect().top + window.pageYOffset;
           const height = target.offsetHeight;
           if (scrollPosition >= top && scrollPosition < top + height) {
             current = target.getAttribute('id');
