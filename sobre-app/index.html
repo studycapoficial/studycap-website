@@ -10,7 +10,7 @@
     content="width=device-width, initial-scale=1.0"
   >
 
-  <meta name="theme-color" content="#02000d">
+  <meta name="theme-color" content="#030712">
 
   <meta
     name="description"
@@ -53,7 +53,7 @@
       --glass-hover: rgba(255, 255, 255, 0.03);
       --glass-border: rgba(255, 255, 255, 0.055);
 
-      --bg-dark: #02000d;
+      --bg-dark: #030712;
       --bg-secondary: #08021c;
     }
 
@@ -85,154 +85,80 @@
       font-weight: 700;
     }
 
-    /* Estrutura do fundo com animação em tons de roxo vibrantes e fluidos */
-    .snow-container {
+    #particle-canvas {
       position: fixed;
-      inset: 0;
-      z-index: -3;
-      pointer-events: none;
-      background: radial-gradient(
-        ellipse at 50% -10%,
-        #2a1254 0%,
-        #12082b 45%,
-        #02000d 85%
-      );
-      animation: bgPulse 12s ease-in-out infinite alternate;
-    }
-
-    @keyframes bgPulse {
-      0% {
-        filter: brightness(1);
-      }
-      100% {
-        filter: brightness(1.25);
-      }
-    }
-
-    #snow-canvas {
-      position: absolute;
-      inset: 0;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
+      z-index: 0;
       pointer-events: none;
     }
 
-    /* Esferas luminosas (auroras) roxas animadas */
-    .aurora {
+    .ambient-light {
       position: fixed;
-      z-index: -2;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      overflow: hidden;
       pointer-events: none;
+    }
+
+    .orb {
+      position: absolute;
       border-radius: 50%;
-      filter: blur(120px);
-      opacity: 0.45;
-      will-change: transform, opacity;
+      filter: blur(100px);
+      opacity: 0.35;
+      animation: float 14s infinite ease-in-out alternate;
     }
 
-    .aurora-1 {
-      width: 65vw;
-      height: 65vw;
-      max-width: 650px;
-      max-height: 650px;
-      background: radial-gradient(circle, #a855f7 0%, #7c3aed 60%, transparent 100%);
-      top: -15%;
-      left: -15%;
-      animation: floatAurora1 14s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
+    .orb-1 {
+      width: 450px;
+      height: 450px;
+      background: radial-gradient(circle, #6d28d9 0%, #3b0764 100%);
+      top: -10%;
+      left: -10%;
+      animation-duration: 16s;
     }
 
-    .aurora-2 {
-      width: 55vw;
-      height: 55vw;
-      max-width: 550px;
-      max-height: 550px;
-      background: radial-gradient(circle, #c4b5fd 0%, #8b5cf6 50%, transparent 100%);
-      right: -10%;
-      top: 35%;
-      animation: floatAurora2 18s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
+    .orb-2 {
+      width: 380px;
+      height: 380px;
+      background: radial-gradient(circle, #be123c 0%, #881337 100%);
+      bottom: -10%;
+      right: -5%;
+      animation-duration: 14s;
     }
 
-    .aurora-3 {
-      width: 60vw;
-      height: 60vw;
-      max-width: 600px;
-      max-height: 600px;
-      background: radial-gradient(circle, #9333ea 0%, #4c1d95 65%, transparent 100%);
-      bottom: -15%;
-      left: 15%;
-      animation: floatAurora3 16s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
+    .orb-3 {
+      width: 280px;
+      height: 280px;
+      background: radial-gradient(circle, #4338ca 0%, #1e1b4b 100%);
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation-duration: 18s;
     }
 
-    @keyframes floatAurora1 {
+    @keyframes float {
       0% {
-        transform: translate3d(0, 0, 0) scale(1);
-        opacity: 0.4;
+        transform: translate(0, 0) scale(1);
       }
-      50% {
-        transform: translate3d(8vw, 10vh, 0) scale(1.15);
-        opacity: 0.6;
-      }
-      100% {
-        transform: translate3d(15vw, -5vh, 0) scale(0.9);
-        opacity: 0.35;
-      }
-    }
 
-    @keyframes floatAurora2 {
-      0% {
-        transform: translate3d(0, 0, 0) scale(0.95);
-        opacity: 0.35;
-      }
       50% {
-        transform: translate3d(-10vw, -8vh, 0) scale(1.2);
-        opacity: 0.55;
+        transform: translate(40px, 60px) scale(1.08);
       }
-      100% {
-        transform: translate3d(-5vw, 12vh, 0) scale(1);
-        opacity: 0.4;
-      }
-    }
 
-    @keyframes floatAurora3 {
-      0% {
-        transform: translate3d(0, 0, 0) scale(1);
-        opacity: 0.3;
-      }
-      50% {
-        transform: translate3d(-12vw, -12vh, 0) scale(1.18);
-        opacity: 0.5;
-      }
       100% {
-        transform: translate3d(6vw, -6vh, 0) scale(0.85);
-        opacity: 0.25;
-      }
-    }
-
-    /* Otimizações de renderização para telas pequenas / celular */
-    @media (max-width: 768px) {
-      .aurora {
-        filter: blur(75px);
-        opacity: 0.38;
-      }
-      .aurora-1 {
-        width: 85vw;
-        height: 85vw;
-        top: -10%;
-        left: -20%;
-      }
-      .aurora-2 {
-        width: 80vw;
-        height: 80vw;
-        top: 30%;
-        right: -25%;
-      }
-      .aurora-3 {
-        width: 85vw;
-        height: 85vw;
-        bottom: -10%;
-        left: -10%;
+        transform: translate(-30px, 30px) scale(0.95);
       }
     }
 
     .container {
+      position: relative;
+      z-index: 1;
       width: 100%;
       max-width: 1100px;
       margin: 0 auto;
@@ -252,7 +178,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 20px;
+      gap: 16px;
 
       padding: 12px 24px;
       border: 1px solid var(--glass-border);
@@ -358,7 +284,7 @@
       max-width: 880px;
       margin: 0 auto 22px;
 
-      font-size: clamp(2.3rem, 5vw, 4rem);
+      font-size: clamp(2rem, 5vw, 4rem);
       font-weight: 900;
       line-height: 1.12;
       letter-spacing: -1.8px;
@@ -426,7 +352,7 @@
       margin-bottom: 14px;
 
       color: #ffffff;
-      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-size: clamp(1.6rem, 4vw, 2.6rem);
       font-weight: 850;
       line-height: 1.2;
       letter-spacing: -1px;
@@ -1034,7 +960,7 @@
       }
 
       h1 {
-        font-size: 2rem;
+        font-size: 1.85rem;
       }
 
       .badge {
@@ -1049,6 +975,10 @@
       .origin-highlight {
         padding: 18px;
       }
+
+      .footer-links {
+        gap: 16px;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -1056,10 +986,11 @@
         scroll-behavior: auto !important;
       }
 
-      .snowflake,
-      .aurora,
-      .about-hero,
-      .snow-container {
+      .about-hero {
+        animation: none !important;
+      }
+
+      .orb {
         animation: none !important;
       }
 
@@ -1074,12 +1005,13 @@
 
 <body>
 
-  <div class="snow-container" id="snow" aria-hidden="true">
-    <canvas id="snow-canvas"></canvas>
+  <canvas id="particle-canvas"></canvas>
+
+  <div class="ambient-light">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
   </div>
-  <div class="aurora aurora-1" aria-hidden="true"></div>
-  <div class="aurora aurora-2" aria-hidden="true"></div>
-  <div class="aurora aurora-3" aria-hidden="true"></div>
 
   <div class="container">
 
@@ -1572,107 +1504,142 @@
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 
   <script>
-    function initCosmicSnow() {
-      const canvas = document.getElementById("snow-canvas");
+    // ------------------------------------------------
+    // CANVAS PARTICLES (Fundo alinhado com a página de exclusão)
+    // ------------------------------------------------
+    const canvas = document.getElementById("particle-canvas");
+    const ctx = canvas ? canvas.getContext("2d") : null;
+
+    let particles = [];
+    let mouse = {
+      x: null,
+      y: null
+    };
+
+    function resizeCanvas() {
       if (!canvas) return;
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
 
-      const ctx = canvas.getContext("2d");
-      if (!ctx) return;
+    window.addEventListener("resize", () => {
+      resizeCanvas();
+      initParticles();
+    });
 
-      const prefersReducedMotion = window.matchMedia(
-        "(prefers-reduced-motion: reduce)"
-      ).matches;
+    if (canvas && ctx) {
+      resizeCanvas();
 
-      if (prefersReducedMotion) {
-        canvas.style.display = "none";
-        return;
-      }
+      window.addEventListener("mousemove", (e) => {
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
+      });
 
-      let width = (canvas.width = window.innerWidth);
-      let height = (canvas.height = window.innerHeight);
-
-      let particles = [];
-      const count = width <= 768 ? 45 : 95;
+      window.addEventListener("mouseleave", () => {
+        mouse.x = null;
+        mouse.y = null;
+      });
 
       class Particle {
         constructor() {
-          this.reset(true);
+          this.reset();
         }
 
-        reset(initial = false) {
-          this.x = Math.random() * width;
-          this.y = initial ? Math.random() * height : -10;
-          this.radius = Math.random() * 2.4 + 0.6;
-          this.speedY = Math.random() * 0.6 + 0.25;
-          this.speedX = Math.random() * 0.2 - 0.1;
-          this.swayAngle = Math.random() * Math.PI * 2;
-          this.swaySpeed = Math.random() * 0.015 + 0.005;
-          this.baseOpacity = Math.random() * 0.55 + 0.25;
-          this.opacity = this.baseOpacity;
-          this.twinkleSpeed = Math.random() * 0.025 + 0.008;
-          this.twinkleFactor = Math.random() * Math.PI;
+        reset() {
+          this.x = Math.random() * canvas.width;
+          this.y = Math.random() * canvas.height;
 
-          // Paleta inspirada na identidade do StudyCap
-          const colors = ["255, 255, 255", "196, 181, 253", "147, 197, 253"];
-          this.color = colors[Math.floor(Math.random() * colors.length)];
-          this.hasGlow = Math.random() > 0.55;
+          this.size = Math.random() * 2 + 0.5;
+
+          this.speedX = (Math.random() - 0.5) * 0.4;
+          this.speedY = (Math.random() - 0.5) * 0.4;
+
+          this.alpha = Math.random() * 0.5 + 0.1;
         }
 
         update() {
-          this.swayAngle += this.swaySpeed;
-          this.twinkleFactor += this.twinkleSpeed;
-
-          this.x += Math.sin(this.swayAngle) * 0.45 + this.speedX;
+          this.x += this.speedX;
           this.y += this.speedY;
 
-          this.opacity = this.baseOpacity + Math.sin(this.twinkleFactor) * 0.22;
+          // Leve repulsão pelo mouse
+          if (mouse.x !== null && mouse.y !== null) {
+            const dx = mouse.x - this.x;
+            const dy = mouse.y - this.y;
 
-          if (this.y > height + 10 || this.x < -20 || this.x > width + 20) {
-            this.reset(false);
+            const dist = Math.sqrt(
+              dx * dx +
+              dy * dy
+            );
+
+            if (dist > 0 && dist < 120) {
+              this.x -= (dx / dist) * 0.6;
+              this.y -= (dy / dist) * 0.6;
+            }
+          }
+
+          if (
+            this.x < 0 ||
+            this.x > canvas.width ||
+            this.y < 0 ||
+            this.y > canvas.height
+          ) {
+            this.reset();
           }
         }
 
         draw() {
-          ctx.beginPath();
-          ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(${this.color}, ${Math.max(0, Math.min(1, this.opacity))})`;
-          ctx.fill();
+          ctx.fillStyle = `rgba(167, 139, 250, ${this.alpha})`;
 
-          if (this.hasGlow && this.radius > 1.6) {
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.radius * 2.6, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(${this.color}, ${Math.max(0, this.opacity * 0.16)})`;
-            ctx.fill();
-          }
+          ctx.beginPath();
+
+          ctx.arc(
+            this.x,
+            this.y,
+            this.size,
+            0,
+            Math.PI * 2
+          );
+
+          ctx.fill();
         }
       }
 
-      function createParticles() {
+      function initParticles() {
         particles = [];
+
+        const count = Math.min(
+          Math.floor(window.innerWidth / 15),
+          65
+        );
+
         for (let i = 0; i < count; i++) {
           particles.push(new Particle());
         }
       }
 
-      function animate() {
-        ctx.clearRect(0, 0, width, height);
-        for (let i = 0; i < particles.length; i++) {
-          particles[i].update();
-          particles[i].draw();
-        }
-        requestAnimationFrame(animate);
+      function animateParticles() {
+        ctx.clearRect(
+          0,
+          0,
+          canvas.width,
+          canvas.height
+        );
+
+        particles.forEach((particle) => {
+          particle.update();
+          particle.draw();
+        });
+
+        requestAnimationFrame(animateParticles);
       }
 
-      createParticles();
-      animate();
-
-      window.addEventListener("resize", () => {
-        width = canvas.width = window.innerWidth;
-        height = canvas.height = window.innerHeight;
-        createParticles();
-      });
+      initParticles();
+      animateParticles();
     }
 
+    // ------------------------------------------------
+    // SCROLL REVEAL ANIMATIONS
+    // ------------------------------------------------
     function initializeScrollReveal() {
       const revealElements = document.querySelectorAll(".reveal");
 
@@ -1704,7 +1671,6 @@
       });
     }
 
-    initCosmicSnow();
     initializeScrollReveal();
 
     if (window.lucide) {

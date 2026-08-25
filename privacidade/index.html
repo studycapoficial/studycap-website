@@ -39,7 +39,10 @@
       --radius-xl: 24px;
       --radius-lg: 16px;
       --radius-md: 12px;
+      --safe-top: env(safe-area-inset-top, 0px);
       --safe-bottom: env(safe-area-inset-bottom, 20px);
+      --safe-left: env(safe-area-inset-left, 0px);
+      --safe-right: env(safe-area-inset-right, 0px);
     }
 
     * {
@@ -60,6 +63,7 @@
       min-height: 100vh;
       line-height: 1.8;
       -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
     /* BARRA DE PROGRESSO DE LEITURA */
@@ -153,10 +157,10 @@
     .wrapper {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 60px 24px 100px;
+      padding: clamp(30px, 5vw, 60px) calc(24px + var(--safe-right)) 100px calc(24px + var(--safe-left));
       display: grid;
-      grid-template-columns: 280px 1fr;
-      gap: 40px;
+      grid-template-columns: minmax(240px, 280px) 1fr;
+      gap: clamp(20px, 3.5vw, 40px);
       position: relative;
     }
 
@@ -508,7 +512,7 @@
     .back-to-top {
       position: fixed;
       bottom: calc(var(--safe-bottom) + 16px);
-      right: 20px;
+      right: calc(var(--safe-right) + 20px);
       width: 44px;
       height: 44px;
       border-radius: 50%;
@@ -543,7 +547,7 @@
       display: none;
       position: fixed;
       bottom: calc(var(--safe-bottom) + 16px);
-      left: 20px;
+      left: calc(var(--safe-left) + 20px);
       background: rgba(15, 23, 42, 0.92);
       border: 1px solid var(--primary);
       color: #ffffff;
@@ -568,7 +572,7 @@
     @media (max-width: 900px) {
       .wrapper { 
         grid-template-columns: 1fr; 
-        padding: 24px 16px calc(var(--safe-bottom) + 80px); 
+        padding: 24px calc(16px + var(--safe-right)) calc(var(--safe-bottom) + 80px) calc(16px + var(--safe-left)); 
         gap: 20px; 
       }
 
@@ -579,11 +583,12 @@
       aside { 
         position: fixed;
         bottom: calc(var(--safe-bottom) + 72px);
-        left: 16px;
-        right: 16px;
+        left: calc(16px + var(--safe-left));
+        right: calc(16px + var(--safe-right));
         top: auto;
         max-height: 65vh;
         overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
         z-index: 995;
         opacity: 0;
         visibility: hidden;
@@ -646,6 +651,29 @@
       
       .btn-contact {
         width: 100%;
+      }
+
+      .mobile-nav-toggle {
+        padding: 8px 14px;
+        font-size: 0.8rem;
+        left: calc(12px + var(--safe-left));
+      }
+
+      .back-to-top {
+        right: calc(12px + var(--safe-right));
+        width: 40px;
+        height: 40px;
+      }
+    }
+
+    /* Otimização para telas ultralargas e dobráveis compactas */
+    @media (max-width: 320px) {
+      .mobile-nav-toggle span {
+        display: inline-block;
+        max-width: 110px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
     }
   </style>
@@ -836,7 +864,7 @@
               <li><strong>Acesso:</strong> Solicitar uma cópia dos dados que temos sobre você.</li>
               <li><strong>Correção:</strong> Solicitar a correção de dados incompletos, inexatos ou desatualizados.</li>
               <li><strong>Exclusão de Conta:</strong> Você pode excluir sua conta e todos os seus dados permanentemente a qualquer momento. Basta acessar as configurações do aplicativo e selecionar a opção "Excluir Conta". Essa ação remove suas informações dos nossos servidores de forma irreversível.</li>
-              <li><strong>Revogação de Consentimento:</strong> Você pode revogar as permissões dadas ao aplicativo e redefinir o ID de publicidade através das configurações do seu sistema operacional.</li>
+              <li><strong>Revogação de ConsentIMENTO:</strong> Você pode revogar as permissões dadas ao aplicativo e redefinir o ID de publicidade através das configurações do seu sistema operacional.</li>
             </ul>
           </section>
 
@@ -900,7 +928,7 @@
         observer.observe(section);
       });
 
-      // 3. SPY SIDEBAR NAVIGATION & HIGHLIGHT (CÁLCULO OFFSET CORRIGIDO)
+      // 3. SPY SIDEBAR NAVIGATION & HIGHLIGHT
       const allNavTargets = document.querySelectorAll('section, .app-header');
       const navLinks = document.querySelectorAll('nav a');
 
@@ -909,7 +937,6 @@
         const scrollPosition = window.pageYOffset + 200;
 
         allNavTargets.forEach(target => {
-          // Utiliza getBoundingClientRect para evitar imprecisões no offsetTop
           const top = target.getBoundingClientRect().top + window.pageYOffset;
           const height = target.offsetHeight;
           if (scrollPosition >= top && scrollPosition < top + height) {
