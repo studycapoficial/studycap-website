@@ -216,9 +216,9 @@
       list-style: none; 
       padding: 0; 
       margin: 0; 
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
+      display: flex; 
+      flex-direction: column; 
+      gap: 4px; 
     }
 
     nav a {
@@ -414,12 +414,12 @@
 
     ul { 
       padding-left: 0; 
-      list-style: none;
+      list-style: none; 
       color: var(--text-muted); 
       margin-bottom: 20px; 
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
+      display: flex; 
+      flex-direction: column; 
+      gap: 8px; 
     }
 
     li { 
@@ -614,7 +614,7 @@
 
       .doc-card { 
         padding: 24px 16px; 
-        border-radius: 20px;
+        border-radius: 20px; 
       }
 
       .app-header {
@@ -677,6 +677,25 @@
       }
     }
   </style>
+
+  <!-- Google Analytics / Firebase -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-analytics.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyALpfjQs3rR_mMwP_qAtxGNXnw7X2dL7VA",
+      authDomain: "websitestudycap.firebaseapp.com",
+      projectId: "websitestudycap",
+      storageBucket: "websitestudycap.firebasestorage.app",
+      messagingSenderId: "763816135649",
+      appId: "1:763816135649:web:5696c83fab5a03d93620a0",
+      measurementId: "G-JZZQ5Y02L6"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+  </script>
 </head>
 <body>
 
