@@ -151,7 +151,7 @@
         transform: translate(40px, 60px) scale(1.08);
       }
 
-    100% {
+      100% {
         transform: translate(-30px, 30px) scale(0.95);
       }
     }
@@ -203,6 +203,7 @@
       font-weight: 800;
       font-size: 1.4rem;
       letter-spacing: -0.5px;
+      flex-shrink: 0;
     }
 
     .logo-img {
@@ -211,6 +212,134 @@
       object-fit: cover;
       border-radius: 9px;
       box-shadow: 0 0 18px var(--primary-glow);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    /* --- SELETOR DE IDIOMAS INTEGRADO --- */
+    .lang-selector-wrapper {
+      position: relative;
+      display: inline-block;
+    }
+
+    .lang-dropdown-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 7px 13px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #ffffff;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      backdrop-filter: blur(12px);
+      transition: all 0.3s ease;
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    .lang-dropdown-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--primary);
+      box-shadow: 0 0 14px var(--primary-glow);
+    }
+
+    .lang-flag {
+      font-size: 1.15rem;
+      line-height: 1;
+    }
+
+    .lang-arrow {
+      width: 14px;
+      height: 14px;
+      transition: transform 0.3s ease;
+      stroke: var(--text-muted);
+      flex-shrink: 0;
+    }
+
+    .lang-selector-wrapper.open .lang-arrow {
+      transform: rotate(180deg);
+    }
+
+    .lang-dropdown-menu {
+      display: none;
+      position: absolute;
+      top: calc(100% + 10px);
+      right: 0;
+      width: 250px;
+      max-height: 340px;
+      overflow-y: auto;
+      background: rgba(15, 6, 28, 0.96);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(167, 139, 250, 0.25);
+      border-radius: 16px;
+      padding: 8px;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.7), 0 0 20px rgba(124, 58, 237, 0.2);
+      z-index: 1100;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(167, 139, 250, 0.4) transparent;
+    }
+
+    .lang-dropdown-menu::-webkit-scrollbar {
+      width: 5px;
+    }
+    .lang-dropdown-menu::-webkit-scrollbar-thumb {
+      background: rgba(167, 139, 250, 0.4);
+      border-radius: 10px;
+    }
+
+    .lang-selector-wrapper.open .lang-dropdown-menu {
+      display: block;
+      animation: menuFadeIn 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes menuFadeIn {
+      from { opacity: 0; transform: translateY(-8px) scale(0.96); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .lang-option-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      padding: 8px 12px;
+      border: none;
+      background: transparent;
+      border-radius: 10px;
+      cursor: pointer;
+      text-align: left;
+      color: var(--text-main);
+      font-size: 0.86rem;
+      transition: all 0.2s ease;
+    }
+
+    .lang-option-item:hover {
+      background: rgba(124, 58, 237, 0.25);
+      color: #ffffff;
+    }
+
+    .lang-option-item.active {
+      background: rgba(124, 58, 237, 0.4);
+      border: 1px solid rgba(167, 139, 250, 0.45);
+      font-weight: 700;
+    }
+
+    .lang-native {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-left: auto;
+    }
+
+    .lang-option-item.active .lang-native {
+      color: #c084fc;
     }
 
     .btn-back {
@@ -228,6 +357,7 @@
       text-decoration: none;
       font-size: 0.9rem;
       font-weight: 500;
+      white-space: nowrap;
 
       transition:
         color 0.3s ease,
@@ -873,23 +1003,47 @@
       }
 
       nav {
-        min-height: 64px;
-        padding: 10px 14px;
+        min-height: 60px;
+        padding: 8px 12px;
         border-radius: 16px;
       }
 
       .logo-area {
-        gap: 9px;
+        gap: 8px;
         font-size: 1.15rem;
       }
 
       .logo-img {
         width: 32px;
-      height: 32px;
+        height: 32px;
+      }
+
+      .nav-actions {
+        gap: 8px;
+      }
+
+      /* No celular: seletor de idiomas visível e compacto de imediato */
+      .lang-dropdown-btn {
+        padding: 6px 10px;
+        font-size: 0.78rem;
+        gap: 6px;
+      }
+
+      .lang-name {
+        max-width: 100px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .lang-dropdown-menu {
+        width: 230px;
+        max-height: 290px;
+        top: calc(100% + 8px);
       }
 
       .btn-back {
-        padding: 8px 10px;
+        padding: 6px 10px;
         font-size: 0.8rem;
       }
 
@@ -956,7 +1110,17 @@
       }
 
       .btn-back {
-        white-space: nowrap;
+        padding: 6px 8px;
+        font-size: 0.76rem;
+      }
+
+      .lang-name {
+        max-width: 70px;
+      }
+
+      .lang-dropdown-btn {
+        padding: 5px 8px;
+        font-size: 0.74rem;
       }
 
       h1 {
@@ -1050,10 +1214,24 @@
           <span>StudyCap</span>
         </a>
 
-        <a href="../" class="btn-back">
-          <i data-lucide="arrow-left" aria-hidden="true"></i>
-          Voltar ao início
-        </a>
+        <div class="nav-actions">
+          <!-- BANDEJA DE IDIOMAS INTEGRADA (VISÍVEL NO TOPO E NO CELULAR DE IMEDIATO) -->
+          <div class="lang-selector-wrapper" id="langSelectorWrapper">
+            <button class="lang-dropdown-btn" id="langDropdownBtn" type="button" aria-haspopup="true" aria-expanded="false">
+              <span class="lang-flag" id="currentLangFlag">🇧🇷</span>
+              <span class="lang-name" id="currentLangName">Português (BR)</span>
+              <svg class="lang-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="lang-dropdown-menu" id="langDropdownMenu" role="menu">
+              <!-- Opções de idioma geradas dinamicamente -->
+            </div>
+          </div>
+
+          <a href="../" class="btn-back">
+            <i data-lucide="arrow-left" aria-hidden="true"></i>
+            <span data-i18n="btn_back">Voltar ao início</span>
+          </a>
+        </div>
       </nav>
     </header>
 
@@ -1062,14 +1240,14 @@
       <section class="about-hero">
         <span class="badge">
           <i data-lucide="sparkles" aria-hidden="true"></i>
-          Nossa história e propósito
+          <span data-i18n="about_badge">Nossa história e propósito</span>
         </span>
 
-        <h1>
+        <h1 data-i18n="about_title">
           Criado para transformar a sua rotina de estudos.
         </h1>
 
-        <p class="hero-desc">
+        <p class="hero-desc" data-i18n="about_desc">
           O StudyCap reúne organização, produtividade, acompanhamento e
           ferramentas de aprendizagem em um só lugar, ajudando estudantes a
           planejarem melhor o tempo e manterem uma rotina de estudos mais
@@ -1084,29 +1262,29 @@
           </div>
 
           <div class="origin-content">
-            <h2>Como tudo começou</h2>
+            <h2 data-i18n="story1_title">Como tudo começou</h2>
 
-            <p>
+            <p data-i18n="story1_p1">
               O <strong>StudyCap</strong>, desenvolvido por
               <strong>AlifDevStudio</strong>, começou a ganhar forma a partir
               de uma conversa simples, mas muito importante.
             </p>
 
-            <p>
+            <p data-i18n="story1_p2">
               A ideia surgiu quando conversei com a minha namorada. Como ela
               sempre teve uma rotina intensa de estudos, sugeriu que eu criasse
               um aplicativo voltado para estudantes. Decidi aceitar o desafio
               e transformar aquela sugestão em um projeto real.
             </p>
 
-            <p>
+            <p data-i18n="story1_p3">
               A rotina dela também ajudou a compreender quais ferramentas
               poderiam realmente fazer diferença no dia a dia, como um
               temporizador Pomodoro, anotações organizadas, flashcards,
               cronogramas, agenda e formas de acompanhar o próprio progresso.
             </p>
 
-            <div class="origin-highlight">
+            <div class="origin-highlight" data-i18n="story1_highlight">
               O StudyCap também nasceu como uma homenagem a ela e ao seu
               esforço diário com os estudos. Uma ideia inspirada por alguém
               especial, transformada em uma ferramenta pensada para ajudar
@@ -1117,22 +1295,22 @@
       </section>
 
       <section class="story-card reveal">
-        <h2>Uma experiência centralizada</h2>
+        <h2 data-i18n="story2_title">Uma experiência centralizada</h2>
 
-        <p>
+        <p data-i18n="story2_p1">
           Muitos estudantes precisam dividir sua rotina entre diferentes
           aplicativos para criar anotações, organizar tarefas, acompanhar
           prazos, controlar o tempo e revisar conteúdos.
         </p>
 
-        <p>
+        <p data-i18n="story2_p2">
           O StudyCap foi criado para reunir essas necessidades em uma única
           plataforma, capaz de acompanhar diferentes etapas do estudo — desde o
           planejamento de uma atividade até a revisão do conteúdo e a análise
           do progresso.
         </p>
 
-        <p>
+        <p data-i18n="story2_p3">
           O objetivo é tornar a organização mais simples e acessível, sem
           transformar o processo de estudar em algo complicado. Cada função é
           pensada para ajudar o estudante a visualizar o que precisa fazer,
@@ -1145,14 +1323,14 @@
         <div class="section-heading reveal">
           <span class="section-label">
             <i data-lucide="layout-grid" aria-hidden="true"></i>
-            Tudo em um só aplicativo
+            <span data-i18n="feat_label">Tudo em um só aplicativo</span>
           </span>
 
-          <h2 id="features-title">
+          <h2 id="features-title" data-i18n="feat_heading">
             Ferramentas para diferentes momentos do estudo
           </h2>
 
-          <p>
+          <p data-i18n="feat_sub">
             O StudyCap foi pensado para acompanhar o estudante no planejamento,
             na concentração, na organização dos conteúdos, nas revisões e na
             preparação para provas.
@@ -1166,9 +1344,9 @@
               <i data-lucide="calendar-range"></i>
             </div>
 
-            <h3>Cronograma de estudos</h3>
+            <h3 data-i18n="f1_title">Cronograma de estudos</h3>
 
-            <p>
+            <p data-i18n="f1_desc">
               Planeje matérias, atividades e sessões de estudo ao longo dos
               dias, criando uma visão mais organizada da sua rotina e dos seus
               objetivos.
@@ -1180,9 +1358,9 @@
               <i data-lucide="list-tree"></i>
             </div>
 
-            <h3>Visualização em lista ou tabela</h3>
+            <h3 data-i18n="f2_title">Visualização em lista ou tabela</h3>
 
-            <p>
+            <p data-i18n="f2_desc">
               Escolha como deseja visualizar suas tarefas e planejamentos. O
               modo lista oferece uma leitura direta, enquanto o modo tabela
               facilita a comparação e a organização das informações.
@@ -1194,9 +1372,9 @@
               <i data-lucide="calendar-days"></i>
             </div>
 
-            <h3>Agenda</h3>
+            <h3 data-i18n="f3_title">Agenda</h3>
 
-            <p>
+            <p data-i18n="f3_desc">
               Registre compromissos, prazos, avaliações e atividades
               importantes para reduzir esquecimentos e acompanhar melhor o que
               está programado.
@@ -1208,9 +1386,9 @@
               <i data-lucide="chart-no-axes-combined"></i>
             </div>
 
-            <h3>Estatísticas de estudo</h3>
+            <h3 data-i18n="f4_title">Estatísticas de estudo</h3>
 
-            <p>
+            <p data-i18n="f4_desc">
               Acompanhe informações sobre sua rotina, tempo dedicado e
               frequência de estudos para identificar avanços, padrões e pontos
               que podem ser melhorados.
@@ -1222,9 +1400,9 @@
               <i data-lucide="gallery-horizontal-end"></i>
             </div>
 
-            <h3>Flashcards</h3>
+            <h3 data-i18n="f5_title">Flashcards</h3>
 
-            <p>
+            <p data-i18n="f5_desc">
               Crie cartões de perguntas e respostas para revisar conteúdos,
               memorizar conceitos importantes e reforçar o aprendizado de forma
               prática.
@@ -1236,9 +1414,9 @@
               <i data-lucide="library-big"></i>
             </div>
 
-            <h3>Notas e biblioteca</h3>
+            <h3 data-i18n="f6_title">Notas e biblioteca</h3>
 
-            <p>
+            <p data-i18n="f6_desc">
               Guarde anotações em uma biblioteca geral ou organize os conteúdos
               separadamente por matéria. Os materiais também podem ser
               arquivados quando não estiverem mais em uso.
@@ -1250,9 +1428,9 @@
               <i data-lucide="timer"></i>
             </div>
 
-            <h3>Temporizador Pomodoro</h3>
+            <h3 data-i18n="f7_title">Temporizador Pomodoro</h3>
 
-            <p>
+            <p data-i18n="f7_desc">
               Utilize ciclos de foco e descanso para organizar o tempo de
               estudo, manter a concentração e reduzir o desgaste durante
               atividades mais longas.
@@ -1264,9 +1442,9 @@
               <i data-lucide="file-check-2"></i>
             </div>
 
-            <h3>Provas e questões do ENEM</h3>
+            <h3 data-i18n="f8_title">Provas e questões do ENEM</h3>
 
-            <p>
+            <p data-i18n="f8_desc">
               Acesse provas dentro do aplicativo e responda às questões para
               praticar, revisar conteúdos e se familiarizar com o formato do
               exame.
@@ -1278,9 +1456,9 @@
               <i data-lucide="bot"></i>
             </div>
 
-            <h3>Mari IA</h3>
+            <h3 data-i18n="f9_title">Mari IA</h3>
 
-            <p>
+            <p data-i18n="f9_desc">
               Uma assistente de estudos desenvolvida para apoiar o estudante
               com explicações, dúvidas e organização acadêmica. A ferramenta
               será disponibilizada gradualmente durante a evolução do
@@ -1293,9 +1471,9 @@
               <i data-lucide="workflow"></i>
             </div>
 
-            <h3>Experiência integrada</h3>
+            <h3 data-i18n="f10_title">Experiência integrada</h3>
 
-            <p>
+            <p data-i18n="f10_desc">
               As ferramentas são desenvolvidas para funcionarem de maneira
               conectada, permitindo que planejamento, estudo, registro e
               acompanhamento façam parte de uma mesma experiência.
@@ -1309,14 +1487,14 @@
         <div class="section-heading reveal">
           <span class="section-label">
             <i data-lucide="layers-3" aria-hidden="true"></i>
-            Nossos pilares
+            <span data-i18n="pillars_label">Nossos pilares</span>
           </span>
 
-          <h2 id="values-title">
+          <h2 id="values-title" data-i18n="pillars_title">
             Tecnologia a serviço de uma rotina mais organizada
           </h2>
 
-          <p>
+          <p data-i18n="pillars_sub">
             O StudyCap busca equilibrar praticidade, organização e evolução
             contínua para oferecer uma ferramenta realmente útil no cotidiano.
           </p>
@@ -1329,9 +1507,9 @@
               <i data-lucide="target"></i>
             </div>
 
-            <h3>Foco no essencial</h3>
+            <h3 data-i18n="pil1_title">Foco no essencial</h3>
 
-            <p>
+            <p data-i18n="pil1_desc">
               Cada ferramenta é criada para ajudar o estudante a manter a
               atenção no que precisa ser feito, evitando configurações
               desnecessárias e excesso de complexidade.
@@ -1343,9 +1521,9 @@
               <i data-lucide="boxes"></i>
             </div>
 
-            <h3>Organização centralizada</h3>
+            <h3 data-i18n="pil2_title">Organização centralizada</h3>
 
-            <p>
+            <p data-i18n="pil2_desc">
               Planejamentos, notas, revisões, estatísticas e atividades ficam
               reunidos em um só ambiente, facilitando o acesso às informações.
             </p>
@@ -1356,9 +1534,9 @@
               <i data-lucide="zap"></i>
             </div>
 
-            <h3>Simplicidade e fluidez</h3>
+            <h3 data-i18n="pil3_title">Simplicidade e fluidez</h3>
 
-            <p>
+            <p data-i18n="pil3_desc">
               Uma interface limpa, rápida e intuitiva para que o tempo seja
               usado estudando, e não tentando entender como utilizar o
               aplicativo.
@@ -1372,14 +1550,14 @@
         <div class="section-heading reveal">
           <span class="section-label">
             <i data-lucide="flask-conical" aria-hidden="true"></i>
-            Primeira versão pública
+            <span data-i18n="beta_label">Primeira versão pública</span>
           </span>
 
-          <h2 id="beta-title">
+          <h2 id="beta-title" data-i18n="beta_heading">
             Um lançamento beta construído com responsabilidade
           </h2>
 
-          <p>
+          <p data-i18n="beta_sub">
             A primeira versão será o início de uma evolução contínua, com
             melhorias realizadas a partir de testes, ajustes técnicos e
             feedbacks dos usuários.
@@ -1392,9 +1570,9 @@
           </div>
 
           <div class="beta-content">
-            <h2>Como funcionará a versão beta?</h2>
+            <h2 data-i18n="beta_title">Como funcionará a versão beta?</h2>
 
-            <p>
+            <p data-i18n="beta_p1">
               Durante o lançamento inicial, a <strong>Mari IA</strong> e os
               recursos de <strong>sincronização em nuvem</strong> permanecerão
               temporariamente desativados. Essa decisão permite que essas
@@ -1402,14 +1580,14 @@
               antes de serem disponibilizadas ao público.
             </p>
 
-            <p>
+            <p data-i18n="beta_p2">
               Nessa primeira etapa, os dados e arquivos criados pelo usuário
               serão armazenados <strong>localmente no dispositivo</strong>.
               Por isso, a remoção do aplicativo ou a limpeza dos dados poderá
               apagar as informações salvas.
             </p>
 
-            <p>
+            <p data-i18n="beta_p3">
               As demais ferramentas disponíveis na versão beta poderão receber
               ajustes frequentes de desempenho, visual, estabilidade e
               usabilidade.
@@ -1417,23 +1595,23 @@
 
             <span class="local-badge">
               <i data-lucide="hard-drive" aria-hidden="true"></i>
-              Armazenamento local na versão beta
+              <span data-i18n="beta_badge">Armazenamento local na versão beta</span>
             </span>
           </div>
         </div>
       </section>
 
       <section class="story-card reveal" style="margin-top: 92px;">
-        <h2>O futuro do StudyCap</h2>
+        <h2 data-i18n="future_title">O futuro do StudyCap</h2>
 
-        <p>
+        <p data-i18n="future_p1">
           O StudyCap está em constante desenvolvimento. O lançamento beta não
           representa o fim do projeto, mas o começo de uma etapa em que o
           aplicativo poderá evoluir com base no uso real e nas necessidades dos
           estudantes.
         </p>
 
-        <p>
+        <p data-i18n="future_p2">
           Nosso compromisso é melhorar continuamente a estabilidade, a
           experiência de uso e as ferramentas já existentes, além de preparar
           novos recursos de maneira cuidadosa e responsável.
@@ -1447,9 +1625,8 @@
             </span>
 
             <div>
-              <strong>Melhorias contínuas</strong>
-              Atualizações de desempenho, estabilidade, interface e
-              acessibilidade.
+              <strong data-i18n="evo1_title">Melhorias contínuas</strong>
+              <span data-i18n="evo1_desc">Atualizações de desempenho, estabilidade, interface e acessibilidade.</span>
             </div>
           </div>
 
@@ -1459,9 +1636,8 @@
             </span>
 
             <div>
-              <strong>Sincronização em nuvem</strong>
-              Implementação futura de recursos para proteger e sincronizar
-              informações entre dispositivos.
+              <strong data-i18n="evo2_title">Sincronização em nuvem</strong>
+              <span data-i18n="evo2_desc">Implementação futura de recursos para proteger e sincronizar informações entre dispositivos.</span>
             </div>
           </div>
 
@@ -1471,9 +1647,8 @@
             </span>
 
             <div>
-              <strong>Expansão para outras plataformas</strong>
-              Planejamento para disponibilizar o StudyCap futuramente em mais
-              dispositivos e sistemas.
+              <strong data-i18n="evo3_title">Expansão para outras plataformas</strong>
+              <span data-i18n="evo3_desc">Planejamento para disponibilizar o StudyCap futuramente em mais dispositivos e sistemas.</span>
             </div>
           </div>
 
@@ -1483,9 +1658,8 @@
             </span>
 
             <div>
-              <strong>Estatísticas mais completas</strong>
-              Novas formas de visualizar a evolução, a frequência e o
-              desempenho nos estudos.
+              <strong data-i18n="evo4_title">Estatísticas mais completas</strong>
+              <span data-i18n="evo4_desc">Novas formas de visualizar a evolução, a frequência e o desempenho nos estudos.</span>
             </div>
           </div>
 
@@ -1495,9 +1669,8 @@
             </span>
 
             <div>
-              <strong>Evolução da Mari IA</strong>
-              Desenvolvimento gradual da assistente para oferecer um suporte
-              acadêmico cada vez mais útil e seguro.
+              <strong data-i18n="evo5_title">Evolução da Mari IA</strong>
+              <span data-i18n="evo5_desc">Desenvolvimento gradual da assistente para oferecer um suporte acadêmico cada vez mais útil e seguro.</span>
             </div>
           </div>
 
@@ -1508,12 +1681,12 @@
 
     <footer>
       <div class="footer-links">
-        <a href="../">Início</a>
-        <a href="../privacidade/">Política de Privacidade</a>
-        <a href="../deletar-conta/">Exclusão de Conta</a>
+        <a href="../" data-i18n="footer_home">Início</a>
+        <a href="../privacidade/" data-i18n="footer_privacy">Política de Privacidade</a>
+        <a href="../deletar-conta/" data-i18n="footer_delete">Exclusão de Conta</a>
       </div>
 
-      <p class="copyright">
+      <p class="copyright" data-i18n="footer_copy">
         © 2026 StudyCap. Organização e produtividade para a sua rotina de estudos.
       </p>
     </footer>
@@ -1523,8 +1696,927 @@
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 
   <script>
+    const translations = {
+      'pt_BR': {
+        name: 'Português (BR)', flag: '🇧🇷', dir: 'ltr',
+        btn_back: 'Voltar ao início',
+        about_badge: 'Nossa história e propósito',
+        about_title: 'Criado para transformar a sua rotina de estudos.',
+        about_desc: 'O StudyCap reúne organização, produtividade, acompanhamento e ferramentas de aprendizagem em um só lugar, ajudando estudantes a planejarem melhor o tempo e manterem uma rotina de estudos mais clara, consistente e eficiente.',
+        story1_title: 'Como tudo começou',
+        story1_p1: 'O <strong>StudyCap</strong>, desenvolvido por <strong>AlifDevStudio</strong>, começou a ganhar forma a partir de uma conversa simples, mas muito importante.',
+        story1_p2: 'A ideia surgiu quando conversei com a minha namorada. Como ela sempre teve uma rotina intensa de estudos, sugeriu que eu criasse um aplicativo voltado para estudantes. Decidi aceitar o desafio e transformar aquela sugestão em um projeto real.',
+        story1_p3: 'A rotina dela também ajudou a compreender quais ferramentas poderiam realmente fazer diferença no dia a dia, como um temporizador Pomodoro, anotações organizadas, flashcards, cronogramas, agenda e formas de acompanhar o próprio progresso.',
+        story1_highlight: 'O StudyCap também nasceu como uma homenagem a ela e ao seu esforço diário com os estudos. Uma ideia inspirada por alguém especial, transformada em uma ferramenta pensada para ajudar muitos outros estudantes.',
+        story2_title: 'Uma experiência centralizada',
+        story2_p1: 'Muitos estudantes precisam dividir sua rotina entre diferentes aplicativos para criar anotações, organizar tarefas, acompanhar prazos, controlar o tempo e revisar conteúdos.',
+        story2_p2: 'O StudyCap foi criado para reunir essas necessidades em uma única plataforma, capaz de acompanhar diferentes etapas do estudo — desde o planejamento de uma atividade até a revisão do conteúdo e a análise do progresso.',
+        story2_p3: 'O objetivo é tornar a organização mais simples e acessível, sem transformar o processo de estudar em algo complicado. Cada função é pensada para ajudar o estudante a visualizar o que precisa fazer, registrar o que aprendeu e compreender como sua rotina está evoluindo.',
+        feat_label: 'Tudo em um só aplicativo',
+        feat_heading: 'Ferramentas para diferentes momentos do estudo',
+        feat_sub: 'O StudyCap foi pensado para acompanhar o estudante no planejamento, na concentração, na organização dos conteúdos, nas revisões e na preparação para provas.',
+        f1_title: 'Cronograma de estudos', f1_desc: 'Planeje matérias, atividades e sessões de estudo ao longo dos dias, criando uma visão mais organizada da sua rotina e dos seus objetivos.',
+        f2_title: 'Visualização em lista ou tabela', f2_desc: 'Escolha como deseja visualizar suas tarefas e planejamentos. O modo lista oferece uma leitura direta, enquanto o modo tabela facilita a comparação e a organização das informações.',
+        f3_title: 'Agenda', f3_desc: 'Registre compromissos, prazos, avaliações e atividades importantes para reduzir esquecimentos e acompanhar melhor o que está programado.',
+        f4_title: 'Estatísticas de estudo', f4_desc: 'Acompanhe informações sobre sua rotina, tempo dedicado e frequência de estudos para identificar avanços, padrões e pontos que podem ser melhorados.',
+        f5_title: 'Flashcards', f5_desc: 'Crie cartões de perguntas e respostas para revisar conteúdos, memorizar conceitos importantes e reforçar o aprendizado de forma prática.',
+        f6_title: 'Notas e biblioteca', f6_desc: 'Guarde anotações em uma biblioteca geral ou organize os conteúdos separadamente por matéria. Os materiais também podem ser arquivados quando não estiverem mais em uso.',
+        f7_title: 'Temporizador Pomodoro', f7_desc: 'Utilize ciclos de foco e descanso para organizar o tempo de estudo, manter a concentração e reduzir o desgaste durante atividades mais longas.',
+        f8_title: 'Provas e questões do ENEM', f8_desc: 'Acesse provas dentro do aplicativo e responda às questões para praticar, revisar conteúdos e se familiarizar com o formato do exame.',
+        f9_title: 'Mari IA', f9_desc: 'Uma assistente de estudos desenvolvida para apoiar o estudante com explicações, dúvidas e organização acadêmica. A ferramenta será disponibilizada gradualmente durante a evolução do aplicativo.',
+        f10_title: 'Experiência integrada', f10_desc: 'As ferramentas são desenvolvidas para funcionarem de maneira conectada, permitindo que planejamento, estudo, registro e acompanhamento façam parte de uma mesma experiência.',
+        pillars_label: 'Nossos pilares',
+        pillars_title: 'Tecnologia a serviço de uma rotina mais organizada',
+        pillars_sub: 'O StudyCap busca equilibrar praticidade, organização e evolução contínua para oferecer uma ferramenta realmente útil no cotidiano.',
+        pil1_title: 'Foco no essencial', pil1_desc: 'Cada ferramenta é criada para ajudar o estudante a manter a atenção no que precisa ser feito, evitando configurações desnecessárias e excesso de complexidade.',
+        pil2_title: 'Organização centralizada', pil2_desc: 'Planejamentos, notas, revisões, estatísticas e atividades ficam reunidos em um só ambiente, facilitando o acesso às informações.',
+        pil3_title: 'Simplicidade e fluidez', pil3_desc: 'Uma interface limpa, rápida e intuitiva para que o tempo seja usado estudando, e não tentando entender como utilizar o aplicativo.',
+        beta_label: 'Primeira versão pública',
+        beta_heading: 'Um lançamento beta construído com responsabilidade',
+        beta_sub: 'A primeira versão será o início de uma evolução contínua, com melhorias realizadas a partir de testes, ajustes técnicos e feedbacks dos usuários.',
+        beta_title: 'Como funcionará a versão beta?',
+        beta_p1: 'Durante o lançamento inicial, a <strong>Mari IA</strong> e os recursos de <strong>sincronização em nuvem</strong> permanecerão temporariamente desativados. Essa decisão permite que essas funções sejam organizadas, testadas e preparadas adequadamente antes de serem disponibilizadas ao público.',
+        beta_p2: 'Nessa primeira etapa, os dados e arquivos criados pelo usuário serão armazenados <strong>localmente no dispositivo</strong>. Por isso, a remoção do aplicativo ou a limpeza dos dados poderá apagar as informações salvas.',
+        beta_p3: 'As demais ferramentas disponíveis na versão beta poderão receber ajustes frequentes de desempenho, visual, estabilidade e usabilidade.',
+        beta_badge: 'Armazenamento local na versão beta',
+        future_title: 'O futuro do StudyCap',
+        future_p1: 'O StudyCap está em constante desenvolvimento. O lançamento beta não representa o fim do projeto, mas o começo de uma etapa em que o aplicativo poderá evoluir com base no uso real e nas necessidades dos estudantes.',
+        future_p2: 'Nosso compromisso é melhorar continuamente a estabilidade, a experiência de uso e as ferramentas já existentes, além de preparar novos recursos de maneira cuidadosa e responsável.',
+        evo1_title: 'Melhorias contínuas', evo1_desc: 'Atualizações de desempenho, estabilidade, interface e acessibilidade.',
+        evo2_title: 'Sincronização em nuvem', evo2_desc: 'Implementação futura de recursos para proteger e sincronizar informações entre dispositivos.',
+        evo3_title: 'Expansão para outras plataformas', evo3_desc: 'Planejamento para disponibilizar o StudyCap futuramente em mais dispositivos e sistemas.',
+        evo4_title: 'Estatísticas mais completas', evo4_desc: 'Novas formas de visualizar a evolução, a frequência e o desempenho nos estudos.',
+        evo5_title: 'Evolução da Mari IA', evo5_desc: 'Desenvolvimento gradual da assistente para oferecer um suporte acadêmico cada vez mais útil e seguro.',
+        footer_home: 'Início', footer_privacy: 'Política de Privacidade', footer_delete: 'Exclusão de Conta',
+        footer_copy: '© 2026 StudyCap. Organização e produtividade para a sua rotina de estudos.'
+      },
+      'pt_PT': {
+        name: 'Português (PT)', flag: '🇵🇹', dir: 'ltr',
+        btn_back: 'Voltar ao início',
+        about_badge: 'A nossa história e propósito',
+        about_title: 'Criado para transformar a sua rotina de estudos.',
+        about_desc: 'O StudyCap reúne organização, produtividade, acompanhamento e ferramentas de aprendizagem num só lugar, ajudando estudantes a planearem melhor o tempo.',
+        story1_title: 'Como tudo começou',
+        story1_p1: 'O <strong>StudyCap</strong>, desenvolvido pela <strong>AlifDevStudio</strong>, começou a ganhar forma a partir de uma conversa simples e marcante.',
+        story1_p2: 'A ideia surgiu numa conversa com a minha namorada. Pela sua rotina de estudos exigente, sugeriu-me criar uma aplicação dedicada a estudantes. Aceitei o desafio com entusiasmo.',
+        story1_p3: 'A sua experiência ajudou a identificar as ferramentas essenciais: temporizador Pomodoro, apontamentos estruturados, flashcards, horários e registo do progresso.',
+        story1_highlight: 'O StudyCap nasceu também como uma homenagem a ela e à sua dedicação diária aos estudos.',
+        story2_title: 'Uma experiência centralizada',
+        story2_p1: 'Muitos estudantes dividem tarefas por diversas aplicações para apontamentos, gestão de prazos e revisões.',
+        story2_p2: 'O StudyCap reúne todas essas necessidades numa única plataforma, acompanhando o estudo do planeamento à revisão.',
+        story2_p3: 'O foco é simplificar a organização, permitindo compreender a evolução da rotina de estudo sem complicações.',
+        feat_label: 'Tudo numa só aplicação',
+        feat_heading: 'Ferramentas para diferentes fases do estudo',
+        feat_sub: 'Concebido para acompanhar o planeamento, concentração, anotações e preparação para exames.',
+        f1_title: 'Horário de estudos', f1_desc: 'Planeie disciplinas, tarefas e sessões ao longo dos dias com clareza.',
+        f2_title: 'Visualização em lista ou tabela', f2_desc: 'Alterne entre o modo lista direto e a tabela para comparações rápidas.',
+        f3_title: 'Agenda', f3_desc: 'Registe prazos, testes e entregas importantes no calendário intuitivo.',
+        f4_title: 'Estatísticas de estudo', f4_desc: 'Analise o tempo investido e padrões de estudo para potenciar o seu rendimento.',
+        f5_title: 'Flashcards', f5_desc: 'Crie cartões de perguntas e respostas para memorizar conceitos e rever conteúdos.',
+        f6_title: 'Notas e biblioteca', f6_desc: 'Organize apontamentos por disciplina ou guarde numa biblioteca geral.',
+        f7_title: 'Temporizador Pomodoro', f7_desc: 'Ciclos de foco e pausas para manter a produtividade sem sobrecarga.',
+        f8_title: 'Exames e questões', f8_desc: 'Responda a questões e testes dentro da app para consolidar matérias.',
+        f9_title: 'Mari IA', f9_desc: 'Assistente inteligente desenvolvida para esclarecer dúvidas e apoiar a aprendizagem.',
+        f10_title: 'Experiência integrada', f10_desc: 'Ferramentas conectadas para uma experiência de estudo harmoniosa e fluida.',
+        pillars_label: 'Os nossos pilares',
+        pillars_title: 'Tecnologia ao serviço de uma rotina organizada',
+        pillars_sub: 'O StudyCap combina utilidade, simplicidade e inovação para o dia a dia académico.',
+        pil1_title: 'Foco no essencial', pil1_desc: 'Interface pensada para manter a concentração, sem distrações supérfluas.',
+        pil2_title: 'Organização centralizada', pil2_desc: 'Apontamentos, planeamento e estatísticas acessíveis num único sítio.',
+        pil3_title: 'Simplicidade e fluidez', pil3_desc: 'Navegação rápida e direta para aproveitar cada minuto a estudar.',
+        beta_label: 'Primeira versão pública',
+        beta_heading: 'Um lançamento beta com responsabilidade',
+        beta_sub: 'O ponto de partida de uma evolução constante moldada pelo feedback dos utilizadores.',
+        beta_title: 'Como funcionará a versão beta?',
+        beta_p1: 'Durante a fase inicial, a <strong>Mari IA</strong> e a <strong>sincronização na nuvem</strong> permanecerão desativadas para aperfeiçoamento contínuo.',
+        beta_p2: 'Os seus dados ficam guardados <strong>localmente no dispositivo</strong> com total privacidade.',
+        beta_p3: 'As funcionalidades receberão atualizações regulares de fluidez e estabilidade.',
+        beta_badge: 'Armazenamento local na versão beta',
+        future_title: 'O futuro do StudyCap',
+        future_p1: 'O lançamento beta assinala o início de um percurso contínuo de inovação.',
+        future_p2: 'Comprometemo-nos a refinar ferramentas existentes e preparar novidades úteis.',
+        evo1_title: 'Melhorias contínuas', evo1_desc: 'Otimizações de velocidade, interface e acessibilidade.',
+        evo2_title: 'Sincronização na nuvem', evo2_desc: 'Implementação de salvaguarda remota entre diferentes dispositivos.',
+        evo3_title: 'Outras plataformas', evo3_desc: 'Disponibilização do StudyCap em mais sistemas operativos.',
+        evo4_title: 'Estatísticas avançadas', evo4_desc: 'Relatórios enriquecidos sobre a frequência e evolução de estudo.',
+        evo5_title: 'Evolução da Mari IA', evo5_desc: 'Aperfeiçoamento da assistente para um apoio académico ainda mais fiável.',
+        footer_home: 'Início', footer_privacy: 'Política de Privacidade', footer_delete: 'Eliminação de Conta',
+        footer_copy: '© 2026 StudyCap. Organização e produtividade para os seus estudos.'
+      },
+      'en': {
+        name: 'English', flag: '🇺🇸', dir: 'ltr',
+        btn_back: 'Back to home',
+        about_badge: 'Our Story & Purpose',
+        about_title: 'Designed to transform your study routine.',
+        about_desc: 'StudyCap brings organization, productivity, habit tracking, and study tools together in one workspace, empowering students to manage time and stay consistent.',
+        story1_title: 'How It All Started',
+        story1_p1: '<strong>StudyCap</strong>, crafted by <strong>AlifDevStudio</strong>, began with a meaningful conversation.',
+        story1_p2: 'The spark came from speaking with my girlfriend. Experiencing a demanding study schedule, she suggested building a purpose-driven student app. I accepted the challenge to turn that vision into reality.',
+        story1_p3: 'Her daily routine shaped every core utility: Pomodoro sessions, clean notes, flashcards, calendars, and milestone analytics.',
+        story1_highlight: 'StudyCap is also a heartfelt tribute to her dedication, engineered to inspire students worldwide.',
+        story2_title: 'A Centralized Workspace',
+        story2_p1: 'Many students juggle separate apps for notes, schedules, timers, and reviews.',
+        story2_p2: 'StudyCap unifies all these workflows into a single cohesive platform from initial planning to final exam prep.',
+        story2_p3: 'Our mission is to keep learning natural and frictionless, giving you clear visibility into your progress.',
+        feat_label: 'All-in-One Platform',
+        feat_heading: 'Tools for Every Stage of Learning',
+        feat_sub: 'Built to support your planning, deep focus, knowledge organization, and test preparation.',
+        f1_title: 'Study Schedule', f1_desc: 'Plan subjects, tasks, and daily study blocks for structured progress.',
+        f2_title: 'List or Table View', f2_desc: 'Toggle between clean lists and structured tables to match your workflow.',
+        f3_title: 'Planner & Agenda', f3_desc: 'Keep track of assignments, deadlines, and exam dates on an intuitive calendar.',
+        f4_title: 'Study Analytics', f4_desc: 'Monitor study volume, frequency, and consistency trends across the month.',
+        f5_title: 'Flashcards', f5_desc: 'Create prompt-and-answer flashcard decks for active recall and spaced review.',
+        f6_title: 'Notes & Library', f6_desc: 'Organize notebooks by subject with media attachments and clean archives.',
+        f7_title: 'Pomodoro Timer', f7_desc: 'Cycle between intense focus intervals and restorative breaks.',
+        f8_title: 'Exams & Practice Questions', f8_desc: 'Practice real exam questions directly within the application.',
+        f9_title: 'Mari AI', f9_desc: 'An AI study companion built to clarify doubts and guide academic milestones.',
+        f10_title: 'Connected Experience', f10_desc: 'Seamless interoperability where scheduling, notes, and timers work as one.',
+        pillars_label: 'Our Core Pillars',
+        pillars_title: 'Technology Serving Meaningful Productivity',
+        pillars_sub: 'Balancing clarity, speed, and continuous improvement for student success.',
+        pil1_title: 'Focus on Essentials', pil1_desc: 'Intuitive design that keeps attention on what matters without clutter.',
+        pil2_title: 'Unified Organization', pil2_desc: 'Notes, timers, agendas, and metrics reside in one centralized hub.',
+        pil3_title: 'Speed & Elegance', pil3_desc: 'Fast, responsive interface so you spend time studying, not configuring.',
+        beta_label: 'First Public Release',
+        beta_heading: 'A Mindful Beta Rollout',
+        beta_sub: 'The initial step in an evolving journey refined through genuine user feedback.',
+        beta_title: 'How Does the Beta Work?',
+        beta_p1: 'During the initial launch, <strong>Mari AI</strong> and <strong>cloud synchronization</strong> remain temporarily disabled for thorough testing.',
+        beta_p2: 'User records are stored <strong>locally on your device</strong> with immediate privacy.',
+        beta_p3: 'Features will receive frequent performance and usability enhancements.',
+        beta_badge: 'Local storage during beta',
+        future_title: 'The Future of StudyCap',
+        future_p1: 'Beta launch marks the prologue of ongoing community-driven innovation.',
+        future_p2: 'We are committed to polishing core features while preparing robust cloud capabilities.',
+        evo1_title: 'Continuous Polish', evo1_desc: 'Regular updates improving speed, stability, and accessibility.',
+        evo2_title: 'Cloud Synchronization', evo2_desc: 'Upcoming cloud backup and multi-device account sync.',
+        evo3_title: 'Platform Expansion', evo3_desc: 'Expanding StudyCap to desktop and additional platforms.',
+        evo4_title: 'Advanced Analytics', evo4_desc: 'Deeper insights into your study habits, retention, and progress.',
+        evo5_title: 'Mari AI Evolution', evo5_desc: 'Ongoing refinement of the study assistant for safe, accurate learning support.',
+        footer_home: 'Home', footer_privacy: 'Privacy Policy', footer_delete: 'Delete Account',
+        footer_copy: '© 2026 StudyCap. Maximizing your academic productivity.'
+      },
+      'es': {
+        name: 'Español', flag: '🇪🇸', dir: 'ltr',
+        btn_back: 'Volver al inicio',
+        about_badge: 'Nuestra historia y propósito',
+        about_title: 'Creado para transformar tu rutina de estudios.',
+        about_desc: 'StudyCap reúne organización, productividad, seguimiento y herramientas de aprendizaje en un solo lugar.',
+        story1_title: 'Cómo comenzó todo',
+        story1_p1: '<strong>StudyCap</strong>, desarrollado por <strong>AlifDevStudio</strong>, nació a partir de una conversación muy especial.',
+        story1_p2: 'La idea surgió al hablar con mi novia. Por su intensa rutina de estudio, sugirió crear una app dedicada a estudiantes.',
+        story1_p3: 'Su rutina ayudó a definir las herramientas clave: técnica Pomodoro, notas por materia, flashcards y estadísticas.',
+        story1_highlight: 'StudyCap nació también como un homenaje a su esfuerzo diario para ayudar a miles de estudiantes.',
+        story2_title: 'Una experiencia centralizada',
+        story2_p1: 'Muchos estudiantes alternan entre múltiples apps para apuntes, calendarios y repaso.',
+        story2_p2: 'StudyCap unifica estas necesidades en una sola plataforma fluida y accesible.',
+        story2_p3: 'El objetivo es facilitar la organización diaria sin complejidades añadidas.',
+        feat_label: 'Todo en una aplicación',
+        feat_heading: 'Herramientas para cada momento del estudio',
+        feat_sub: 'Diseñado para acompañarte en planificación, concentración, notas y exámenes.',
+        f1_title: 'Cronograma de estudios', f1_desc: 'Planifica materias y sesiones a lo largo de la semana.',
+        f2_title: 'Vista en lista o tabla', f2_desc: 'Alterna entre lista directa o tabla estructurada según tu preferencia.',
+        f3_title: 'Agenda', f3_desc: 'Apunta exámenes, entregas y compromisos en un calendario claro.',
+        f4_title: 'Estadísticas de estudio', f4_desc: 'Mide el tiempo dedicado y analiza tu evolución mensual.',
+        f5_title: 'Flashcards', f5_desc: 'Crea tarjetas de preguntas y respuestas para memorizar con facilidad.',
+        f6_title: 'Notas y biblioteca', f6_desc: 'Guarda apuntes por materia con audios e imágenes adjuntas.',
+        f7_title: 'Temporizador Pomodoro', f7_desc: 'Ciclos de enfoque y descanso para maximizar tu energía.',
+        f8_title: 'Exámenes y preguntas', f8_desc: 'Practica exámenes y resuelve preguntas dentro de la aplicación.',
+        f9_title: 'Mari IA', f9_desc: 'Asistente con inteligencia artificial para despejar dudas académicas.',
+        f10_title: 'Experiencia integrada', f10_desc: 'Todas las herramientas conectadas entre sí para mayor fluidez.',
+        pillars_label: 'Nuestros pilares',
+        pillars_title: 'Tecnología para una rutina más organizada',
+        pillars_sub: 'Equilibrio entre practicidad, simplicidad y evolución constante.',
+        pil1_title: 'Foco en lo esencial', pil1_desc: 'Diseño limpio para concentrarte en tus metas.',
+        pil2_title: 'Organización centralizada', pil2_desc: 'Toda tu información académica reunida en un solo lugar.',
+        pil3_title: 'Simplicidad y fluidez', pil3_desc: 'Interfaz rápida para estudiar sin perder tiempo.',
+        beta_label: 'Primera versión pública',
+        beta_heading: 'Un lanzamiento beta responsable',
+        beta_sub: 'El comienzo de un camino en continuo perfeccionamiento.',
+        beta_title: '¿Cómo funcionará la versión beta?',
+        beta_p1: 'Durante la etapa inicial, <strong>Mari IA</strong> y la <strong>sincronización en la nube</strong> estarán en preparación.',
+        beta_p2: 'Tus notas se almacenan <strong>localmente en tu dispositivo</strong> con total seguridad.',
+        beta_p3: 'Recibirás constantes mejoras de rendimiento y usabilidad.',
+        beta_badge: 'Almacenamiento local en versión beta',
+        future_title: 'El futuro de StudyCap',
+        future_p1: 'El lanzamiento beta es solo el primer paso de un proyecto en constante evolución.',
+        future_p2: 'Continuaremos optimizando las herramientas existentes y sumando nuevas.',
+        evo1_title: 'Mejoras continuas', evo1_desc: 'Ajustes de rendimiento, interfaz y accesibilidad.',
+        evo2_title: 'Sincronización en la nube', evo2_desc: 'Copia de seguridad y acceso multidispositivo en el futuro.',
+        evo3_title: 'Nuevas plataformas', evo3_desc: 'Llegada planificada a más dispositivos y sistemas.',
+        evo4_title: 'Estadísticas ampliadas', evo4_desc: 'Nuevos gráficos para monitorear tu desempeño.',
+        evo5_title: 'Evolución de Mari IA', evo5_desc: 'Desarrollo de la asistente para un aprendizaje seguro.',
+        footer_home: 'Inicio', footer_privacy: 'Privacidad', footer_delete: 'Eliminar Cuenta',
+        footer_copy: '© 2026 StudyCap. Elevando tu productividad al máximo.'
+      },
+      'zh': {
+        name: '简体中文', flag: '🇨🇳', dir: 'ltr',
+        btn_back: '返回首页', about_badge: '品牌故事与初衷',
+        about_title: '为革新您的学习日常而生。',
+        about_desc: 'StudyCap 集日程规划、专注计时、笔记整理与复习工具于一体，助力学生合理支配时间。',
+        story1_title: '项目缘起', story1_p1: '由 <strong>AlifDevStudio</strong> 打造的 <strong>StudyCap</strong> 始于一段深刻的交流。',
+        story1_p2: '灵感源于我与女友的探讨。面对繁重的学业，她提议打造一款真正实用的学生助手。',
+        story1_p3: '她的日常反馈促成了番茄钟、科目笔记、抽认卡与数据统计等核心工具的诞生。',
+        story1_highlight: 'StudyCap 凝聚了对她勤勉学习的致敬，也致力于赋能更多追求卓越的学子。',
+        story2_title: '一站式整合体验', story2_p1: '许多学生被迫在多个应用间反复切换记录笔记、任务与复习进度。',
+        story2_p2: 'StudyCap 将各环节深度整合，全面覆盖从规划到考前冲刺的整个周期。',
+        story2_p3: '化繁为简，让时间真正投入于高效学习与认知成长之中。',
+        feat_label: '全能应用', feat_heading: '贯穿学习全周期的利器',
+        feat_sub: '专注陪伴您的每一次规划、深度专注、课后复盘与模考演练。',
+        f1_title: '学习计划', f1_desc: '科学安排各科学习日程，构建井井有条的日常节奏。',
+        f2_title: '列表或表格视图', f2_desc: '自由切换列表与表格，全景掌握任务轻重缓急。',
+        f3_title: '日程日历', f3_desc: '记录考试日期与作业交期，关键节点一目了然。',
+        f4_title: '学习统计', f4_desc: '多维度复盘学习时长与自律轨迹，见证点滴进步。',
+        f5_title: '记忆抽认卡', f5_desc: '自主创建问答卡片，利用主动回忆强化记忆。',
+        f6_title: '笔记与资料库', f6_desc: '按科目归类图文笔记，旧资料随心归档。',
+        f7_title: '番茄工作法', f7_desc: '专注与休息交替进行，保持全天充沛精力。',
+        f8_title: '真题演练', f8_desc: '在应用内演练真题试卷，熟悉考核题型。',
+        f9_title: 'Mari 人工智能', f9_desc: '内置 AI 学习助手随时解答疑难困惑。',
+        f10_title: '深度协同', f10_desc: '各模块顺畅互通，打造行云流水般的学习流程。',
+        pillars_label: '核心理念', pillars_title: '技术赋能高品质学习生活',
+        pillars_sub: '兼顾实用、极简与持续创新，做学生的可靠伙伴。',
+        pil1_title: '聚焦本质', pil1_desc: '去除冗余杂项，专注真正重要的学习任务。',
+        pil2_title: '统一收纳', pil2_desc: '笔记、日程与数据汇聚一处，查找触手可及。',
+        pil3_title: '轻盈流畅', pil3_desc: '界面响应迅捷，打开即刻沉浸学习。',
+        beta_label: '公测首发', beta_heading: '严谨打造的测试版本',
+        beta_sub: '以用户真实反馈为驱动，开启持续进化之旅。',
+        beta_title: '测试版运行机制',
+        beta_p1: '首发期间，<strong>Mari AI</strong> 与<strong>云端同步</strong>暂行离线优化。',
+        beta_p2: '数据暂保存在<strong>本地设备</strong>，确保即时隐私与高速访问。',
+        beta_p3: '各项功能将持续迎来稳定性与交互体验迭代。',
+        beta_badge: '测试版支持本地存储',
+        future_title: 'StudyCap 的未来演进',
+        future_p1: '公测是探索的起点，我们将根据学生实际需求不断推陈出新。',
+        future_p2: '我们将持续完善核心体验并稳步推出更多云端协同功能。',
+        evo1_title: '持续优化', evo1_desc: '不断提升响应速度、界面美感与无障碍支持。',
+        evo2_title: '云端同步', evo2_desc: '未来实现跨设备数据备份与无缝漫游。',
+        evo3_title: '多端拓展', evo3_desc: '逐步拓展至电脑桌面端与其他生态。',
+        evo4_title: '深度洞察', evo4_desc: '引入更丰富的统计图表分析专注趋势。',
+        evo5_title: 'AI 助手演进', evo5_desc: '持续升级知识问答能力，打造贴心学伴。',
+        footer_home: '首页', footer_privacy: '隐私政策', footer_delete: '注销账户',
+        footer_copy: '© 2026 StudyCap。助您的专注与学习效率更上一层楼。'
+      },
+      'hi': {
+        name: 'हिन्दी', flag: '🇮🇳', dir: 'ltr',
+        btn_back: 'मुख्य पृष्ठ पर लौटें', about_badge: 'हमारी कहानी और उद्देश्य',
+        about_title: 'आपकी अध्ययन दिनचर्या को बदलने के लिए निर्मित।',
+        about_desc: 'StudyCap संगठन, एकाग्रता, ट्रैकिंग और शिक्षण उपकरणों को एक ही स्थान पर लाता है।',
+        story1_title: 'इसकी शुरुआत कैसे हुई',
+        story1_p1: '<strong>AlifDevStudio</strong> द्वारा निर्मित <strong>StudyCap</strong> एक विचारशील संवाद से शुरू हुआ।',
+        story1_p2: 'मेरी साथी के गहन अध्ययन कार्यक्रम ने मुझे छात्रों के लिए एक संपूर्ण ऐप बनाने की प्रेरणा दी।',
+        story1_p3: 'उनकी दिनचर्या से पोमोडोरो टाइमर, फ्लैशकार्ड और अध्ययन आंकड़ों जैसे आवश्यक फीचर्स विकसित हुए।',
+        story1_highlight: 'StudyCap उनकी मेहनत के प्रति एक सम्मान है, जो सभी विद्यार्थियों के काम आ सके।',
+        story2_title: 'एक एकीकृत अनुभव',
+        story2_p1: 'छात्रों को नोट्स, टाइमर और शेड्यूल के लिए कई अलग-अलग ऐप्स का सहारा लेना पड़ता है।',
+        story2_p2: 'StudyCap इन सभी जरूरतों को एक ही सरल और सुलभ मंच पर संयोजित करता है।',
+        story2_p3: 'हमारा लक्ष्य पढ़ाई के प्रबंधन को तनावमुक्त और सहज बनाना है।',
+        feat_label: 'सब कुछ एक ही ऐप में', feat_heading: 'अध्ययन के हर चरण के लिए उपकरण',
+        feat_sub: 'योजना, ध्यान, नोट्स और परीक्षा की तैयारी में आपका निरंतर साथी।',
+        f1_title: 'अध्ययन समय सारणी', f1_desc: 'दैनिक दिनचर्या को सुव्यवस्थित रखने के लिए विषयों की योजना बनाएं।',
+        f2_title: 'सूची या तालिका दृश्य', f2_desc: 'अपनी सुविधानुसार सूची या तालिका दृश्य चुनें।',
+        f3_title: 'कैलेंडर और कार्य सूची', f3_desc: 'परीक्षाओं और असाइनमेंट की समय सीमा कभी न भूलें।',
+        f4_title: 'विस्तृत आंकड़े', f4_desc: 'महीने भर की अध्ययन प्रगति का विश्लेषण करें।',
+        f5_title: 'फ्लैशकार्ड', f5_desc: 'तेजी से दोहराने और याद रखने के लिए प्रश्न-उत्तर कार्ड बनाएं।',
+        f6_title: 'नोट्स और लाइब्रेरी', f6_desc: 'विषयवार नोट्स और मल्टीमीडिया सामग्री सुरक्षित रखें।',
+        f7_title: 'पोमोडोरो टाइमर', f7_desc: 'एकाग्रता और विश्राम चक्रों के साथ मानसिक थकान घटाएं।',
+        f8_title: 'परीक्षाएं और अभ्यास प्रश्न', f8_desc: 'ऐप में सीधे मॉक टेस्ट हल करें और अभ्यास करें।',
+        f9_title: 'Mari AI', f9_desc: 'अकादमिक शंकाओं के समाधान हेतु अंतर्निहित सहायक।',
+        f10_title: 'एकीकृत प्रणाली', f10_desc: 'सभी उपकरण एक साथ सामंजस्य से कार्य करते हैं।',
+        pillars_label: 'हमारे स्तंभ', pillars_title: 'सुव्यवस्थित दिनचर्या के लिए तकनीक',
+        pillars_sub: 'व्यावहारिकता, सादगी और निरंतर सुधार का संतुलन।',
+        pil1_title: 'अनिवार्य पर ध्यान', pil1_desc: 'अनावश्यक भटकाव से मुक्त साफ़-सुथरा इंटरफ़ेस।',
+        pil2_title: 'केंद्रीकृत संगठन', pil2_desc: 'आपकी सारी अध्ययन सामग्री एक ही जगह सुरक्षित।',
+        pil3_title: 'सहज और तीव्र', pil3_desc: 'तेज ऐप ताकि आप समय का उपयोग केवल पढ़ाई में करें।',
+        beta_label: 'प्रथम सार्वजनिक संस्करण', beta_heading: 'जिम्मेदारी से तैयार बीटा संस्करण',
+        beta_sub: 'उपयोगकर्ताओं के फीडबैक के साथ एक निरंतर विकास की शुरुआत।',
+        beta_title: 'बीटा संस्करण कैसे काम करेगा?',
+        beta_p1: 'शुरुआती दौर में <strong>Mari AI</strong> और <strong>क्लाउड सिंक</strong> का परीक्षण चल रहा है।',
+        beta_p2: 'आपका डेटा सुरक्षित रूप से <strong>लोकल डिवाइस</strong> पर संग्रहीत रहेगा।',
+        beta_p3: 'नियमित अपडेट के साथ फीचर्स लगातार बेहतर होंगे।',
+        beta_badge: 'बीटा में लोकल स्टोरेज',
+        future_title: 'StudyCap का भविष्य',
+        future_p1: 'बीटा संस्करण एक बड़े सफर की केवल शुरुआत है।',
+        future_p2: 'हम निरंतर नए फीचर्स और क्लाउड क्षमताओं पर काम कर रहे हैं।',
+        evo1_title: 'निरंतर सुधार', evo1_desc: 'गति, स्थिरता और यूजर इंटरफेस में लगातार वृद्धि।',
+        evo2_title: 'क्लाउड सिंक', evo2_desc: 'आगामी समय में विभिन्न डिवाइसों पर डेटा बैकअप की सुविधा।',
+        evo3_title: 'अन्य प्लेटफॉर्म', evo3_desc: 'डेस्कटॉप और अन्य प्रणालियों पर ऐप का विस्तार।',
+        evo4_title: 'विस्तृत आंकड़े', evo4_desc: 'अध्ययन प्रगति को समझने के नए ग्राफ।',
+        evo5_title: 'Mari AI का विकास', evo5_desc: 'विश्वसनीय शिक्षण सहायता के लिए एआई का उन्नयन।',
+        footer_home: 'होम', footer_privacy: 'गोपनीयता नीति', footer_delete: 'खाता हटाएं',
+        footer_copy: '© 2026 StudyCap. अपनी उत्पादकता को नई ऊंचाइयों पर ले जाएं।'
+      },
+      'id': {
+        name: 'Bahasa Indonesia', flag: '🇮🇩', dir: 'ltr',
+        btn_back: 'Kembali ke Beranda', about_badge: 'Kisah & Tujuan Kami',
+        about_title: 'Diciptakan untuk mengubah rutinitas belajar Anda.',
+        about_desc: 'StudyCap menyatukan manajemen waktu, catatan, flashcard, dan analitik dalam satu ruang kerja yang rapi.',
+        story1_title: 'Awal Mula Perjalanan',
+        story1_p1: '<strong>StudyCap</strong>, dikembangkan oleh <strong>AlifDevStudio</strong>, berawal dari percakapan berharga.',
+        story1_p2: 'Idenya muncul saat berbincang dengan pasangan saya yang memiliki rutinitas belajar padat.',
+        story1_p3: 'Rutinitasnya menginspirasi fitur esensial seperti Pomodoro, flashcard, dan catatan terstruktur.',
+        story1_highlight: 'StudyCap lahir sebagai bentuk apresiasi atas dedikasinya untuk membantu para pelajar di mana pun.',
+        story2_title: 'Pengalaman Terpadu',
+        story2_p1: 'Pelajar sering kali kerepotan berganti-ganti aplikasi untuk jadwal, catatan, dan tugas.',
+        story2_p2: 'StudyCap menggabungkan semua kebutuhan belajar ke dalam satu platform yang simpel.',
+        story2_p3: 'Membantu Anda fokus belajar tanpa dipusingkan oleh pengaturan rumit.',
+        feat_label: 'Semua dalam Satu Aplikasi', feat_heading: 'Alat untuk Setiap Tahapan Belajar',
+        feat_sub: 'Menemani Anda dalam merencanakan jadwal, fokus, mencatat, dan menghadapi ujian.',
+        f1_title: 'Jadwal Belajar', f1_desc: 'Atur mata pelajaran dan target harian secara teratur.',
+        f2_title: 'Tampilan Daftar atau Tabel', f2_desc: 'Pilih mode daftar atau tabel sesuai gaya belajar Anda.',
+        f3_title: 'Agenda & Kalender', f3_desc: 'Pantau tenggat waktu tugas dan jadwal ujian penting.',
+        f4_title: 'Statistik Belajar', f4_desc: 'Lihat ringkasan waktu belajar dan konsistensi Anda.',
+        f5_title: 'Flashcards', f5_desc: 'Gunakan kartu tanya-jawab untuk memperkuat daya ingat materi.',
+        f6_title: 'Catatan & Media', f6_desc: 'Kelompokkan catatan berdasarkan mata pelajaran dengan lampiran.',
+        f7_title: 'Timer Pomodoro', f7_desc: 'Jaga stamina berpikir dengan ritme fokus dan jeda istirahat.',
+        f8_title: 'Ujian & Latihan Soal', f8_desc: 'Kerjakan soal latihan langsung di dalam aplikasi.',
+        f9_title: 'Mari AI', f9_desc: 'Asisten cerdas untuk menjawab keraguan dan pertanyaan akademik.',
+        f10_title: 'Sistem Terkoneksi', f10_desc: 'Setiap modul saling terhubung untuk alur kerja tanpa hambatan.',
+        pillars_label: 'Pilar Utama', pillars_title: 'Teknologi untuk Rutinitas Terorganisir',
+        pillars_sub: 'Keseimbangan antara kesederhanaan, kecepatan, dan inovasi berkelanjutan.',
+        pil1_title: 'Fokus pada yang Utama', pil1_desc: 'Antarmuka bersih tanpa gangguan yang tidak perlu.',
+        pil2_title: 'Penyimpanan Terpusat', pil2_desc: 'Semua berkas dan jadwal belajar tersimpan di satu tempat.',
+        pil3_title: 'Ringan & Cepat', pil3_desc: 'Akses instan agar waktu Anda tercurahkan penuh untuk belajar.',
+        beta_label: 'Rilis Publik Perdana', beta_heading: 'Peluncuran Versi Beta',
+        beta_sub: 'Langkah awal dari pengembangan berkelanjutan bersama masukan pengguna.',
+        beta_title: 'Cara Kerja Versi Beta',
+        beta_p1: 'Pada fase perdana, <strong>Mari AI</strong> dan <strong>sinkronisasi cloud</strong> sedang dipersiapkan.',
+        beta_p2: 'Data Anda tersimpan secara <strong>lokal pada perangkat</strong> demi privasi instan.',
+        beta_p3: 'Fitur akan menerima penyempurnaan stabilitas secara berkala.',
+        beta_badge: 'Penyimpanan lokal di versi beta',
+        future_title: 'Masa Depan StudyCap',
+        future_p1: 'Versi beta adalah pembuka dari inovasi fitur jangka panjang.',
+        future_p2: 'Kami berdedikasi mengembangkan sinkronisasi cloud dan fitur pintar lainnya.',
+        evo1_title: 'Pembaruan Rutin', evo1_desc: 'Peningkatan performa, visual, dan kemudahan akses.',
+        evo2_title: 'Sinkronisasi Cloud', evo2_desc: 'Fitur pencadangan data antar perangkat di masa depan.',
+        evo3_title: 'Ekspansi Perangkat', evo3_desc: 'Rencana ketersediaan di platform komputer dan lainnya.',
+        evo4_title: 'Statistik Lanjutan', evo4_desc: 'Visualisasi grafis baru untuk melihat pencapaian belajar.',
+        evo5_title: 'Evolusi Mari AI', evo5_desc: 'Peningkatan kecerdasan asisten untuk bimbingan yang aman.',
+        footer_home: 'Beranda', footer_privacy: 'Privasi', footer_delete: 'Hapus Akun',
+        footer_copy: '© 2026 StudyCap. Maksimalkan produktivitas belajar Anda.'
+      },
+      'ar': {
+        name: 'العربية', flag: '🇸🇦', dir: 'rtl',
+        btn_back: 'العودة للرئيسية', about_badge: 'قصتنا وهدفنا',
+        about_title: 'صُمم لتغيير روتين دراستك بالكامل.',
+        about_desc: 'يجمع StudyCap بين التنظيم والإنتاجية والمؤقتات الذكية والتحليلات في مساحة عمل واحدة.',
+        story1_title: 'كيف بدأت الفكرة',
+        story1_p1: 'بدأ تطبيق <strong>StudyCap</strong> من تطوير <strong>AlifDevStudio</strong> بفضل محادثة هادفة.',
+        story1_p2: 'استلهمت الفكرة من روتين دراسة شريكتي المكثف، واقترحت بناء تطبيق يخدم الطلاب بذكاء.',
+        story1_p3: 'ساعدت تجربتها في صياغة الأدوات الأساسية: مؤقت بومودورو، والبطاقات التعليمية، وجداول المذاكرة.',
+        story1_highlight: 'StudyCap هو تحية لجهدها اليومي، وأداة صُممت لتلهم آلاف الطلاب حول العالم.',
+        story2_title: 'تجربة مركزية متكاملة',
+        story2_p1: 'يعاني الطلاب من تشتت جهودهم بين عدة تطبيقات للملاحظات والمواعيد والمراجعة.',
+        story2_p2: 'يجمع StudyCap كل هذه الاحتياجات تحت مظلة منصة واحدة سهلة وبسيطة.',
+        story2_p3: 'هدفنا جعل إدارة الوقت واضحة وسلسة لتتفرغ تماماً لتحقيق النجاح.',
+        feat_label: 'كل شيء في تطبيق واحد', feat_heading: 'أدوات لكل مراحل المذاكرة',
+        feat_sub: 'رفيقك الدائم في التخطيط، والتركيز العالي، وتنظيم المحاضرات، والامتحانات.',
+        f1_title: 'جدول الدراسة', f1_desc: 'خطط للمواد والمهام على مدار الأسبوع بيسر.',
+        f2_title: 'عرض القائمة أو الجدول', f2_desc: 'اختر بين عرض القائمة المباشر أو الجدول المقارن.',
+        f3_title: 'التقويم والمواعيد', f3_desc: 'سجّل مواعيد الاختبارات وتسليم الواجبات بلا نسيان.',
+        f4_title: 'إحصائيات الدراسة', f4_desc: 'تابع ساعات دراستك ومستوى التزامك الأسبوعي والشهري.',
+        f5_title: 'البطاقات التعليمية', f5_desc: 'أنشئ بطاقات سؤال وجواب لتثبيت الحفظ والاسترجاع السريع.',
+        f6_title: 'الملاحظات والمكتبة', f6_desc: 'نظّم الدفاتر حسب المادة مع إرفاق الصور والتسجيلات.',
+        f7_title: 'مؤقت بومودورو', f7_desc: 'فترات تركيز متتالية مع استراحات منتظمة لتعزيز طاقتك.',
+        f8_title: 'نماذج الامتحانات', f8_desc: 'تدرّب على بنوك الأسئلة مباشرة داخل التطبيق.',
+        f9_title: 'Mari AI', f9_desc: 'مساعدة ذكية تجيب على الأسئلة وتوضح المفاهيم المعقدة.',
+        f10_title: 'نظام متكامل', f10_desc: 'ترابط وثيق بين الملاحظات والتقويم والمؤقت دون انقطاع.',
+        pillars_label: 'ركائزنا الأساسية', pillars_title: 'تقنية مسخرة لروتين منظم',
+        pillars_sub: 'توازن مثالي بين البساطة والسرعة والتحسين المستمر.',
+        pil1_title: 'التركيز على الأساسيات', pil1_desc: 'واجهة نقية تبقيك منتبهاً لما يهمك فقط.',
+        pil2_title: 'تنظيم موحد', pil2_desc: 'كل بياناتك ومصادرك مجتمعة في مكان واحد.',
+        pil3_title: 'سرعة وانسيابية', pil3_desc: 'استجابة فائقة لتستغل كل ثانية في المذاكرة.',
+        beta_label: 'النسخة التجريبية الأولى', beta_heading: 'إطلاق تجريبي مدروس',
+        beta_sub: 'بداية رحلة تطوير مستمرة تُبنى على تجارب المستخدمين واقتراحاتهم.',
+        beta_title: 'كيف تعمل النسخة التجريبية؟',
+        beta_p1: 'خلال هذه المرحلة، تبقى <strong>Mari AI</strong> و<strong>المزامنة السحابية</strong> قيد التجهيز.',
+        beta_p2: 'تُحفظ ملفاتك <strong>محلياً على جهازك</strong> بأقصى درجات الخصوصية.',
+        beta_p3: 'ستصل تحديثات مستمرة لتحسين الاستقرار والأداء.',
+        beta_badge: 'حفظ محلي في النسخة التجريبية',
+        future_title: 'مستقبل StudyCap',
+        future_p1: 'النسخة التجريبية هي مجرد انطلاقة لمشروع يطمح للكثير.',
+        future_p2: 'ملتزمون بتطوير الخصائص ودعم النسخ السحابية مستقبلاً.',
+        evo1_title: 'تطوير مستمر', evo1_desc: 'تحديثات في السرعة والتوافق وجمالية الواجهات.',
+        evo2_title: 'المزامنة السحابية', evo2_desc: 'الربط بين الأجهزة والنسخ الاحتياطي عن بُعد.',
+        evo3_title: 'دعم أنظمة أخرى', evo3_desc: 'توفير StudyCap على الحواسيب والمنصات المتعددة.',
+        evo4_title: 'إحصائيات أعمق', evo4_desc: 'رسوم بيانية متقدمة لرصد نمو استيعابك.',
+        evo5_title: 'ترقية الذكاء الاصطناعي', evo5_desc: 'توسيع قدرات المساعد لتقديم دعم تعليمي متقدم.',
+        footer_home: 'الرئيسية', footer_privacy: 'الخصوصية', footer_delete: 'حذف الحساب',
+        footer_copy: '© 2026 StudyCap. ارتقِ بإنتاجيتك إلى أقصى الحدود.'
+      },
+      'bn': {
+        name: 'বাংলা', flag: '🇧🇩', dir: 'ltr',
+        btn_back: 'হোমে ফিরে যান', about_badge: 'আমাদের গল্প ও উদ্দেশ্য',
+        about_title: 'আপনার অধ্যয়নের রুটিন সহজ করার লক্ষ্যে তৈরি।',
+        about_desc: 'StudyCap রুটিন, সময় ব্যবস্থাপনা, ফ্ল্যাশকার্ড ও নোটবুককে একটি সুসংগঠিত প্ল্যাটফর্মে যুক্ত করে।',
+        story1_title: 'যেভাবে শুরু হলো',
+        story1_p1: '<strong>AlifDevStudio</strong> দ্বারা নির্মিত <strong>StudyCap</strong> একটি সাধারণ কিন্তু গভীর আলোচনা থেকে শুরু হয়।',
+        story1_p2: 'আমার সঙ্গীর ব্যস্ত পড়াশোনার রুটিন দেখে শিক্ষার্থীদের উপকারে আসার মতো একটি অ্যাপ তৈরির অনুপ্রেরণা পাই।',
+        story1_p3: 'তার অভিজ্ঞতা থেকেই পোমোডোরো, বিষয়ভিত্তিক নোট ও পরীক্ষার প্রস্তুতির মতো ফিচার যুক্ত হয়েছে।',
+        story1_highlight: 'StudyCap তার নিরলস পরিশ্রমের প্রতি শ্রদ্ধাঞ্জলি এবং সব শিক্ষার্থীদের জন্য একটি সহায়ক মাধ্যম।',
+        story2_title: 'এক জায়গায় সব সমাধান',
+        story2_p1: 'শিক্ষার্থীদের বিভিন্ন কাজের জন্য আলাদা আলাদা অ্যাপ ব্যবহার করতে গিয়ে প্রচুর সময় অপচয় হয়।',
+        story2_p2: 'StudyCap সব প্রয়োজনকে এক প্ল্যাটফর্মে এনে পড়াশোনাকে করে তোলে সুসংগঠিত।',
+        story2_p3: 'আমাদের লক্ষ্য পড়াশোনার প্রক্রিয়াকে সহজ, সাবলীল ও আনন্দদায়ক রাখা।',
+        feat_label: 'একটি অ্যাপেই সবকিছু', feat_heading: 'পড়াশোনার প্রতিটি ধাপের জন্য প্রয়োজনীয় টুলস',
+        feat_sub: 'পরিকল্পনা, একাগ্রতা, ক্লাস নোট এবং পরীক্ষার প্রস্তুতির নির্ভরযোগ্য সঙ্গী।',
+        f1_title: 'পড়ার রুটিন', f1_desc: 'প্রতিদিনের লক্ষ্য ও বিষয়ভিত্তিক সময়সূচি সহজে সাজিয়ে নিন।',
+        f2_title: 'তালিকা বা টেবিল ভিউ', f2_desc: 'পছন্দমতো তালিকা কিংবা টেবিল ভিউতে কাজগুলো দেখুন।',
+        f3_title: 'ক্যালেন্ডার ও সূচি', f3_desc: 'পরীক্ষার তারিখ ও অ্যাসাইনমেন্টের ডেডলাইন মনে রাখুন।',
+        f4_title: 'পরিসংখ্যান', f4_desc: 'প্রতি মাসে আপনার পড়ার অগ্রগতি ও সময় বিশ্লেষণ করুন।',
+        f5_title: 'ফ্ল্যাশকার্ড', f5_desc: 'সহজে রিভিশন ও মনে রাখার জন্য প্রশ্ন-উত্তর কার্ড বানান।',
+        f6_title: 'নোট ও মিডিয়া', f6_desc: 'বিষয়ভিত্তিক নোটের সাথে ছবি ও ভয়েস রেকর্ড যুক্ত রাখুন।',
+        f7_title: 'পোমোডোরো টাইমার', f7_desc: 'পড়ার ফাঁকে নির্দিষ্ট বিরতি নিয়ে কাজের ক্লান্তি দূর করুন।',
+        f8_title: 'নমুনা প্রশ্ন ও পরীক্ষা', f8_desc: 'অ্যাপের ভেতরেই সরাসরি প্রশ্ন সমাধান করে অনুশীলন করুন।',
+        f9_title: 'Mari AI', f9_desc: 'যেকোনো অ্যাকাডেমিক প্রশ্নের তাৎক্ষণিক সমাধানের জন্য এআই।',
+        f10_title: 'একীভূত অভিজ্ঞতা', f10_desc: 'সব ফিচার একে অপরের সাথে সুন্দরভাবে সংযুক্ত।',
+        pillars_label: 'আমাদের মূল ভিত্তি', pillars_title: 'সুশৃঙ্খল রুটিন গড়তে আধুনিক প্রযুক্তি',
+        pillars_sub: 'ব্যবহারের সুবিধা, গতি ও সার্বক্ষণিক মানোন্নয়নের মেলবন্ধন।',
+        pil1_title: 'প্রয়োজনীয় বিষয়ে মনোযোগ', pil1_desc: 'অপ্রয়োজনীয় জটিলতামুক্ত পরিষ্কার পরিচ্ছন্ন ইউজার ইন্টারফেস।',
+        pil2_title: 'কেন্দ্রীয় ব্যবস্থাপনা', pil2_desc: 'সব নোট, শিডিউল ও ডেটা একটি নির্ভরযোগ্য স্থানে।',
+        pil3_title: 'সহজ ও সাবলীল', pil3_desc: 'দ্রুতগতির অ্যাপ যাতে সময় শুধু পড়াশোনাতেই ব্যয় হয়।',
+        beta_label: 'প্রথম উন্মুক্ত সংস্করণ', beta_heading: 'একটি সুচিন্তিত বেটা সংস্করণ',
+        beta_sub: 'ব্যবহারকারীদের মতামতের ভিত্তিতে ক্রমান্বয়ে উন্নতির সূচনা।',
+        beta_title: 'বেটা সংস্করণ কীভাবে কাজ করবে?',
+        beta_p1: 'প্রাথমিক পর্যায়ে <strong>Mari AI</strong> ও <strong>ক্লাউড ব্যাকআপ</strong> ফিচার পরিমার্জনাধীন রয়েছে।',
+        beta_p2: 'আপনার সব তথ্য নিরাপদভাবে <strong>ডিভাইসেই সংরক্ষিত</strong> থাকবে।',
+        beta_p3: 'নিয়মিত আপডেটের মাধ্যমে অ্যাপের মান ক্রমাগত উন্নত করা হবে।',
+        beta_badge: 'বেটাতে লোকাল স্টোরেজ',
+        future_title: 'StudyCap এর ভবিষ্যৎ',
+        future_p1: 'বেটা রিলিজ হলো দীর্ঘমেয়াদী সম্ভাবনার প্রথম সোপান।',
+        future_p2: 'আমরা প্রতিনিয়ত নতুন সুবিধা ও ক্লাউড সংযোগের প্রস্তুতি নিচ্ছি।',
+        evo1_title: 'অবিরাম উন্নতি', evo1_desc: 'পারফরম্যান্স, ডিজাইন ও গতি বৃদ্ধিতে নিয়মিত আপডেট।',
+        evo2_title: 'ক্লাউড সিঙ্ক', evo2_desc: 'ভবিষ্যতে একাধিক ডিভাইসের মধ্যে তথ্য আদানপ্রদানের সুবিধা।',
+        evo3_title: 'অন্যান্য প্ল্যাটফর্ম', evo3_desc: 'কম্পিউটার ও অন্যান্য অপারেটিং সিস্টেমে অ্যাপটির বিস্তার।',
+        evo4_title: 'উন্নত বিশ্লেষণ', evo4_desc: 'পড়ার অগ্রগতি বুঝতে আরো সমৃদ্ধ ভিজ্যুয়াল রিপোর্ট।',
+        evo5_title: 'Mari AI এর অগ্রগতি', evo5_desc: 'সহকারীর বুদ্ধিমত্তা বৃদ্ধি করে নিরাপদ সাপোর্ট নিশ্চিতকরণ।',
+        footer_home: 'হোম', footer_privacy: 'গোপনীয়তা', footer_delete: 'অ্যাকাউন্ট মুছুন',
+        footer_copy: '© 2026 StudyCap. আপনার একাডেমিক দক্ষতাকে সর্বোচ্চ মাত্রায় নিয়ে যান।'
+      },
+      'ur': {
+        name: 'اردو', flag: '🇵🇰', dir: 'rtl',
+        btn_back: 'ہوم پر واپس جائیں', about_badge: 'ہماری کہانی اور مقصد',
+        about_title: 'آپ کے پڑھائی کے انداز کو بدلنے کے لیے تیار۔',
+        about_desc: 'StudyCap نوٹس، ٹائمر، شیڈول اور اعدادوشمار کو ایک منظم جگہ پر لاتا ہے۔',
+        story1_title: 'آغاز کی داستان',
+        story1_p1: '<strong>AlifDevStudio</strong> کا تیار کردہ <strong>StudyCap</strong> ایک اہم مکالمے کا نتیجہ ہے۔',
+        story1_p2: 'یہ خیال میری ساتھی کی سخت تعلیمی روٹین دیکھ کر پیدا ہوا، جس پر میں نے ایک جامع ایپ بنانے کا بیڑہ اٹھایا۔',
+        story1_p3: 'ان کی روٹین نے پومودورو، فلیش کارڈز اور شیڈول جیسے ضروری ٹولز کو ڈیزائن کرنے میں رہنمائی کی۔',
+        story1_highlight: 'StudyCap ان کی محنت کا اعتراف اور طلبہ کی رہنمائی کے لیے ایک سچا تحفہ ہے۔',
+        story2_title: 'ایک منظم ماحول',
+        story2_p1: 'طلبہ کو مختلف کاموں کے لیے کئی ایپس کا سہارا لینا پڑتا ہے جس سے وقت ضائع ہوتا ہے۔',
+        story2_p2: 'StudyCap تمام ضروریات کو ایک ہی چھت تلے جمع کرتا ہے۔',
+        story2_p3: 'ہمارا مقصد پڑھائی کو سادہ اور آسان بنانا ہے۔',
+        feat_label: 'سب کچھ ایک ہی ایپ میں', feat_heading: 'ہر مرحلے کے لیے کارآمد ٹولز',
+        feat_sub: 'منصوبہ بندی، گہرے فوکس، امتحانی تیاری اور نوٹس کا ہم سفر۔',
+        f1_title: 'اسٹڈی شیڈول', f1_desc: 'مضامین اور روزانہ کی پڑھائی کے اوقات ترتیب دیں۔',
+        f2_title: 'فہرست یا ٹیبل ویو', f2_desc: 'اپنی سہولت کے مطابق لسٹ یا ٹیبل ویو منتخب کریں۔',
+        f3_title: 'کیلنڈر اور ڈیڈ لائنز', f3_desc: 'امتحانی تاریخیں اور اسائنمنٹس ہمیشہ یاد رکھیں۔',
+        f4_title: 'تفصیلی اعدادوشمار', f4_desc: 'پورے مہینے کے پڑھائی کے اوقات کا جائزہ لیں۔',
+        f5_title: 'فلیش کارڈز', f5_desc: 'سوال و جواب کے کارڈز کے ذریعے دہرائی آسان بنائیں۔',
+        f6_title: 'نوٹس اور میڈیا', f6_desc: 'مضامین کے لحاظ سے تصاویر اور وائس ریکارڈز محفوظ کریں۔',
+        f7_title: 'پومودورو ٹائمر', f7_desc: 'وقفوں کے ساتھ فوکس سیشنز سے تھکن دور کریں۔',
+        f8_title: 'امتحانات اور پریکٹس', f8_desc: 'ایپ کے اندر ٹیسٹ اور سوالات حل کریں۔',
+        f9_title: 'Mari AI', f9_desc: 'تعلیمی سوالات کے فوری حل کے لیے سمارٹ معاون۔',
+        f10_title: 'مربوط سسٹم', f10_desc: 'تمام فیچرز کا باہمی ربط کام کو تیز بناتا ہے۔',
+        pillars_label: 'بنیادی اصول', pillars_title: 'منظم روٹین کے لیے جدید ٹیکنالوجی',
+        pillars_sub: 'سادگی، رفتار اور مسلسل جدت کا حسین امتزاج۔',
+        pil1_title: 'بنیادی چیزوں پر توجہ', pil1_desc: 'غیر ضروری پیچیدگیوں سے پاک پرسکون انٹرفیس۔',
+        pil2_title: 'مرکزی انتظام', pil2_desc: 'تمام نوٹس اور ڈیٹا ایک ہی جگہ پر محفوظ۔',
+        pil3_title: 'تیز اور آسان', pil3_desc: 'تیز ترین ایپ تاکہ آپ کا قیمتی وقت صرف پڑھائی میں لگے۔',
+        beta_label: 'پہلا پبلک ریلیز', beta_heading: 'ذمہ دارانہ بیٹا ورژن',
+        beta_sub: 'صارفین کی آراء کی بنیاد پر بہتری کے طویل سفر کا آغاز۔',
+        beta_title: 'بیٹا ورژن کیسے کام کرے گا؟',
+        beta_p1: 'ابتدائی مراحل میں <strong>Mari AI</strong> اور <strong>کلاؤڈ سنک</strong> پر کام جاری ہے۔',
+        beta_p2: 'آپ کا ڈیٹا مکمل رازداری کے ساتھ <strong>ڈیوائس میں لوکل</strong> محفوظ رہے گا۔',
+        beta_p3: 'مسلسل اپڈیٹس سے کارکردگی میں اضافہ کیا جائے گا۔',
+        beta_badge: 'بیٹا میں لوکل اسٹوریج',
+        future_title: 'StudyCap کا مستقبل',
+        future_p1: 'بیٹا ریلیز مستقبل کے شاندار فیچرز کا ابتدائیہ ہے۔',
+        future_p2: 'ہم کلاؤڈ سپورٹ اور نئے فیچرز لانے کے لیے پرعزم ہیں۔',
+        evo1_title: 'مسلسل بہتری', evo1_desc: 'رفتار، استحکام اور انٹرفیس میں باقاعدہ اپڈیٹس۔',
+        evo2_title: 'کلاؤڈ سنک', evo2_desc: 'مستقبل میں تمام ڈیوائسز پر ڈیٹا بیک اپ کی سہولت۔',
+        evo3_title: 'دیگر سسٹمز پر توسیع', evo3_desc: 'ڈیسک ٹاپ کمپیوٹرز اور دیگر پلیٹ فارمز پر دستیابی۔',
+        evo4_title: 'تفصیلی چارٹس', evo4_desc: 'پڑھائی کی رفتار کو سمجھنے کے لیے جدید اینالیٹکس۔',
+        evo5_title: 'Mari AI کی ترقی', evo5_desc: 'طالب علموں کی معاونت کے لیے ای آئی ماڈل کی بہتری۔',
+        footer_home: 'ہوم', footer_privacy: 'رازداری', footer_delete: 'اکاؤنٹ ڈیلیٹ کریں',
+        footer_copy: '© 2026 StudyCap. اپنی کارکردگی کو عروج پر لے جائیں۔'
+      },
+      'ja': {
+        name: '日本語', flag: '🇯🇵', dir: 'ltr',
+        btn_back: 'ホームに戻る', about_badge: '開発ストーリーと使命',
+        about_title: '毎日の勉強習慣を劇的に変えるために。',
+        about_desc: 'StudyCap はノート整理、ポモドーロ、進捗分析、学習プランを一元管理できる統合ワークスペースです。',
+        story1_title: '開発の原点',
+        story1_p1: '<strong>AlifDevStudio</strong> による <strong>StudyCap</strong> は、何気ない大切な対話から始まりました。',
+        story1_p2: '日々勉強に励むパートナーの「本当に使いやすい学生向けアプリがほしい」という言葉から開発を決意しました。',
+        story1_p3: '彼女のリアルな学習習慣から、ポモドーロやフラッシュカード、カレンダーなどの必須機能が誕生しました。',
+        story1_highlight: '彼女の日々の努力への敬意を込め、世界中の学習者を支えるために生まれたアプリです。',
+        story2_title: '一元管理された学習空間',
+        story2_p1: '多くの学生がノート、予定表、タイマーなど複数のアプリを使い分ける負担に悩んでいます。',
+        story2_p2: 'StudyCap は計画から復習、試験対策までの全工程をひとつのアプリで完結させます。',
+        story2_p3: '複雑な設定を排し、学ぶことそのものに全力を注げる環境を提供します。',
+        feat_label: 'オールインワン', feat_heading: '学習のあらゆる瞬間を支えるツール群',
+        feat_sub: 'スケジュール立案、深い集中、ノートの整理、試験対策までしっかりサポート。',
+        f1_title: '学習スケジュール', f1_desc: '日々の科目や自習枠を明確に計画し、継続的な学習習慣を確立。',
+        f2_title: 'リスト・テーブル表示', f2_desc: 'シンプルなリストと全体を見渡せるテーブル表示を自由に切り替え。',
+        f3_title: 'カレンダー＆予定表', f3_desc: '提出期限やテスト日程を一目で把握できるスマートなカレンダー。',
+        f4_title: '学習統計データ', f4_desc: '勉強時間や継続日数を可視化し、成長の軌跡を実感。',
+        f5_title: 'フラッシュカード', f5_desc: '一問一答カードを作成し、スキマ時間に素早く復習。',
+        f6_title: 'ノート＆ライブラリ', f6_desc: '科目別に整理でき、画像や音声も添付できるノート機能。',
+        f7_title: 'ポモドーロタイマー', f7_desc: '集中と休憩のサイクルで疲労を抑え、高い生産性を維持。',
+        f8_title: '演習問題と過去問', f8_desc: 'アプリ内で試験問題を解き、実戦力を養成。',
+        f9_title: 'Mari AI', f9_desc: '勉強の疑問をいつでも質問できる頼もしいAIパートナー。',
+        f10_title: 'シームレスな連携', f10_desc: 'すべての機能が連動し、ストレスのない学習体験を実現。',
+        pillars_label: '私たちの理念', pillars_title: '秩序ある学習習慣を支える技術',
+        pillars_sub: '実用性、使いやすさ、継続的な進化のベストバランスを追求。',
+        pil1_title: '本質への集中', pil1_desc: '無駄を削ぎ落とした洗練されたデザイン。',
+        pil2_title: '統合された整理術', pil2_desc: 'ノートも予定も記録も、ひとつの場所に。',
+        pil3_title: '軽快さと心地よさ', pil3_desc: '勉強時間を奪わない、直感的で素早いレスポンス。',
+        beta_label: 'オープンベータ公開', beta_heading: '責任を持って届けるベータ版',
+        beta_sub: 'ユーザーの声とともに進化を続ける、最初の大きな一歩。',
+        beta_title: 'ベータ版の仕様について',
+        beta_p1: '初期段階では <strong>Mari AI</strong> と <strong>クラウド同期</strong> は機能調整のため一時的にオフになっています。',
+        beta_p2: '作成データは <strong>端末内（ローカル）に安全に保存</strong> されます。',
+        beta_p3: '安定性と機能改善のためのアップデートを継続的に行います。',
+        beta_badge: 'ベータ版はローカル保存',
+        future_title: 'StudyCap のこれから',
+        future_p1: 'ベータ版のリリースは、学習環境を進化させる旅の始まりに過ぎません。',
+        future_p2: 'クラウド同期や新機能の追加に向けて、着実に開発を進めています。',
+        evo1_title: '継続的な品質向上', evo1_desc: '表示速度、安定性、アクセシビリティの定期改善。',
+        evo2_title: 'クラウド同期', evo2_desc: '将来的な複数端末間でのバックアップと自動同期。',
+        evo3_title: '他プラットフォーム展開', evo3_desc: 'パソコンなどより多くの環境への対応。',
+        evo4_title: '高度な学習分析', evo4_desc: '理解度や勉強ペースを多角的に把握できるグラフ。',
+        evo5_title: 'Mari AI の進化', evo5_desc: 'より正確で親身な学習サポートを提供できるよう進化。',
+        footer_home: 'ホーム', footer_privacy: 'プライバシーポリシー', footer_delete: 'アカウント削除',
+        footer_copy: '© 2026 StudyCap. 学習の生産性を最大化するパートナー。'
+      },
+      'ko': {
+        name: '한국어', flag: '🇰🇷', dir: 'ltr',
+        btn_back: '홈으로 돌아가기', about_badge: '스토리와 비전',
+        about_title: '학습 루틴을 혁신하기 위해 탄생했습니다.',
+        about_desc: 'StudyCap은 시간 관리, 집중 타이머, 스마트 노트, 학습 분석을 하나의 앱에 담았습니다.',
+        story1_title: '시작된 이야기',
+        story1_p1: '<strong>AlifDevStudio</strong>가 개발한 <strong>StudyCap</strong>은 뜻깊은 대화에서 출발했습니다.',
+        story1_p2: '공부에 매진하는 여자친구의 제안을 받아들여 학생들을 위한 진정한 앱을 만들기로 결심했습니다.',
+        story1_p3: '그녀의 실제 피드백을 통해 뽀모도로, 과목별 노트, 플래시카드 등의 핵심 기능이 완성되었습니다.',
+        story1_highlight: '그녀의 노력에 보내는 응원이자, 모든 학생의 학업 성취를 돕기 위한 결실입니다.',
+        story2_title: '통합된 학습 공간',
+        story2_p1: '많은 학생들이 여러 앱을 오가며 메모하고 일정을 관리하느라 피로를 느낍니다.',
+        story2_p2: 'StudyCap은 계획부터 복습까지 모든 학업 과정을 하나의 플랫폼에 집약했습니다.',
+        story2_p3: '학습에만 온전히 집중할 수 있도록 직관적이고 깔끔한 구조를 지향합니다.',
+        feat_label: '올인원 플랫폼', feat_heading: '학습의 모든 단계를 지원하는 도구',
+        feat_sub: '목표 설정, 깊은 몰입, 체계적인 복습, 시험 대비까지 함께합니다.',
+        f1_title: '학습 플래너', f1_desc: '과목과 일일 공부 세션을 체계적으로 계획하세요.',
+        f2_title: '목록 또는 표 보기', f2_desc: '취향에 따라 간결한 목록이나 비교하기 쉬운 표로 확인하세요.',
+        f3_title: '캘린더 일정', f3_desc: '시험일과 과제 마감일을 직관적으로 관리하세요.',
+        f4_title: '상세 통계', f4_desc: '한 달간의 누적 공부 시간과 성취도를 한눈에 분석하세요.',
+        f5_title: '플래시카드', f5_desc: '핵심 개념을 빠르게 암기하고 테스트할 수 있는 카드 기능.',
+        f6_title: '노트 & 미디어', f6_desc: '과목별로 필기하고 음성 및 이미지를 자유롭게 첨부하세요.',
+        f7_title: '뽀모도로 타이머', f7_desc: '집중과 휴식의 리듬으로 피로를 줄이고 몰입감을 극대화하세요.',
+        f8_title: '기출 및 모의고사', f8_desc: '앱 내에서 문제를 풀며 실전 감각을 유지하세요.',
+        f9_title: 'Mari AI', f9_desc: '학습 중 궁금한 점을 즉시 해결해 주는 AI 조언자.',
+        f10_title: '유기적 연동', f10_desc: '모든 기능이 매끄럽게 연결되어 물 흐르듯 공부할 수 있습니다.',
+        pillars_label: '핵심 가치', pillars_title: '체계적인 루틴을 위한 기술',
+        pillars_sub: '실용성, 직관성, 지속적인 업데이트의 조화.',
+        pil1_title: '본질에 집중', pil1_desc: '학습을 방해하는 불필요한 요소를 과감히 제거했습니다.',
+        pil2_title: '중앙 집중식 관리', pil2_desc: '노트와 일정, 통계가 모두 한자리에 정리됩니다.',
+        pil3_title: '빠르고 쾌적한 환경', pil3_desc: '앱 설정에 시간을 낭비하지 않는 빠른 반응 속도.',
+        beta_label: '첫 공개 베타', beta_heading: '신중하게 준비한 베타 버전',
+        beta_sub: '학생들의 피드백을 바탕으로 함께 성장해 나가는 시작점입니다.',
+        beta_title: '베타 버전 안내',
+        beta_p1: '초기 버전에서는 <strong>Mari AI</strong>와 <strong>클라우드 동기화</strong>가 안정화 작업 중입니다.',
+        beta_p2: '작성한 모든 데이터는 <strong>기기 내 로컬에 안전하게 보관</strong>됩니다.',
+        beta_p3: '안정적인 서비스를 위해 지속적인 성능 패치가 진행됩니다.',
+        beta_badge: '베타 버전 로컬 저장',
+        future_title: 'StudyCap의 미래',
+        future_p1: '베타 출시는 더 나은 학습 환경을 위한 여정의 첫걸음입니다.',
+        future_p2: '클라우드 백업과 다양한 확장 기능을 꾸준히 선보일 예정입니다.',
+        evo1_title: '지속적인 최적화', evo1_desc: '속도, 안정성, 시각적 편의성 업데이트.',
+        evo2_title: '클라우드 동기화', evo2_desc: '다양한 기기 간 데이터 연동 기능 구축 예정.',
+        evo3_title: '플랫폼 확장', evo3_desc: 'PC 등 더 많은 환경에서 사용 가능하도록 준비 중.',
+        evo4_title: '고도화된 분석', evo4_desc: '학습 성장을 다각도로 파악할 수 있는 지표 제공.',
+        evo5_title: 'Mari AI 진화', evo5_desc: '더욱 신뢰할 수 있는 학업 보조 AI로 지속 업그레이드.',
+        footer_home: '홈', footer_privacy: '개인정보처리방침', footer_delete: '계정 삭제',
+        footer_copy: '© 2026 StudyCap. 당신의 학습 생산성을 최고로 끌어올립니다.'
+      },
+      'de': {
+        name: 'Deutsch', flag: '🇩🇪', dir: 'ltr',
+        btn_back: 'Zur Startseite', about_badge: 'Unsere Geschichte & Mission',
+        about_title: 'Entwickelt, um deinen Lernalltag zu transformieren.',
+        about_desc: 'StudyCap vereint Zeitmanagement, Pomodoro-Fokus, Fächer-Notizen und Analysen in einem klaren Workspace.',
+        story1_title: 'Wie alles begann',
+        story1_p1: '<strong>StudyCap</strong>, entwickelt von <strong>AlifDevStudio</strong>, entstand aus einem bedeutsamen Gespräch.',
+        story1_p2: 'Die Inspiration kam von meiner Freundin und ihrem anspruchsvollen Lernpensum. Ich nahm die Herausforderung an, eine ideale App für Lernende zu bauen.',
+        story1_p3: 'Ihr Alltag prägte die Kernfunktionen: strukturierte Notizen, Karteikarten, Pomodoro-Zyklen und Fortschrittskontrollen.',
+        story1_highlight: 'StudyCap ist eine Hommage an ihren Einsatz – geschaffen, um Schülern und Studierenden weltweit zu helfen.',
+        story2_title: 'Ein zentrales Lernerlebnis',
+        story2_p1: 'Viele Lernende verlieren Zeit beim Wechsel zwischen verschiedenen Notiz-, Kalender- und Timer-Apps.',
+        story2_p2: 'StudyCap vereint alle Schritte von der Planung bis zur Prüfungsvorbereitung an einem Ort.',
+        story2_p3: 'Unser Ziel ist maximale Einfachheit, damit die Zeit ins Lernen statt ins Verwalten fließt.',
+        feat_label: 'Alles in einer App', feat_heading: 'Werkzeuge für jeden Lernabschnitt',
+        feat_sub: 'Begleitet dich bei Planung, Konzentration, Notizen und Prüfungsvorbereitung.',
+        f1_title: 'Studienplan', f1_desc: 'Plane Fächer, Aufgaben und Lerneinheiten für eine feste Struktur.',
+        f2_title: 'Listen- oder Tabellenansicht', f2_desc: 'Wähle deinen bevorzugten Modus: schnelle Liste oder tabellarischer Überblick.',
+        f3_title: 'Kalender & Termine', f3_desc: 'Halte Abgabefristen und Prüfungstermine verlässlich im Blick.',
+        f4_title: 'Lernstatistiken', f4_desc: 'Verfolge deine Lernstunden und Gewohnheiten im Monatsverlauf.',
+        f5_title: 'Karteikarten', f5_desc: 'Erstelle Frage-Antwort-Karten für effektive Wiederholungen.',
+        f6_title: 'Notizen & Bibliothek', f6_desc: 'Sammle Vorlesungsmitschriften mit Audio- und Bildanhängen geordnet nach Fach.',
+        f7_title: 'Pomodoro-Timer', f7_desc: 'Strukturiere Lerneinheiten mit festen Fokus- und Pausenzeiten.',
+        f8_title: 'Prüfungsfragen', f8_desc: 'Übe Prüfungsaufgaben direkt in der App für mehr Routine.',
+        f9_title: 'Mari KI', f9_desc: 'Eine intelligente Lernassistentin zur schnellen Klärung offener Fragen.',
+        f10_title: 'Vernetztes System', f10_desc: 'Alle Tools greifen nahtlos ineinander für unterbrechungsfreies Arbeiten.',
+        pillars_label: 'Unsere Pfeiler', pillars_title: 'Technologie für organisierte Produktivität',
+        pillars_sub: 'Ausgewogenheit zwischen Benutzerfreundlichkeit, Tempo und stetiger Verbesserung.',
+        pil1_title: 'Fokus aufs Wesentliche', pil1_desc: 'Aufgeräumte Oberfläche ohne überflüssige Ablenkungen.',
+        pil2_title: 'Zentral organisiert', pil2_desc: 'All deine Materialien und Termine an einem verlässlichen Ort.',
+        pil3_title: 'Schnell und geschmeidig', pil3_desc: 'Blitzschnelle Ladezeiten für ungestörtes Lernen.',
+        beta_label: 'Erste öffentliche Version', beta_heading: 'Ein verantwortungsvoller Beta-Start',
+        beta_sub: 'Der Auftakt einer Reise, die wir gemeinsam mit unseren Nutzern gestalten.',
+        beta_title: 'Wie funktioniert die Beta-Version?',
+        beta_p1: 'Zum Start bleiben <strong>Mari KI</strong> und <strong>Cloud-Synchronisierung</strong> für abschließende Tests noch pausiert.',
+        beta_p2: 'Deine Einträge werden mit voller Privatsphäre <strong>lokal auf dem Gerät</strong> gespeichert.',
+        beta_p3: 'Regelmäßige Updates bringen kontinuierliche Stabilitätsverbesserungen.',
+        beta_badge: 'Lokale Speicherung in der Beta',
+        future_title: 'Die Zukunft von StudyCap',
+        future_p1: 'Die Beta-Version ist erst das Fundament für viele kommende Erweiterungen.',
+        future_p2: 'Wir arbeiten mit Hochdruck an Cloud-Funktionen und neuen Werkzeugen.',
+        evo1_title: 'Kontinuierlicher Feinschliff', evo1_desc: 'Laufende Optimierungen bei Tempo, UI und Barrierefreiheit.',
+        evo2_title: 'Cloud-Synchronisierung', evo2_desc: 'Zukünftiger Datenabgleich über mehrere Endgeräte hinweg.',
+        evo3_title: 'Plattform-Erweiterung', evo3_desc: 'Bereitstellung von StudyCap auf weiteren Systemen wie Desktop.',
+        evo4_title: 'Erweiterte Metriken', evo4_desc: 'Tiefere Einblicke in deine persönlichen Lerngewohnheiten.',
+        evo5_title: 'Weiterentwicklung von Mari KI', evo5_desc: 'Stetige Weiterbildung der KI für fundierte Unterstützung.',
+        footer_home: 'Start', footer_privacy: 'Datenschutz', footer_delete: 'Konto löschen',
+        footer_copy: '© 2026 StudyCap. Hebe deine Produktivität auf das nächste Level.'
+      },
+      'fr': {
+        name: 'Français', flag: '🇫🇷', dir: 'ltr',
+        btn_back: 'Retour à l\'accueil', about_badge: 'Notre histoire & notre mission',
+        about_title: 'Créé pour transformer votre quotidien d\'études.',
+        about_desc: 'StudyCap réunit organisation, minuteurs Pomodoro, fiches de révision et suivi statistique en un seul espace clair.',
+        story1_title: 'Comment tout a commencé',
+        story1_p1: '<strong>StudyCap</strong>, développé par <strong>AlifDevStudio</strong>, est né d\'une conversation déterminante.',
+        story1_p2: 'L\'idée m\'est venue en observant les études intenses de ma compagne. Elle m\'a suggéré de concevoir une application sur-mesure.',
+        story1_p3: 'Ses retours concrets ont forgé nos fonctionnalités : flashcards, minuteur Pomodoro, notes par matière et calendrier.',
+        story1_highlight: 'StudyCap est un hommage à son dévouement, pensé pour épauler tous les étudiants en quête de réussite.',
+        story2_title: 'Une expérience centralisée',
+        story2_p1: 'Trop d\'étudiants s\'éparpillent entre une multitude d\'applications disparates pour gérer leurs cours.',
+        story2_p2: 'StudyCap rassemble l\'intégralité des besoins scolaires sur une interface fluide et élégante.',
+        story2_p3: 'L\'objectif est d\'éliminer les frictions pour que vous puissiez vous concentrer sur vos révisions.',
+        feat_label: 'Tout-en-un', feat_heading: 'Des outils adaptés à chaque étape du travail',
+        feat_sub: 'Pour vous accompagner dans la planification, la concentration, la prise de notes et les examens.',
+        f1_title: 'Emploi du temps', f1_desc: 'Planifiez vos matières et sessions de révision hebdomadaires.',
+        f2_title: 'Vue en liste ou tableau', f2_desc: 'Basculez entre lecture synthétique en liste et comparaison en tableau.',
+        f3_title: 'Agenda', f3_desc: 'Ne manquez aucune date d\'examen ni remise de devoir important.',
+        f4_title: 'Statistiques d\'étude', f4_desc: 'Mesurez votre temps de travail et suivez vos progrès au fil des mois.',
+        f5_title: 'Flashcards', f5_desc: 'Concevez des fiches d\'auto-évaluation pour mémoriser durablement.',
+        f6_title: 'Notes & bibliothèque', f6_desc: 'Classez vos cours par matière en y joignant audios et images.',
+        f7_title: 'Minuteur Pomodoro', f7_desc: 'Alternez concentration maximale et courtes pauses régénératrices.',
+        f8_title: 'Annales & examens', f8_desc: 'Entraînez-vous sur des exercices types directement dans l\'appli.',
+        f9_title: 'Mari IA', f9_desc: 'Une assistante intelligente disponible pour éclaircir vos doutes académiques.',
+        f10_title: 'Écosystème unifié', f10_desc: 'Toutes les fonctionnalités communiquent sans aucune coupure.',
+        pillars_label: 'Nos piliers', pillars_title: 'La technologie au service d\'une méthode rodée',
+        pillars_sub: 'L\'alliance de la simplicité, de la rapidité et du progrès continu.',
+        pil1_title: 'Cap sur l\'essentiel', pil1_desc: 'Une interface épurée pour éviter toute dispersion inutile.',
+        pil2_title: 'Organisation unifiée', pil2_desc: 'Vos notes, plannings et métriques centralisés au même endroit.',
+        pil3_title: 'Vitesse & ergonomie', pil3_desc: 'Une application réactive conçue pour consacrer votre temps aux cours.',
+        beta_label: 'Première version publique', beta_heading: 'Un lancement bêta réfléchi',
+        beta_sub: 'Le point de départ d\'une aventure enrichie par les retours des étudiants.',
+        beta_title: 'Fonctionnement de la version bêta',
+        beta_p1: 'Au lancement, <strong>Mari IA</strong> et la <strong>synchronisation cloud</strong> sont temporairement désactivées pour finalisation.',
+        beta_p2: 'Vos contenus sont conservés <strong>localement sur votre appareil</strong> en toute confidentialité.',
+        beta_p3: 'Des mises à jour régulières viendront perfectionner la stabilité.',
+        beta_badge: 'Stockage local en version bêta',
+        future_title: 'L\'avenir de StudyCap',
+        future_p1: 'Cette version bêta ouvre la voie à une expérience toujours plus complète.',
+        future_p2: 'Nous préparons activement la synchronisation multi-appareils et de nouvelles fonctions.',
+        evo1_title: 'Améliorations continues', evo1_desc: 'Optimisations de rapidité, d\'accessibilité et d\'interface.',
+        evo2_title: 'Synchronisation Cloud', evo2_desc: 'Sauvegarde automatique et accès multi-appareils à venir.',
+        evo3_title: 'Nouvelles plateformes', evo3_desc: 'Portage envisagé sur ordinateurs et autres environnements.',
+        evo4_title: 'Statistiques avancées', evo4_desc: 'Nouveaux graphiques pour mesurer vos habitudes de mémorisation.',
+        evo5_title: 'Évolution de Mari IA', evo5_desc: 'Enrichissement continu de notre IA pour un accompagnement fiable.',
+        footer_home: 'Accueil', footer_privacy: 'Confidentialité', footer_delete: 'Suppression de Compte',
+        footer_copy: '© 2026 StudyCap. Portez votre productivité à son plus haut niveau.'
+      },
+      'it': {
+        name: 'Italiano', flag: '🇮🇹', dir: 'ltr',
+        btn_back: 'Torna alla home', about_badge: 'La nostra storia e missione',
+        about_title: 'Creato per rivoluzionare il tuo metodo di studio.',
+        about_desc: 'StudyCap unisce pianificazione, concentrazione con Pomodoro, appunti per materia e metriche in un unico spazio.',
+        story1_title: 'Come tutto è iniziato',
+        story1_p1: '<strong>StudyCap</strong>, sviluppato da <strong>AlifDevStudio</strong>, è nato da una conversazione preziosa.',
+        story1_p2: 'L\'idea è scaturita dal percorso di studi intenso della mia ragazza. Su suo consiglio, ho raccolto la sfida di creare l\'app ideale per gli studenti.',
+        story1_p3: 'La sua routine quotidiana ha plasmato gli strumenti indispensabili: flashcard, timer, note ordinate e monitoraggio dei progressi.',
+        story1_highlight: 'StudyCap è un omaggio alla sua dedizione, pensato per supportare gli studenti di tutto il mondo.',
+        story2_title: 'Un\'esperienza centralizzata',
+        story2_p1: 'Troppi studenti disperdono energie passando da un\'app all\'altra per gestire compiti e appunti.',
+        story2_p2: 'StudyCap integra tutte le fasi dell\'apprendimento in un ambiente coeso e piacevole.',
+        story2_p3: 'Puntiamo alla semplicità assoluta affinché il tempo sia dedicato interamente allo studio.',
+        feat_label: 'Tutto in un\'unica app', feat_heading: 'Strumenti per ogni fase dello studio',
+        feat_sub: 'Al tuo fianco nella pianificazione, nella massima concentrazione e negli esami.',
+        f1_title: 'Piano di studio', f1_desc: 'Organizza materie e sessioni settimanali con assoluta chiarezza.',
+        f2_title: 'Vista elenco o tabella', f2_desc: 'Scegli la modalità che preferisci per visualizzare i tuoi impegni.',
+        f3_title: 'Agenda', f3_desc: 'Segna date d\'esame, verifiche e scadenze in un calendario pulito.',
+        f4_title: 'Statistiche di studio', f4_desc: 'Monitora le ore di studio e i traguardi raggiunti ogni mese.',
+        f5_title: 'Flashcard', f5_desc: 'Crea schede domanda-risposta per memorizzare concetti chiave.',
+        f6_title: 'Note e archivio', f6_desc: 'Archivia appunti per materia allegando registrazioni e immagini.',
+        f7_title: 'Timer Pomodoro', f7_desc: 'Mantieni alta la freschezza mentale alternando focus e pause.',
+        f8_title: 'Prove d\'esame', f8_desc: 'Esercitati rispondendo ai quesiti direttamente nell\'app.',
+        f9_title: 'Mari IA', f9_desc: 'Assistente intelligente per risolvere dubbi e chiarire nozioni.',
+        f10_title: 'Ecosistema fluido', f10_desc: 'Tutti gli strumenti comunicano perfettamente tra loro.',
+        pillars_label: 'I nostri pilastri', pillars_title: 'Tecnologia per un metodo organizzato',
+        pillars_sub: 'Equilibrio perfetto tra semplicità, reattività ed evoluzione continua.',
+        pil1_title: 'Focus sull\'essenziale', pil1_desc: 'Design pulito per concentrarti solo su ciò che conta davvero.',
+        pil2_title: 'Organizzazione unificata', pil2_desc: 'I tuoi materiali e scadenze raccolti in un ambiente ordinato.',
+        pil3_title: 'Velocità e immediatezza', pil3_desc: 'Interfaccia rapida per non sprecare nemmeno un secondo.',
+        beta_label: 'Prima versione pubblica', beta_heading: 'Un lancio beta responsabile',
+        beta_sub: 'Il punto di partenza di un percorso guidato dai suggerimenti degli utenti.',
+        beta_title: 'Come funziona la versione beta?',
+        beta_p1: 'Durante la fase beta iniziale, <strong>Mari IA</strong> e la <strong>sincronizzazione cloud</strong> restano disattivate per ottimizzazione.',
+        beta_p2: 'Tutti i tuoi dati rimangono salvati <strong>in locale sul dispositivo</strong> con massima privacy.',
+        beta_p3: 'Rilasceremo aggiornamenti frequenti per garantire massima stabilità.',
+        beta_badge: 'Salvataggio locale in beta',
+        future_title: 'Il futuro di StudyCap',
+        future_p1: 'Il lancio della beta è solo il primo passo verso un\'evoluzione costante.',
+        future_p2: 'Siamo al lavoro per introdurre sincronizzazione cloud e nuove funzioni.',
+        evo1_title: 'Cura continua', evo1_desc: 'Miglioramenti costanti di velocità, UI e usabilità.',
+        evo2_title: 'Cloud Sync', evo2_desc: 'Implementazione del salvataggio cloud per accedere ovunque.',
+        evo3_title: 'Espansione multipiattaforma', evo3_desc: 'Disponibilità prevista su computer e altri sistemi.',
+        evo4_title: 'Statistiche avanzate', evo4_desc: 'Grafici più dettagliati per comprendere i ritmi di apprendimento.',
+        evo5_title: 'Evoluzione di Mari IA', evo5_desc: 'Perfezionamento continuo per un supporto accademico sicuro.',
+        footer_home: 'Home', footer_privacy: 'Privacy', footer_delete: 'Elimina Account',
+        footer_copy: '© 2026 StudyCap. Massimizza la tua produttività nello studio.'
+      },
+      'ru': {
+        name: 'Русский', flag: '🇷🇺', dir: 'ltr',
+        btn_back: 'На главную', about_badge: 'Наша история и миссия',
+        about_title: 'Создано, чтобы изменить ваш подход к учебе.',
+        about_desc: 'StudyCap объединяет таймеры Pomodoro, расписание, флеш-карты и аналитику в едином удобном пространстве.',
+        story1_title: 'Как всё начиналось',
+        story1_p1: 'Приложение <strong>StudyCap</strong> от <strong>AlifDevStudio</strong> зародилось благодаря важному диалогу.',
+        story1_p2: 'Идея пришла во время беседы с моей девушкой. Видя её интенсивную учебу, я решил создать идеального цифрового помощника для студентов.',
+        story1_p3: 'Её опыт помог определить ключевой функционал: конспекты по предметам, карточки, таймеры и график занятий.',
+        story1_highlight: 'StudyCap — это дань уважения её упорству и инструмент, созданный для поддержки каждого студента.',
+        story2_title: 'Единая рабочая среда',
+        story2_p1: 'Студентам часто приходится разрываться между десятком разных приложений для планирования и заметок.',
+        story2_p2: 'StudyCap объединяет все потребности в единой гармоничной платформе.',
+        story2_p3: 'Мы стремимся сделать процесс организации простым, чтобы вы могли полностью погрузиться в учебу.',
+        feat_label: 'Всё в одном приложении', feat_heading: 'Инструменты для каждого этапа учебы',
+        feat_sub: 'Для продуктивного планирования, концентрации, конспектов и подготовки к экзаменам.',
+        f1_title: 'Расписание занятий', f1_desc: 'Планируйте предметы и ежедневные часы учебы для стабильного режима.',
+        f2_title: 'Список или таблица', f2_desc: 'Выбирайте наглядный список или подробную таблицу для контроля задач.',
+        f3_title: 'Календарь и дедлайны', f3_desc: 'Фиксируйте даты сдачи работ и экзаменов, чтобы ничего не забыть.',
+        f4_title: 'Статистика учебы', f4_desc: 'Анализируйте продуктивность и количество часов, уделенных учебе.',
+        f5_title: 'Флеш-карточки', f5_desc: 'Создавайте карточки с вопросами и ответами для быстрого запоминания.',
+        f6_title: 'Заметки и библиотека', f6_desc: 'Ведите записи по предметам с прикреплением аудиозаписей и фото.',
+        f7_title: 'Таймер Pomodoro', f7_desc: 'Чередуйте интервалы глубокой концентрации и отдыха для снижения усталости.',
+        f8_title: 'Экзаменационные задания', f8_desc: 'Решайте экзаменационные вопросы прямо внутри приложения.',
+        f9_title: 'Mari AI', f9_desc: 'Интеллектуальный помощник для оперативного ответа на учебные вопросы.',
+        f10_title: 'Интегрированная система', f10_desc: 'Все инструменты работают согласованно для бесшовного процесса.',
+        pillars_label: 'Наши принципы', pillars_title: 'Технологии на службе дисциплины',
+        pillars_sub: 'Баланс простоты, высокой скорости и непрерывного развития.',
+        pil1_title: 'Фокус на главном', pil1_desc: 'Лаконичный интерфейс без отвлекающих визуальных шумов.',
+        pil2_title: 'Единая структура', pil2_desc: 'Все конспекты, графики и метрики собраны в одном надежном месте.',
+        pil3_title: 'Быстрота и плавность', pil3_desc: 'Мгновенный отклик, чтобы вы не тратили время на лишнюю настройку.',
+        beta_label: 'Первый публичный релиз', beta_heading: 'Ответственный запуск бета-версии',
+        beta_sub: 'Старт непрерывного развития на основе реальных отзывов пользователей.',
+        beta_title: 'Как устроена бета-версия?',
+        beta_p1: 'На начальном этапе функции <strong>Mari AI</strong> и <strong>облачной синхронизации</strong> временно дорабатываются.',
+        beta_p2: 'Все ваши данные хранятся <strong>локально на устройстве</strong> в полной безопасности.',
+        beta_p3: 'Приложение будет получать регулярные обновления стабильности и интерфейса.',
+        beta_badge: 'Локальное хранение в бета-версии',
+        future_title: 'Будущее StudyCap',
+        future_p1: 'Бета-версия — это фундамент для реализации масштабных планов.',
+        future_p2: 'Мы уже готовим интеграцию с облаком и новые вспомогательные модули.',
+        evo1_title: 'Постоянное развитие', evo1_desc: 'Регулярные оптимизации скорости, дизайна и стабильности.',
+        evo2_title: 'Облачная синхронизация', evo2_desc: 'Внедрение резервного копирования и доступа с разных устройств.',
+        evo3_title: 'Новые платформы', evo3_desc: 'Планы по выпуску версии для настольных компьютеров.',
+        evo4_title: 'Глубокая аналитика', evo4_desc: 'Новые наглядные графики для отслеживания динамики знаний.',
+        evo5_title: 'Развитие Mari AI', evo5_desc: 'Обучение ассистента для ещё более точных академических консультаций.',
+        footer_home: 'Главная', footer_privacy: 'Конфиденциальность', footer_delete: 'Удалить аккаунт',
+        footer_copy: '© 2026 StudyCap. Повышайте свою продуктивность до максимума.'
+      }
+    };
+
+    const availableLanguages = [
+      { code: 'pt_BR', name: 'Português', native: 'Brasil', flag: '🇧🇷' },
+      { code: 'pt_PT', name: 'Português', native: 'Portugal', flag: '🇵🇹' },
+      { code: 'en', name: 'English', native: 'English', flag: '🇺🇸' },
+      { code: 'es', name: 'Español', native: 'Español', flag: '🇪🇸' },
+      { code: 'zh', name: 'Mandarim', native: '简体中文', flag: '🇨🇳' },
+      { code: 'hi', name: 'Hindi', native: 'हिन्दी', flag: '🇮🇳' },
+      { code: 'id', name: 'Indonésio', native: 'Bahasa Indonesia', flag: '🇮🇩' },
+      { code: 'ar', name: 'Árabe', native: 'العربية', flag: '🇸🇦' },
+      { code: 'bn', name: 'Bengali', native: 'বাংলা', flag: '🇧🇩' },
+      { code: 'ur', name: 'Urdu', native: 'اردو', flag: '🇵🇰' },
+      { code: 'ja', name: 'Japonês', native: '日本語', flag: '🇯🇵' },
+      { code: 'ko', name: 'Coreano', native: '한국어', flag: '🇰🇷' },
+      { code: 'de', name: 'Alemão', native: 'Deutsch', flag: '🇩🇪' },
+      { code: 'fr', name: 'Francês', native: 'Français', flag: '🇫🇷' },
+      { code: 'it', name: 'Italiano', native: 'Italiano', flag: '🇮🇹' },
+      { code: 'ru', name: 'Russo', native: 'Русский', flag: '🇷🇺' }
+    ];
+
+    let currentSelectedLang = 'pt_BR';
+
+    function setLanguage(langCode) {
+      if (!translations[langCode]) langCode = 'pt_BR';
+      currentSelectedLang = langCode;
+
+      try {
+        localStorage.setItem('studycap_language', langCode);
+      } catch(e) {}
+
+      const langData = translations[langCode];
+      document.documentElement.lang = langCode.replace('_', '-');
+      document.documentElement.dir = langData.dir || 'ltr';
+
+      // Atualizar textos dos elementos com data-i18n
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (langData[key]) {
+          el.innerHTML = langData[key];
+        }
+      });
+
+      // Atualizar botão da bandeja
+      const flagEl = document.getElementById('currentLangFlag');
+      const nameEl = document.getElementById('currentLangName');
+      if (flagEl) flagEl.textContent = langData.flag;
+      if (nameEl) nameEl.textContent = langData.name;
+
+      // Atualizar classe ativa nas opções
+      document.querySelectorAll('.lang-option-item').forEach(btn => {
+        if (btn.getAttribute('data-code') === langCode) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+
+      // Atualizar ícones lucide se necessário
+      if (window.lucide) {
+        lucide.createIcons();
+      }
+    }
+
+    function initLanguageSelector() {
+      const menu = document.getElementById('langDropdownMenu');
+      const wrapper = document.getElementById('langSelectorWrapper');
+      const btn = document.getElementById('langDropdownBtn');
+
+      if (!menu || !wrapper || !btn) return;
+
+      // Monta as 16 opções na bandeja
+      menu.innerHTML = availableLanguages.map(item => `
+        <button type="button" class="lang-option-item ${item.code === currentSelectedLang ? 'active' : ''}" data-code="${item.code}">
+          <span class="lang-flag">${item.flag}</span>
+          <span>${item.name}</span>
+          <span class="lang-native">${item.native}</span>
+        </button>
+      `).join('');
+
+      // Abrir/Fechar dropdown
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = wrapper.classList.toggle('open');
+        btn.setAttribute('aria-expanded', isOpen);
+      });
+
+      // Selecionar idioma
+      menu.querySelectorAll('.lang-option-item').forEach(itemBtn => {
+        itemBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const code = itemBtn.getAttribute('data-code');
+          setLanguage(code);
+          wrapper.classList.remove('open');
+          btn.setAttribute('aria-expanded', 'false');
+        });
+      });
+
+      // Fechar ao clicar fora
+      document.addEventListener('click', (e) => {
+        if (!wrapper.contains(e.target)) {
+          wrapper.classList.remove('open');
+          btn.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      // Carregar idioma salvo previamente no navegador
+      let saved = 'pt_BR';
+      try {
+        saved = localStorage.getItem('studycap_language') || 'pt_BR';
+      } catch(e) {}
+      setLanguage(saved);
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      initLanguageSelector();
+    });
+  </script>
+
+  <script>
     // ------------------------------------------------
-    // CANVAS PARTICLES (Fundo alinhado com a página de exclusão)
+    // CANVAS PARTICLES (Fundo alinhado com as demais páginas)
     // ------------------------------------------------
     const canvas = document.getElementById("particle-canvas");
     const ctx = canvas ? canvas.getContext("2d") : null;

@@ -7,6 +7,7 @@
   <meta name="theme-color" content="#2e1065">
 
   <link rel="icon" href="Mari.png" type="image/png">
+  <link rel="apple-touch-icon" href="Mari.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -39,6 +40,7 @@
       min-height: 100vh;
       min-height: 100dvh;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
       padding: 24px 16px;
@@ -105,25 +107,180 @@
     }
 
     @keyframes float {
-      0% {
-        transform: translate(0, 0) scale(1);
-      }
-
-      50% {
-        transform: translate(40px, 60px) scale(1.08);
-      }
-
-      100% {
-        transform: translate(-30px, 30px) scale(0.95);
-      }
+      0% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(40px, 60px) scale(1.08); }
+      100% { transform: translate(-30px, 30px) scale(0.95); }
     }
 
     .wrapper {
       position: relative;
-      z-index: 1;
+      z-index: 10;
       width: 100%;
       max-width: 580px;
       margin: auto;
+    }
+
+    /* Barra Superior com z-index alto para a bandeja abrir à frente de tudo */
+    .top-action-bar {
+      position: relative;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 16px;
+      padding: 8px 14px;
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 18px;
+      box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+    }
+
+    .btn-top-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: all 0.25s ease;
+      white-space: nowrap;
+    }
+
+    .btn-top-back:hover {
+      color: #ffffff;
+      border-color: rgba(139, 92, 246, 0.5);
+      background: rgba(139, 92, 246, 0.12);
+      transform: translateX(-2px);
+    }
+
+    /* SELETOR DE IDIOMAS */
+    .lang-selector-wrapper {
+      position: relative;
+      display: inline-block;
+      z-index: 1001;
+    }
+
+    .lang-dropdown-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 7px 12px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #ffffff;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      backdrop-filter: blur(12px);
+      transition: all 0.3s ease;
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    .lang-dropdown-btn:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: var(--primary);
+      box-shadow: 0 0 14px var(--primary-glow);
+    }
+
+    .lang-flag {
+      font-size: 1.15rem;
+      line-height: 1;
+    }
+
+    .lang-arrow {
+      width: 14px;
+      height: 14px;
+      transition: transform 0.3s ease;
+      stroke: var(--text-muted);
+      flex-shrink: 0;
+    }
+
+    .lang-selector-wrapper.open .lang-arrow {
+      transform: rotate(180deg);
+    }
+
+    /* Dropdown ajustado com z-index elevado para sobrepor todas as informações */
+    .lang-dropdown-menu {
+      display: none;
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      width: 240px;
+      max-height: 320px;
+      overflow-y: auto;
+      background: rgba(15, 6, 28, 0.98);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(139, 92, 246, 0.4);
+      border-radius: 16px;
+      padding: 8px;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.9), 0 0 25px rgba(124, 58, 237, 0.35);
+      z-index: 9999;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(139, 92, 246, 0.4) transparent;
+    }
+
+    .lang-dropdown-menu::-webkit-scrollbar { width: 5px; }
+    .lang-dropdown-menu::-webkit-scrollbar-thumb {
+      background: rgba(139, 92, 246, 0.4);
+      border-radius: 10px;
+    }
+
+    .lang-selector-wrapper.open .lang-dropdown-menu {
+      display: block;
+      animation: menuFadeIn 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes menuFadeIn {
+      from { opacity: 0; transform: translateY(-6px) scale(0.96); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .lang-option-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      padding: 8px 12px;
+      border: none;
+      background: transparent;
+      border-radius: 10px;
+      cursor: pointer;
+      text-align: left;
+      color: var(--text-main);
+      font-size: 0.85rem;
+      transition: all 0.2s ease;
+    }
+
+    .lang-option-item:hover {
+      background: rgba(139, 92, 246, 0.22);
+      color: #ffffff;
+    }
+
+    .lang-option-item.active {
+      background: rgba(139, 92, 246, 0.38);
+      border: 1px solid rgba(167, 139, 250, 0.4);
+      font-weight: 700;
+    }
+
+    .lang-native {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-left: auto;
+    }
+
+    .lang-option-item.active .lang-native {
+      color: #c4b5fd;
     }
 
     .delete-card {
@@ -134,6 +291,7 @@
       border-radius: 28px;
       padding: 44px 36px;
       position: relative;
+      z-index: 1;
       box-shadow:
         0 30px 60px -12px rgba(0, 0, 0, 0.5),
         0 18px 36px -18px rgba(0, 0, 0, 0.7),
@@ -185,7 +343,6 @@
         opacity: 0;
         transform: translateY(30px) scale(0.97);
       }
-
       100% {
         opacity: 1;
         transform: translateY(0) scale(1);
@@ -238,15 +395,8 @@
     }
 
     @keyframes pulseGlow {
-      0% {
-        opacity: 0.5;
-        transform: scale(0.95);
-      }
-
-      100% {
-        opacity: 0.9;
-        transform: scale(1.1);
-      }
+      0% { opacity: 0.5; transform: scale(0.95); }
+      100% { opacity: 0.9; transform: scale(1.1); }
     }
 
     .logo-container img {
@@ -255,7 +405,6 @@
       object-fit: cover;
     }
 
-    /* Em caso de falha da imagem de logo */
     .logo-fallback {
       font-size: 2rem;
       font-weight: 800;
@@ -327,7 +476,6 @@
       font-size: 0.92rem;
     }
 
-    /* Badges dos dados afetados */
     .affected-data {
       display: flex;
       flex-wrap: wrap;
@@ -360,7 +508,6 @@
       .actions-grid {
         grid-template-columns: 1fr 1fr;
       }
-
       .btn-primary-action {
         grid-column: span 2;
       }
@@ -565,7 +712,7 @@
         0 0 15px rgba(99, 102, 241, 0.4);
       opacity: 0;
       transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-      z-index: 999;
+      z-index: 99999;
       pointer-events: none;
       max-width: calc(100vw - 32px);
       width: max-content;
@@ -588,10 +735,32 @@
       flex-shrink: 0;
     }
 
-    /* RESPONSIVE ADAPTATIONS FOR SMALLER SCREENS */
     @media (max-width: 480px) {
       body {
-        padding: 16px 12px;
+        padding: 12px 10px;
+      }
+
+      .top-action-bar {
+        padding: 6px 10px;
+        border-radius: 14px;
+        margin-bottom: 12px;
+      }
+
+      .lang-dropdown-btn {
+        padding: 5px 8px;
+        font-size: 0.76rem;
+      }
+
+      .lang-name {
+        max-width: 75px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .btn-top-back {
+        padding: 5px 8px;
+        font-size: 0.78rem;
       }
 
       .delete-card {
@@ -610,7 +779,7 @@
       }
 
       h1 {
-        font-size: 1.5rem;
+        font-size: 1.45rem;
       }
 
       .subtitle {
@@ -685,6 +854,28 @@
   </div>
 
   <div class="wrapper">
+    
+    <!-- BARRA SUPERIOR COM SELETOR DE IDIOMAS VISÍVEL IMEDIATAMENTE NO CELULAR E PC -->
+    <div class="top-action-bar">
+      <a href="../" class="btn-top-back" title="Voltar ao início">
+        <svg class="icon" style="width:14px;height:14px;" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+        <span data-i18n="btn_back_home">Início</span>
+      </a>
+
+      <!-- BANDEJA DE IDIOMAS INTEGRADA -->
+      <div class="lang-selector-wrapper" id="langSelectorWrapper">
+        <button class="lang-dropdown-btn" id="langDropdownBtn" type="button" aria-haspopup="true" aria-expanded="false">
+          <span class="lang-flag" id="currentLangFlag">🇧🇷</span>
+          <span class="lang-name" id="currentLangName">Português (BR)</span>
+          <svg class="lang-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="lang-dropdown-menu" id="langDropdownMenu" role="menu">
+          <!-- As opções de idiomas serão injetadas via JavaScript -->
+        </div>
+      </div>
+    </div>
+
+    <!-- CARTÃO PRINCIPAL DE EXCLUSÃO DE CONTA -->
     <div class="delete-card">
       <div class="card-top-shine"></div>
 
@@ -697,7 +888,7 @@
               src="Mari.png"
               alt="StudyCap Logo"
               id="logo-img"
-              onerror="this.style.display='none'; document.getElementById('logo-fallback').style.display='block';"
+              onerror="this.src='../Nova.png'"
             >
 
             <div class="logo-fallback" id="logo-fallback">
@@ -706,9 +897,9 @@
           </div>
         </div>
 
-        <h1>Solicitar Exclusão de Conta</h1>
+        <h1 data-i18n="title">Solicitar Exclusão de Conta</h1>
 
-        <p class="subtitle">
+        <p class="subtitle" data-i18n="subtitle">
           Sentiremos sua falta! Se decidir prosseguir, todos os seus dados e
           históricos do StudyCap serão apagados permanentemente.
         </p>
@@ -724,10 +915,9 @@
         </div>
 
         <div class="warning-content">
-          <strong>Ação Irreversível</strong>
+          <strong data-i18n="warn_title">Ação Irreversível</strong>
 
-          Uma vez confirmada, a exclusão removerá todo o seu progresso de estudo
-          de forma irreversível.
+          <span data-i18n="warn_desc">Uma vez confirmada, a exclusão removerá todo o seu progresso de estudo de forma irreversível.</span>
 
           <div class="affected-data">
 
@@ -740,8 +930,7 @@
                 <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
                 <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
               </svg>
-
-              Anotações & Cadernos
+              <span data-i18n="chip_notes">Anotações & Cadernos</span>
             </span>
 
             <span class="data-chip">
@@ -752,8 +941,7 @@
               >
                 <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
               </svg>
-
-              Flashcards & Decks
+              <span data-i18n="chip_flashcards">Flashcards & Decks</span>
             </span>
 
             <span class="data-chip">
@@ -766,8 +954,7 @@
                 <line x1="12" y1="20" x2="12" y2="4"></line>
                 <line x1="6" y1="20" x2="6" y2="14"></line>
               </svg>
-
-              Histórico de Estudo
+              <span data-i18n="chip_history">Histórico de Estudo</span>
             </span>
 
           </div>
@@ -785,8 +972,7 @@
             <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
             <polyline points="22,6 12,13 2,6"></polyline>
           </svg>
-
-          Enviar Solicitação por E-mail
+          <span data-i18n="btn_email">Enviar Solicitação por E-mail</span>
         </a>
 
         <button
@@ -798,8 +984,7 @@
             <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
             <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
           </svg>
-
-          Copiar E-mail
+          <span data-i18n="btn_copy_email">Copiar E-mail</span>
         </button>
 
         <button
@@ -811,14 +996,13 @@
             <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
             <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
           </svg>
-
-          Copiar Texto
+          <span data-i18n="btn_copy_text">Copiar Texto</span>
         </button>
 
       </div>
 
       <div class="manual-box">
-        Endereço oficial do suporte de contas:
+        <span data-i18n="manual_info">Endereço oficial do suporte de contas:</span>
         <br>
 
         <span
@@ -841,7 +1025,7 @@
 
       <div class="timeline-section">
 
-        <div class="timeline-title">
+        <div class="timeline-title" data-i18n="timeline_title">
           Como funciona o processo de exclusão
         </div>
 
@@ -849,21 +1033,21 @@
 
           <div class="step-item">
             <div class="step-badge">1</div>
-            <div class="step-text">
+            <div class="step-text" data-i18n="step1">
               Envio da solicitação
             </div>
           </div>
 
           <div class="step-item">
             <div class="step-badge">2</div>
-            <div class="step-text">
+            <div class="step-text" data-i18n="step2">
               Verificação da conta
             </div>
           </div>
 
           <div class="step-item">
             <div class="step-badge">3</div>
-            <div class="step-text">
+            <div class="step-text" data-i18n="step3">
               Remoção em 7 dias
             </div>
           </div>
@@ -873,13 +1057,13 @@
 
       <!-- Rodapé -->
       <footer>
-        <a href="index.html">
+        <a href="../" data-i18n="footer_back">
           ← Voltar ao Início
         </a>
 
         <span>•</span>
 
-        <span>
+        <span data-i18n="footer_copy">
           © 2026 StudyCap
         </span>
       </footer>
@@ -903,20 +1087,451 @@
   </div>
 
   <script>
+    const translations = {
+      'pt_BR': {
+        name: 'Português (BR)', flag: '🇧🇷', dir: 'ltr',
+        btn_back_home: 'Início', title: 'Solicitar Exclusão de Conta',
+        subtitle: 'Sentiremos sua falta! Se decidir prosseguir, todos os seus dados e históricos do StudyCap serão apagados permanentemente.',
+        warn_title: 'Ação Irreversível',
+        warn_desc: 'Uma vez confirmada, a exclusão removerá todo o seu progresso de estudo de forma irreversível.',
+        chip_notes: 'Anotações & Cadernos', chip_flashcards: 'Flashcards & Decks', chip_history: 'Histórico de Estudo',
+        btn_email: 'Enviar Solicitação por E-mail', btn_copy_email: 'Copiar E-mail', btn_copy_text: 'Copiar Texto',
+        manual_info: 'Endereço oficial do suporte de contas:',
+        timeline_title: 'Como funciona o processo de exclusão',
+        step1: 'Envio da solicitação', step2: 'Verificação da conta', step3: 'Remoção em 7 dias',
+        footer_back: '← Voltar ao Início', footer_copy: '© 2026 StudyCap',
+        toast_email: 'E-mail do suporte copiado!', toast_template: 'Texto completo da solicitação copiado!', toast_error: 'Erro ao copiar. Selecione e copie manualmente.',
+        email_subject: 'Exclusão de conta – StudyCap',
+        email_body: 'Olá, equipe StudyCap.\n\nGostaria de solicitar a exclusão permanente da minha conta e de todos os dados associados a ela.\n\nE-mail cadastrado no StudyCap: [INFORME AQUI O E-MAIL DA CONTA]\n\nEstou ciente de que esta ação é irreversível e removerá todos os meus flashcards, anotações, cadernos, históricos e progresso acumulado.'
+      },
+      'pt_PT': {
+        name: 'Português (PT)', flag: '🇵🇹', dir: 'ltr',
+        btn_back_home: 'Início', title: 'Pedir Eliminação de Conta',
+        subtitle: 'Sentiremos a sua falta! Se optar por prosseguir, todos os seus dados e históricos do StudyCap serão eliminados permanentemente.',
+        warn_title: 'Ação Irreversível',
+        warn_desc: 'Após confirmada, a eliminação removerá todo o seu progresso de estudo de forma irreversível.',
+        chip_notes: 'Apontamentos & Cadernos', chip_flashcards: 'Flashcards & Decks', chip_history: 'Histórico de Estudo',
+        btn_email: 'Enviar Pedido por E-mail', btn_copy_email: 'Copiar E-mail', btn_copy_text: 'Copiar Texto',
+        manual_info: 'Endereço oficial do suporte de contas:',
+        timeline_title: 'Como funciona o processo de eliminação',
+        step1: 'Envio do pedido', step2: 'Verificação da conta', step3: 'Eliminação em 7 dias',
+        footer_back: '← Voltar ao Início', footer_copy: '© 2026 StudyCap',
+        toast_email: 'E-mail do suporte copiado!', toast_template: 'Texto completo do pedido copiado!', toast_error: 'Erro ao copiar. Selecione e copie manualmente.',
+        email_subject: 'Eliminação de conta – StudyCap',
+        email_body: 'Olá, equipa StudyCap.\n\nGostaria de solicitar a eliminação definitiva da minha conta e de todos os dados associados.\n\nE-mail associado no StudyCap: [INDIQUE AQUI O E-MAIL DA CONTA]\n\nCompreendo que esta ação é irreversível e removerá todos os meus apontamentos, flashcards, cadernos e estatísticas acumuladas.'
+      },
+      'en': {
+        name: 'English', flag: '🇺🇸', dir: 'ltr',
+        btn_back_home: 'Home', title: 'Request Account Deletion',
+        subtitle: 'We will miss you! If you decide to proceed, all your personal StudyCap records and study history will be permanently purged.',
+        warn_title: 'Irreversible Action',
+        warn_desc: 'Once confirmed, deletion will permanently remove all your learning progress without recovery.',
+        chip_notes: 'Notes & Notebooks', chip_flashcards: 'Flashcards & Decks', chip_history: 'Study Analytics History',
+        btn_email: 'Send Request via Email', btn_copy_email: 'Copy Email', btn_copy_text: 'Copy Template',
+        manual_info: 'Official account support inbox:',
+        timeline_title: 'How the deletion process works',
+        step1: 'Submission of request', step2: 'Account verification', step3: 'Purged within 7 days',
+        footer_back: '← Back to Home', footer_copy: '© 2026 StudyCap',
+        toast_email: 'Support email copied!', toast_template: 'Full deletion request copied!', toast_error: 'Error copying. Please select and copy manually.',
+        email_subject: 'Account Deletion Request – StudyCap',
+        email_body: 'Hello StudyCap Support Team,\n\nI would like to request the permanent deletion of my account and all associated data.\n\nRegistered StudyCap Email: [INSERT YOUR ACCOUNT EMAIL HERE]\n\nI understand that this action is irreversible and will permanently delete all my flashcards, notebooks, notes, study logs, and accumulated milestones.'
+      },
+      'es': {
+        name: 'Español', flag: '🇪🇸', dir: 'ltr',
+        btn_back_home: 'Inicio', title: 'Solicitar Eliminación de Cuenta',
+        subtitle: '¡Te extrañaremos! Si decides continuar, todos tus datos e historiales en StudyCap se borrarán permanentemente.',
+        warn_title: 'Acción Irreversible',
+        warn_desc: 'Una vez confirmada, la eliminación borrará todo tu progreso de estudio de forma irreversible.',
+        chip_notes: 'Apuntes y Cuadernos', chip_flashcards: 'Flashcards y Barajas', chip_history: 'Historial de Estudio',
+        btn_email: 'Enviar Solicitud por Correo', btn_copy_email: 'Copiar Correo', btn_copy_text: 'Copiar Texto',
+        manual_info: 'Dirección oficial de soporte de cuentas:',
+        timeline_title: 'Cómo funciona el proceso de eliminación',
+        step1: 'Envío de solicitud', step2: 'Verificación de cuenta', step3: 'Eliminación en 7 días',
+        footer_back: '← Volver al Inicio', footer_copy: '© 2026 StudyCap',
+        toast_email: '¡Correo de soporte copiado!', toast_template: '¡Texto de solicitud copiado!', toast_error: 'Error al copiar. Selecciona y copia manualmente.',
+        email_subject: 'Eliminación de cuenta – StudyCap',
+        email_body: 'Hola, equipo de StudyCap.\n\nDeseo solicitar la eliminación permanente de mi cuenta y de todos los datos asociados a ella.\n\nCorreo registrado en StudyCap: [INDICA AQUÍ EL CORREO DE LA CUENTA]\n\nComprendo que esta acción es irreversible y eliminará todos mis apuntes, tarjetas de memoria, cuadernos e historiales de estudio.'
+      },
+      'zh': {
+        name: '简体中文', flag: '🇨🇳', dir: 'ltr',
+        btn_back_home: '首页', title: '申请注销并删除账户',
+        subtitle: '我们会想念您的！若您确认注销，您在 StudyCap 中的所有个人资料及学习记录都将被永久彻底清除。',
+        warn_title: '不可逆操作',
+        warn_desc: '一旦确认，注销将永久移除您所有的学习进度与数据，且无法恢复。',
+        chip_notes: '笔记与课本', chip_flashcards: '记忆卡与卡组', chip_history: '学习统计记录',
+        btn_email: '通过电子邮件发送申请', btn_copy_email: '复制邮箱地址', btn_copy_text: '复制申请模版',
+        manual_info: '官方账号支持服务邮箱：',
+        timeline_title: '账户注销流程说明',
+        step1: '提交注销申请', step2: '账号归属核验', step3: '7天内完成抹除',
+        footer_back: '← 返回首页', footer_copy: '© 2026 StudyCap',
+        toast_email: '支持邮箱已复制！', toast_template: '完整申请文本已复制！', toast_error: '复制失败，请手动选取复制。',
+        email_subject: '账户注销申请 – StudyCap',
+        email_body: 'StudyCap 支持团队：\n\n我希望申请永久注销并删除我的账号及其包含的所有关联数据。\n\nStudyCap 注册邮箱：[在此填写账号邮箱地址]\n\n我已知悉该操作完全不可逆，并将永久销毁我的所有笔记、记忆抽认卡、日程及学习统计数据。'
+      },
+      'hi': {
+        name: 'हिन्दी', flag: '🇮🇳', dir: 'ltr',
+        btn_back_home: 'होम', title: 'खाता हटाने का अनुरोध',
+        subtitle: 'हमें आपकी कमी खलेगी! यदि आप आगे बढ़ते हैं, तो StudyCap पर आपका सभी डेटा और अध्ययन इतिहास स्थायी रूप से हटा दिया जाएगा।',
+        warn_title: 'अपरिवर्तनीय प्रक्रिया',
+        warn_desc: 'एक बार पुष्टि हो जाने पर, यह प्रक्रिया आपकी सारी अध्ययन प्रगति को स्थायी रूप से नष्ट कर देगी।',
+        chip_notes: 'नोट्स और कॉपियां', chip_flashcards: 'फ्लैशकार्ड्स और डेक्स', chip_history: 'अध्ययन इतिहास',
+        btn_email: 'ईमेल द्वारा अनुरोध भेजें', btn_copy_email: 'ईमेल कॉपी करें', btn_copy_text: 'टेक्स्ट कॉपी करें',
+        manual_info: 'आधिकारिक सहायता ईमेल पता:',
+        timeline_title: 'खाता हटाने की प्रक्रिया कैसे कार्य करती है',
+        step1: 'अनुरोध भेजना', step2: 'खाते का सत्यापन', step3: '7 दिनों में निष्कासन',
+        footer_back: '← होम पर लौटें', footer_copy: '© 2026 StudyCap',
+        toast_email: 'सहायता ईमेल कॉपी हो गया!', toast_template: 'अनुरोध टेक्स्ट कॉपी हो गया!', toast_error: 'कॉपी करने में त्रुटि। कृपया स्वयं कॉपी करें।',
+        email_subject: 'खाता हटाने का अनुरोध – StudyCap',
+        email_body: 'नमस्ते StudyCap टीम,\n\nमैं अपने खाते और उससे जुड़े सभी डेटा को स्थायी रूप से हटाने का अनुरोध करना चाहता/चाहती हूँ।\n\nStudyCap पंजीकृत ईमेल: [यहाँ अपना खाता ईमेल लिखें]\n\nमैं समझता/समझती हूँ कि यह क्रिया अपरिवर्तनीय है और इससे मेरे सभी फ्लैशकार्ड, नोट्स, कॉपियाँ और अध्ययन रिकॉर्ड्स हमेशा के लिए मिट जाएंगे।'
+      },
+      'id': {
+        name: 'Bahasa Indonesia', flag: '🇮🇩', dir: 'ltr',
+        btn_back_home: 'Beranda', title: 'Permohonan Penghapusan Akun',
+        subtitle: 'Kami akan merindukan Anda! Jika melanjutkan, seluruh data dan catatan riwayat belajar Anda di StudyCap akan dihapus permanen.',
+        warn_title: 'Tindakan Permanen',
+        warn_desc: 'Setelah dikonfirmasi, penghapusan akan menghilangkan semua kemajuan belajar Anda secara permanen tanpa pemulihan.',
+        chip_notes: 'Catatan & Buku', chip_flashcards: 'Flashcard & Dek', chip_history: 'Riwayat Waktu Belajar',
+        btn_email: 'Kirim Permohonan via Email', btn_copy_email: 'Salin Email', btn_copy_text: 'Salin Teks',
+        manual_info: 'Alamat resmi tim bantuan akun:',
+        timeline_title: 'Tahapan proses penghapusan',
+        step1: 'Pengiriman permohonan', step2: 'Verifikasi kepemilikan', step3: 'Dihapus dalam 7 hari',
+        footer_back: '← Kembali ke Beranda', footer_copy: '© 2026 StudyCap',
+        toast_email: 'Email bantuan disalin!', toast_template: 'Teks permohonan disalin!', toast_error: 'Gagal menyalin. Silakan pilih dan salin manual.',
+        email_subject: 'Permohonan Hapus Akun – StudyCap',
+        email_body: 'Halo Tim StudyCap,\n\nSaya ingin mengajukan permohonan penghapusan akun secara permanen beserta seluruh data terkait.\n\nEmail terdaftar di StudyCap: [TULISKAN EMAIL AKUN DI SINI]\n\nSaya memahami bahwa tindakan ini bersifat permanen dan akan menghapus seluruh flashcard, catatan, buku materi, dan riwayat belajar saya.'
+      },
+      'ar': {
+        name: 'العربية', flag: '🇸🇦', dir: 'rtl',
+        btn_back_home: 'الرئيسية', title: 'طلب حذف الحساب نهائياً',
+        subtitle: 'سنفتقدك بالتأكيد! إذا قررت المتابعة، فسيتم مسح كافة ملفاتك وملاحظاتك وسجلات تقدمك في StudyCap نهائياً وبشكل دائم.',
+        warn_title: 'إجراء لا رجعة فيه',
+        warn_desc: 'بمجرد التأكيد، ستتم إزالة جميع تقدمك الأكاديمي وسجلاتك السحابية بشكل كامل وغير قابل للاسترجاع.',
+        chip_notes: 'الملاحظات والدفاتر', chip_flashcards: 'البطاقات التعليمية', chip_history: 'سجل المذاكرة والتحليلات',
+        btn_email: 'إرسال طلب الحذف عبر البريد', btn_copy_email: 'نسخ البريد الإلكتروني', btn_copy_text: 'نسخ نص الطلب',
+        manual_info: 'البريد الرسمي المعتمد لدعم الحسابات:',
+        timeline_title: 'خطوات إتمام عملية الحذف',
+        step1: 'إرسال الطلب', step2: 'التحقق من ملكية الحساب', step3: 'المسح خلال 7 أيام',
+        footer_back: 'العودة للرئيسية →', footer_copy: '© 2026 StudyCap',
+        toast_email: 'تم نسخ بريد الدعم!', toast_template: 'تم نسخ نص الطلب بالكامل!', toast_error: 'تعذر النسخ. يرجى التحديد والنسخ يدوياً.',
+        email_subject: 'طلب حذف الحساب – StudyCap',
+        email_body: 'مرحباً فريق عمل StudyCap،\n\nأود طلب الحذف النهائي لحسابي وجميع البيانات المرتبطة به بشكل كامل.\n\nالبريد الإلكتروني المسجل في التطبيق: [اكتب بريدك هنا]\n\nأدرك تماماً أن هذا الإجراء غير قابل للإلغاء وسيؤدي لحذف دفاتري وملاحظاتي وبطاقاتي التعليمية وسجل دراستي.'
+      },
+      'bn': {
+        name: 'বাংলা', flag: '🇧🇩', dir: 'ltr',
+        btn_back_home: 'হোম', title: 'অ্যাকাউন্ট মোছার আবেদন',
+        subtitle: 'আমরা আপনাকে মিস করব! আপনি এগিয়ে যেতে চাইলে StudyCap-এ থাকা আপনার সমস্ত ডেটা এবং অধ্যয়নের রেকর্ড চিরতরে মুছে যাবে।',
+        warn_title: 'অপরিবর্তনীয় প্রক্রিয়া',
+        warn_desc: 'একবার নিশ্চিত হয়ে গেলে আপনার সম্পূর্ণ অধ্যয়নের অগ্রগতি অপরিবর্তনীয়ভাবে মুছে ফেলা হবে।',
+        chip_notes: 'নোট এবং খাতা', chip_flashcards: 'ফ্ল্যাশকার্ড ও ডেক', chip_history: 'পড়ার ইতিহাস',
+        btn_email: 'ইমেলের মাধ্যমে আবেদন পাঠান', btn_copy_email: 'ইমেল কপি করুন', btn_copy_text: 'টেক্সট কপি করুন',
+        manual_info: 'অ্যাকাউন্ট সাপোর্টের অফিসিয়াল ঠিকানা:',
+        timeline_title: 'অ্যাকাউন্ট মোছার প্রক্রিয়া কীভাবে কাজ করে',
+        step1: 'আবেদন প্রেরণ', step2: 'অ্যাকাউন্ট যাচাইকরণ', step3: '৭ দিনের মধ্যে অপসরণ',
+        footer_back: '← হোমে ফিরে যান', footer_copy: '© 2026 StudyCap',
+        toast_email: 'সাপোর্ট ইমেল কপি করা হয়েছে!', toast_template: 'আবেদনের টেক্সট কপি করা হয়েছে!', toast_error: 'কপি করতে সমস্যা হয়েছে। অনুগ্রহ করে ম্যানুয়ালি কপি করুন।',
+        email_subject: 'অ্যাকাউন্ট মোছার আবেদন – StudyCap',
+        email_body: 'হ্যালো StudyCap টিম,\n\nআমি স্থায়ীভাবে আমার অ্যাকাউন্ট এবং সংশ্লিষ্ট সমস্ত ডেটা মুছে ফেলার অনুরোধ জানাতে চাই।\n\nStudyCap-এ নিবন্ধিত ইমেল: [এখানে আপনার অ্যাকাউন্টের ইমেল লিখুন]\n\nআমি অবগত আছি যে এই পদক্ষেপটি অপরিবর্তনীয় এবং আমার তৈরি সমস্ত নোট, ফ্ল্যাশকার্ড ও পড়ার রেকর্ড স্থায়ীভাবে মুছে যাবে।'
+      },
+      'ur': {
+        name: 'اردو', flag: '🇵🇰', dir: 'rtl',
+        btn_back_home: 'ہوم', title: 'اکاؤنٹ مستقل حذف کرنے کی درخواست',
+        subtitle: 'ہمیں آپ کی کمی محسوس ہوگی! اگر آپ آگے بڑھتے ہیں تو StudyCap پر آپ کا تمام ریکارڈ اور ڈیٹا ہمیشہ کے لیے حذف کر دیا جائے گا۔',
+        warn_title: 'ناقابل واپسی عمل',
+        warn_desc: 'ایک بار تصدیق ہو جانے کے بعد آپ کے مطالعے کی تمام پیش رفت ہمیشہ کے لیے ضائع ہو جائے گی۔',
+        chip_notes: 'نوٹس اور کاپیاں', chip_flashcards: 'فلیش کارڈز', chip_history: 'پڑھائی کی تاریخ',
+        btn_email: 'ای میل کے ذریعے درخواست بھیجیں', btn_copy_email: 'ای میل کاپی کریں', btn_copy_text: 'متن کاپی کریں',
+        manual_info: 'اکاؤنٹ سپورٹ کا سرکاری ای میل ایڈریس:',
+        timeline_title: 'حذف کرنے کا طریقہ کار',
+        step1: 'درخواست کی ترسیل', step2: 'اکاؤنٹ کی تصدیق', step3: '7 دنوں میں خاتمہ',
+        footer_back: 'ہوم پر واپس جائیں →', footer_copy: '© 2026 StudyCap',
+        toast_email: 'سپورٹ ای میل کاپی ہو گیا!', toast_template: 'درخواست کا متن کاپی ہو گیا!', toast_error: 'کاپی کرنے میں خرابی۔ براہ کرم خود منتخب کر کے کاپی کریں۔',
+        email_subject: 'اکاؤنٹ حذف کرنے کی درخواست – StudyCap',
+        email_body: 'ہیلو StudyCap ٹیم،\n\nمیں اپنے اکاؤنٹ اور تمام متعلقہ ڈیٹا کو مستقل طور پر حذف کرنے کی درخواست کرتا/کرتی ہوں۔\n\nرجسٹرڈ ای میل: [یہاں اپنا رجسٹرڈ ای میل درج کریں]\n\nمیں سمجھتا/سمجھتی ہوں کہ یہ عمل ناقابل واپسی ہے اور اس سے میرے تمام فلیش کارڈز، نوٹس اور ریکارڈز ہمیشہ کے لیے ختم ہو جائیں گے۔'
+      },
+      'ja': {
+        name: '日本語', flag: '🇯🇵', dir: 'ltr',
+        btn_back_home: 'ホーム', title: 'アカウント削除のリクエスト',
+        subtitle: 'ご利用ありがとうございました。削除手続きを完了すると、StudyCap内のすべてのデータと学習履歴は完全に抹消されます。',
+        warn_title: '復元不可能な操作',
+        warn_desc: '一度確定すると、これまで積み上げたすべての学習記録は永久に失われ復元できません。',
+        chip_notes: 'ノートと資料', chip_flashcards: 'フラッシュカード', chip_history: '学習進捗の履歴',
+        btn_email: 'メールで削除を申請する', btn_copy_email: 'メールアドレスをコピー', btn_copy_text: '申請文をコピー',
+        manual_info: 'アカウント管理窓口（公式）:',
+        timeline_title: 'アカウント削除の手順について',
+        step1: '申請メールの送信', step2: 'ご本人様確認', step3: '7日以内に完全削除',
+        footer_back: '← ホームに戻る', footer_copy: '© 2026 StudyCap',
+        toast_email: 'サポートアドレスをコピーしました！', toast_template: '申請文面をコピーしました！', toast_error: 'コピーに失敗しました。手動でコピーしてください。',
+        email_subject: 'アカウント削除の申請 – StudyCap',
+        email_body: 'StudyCap サポートチーム御中\n\nStudyCapのアカウントおよびそれに紐づくすべての個人データの完全削除を申請いたします。\n\n登録メールアドレス：[ここにアカウントのメールアドレスを入力]\n\n本操作が取り消し不可能であり、作成したすべてのノート、フラッシュカード、学習履歴が完全に消去されることを承知しています。'
+      },
+      'ko': {
+        name: '한국어', flag: '🇰🇷', dir: 'ltr',
+        btn_back_home: '홈', title: '계정 영구 삭제 요청',
+        subtitle: '회원님과의 작별이 아쉽습니다. 삭제를 계속 진행하시면 StudyCap에 저장된 모든 데이터와 학습 기록이 영구히 파기됩니다.',
+        warn_title: '되돌릴 수 없는 조치',
+        warn_desc: '삭제가 최종 확인되면 그동안의 모든 학업 진도와 데이터가 영구적으로 지워지며 복구할 수 없습니다.',
+        chip_notes: '필기 노트 및 교재', chip_flashcards: '플래시카드 덱', chip_history: '누적 학습 기록',
+        btn_email: '이메일로 삭제 요청 보내기', btn_copy_email: '이메일 주소 복사', btn_copy_text: '요청서 양식 복사',
+        manual_info: '공식 계정 지원 이메일 센터:',
+        timeline_title: '계정 삭제 처리 절차',
+        step1: '삭제 요청 접수', step2: '계정 소유자 확인', step3: '7일 이내 데이터 파기',
+        footer_back: '← 홈으로 돌아가기', footer_copy: '© 2026 StudyCap',
+        toast_email: '지원 이메일이 복사되었습니다!', toast_template: '요청서 양식이 복사되었습니다!', toast_error: '복사 실패. 직접 선택하여 복사해 주세요.',
+        email_subject: '계정 영구 삭제 요청 – StudyCap',
+        email_body: 'StudyCap 지원팀 귀하,\n\n본인의 StudyCap 계정 및 계정에 연결된 모든 개인 데이터의 영구 삭제를 요청합니다.\n\n가입 이메일 주소: [여기에 계정 이메일을 입력해 주세요]\n\n본 조치가 복구 불가능하며, 저장된 모든 노트, 플래시카드 및 학업 통계가 완전히 파기됨을 확인하였습니다.'
+      },
+      'de': {
+        name: 'Deutsch', flag: '🇩🇪', dir: 'ltr',
+        btn_back_home: 'Startseite', title: 'Konto-Löschung beantragen',
+        subtitle: 'Wir werden dich vermissen! Wenn du fortfährst, werden alle deine Daten und Lernhistorien bei StudyCap unwiderruflich gelöscht.',
+        warn_title: 'Unumkehrbare Aktion',
+        warn_desc: 'Nach Bestätigung wird dein gesamter Lernfortschritt dauerhaft und ohne Wiederherstellungsmöglichkeit entfernt.',
+        chip_notes: 'Notizen & Hefte', chip_flashcards: 'Karteikarten & Decks', chip_history: 'Lernhistorie & Statistik',
+        btn_email: 'Antrag per E-Mail senden', btn_copy_email: 'E-Mail kopieren', btn_copy_text: 'Text kopieren',
+        manual_info: 'Offizielle Support-Adresse für Konten:',
+        timeline_title: 'So funktioniert der Löschprozess',
+        step1: 'Antrag einreichen', step2: 'Konto-Verifizierung', step3: 'Löschung binnen 7 Tagen',
+        footer_back: '← Zur Startseite', footer_copy: '© 2026 StudyCap',
+        toast_email: 'Support-Adresse kopiert!', toast_template: 'Vollständiger Antragstext kopiert!', toast_error: 'Kopieren fehlgeschlagen. Bitte manuell kopieren.',
+        email_subject: 'Konto-Löschung – StudyCap',
+        email_body: 'Hallo StudyCap-Team,\n\nich möchte hiermit die dauerhafte Löschung meines Kontos und aller zugehörigen Daten beantragen.\n\nRegistrierte E-Mail-Adresse: [BITTE HIER KONTO-E-MAIL EINTRAGEN]\n\nMir ist bewusst, dass dieser Schritt unwiderruflich ist und alle meine Karteikarten, Notizen, Hefte und Lernstatistiken dauerhaft gelöscht werden.'
+      },
+      'fr': {
+        name: 'Français', flag: '🇫🇷', dir: 'ltr',
+        btn_back_home: 'Accueil', title: 'Demande de Suppression de Compte',
+        subtitle: 'Vous allez nous manquer ! Si vous décidez de continuer, toutes vos données et archives d\'étude sur StudyCap seront effacées définitivement.',
+        warn_title: 'Action Irréversible',
+        warn_desc: 'Une fois confirmée, la suppression anéantira l\'ensemble de votre progression de manière permanente et irréversible.',
+        chip_notes: 'Notes & Cahiers', chip_flashcards: 'Flashcards & Paquets', chip_history: 'Historique de Révision',
+        btn_email: 'Envoyer la Demande par E-mail', btn_copy_email: 'Copier l\'E-mail', btn_copy_text: 'Copier le Texte',
+        manual_info: 'Adresse officielle du support des comptes :',
+        timeline_title: 'Fonctionnement de la procédure de suppression',
+        step1: 'Envoi de la demande', step2: 'Vérification du compte', step3: 'Suppression en 7 jours',
+        footer_back: '← Retour à l\'Accueil', footer_copy: '© 2026 StudyCap',
+        toast_email: 'E-mail du support copié !', toast_template: 'Texte de la demande copié !', toast_error: 'Erreur de copie. Veuillez sélectionner et copier manuellement.',
+        email_subject: 'Suppression de compte – StudyCap',
+        email_body: 'Bonjour à l\'équipe StudyCap,\n\nJe souhaite demander la suppression définitive de mon compte utilisateur et de toutes les données associées.\n\nAdresse e-mail du compte : [INDIQUEZ ICI L\'E-MAIL DU COMPTE]\n\nJe suis pleinement conscient(e) que cette démarche est irréversible et effacera tous mes cours, mes flashcards et mes statistiques cumulées.'
+      },
+      'it': {
+        name: 'Italiano', flag: '🇮🇹', dir: 'ltr',
+        btn_back_home: 'Home', title: 'Richiesta di Eliminazione Account',
+        subtitle: 'Ci mancherai! Se decidi di procedere, tutti i tuoi dati e la cronologia salvata in StudyCap verranno rimossi per sempre.',
+        warn_title: 'Azione Irreversibile',
+        warn_desc: 'Una volta confermata, la cancellazione eliminerà definitivamente e senza possibilità di recupero tutti i tuoi progressi.',
+        chip_notes: 'Appunti e Quaderni', chip_flashcards: 'Flashcard e Mazzi', chip_history: 'Statistiche di Studio',
+        btn_email: 'Invia Richiesta via Email', btn_copy_email: 'Copia Email', btn_copy_text: 'Copia Testo',
+        manual_info: 'Indirizzo ufficiale del supporto account:',
+        timeline_title: 'Come funziona la procedura di eliminazione',
+        step1: 'Invio della richiesta', step2: 'Verifica dell\'account', step3: 'Rimozione entro 7 giorni',
+        footer_back: '← Torna alla Home', footer_copy: '© 2026 StudyCap',
+        toast_email: 'Email del supporto copiata!', toast_template: 'Testo della richiesta copiato!', toast_error: 'Errore durante la copia. Seleziona e copia a mano.',
+        email_subject: 'Eliminazione account – StudyCap',
+        email_body: 'Gentile team StudyCap,\n\ndesidero richiedere la cancellazione permanente del mio account e di tutti i dati collegati ad esso.\n\nEmail registrata su StudyCap: [INSERIRE QUI L\'EMAIL DELL\'ACCOUNT]\n\nSono consapevole che l\'azione è irreversibile e comporterà l\'eliminazione definitiva di appunti, flashcard, quaderni e statistiche accumulate.'
+      },
+      'ru': {
+        name: 'Русский', flag: '🇷🇺', dir: 'ltr',
+        btn_back_home: 'Главная', title: 'Запрос на удаление аккаунта',
+        subtitle: 'Нам будет вас не хватать! Если вы решите продолжить, все ваши материалы и статистика в StudyCap будут безвозвратно стерты.',
+        warn_title: 'Необратимое действие',
+        warn_desc: 'После подтверждения удаление навсегда сотрет весь ваш учебный прогресс без возможности восстановления.',
+        chip_notes: 'Конспекты и тетради', chip_flashcards: 'Карточки и колоды', chip_history: 'История занятий',
+        btn_email: 'Отправить запрос по Email', btn_copy_email: 'Скопировать Email', btn_copy_text: 'Скопировать текст',
+        manual_info: 'Официальный адрес службы поддержки аккаунтов:',
+        timeline_title: 'Как проходит процедура удаления',
+        step1: 'Отправка обращения', step2: 'Проверка владельца', step3: 'Удаление за 7 дней',
+        footer_back: '← На главную', footer_copy: '© 2026 StudyCap',
+        toast_email: 'Email поддержки скопирован!', toast_template: 'Текст запроса скопирован!', toast_error: 'Не удалось скопировать. Выделите и скопируйте вручную.',
+        email_subject: 'Удаление аккаунта – StudyCap',
+        email_body: 'Здравствуйте, команда StudyCap!\n\nЯ прошу навсегда удалить мою учетную запись и все связанные с ней данные.\n\nЗарегистрированный email в StudyCap: [УКАЖИТЕ ЗДЕСЬ ВАШ EMAIL]\n\nЯ подтверждаю, что понимаю необратимость этого действия, ведущего к полному уничтожению заметок, карточек и истории обучения.'
+      }
+    };
+
+    const availableLanguages = [
+      { code: 'pt_BR', name: 'Português', native: 'Brasil', flag: '🇧🇷' },
+      { code: 'pt_PT', name: 'Português', native: 'Portugal', flag: '🇵🇹' },
+      { code: 'en', name: 'English', native: 'English', flag: '🇺🇸' },
+      { code: 'es', name: 'Español', native: 'Español', flag: '🇪🇸' },
+      { code: 'zh', name: 'Mandarim', native: '简体中文', flag: '🇨🇳' },
+      { code: 'hi', name: 'Hindi', native: 'हिन्दी', flag: '🇮🇳' },
+      { code: 'id', name: 'Indonésio', native: 'Bahasa Indonesia', flag: '🇮🇩' },
+      { code: 'ar', name: 'Árabe', native: 'العربية', flag: '🇸🇦' },
+      { code: 'bn', name: 'Bengali', native: 'বাংলা', flag: '🇧🇩' },
+      { code: 'ur', name: 'Urdu', native: 'اردو', flag: '🇵🇰' },
+      { code: 'ja', name: 'Japonês', native: '日本語', flag: '🇯🇵' },
+      { code: 'ko', name: 'Coreano', native: '한국어', flag: '🇰🇷' },
+      { code: 'de', name: 'Alemão', native: 'Deutsch', flag: '🇩🇪' },
+      { code: 'fr', name: 'Francês', native: 'Français', flag: '🇫🇷' },
+      { code: 'it', name: 'Italiano', native: 'Italiano', flag: '🇮🇹' },
+      { code: 'ru', name: 'Russo', native: 'Русский', flag: '🇷🇺' }
+    ];
+
+    let currentSelectedLang = 'pt_BR';
     const SUPPORT_EMAIL = "studycapoficial@gmail.com";
 
-    // ------------------------------------------------
-    // CANVAS PARTICLES
-    // ------------------------------------------------
+    function setLanguage(langCode) {
+      if (!translations[langCode]) langCode = 'pt_BR';
+      currentSelectedLang = langCode;
+
+      try {
+        localStorage.setItem('studycap_language', langCode);
+      } catch(e) {}
+
+      const langData = translations[langCode];
+      document.documentElement.lang = langCode.replace('_', '-');
+      document.documentElement.dir = langData.dir || 'ltr';
+
+      // Atualiza textos na tela
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (langData[key]) {
+          el.innerHTML = langData[key];
+        }
+      });
+
+      // Atualiza o botão da bandeja
+      const flagEl = document.getElementById('currentLangFlag');
+      const nameEl = document.getElementById('currentLangName');
+      if (flagEl) flagEl.textContent = langData.flag;
+      if (nameEl) nameEl.textContent = langData.name;
+
+      // Atualiza seleção visual no menu
+      document.querySelectorAll('.lang-option-item').forEach(btn => {
+        if (btn.getAttribute('data-code') === langCode) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+
+      // Atualiza o link do mailto dinamicamente
+      updateMailtoLink();
+    }
+
+    function updateMailtoLink() {
+      const current = translations[currentSelectedLang] || translations['pt_BR'];
+      const subject = encodeURIComponent(current.email_subject);
+      const emailBody = current.email_body;
+      const mailtoUrl = `mailto:${SUPPORT_EMAIL}?subject=${subject}&body=${encodeURIComponent(emailBody)}`;
+
+      const btnMail = document.getElementById("btn-send-email");
+      if (btnMail) {
+        btnMail.setAttribute("href", mailtoUrl);
+      }
+    }
+
+    function initLanguageSelector() {
+      const menu = document.getElementById('langDropdownMenu');
+      const wrapper = document.getElementById('langSelectorWrapper');
+      const btn = document.getElementById('langDropdownBtn');
+
+      if (!menu || !wrapper || !btn) return;
+
+      // Montar lista de idiomas
+      menu.innerHTML = availableLanguages.map(item => `
+        <button type="button" class="lang-option-item ${item.code === currentSelectedLang ? 'active' : ''}" data-code="${item.code}">
+          <span class="lang-flag">${item.flag}</span>
+          <span>${item.name}</span>
+          <span class="lang-native">${item.native}</span>
+        </button>
+      `).join('');
+
+      // Abrir/Fechar dropdown
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = wrapper.classList.toggle('open');
+        btn.setAttribute('aria-expanded', isOpen);
+      });
+
+      // Seleção de idioma
+      menu.querySelectorAll('.lang-option-item').forEach(itemBtn => {
+        itemBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const code = itemBtn.getAttribute('data-code');
+          setLanguage(code);
+          wrapper.classList.remove('open');
+          btn.setAttribute('aria-expanded', 'false');
+        });
+      });
+
+      // Fechar ao clicar fora
+      document.addEventListener('click', (e) => {
+        if (!wrapper.contains(e.target)) {
+          wrapper.classList.remove('open');
+          btn.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      // Carregar idioma salvo
+      let saved = 'pt_BR';
+      try {
+        saved = localStorage.getItem('studycap_language') || 'pt_BR';
+      } catch(e) {}
+      setLanguage(saved);
+    }
+
+    function copyEmailToClipboard() {
+      const current = translations[currentSelectedLang] || translations['pt_BR'];
+      copyToClipboard(SUPPORT_EMAIL, current.toast_email);
+    }
+
+    function copyFullTemplate() {
+      const current = translations[currentSelectedLang] || translations['pt_BR'];
+      const fullText = `Assunto: ${current.email_subject}\n\n${current.email_body}`;
+      copyToClipboard(fullText, current.toast_template);
+    }
+
+    function copyToClipboard(text, successMessage) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text)
+          .then(() => {
+            showToast(successMessage);
+          })
+          .catch(() => {
+            fallbackCopy(text, successMessage);
+          });
+      } else {
+        fallbackCopy(text, successMessage);
+      }
+    }
+
+    function fallbackCopy(text, successMessage) {
+      const current = translations[currentSelectedLang] || translations['pt_BR'];
+      const textArea = document.createElement("textarea");
+      textArea.value = text;
+      textArea.style.position = "fixed";
+      textArea.style.left = "-9999px";
+      document.body.appendChild(textArea);
+      textArea.select();
+
+      try {
+        document.execCommand("copy");
+        showToast(successMessage);
+      } catch (err) {
+        showToast(current.toast_error);
+      }
+
+      document.body.removeChild(textArea);
+    }
+
+    let toastTimeout;
+    function showToast(message) {
+      const toast = document.getElementById("toast");
+      const toastMsg = document.getElementById("toast-message");
+      if (!toast || !toastMsg) return;
+
+      toastMsg.innerText = message;
+      toast.classList.add("show");
+
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        toast.classList.remove("show");
+      }, 3500);
+    }
 
     const canvas = document.getElementById("particle-canvas");
     const ctx = canvas.getContext("2d");
-
     let particles = [];
-    let mouse = {
-      x: null,
-      y: null
-    };
+    let mouse = { x: null, y: null };
 
     function resizeCanvas() {
       canvas.width = window.innerWidth;
@@ -941,7 +1556,6 @@
     });
 
     class Particle {
-
       constructor() {
         this.reset();
       }
@@ -949,12 +1563,9 @@
       reset() {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
-
         this.size = Math.random() * 2 + 0.5;
-
         this.speedX = (Math.random() - 0.5) * 0.4;
         this.speedY = (Math.random() - 0.5) * 0.4;
-
         this.alpha = Math.random() * 0.5 + 0.1;
       }
 
@@ -962,16 +1573,10 @@
         this.x += this.speedX;
         this.y += this.speedY;
 
-        // Leve repulsão pelo mouse
         if (mouse.x !== null && mouse.y !== null) {
-
           const dx = mouse.x - this.x;
           const dy = mouse.y - this.y;
-
-          const dist = Math.sqrt(
-            dx * dx +
-            dy * dy
-          );
+          const dist = Math.sqrt(dx * dx + dy * dy);
 
           if (dist > 0 && dist < 120) {
             this.x -= (dx / dist) * 0.6;
@@ -991,198 +1596,36 @@
 
       draw() {
         ctx.fillStyle = `rgba(167, 139, 250, ${this.alpha})`;
-
         ctx.beginPath();
-
-        ctx.arc(
-          this.x,
-          this.y,
-          this.size,
-          0,
-          Math.PI * 2
-        );
-
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fill();
       }
     }
 
     function initParticles() {
       particles = [];
-
-      const count = Math.min(
-        Math.floor(window.innerWidth / 15),
-        65
-      );
-
+      const count = Math.min(Math.floor(window.innerWidth / 15), 65);
       for (let i = 0; i < count; i++) {
         particles.push(new Particle());
       }
     }
 
     function animateParticles() {
-      ctx.clearRect(
-        0,
-        0,
-        canvas.width,
-        canvas.height
-      );
-
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
       particles.forEach((particle) => {
         particle.update();
         particle.draw();
       });
-
       requestAnimationFrame(animateParticles);
     }
 
     initParticles();
     animateParticles();
 
-    // ------------------------------------------------
-    // SOLICITAÇÃO POR E-MAIL
-    // ------------------------------------------------
-
-    const subject = encodeURIComponent(
-      "Exclusão de conta – StudyCap"
-    );
-
-    const emailBody = `Olá, equipe StudyCap.
-
-Gostaria de solicitar a exclusão permanente da minha conta e de todos os dados associados a ela.
-
-E-mail cadastrado no StudyCap: [INFORME AQUI O E-MAIL DA CONTA]
-
-Estou ciente de que esta ação é irreversível e removerá todos os meus flashcards, anotações, cadernos, históricos e progresso acumulado.`;
-
-    const mailtoUrl =
-      `mailto:${SUPPORT_EMAIL}?subject=${subject}&body=${encodeURIComponent(emailBody)}`;
-
-    document
-      .getElementById("btn-send-email")
-      .setAttribute("href", mailtoUrl);
-
-    // ------------------------------------------------
-    // COPIAR PARA CLIPBOARD
-    // ------------------------------------------------
-
-    function copyEmailToClipboard() {
-      copyToClipboard(
-        SUPPORT_EMAIL,
-        "E-mail do suporte copiado!"
-      );
-    }
-
-    function copyFullTemplate() {
-
-      const fullText = `Assunto: Exclusão de conta – StudyCap
-
-Olá, equipe StudyCap.
-
-Gostaria de solicitar a exclusão permanente da minha conta e de todos os dados associados a ela.
-
-E-mail cadastrado no StudyCap: [INFORME AQUI O E-MAIL DA CONTA]
-
-Estou ciente de que esta ação é irreversível e removerá todos os meus flashcards, anotações, cadernos, históricos e progresso acumulado.`;
-
-      copyToClipboard(
-        fullText,
-        "Texto completo da solicitação copiado!"
-      );
-    }
-
-    function copyToClipboard(text, successMessage) {
-
-      if (
-        navigator.clipboard &&
-        navigator.clipboard.writeText
-      ) {
-
-        navigator.clipboard
-          .writeText(text)
-          .then(() => {
-            showToast(successMessage);
-          })
-          .catch(() => {
-            fallbackCopy(
-              text,
-              successMessage
-            );
-          });
-
-      } else {
-
-        fallbackCopy(
-          text,
-          successMessage
-        );
-      }
-    }
-
-    function fallbackCopy(
-      text,
-      successMessage
-    ) {
-
-      const textArea =
-        document.createElement("textarea");
-
-      textArea.value = text;
-
-      textArea.style.position = "fixed";
-      textArea.style.left = "-9999px";
-
-      document.body.appendChild(textArea);
-
-      textArea.select();
-
-      try {
-
-        document.execCommand("copy");
-
-        showToast(
-          successMessage
-        );
-
-      } catch (err) {
-
-        showToast(
-          "Erro ao copiar. Selecione e copie manualmente."
-        );
-      }
-
-      document.body.removeChild(
-        textArea
-      );
-    }
-
-    // ------------------------------------------------
-    // TOAST NOTIFICATION SYSTEM
-    // ------------------------------------------------
-
-    let toastTimeout;
-
-    function showToast(message) {
-
-      const toast =
-        document.getElementById("toast");
-
-      const toastMsg =
-        document.getElementById(
-          "toast-message"
-        );
-
-      toastMsg.innerText = message;
-
-      toast.classList.add("show");
-
-      clearTimeout(toastTimeout);
-
-      toastTimeout = setTimeout(() => {
-
-        toast.classList.remove("show");
-
-      }, 3500);
-    }
+    document.addEventListener('DOMContentLoaded', () => {
+      initLanguageSelector();
+      updateMailtoLink();
+    });
   </script>
 
 </body>

@@ -154,10 +154,203 @@
       pointer-events: none;
     }
 
+    /* BARRA SUPERIOR COM SELETOR DE IDIOMA VISÍVEL DE IMEDIATO */
+    .top-header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: clamp(14px, 2.5vw, 24px) calc(24px + var(--safe-right)) 0 calc(24px + var(--safe-left));
+      position: relative;
+      z-index: 110;
+    }
+
+    .top-nav {
+      min-height: 64px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 20px;
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 14px 40px -18px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    .brand-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 1.25rem;
+      letter-spacing: -0.4px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    .brand-logo {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      object-fit: cover;
+      box-shadow: 0 0 14px var(--primary-glow);
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* SELETOR DE IDIOMAS */
+    .lang-selector-wrapper {
+      position: relative;
+      display: inline-block;
+    }
+
+    .lang-dropdown-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 7px 12px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #ffffff;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      backdrop-filter: blur(12px);
+      transition: all 0.3s ease;
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    .lang-dropdown-btn:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: var(--primary);
+      box-shadow: 0 0 14px var(--primary-glow);
+    }
+
+    .lang-flag {
+      font-size: 1.15rem;
+      line-height: 1;
+    }
+
+    .lang-arrow {
+      width: 14px;
+      height: 14px;
+      transition: transform 0.3s ease;
+      stroke: var(--text-dim);
+      flex-shrink: 0;
+    }
+
+    .lang-selector-wrapper.open .lang-arrow {
+      transform: rotate(180deg);
+    }
+
+    .lang-dropdown-menu {
+      display: none;
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      width: 240px;
+      max-height: 320px;
+      overflow-y: auto;
+      background: rgba(15, 23, 42, 0.96);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(139, 92, 246, 0.3);
+      border-radius: 16px;
+      padding: 8px;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.8), 0 0 20px rgba(124, 58, 237, 0.25);
+      z-index: 1200;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(139, 92, 246, 0.4) transparent;
+    }
+
+    .lang-dropdown-menu::-webkit-scrollbar { width: 5px; }
+    .lang-dropdown-menu::-webkit-scrollbar-thumb {
+      background: rgba(139, 92, 246, 0.4);
+      border-radius: 10px;
+    }
+
+    .lang-selector-wrapper.open .lang-dropdown-menu {
+      display: block;
+      animation: menuFadeIn 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes menuFadeIn {
+      from { opacity: 0; transform: translateY(-6px) scale(0.96); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .lang-option-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      padding: 8px 12px;
+      border: none;
+      background: transparent;
+      border-radius: 10px;
+      cursor: pointer;
+      text-align: left;
+      color: var(--text-main);
+      font-size: 0.85rem;
+      transition: all 0.2s ease;
+    }
+
+    .lang-option-item:hover {
+      background: rgba(139, 92, 246, 0.22);
+      color: #ffffff;
+    }
+
+    .lang-option-item.active {
+      background: rgba(139, 92, 246, 0.38);
+      border: 1px solid rgba(167, 139, 250, 0.4);
+      font-weight: 700;
+    }
+
+    .lang-native {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      margin-left: auto;
+    }
+
+    .lang-option-item.active .lang-native {
+      color: #c4b5fd;
+    }
+
+    .btn-top-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 14px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--glass-border);
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: all 0.25s ease;
+      white-space: nowrap;
+    }
+
+    .btn-top-back:hover {
+      color: #ffffff;
+      border-color: rgba(139, 92, 246, 0.5);
+      background: rgba(139, 92, 246, 0.12);
+      transform: translateX(-2px);
+    }
+
     .wrapper {
       max-width: 1200px;
       margin: 0 auto;
-      padding: clamp(30px, 5vw, 60px) calc(24px + var(--safe-right)) 100px calc(24px + var(--safe-left));
+      padding: clamp(20px, 3.5vw, 40px) calc(24px + var(--safe-right)) 100px calc(24px + var(--safe-left));
       display: grid;
       grid-template-columns: minmax(240px, 280px) 1fr;
       gap: clamp(20px, 3.5vw, 40px);
@@ -167,7 +360,7 @@
     /* --- SIDEBAR (DESKTOP STICKY & MOBILE DRAWER) --- */
     aside {
       position: sticky;
-      top: 40px;
+      top: 30px;
       height: fit-content;
       z-index: 100;
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
@@ -487,7 +680,6 @@
       box-shadow: 0 8px 25px rgba(124, 58, 237, 0.5);
     }
 
-    /* FOOTER */
     footer {
       text-align: center;
       margin-top: 50px;
@@ -569,10 +761,54 @@
       transform: scale(0.96);
     }
 
+    /* RESPONSIVIDADE MOBILE COM SELETOR DE IDIOMAS SEMPRE VISÍVEL */
     @media (max-width: 900px) {
+      .top-header-container {
+        padding: 12px 16px 0 16px;
+      }
+
+      .top-nav {
+        min-height: 56px;
+        padding: 8px 14px;
+        border-radius: 16px;
+      }
+
+      .brand-link {
+        font-size: 1.1rem;
+        gap: 8px;
+      }
+
+      .brand-logo {
+        width: 28px;
+        height: 28px;
+      }
+
+      .lang-dropdown-btn {
+        padding: 6px 10px;
+        font-size: 0.78rem;
+        gap: 5px;
+      }
+
+      .lang-name {
+        max-width: 95px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .lang-dropdown-menu {
+        width: 220px;
+        max-height: 280px;
+      }
+
+      .btn-top-back {
+        padding: 6px 10px;
+        font-size: 0.8rem;
+      }
+
       .wrapper { 
         grid-template-columns: 1fr; 
-        padding: 24px calc(16px + var(--safe-right)) calc(var(--safe-bottom) + 80px) calc(16px + var(--safe-left)); 
+        padding: 16px calc(16px + var(--safe-right)) calc(var(--safe-bottom) + 80px) calc(16px + var(--safe-left)); 
         gap: 20px; 
       }
 
@@ -630,6 +866,27 @@
     }
 
     @media (max-width: 480px) {
+      .top-nav {
+        padding: 6px 10px;
+      }
+
+      .lang-name {
+        max-width: 65px;
+      }
+
+      .lang-dropdown-btn {
+        padding: 5px 8px;
+        font-size: 0.74rem;
+      }
+
+      .btn-top-back span {
+        display: none;
+      }
+
+      .btn-top-back {
+        padding: 6px 8px;
+      }
+
       .app-header {
         flex-direction: column;
         align-items: flex-start;
@@ -666,7 +923,6 @@
       }
     }
 
-    /* Otimização para telas ultralargas e dobráveis compactas */
     @media (max-width: 320px) {
       .mobile-nav-toggle span {
         display: inline-block;
@@ -717,7 +973,7 @@
 
   <!-- BOTÃO NAVEGAÇÃO MOBILE -->
   <button class="mobile-nav-toggle" id="mobileNavBtn" aria-label="Abrir Menu de Navegação">
-    <span>📑 Índice da Política</span>
+    <span data-i18n="mobile_nav_btn">📑 Índice da Política</span>
   </button>
 
   <!-- BOTÃO VOLTAR AO TOPO -->
@@ -725,30 +981,59 @@
     ↑
   </button>
 
+  <!-- BARRA SUPERIOR FIXA COM SELETOR DE IDIOMAS VISÍVEL IMEDIATAMENTE NO CELULAR E PC -->
+  <div class="top-header-container">
+    <div class="top-nav">
+      <a href="../" class="brand-link" aria-label="StudyCap Início">
+        <img src="Mari.png" alt="StudyCap Logo" class="brand-logo" onerror="this.src='../Nova.png'">
+        <span>StudyCap</span>
+      </a>
+
+      <div class="top-actions">
+        <!-- BANDEJA DE IDIOMAS INTEGRADA -->
+        <div class="lang-selector-wrapper" id="langSelectorWrapper">
+          <button class="lang-dropdown-btn" id="langDropdownBtn" type="button" aria-haspopup="true" aria-expanded="false">
+            <span class="lang-flag" id="currentLangFlag">🇧🇷</span>
+            <span class="lang-name" id="currentLangName">Português (BR)</span>
+            <svg class="lang-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="lang-dropdown-menu" id="langDropdownMenu" role="menu">
+            <!-- As opções de idiomas serão injetadas via JavaScript -->
+          </div>
+        </div>
+
+        <a href="../" class="btn-top-back" title="Voltar ao início">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="15 18 9 12 15 6"/></svg>
+          <span data-i18n="btn_back_home">Início</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
   <div class="wrapper">
     
     <!-- SIDEBAR / MENU DE NAVEGAÇÃO -->
     <aside id="sidebarNav">
       <div class="nav-card">
         <div class="nav-header-box">
-          <div class="nav-title">Navegação</div>
-          <span class="nav-badge">12 Seções</span>
+          <div class="nav-title" data-i18n="nav_title">Navegação</div>
+          <span class="nav-badge" data-i18n="nav_badge">12 Seções</span>
         </div>
         <nav id="navbar">
           <ul>
-            <li><a href="#intro" class="active">Introdução</a></li>
-            <li><a href="#coleta">1. Informações Coletadas</a></li>
-            <li><a href="#anuncios">2. Anúncios Recompensados</a></li>
-            <li><a href="#enem">3. Simulados e Dados do ENEM</a></li>
-            <li><a href="#uso">4. Uso dos Dados</a></li>
-            <li><a href="#armazenamento">5. Armazenamento</a></li>
-            <li><a href="#terceiros">6. Serviços de Terceiros</a></li>
-            <li><a href="#pagamentos">7. Pagamentos</a></li>
-            <li><a href="#permissoes">8. Permissões</a></li>
-            <li><a href="#direitos">9. Seus Direitos</a></li>
-            <li><a href="#menores">10. Menores</a></li>
-            <li><a href="#alteracoes">11. Alterações</a></li>
-            <li><a href="#contato">12. Contato</a></li>
+            <li><a href="#intro" class="active" data-i18n="nav_intro">Introdução</a></li>
+            <li><a href="#coleta" data-i18n="nav_coleta">1. Informações Coletadas</a></li>
+            <li><a href="#anuncios" data-i18n="nav_anuncios">2. Anúncios Recompensados</a></li>
+            <li><a href="#enem" data-i18n="nav_enem">3. Simulados e ENEM</a></li>
+            <li><a href="#uso" data-i18n="nav_uso">4. Uso dos Dados</a></li>
+            <li><a href="#armazenamento" data-i18n="nav_armazenamento">5. Armazenamento</a></li>
+            <li><a href="#terceiros" data-i18n="nav_terceiros">6. Serviços de Terceiros</a></li>
+            <li><a href="#pagamentos" data-i18n="nav_pagamentos">7. Pagamentos</a></li>
+            <li><a href="#permissoes" data-i18n="nav_permissoes">8. Permissões</a></li>
+            <li><a href="#direitos" data-i18n="nav_direitos">9. Seus Direitos</a></li>
+            <li><a href="#menores" data-i18n="nav_menores">10. Menores</a></li>
+            <li><a href="#alteracoes" data-i18n="nav_alteracoes">11. Alterações</a></li>
+            <li><a href="#contato" data-i18n="nav_contato">12. Contato</a></li>
           </ul>
         </nav>
       </div>
@@ -761,161 +1046,1558 @@
         
         <div class="app-header" id="intro">
           <div class="icon-box">
-             <img src="Mari.png" alt="StudyCap Logo" onerror="this.style.display='none'">
+             <img src="Mari.png" alt="StudyCap Logo" onerror="this.src='../Nova.png'">
           </div>
           
           <div>
-            <h1>Política de Privacidade</h1>
-            <span class="meta">Última atualização: 31/01/2026</span>
+            <h1 data-i18n="doc_title">Política de Privacidade</h1>
+            <span class="meta" data-i18n="doc_meta">Última atualização: 31/01/2026</span>
           </div>
         </div>
 
         <div class="content-body">
-          <p>O <strong>StudyCap</strong> valoriza a sua privacidade e está comprometido em proteger seus dados pessoais. Esta Política de Privacidade descreve detalhadamente como coletamos, usamos, armazenamos e protegemos as suas informações ao utilizar nosso aplicativo de produtividade e estudos.</p>
-          <p>Ao utilizar o StudyCap, você concorda com a coleta e uso de informações de acordo com esta política e com as normas de Proteção de Dados (LGPD - Lei nº 13.709/2018).</p>
+          <p data-i18n="intro_p1">O <strong>StudyCap</strong> valoriza a sua privacidade e está comprometido em proteger seus dados pessoais. Esta Política de Privacidade descreve detalhadamente como coletamos, usamos, armazenamos e protegemos as suas informações ao utilizar nosso aplicativo de produtividade e estudos.</p>
+          <p data-i18n="intro_p2">Ao utilizar o StudyCap, você concorda com a coleta e uso de informações de acordo com esta política e com as normas de Proteção de Dados (LGPD - Lei nº 13.709/2018).</p>
 
           <section id="coleta">
-            <h2>1. Informações que Coletamos</h2>
-            <p>Para fornecer nossos serviços de sincronização de notas, inteligência artificial, estatísticas de estudo e simulados, coletamos os seguintes tipos de dados:</p>
+            <h2 data-i18n="sec1_title">1. Informações que Coletamos</h2>
+            <p data-i18n="sec1_p">Para fornecer nossos serviços de sincronização de notas, inteligência artificial, estatísticas de estudo e simulados, coletamos os seguintes tipos de dados:</p>
             
-            <h3>1.1. Dados de Identificação (Conta)</h3>
-            <p>Para criar sua conta e permitir o acesso seguro em múltiplos dispositivos, utilizamos serviços de autenticação. Coletamos:</p>
+            <h3 data-i18n="sec1_1_title">1.1. Dados de Identificação (Conta)</h3>
+            <p data-i18n="sec1_1_p">Para criar sua conta e permitir o acesso seguro em múltiplos dispositivos, utilizamos serviços de autenticação. Coletamos:</p>
             <ul>
-              <li><strong>Endereço de e-mail:</strong> Essencial para login e recuperação de conta.</li>
-              <li><strong>Nome de usuário e foto de perfil:</strong> Coletados apenas se fornecidos através do login social (Google Auth) para personalização do perfil.</li>
-              <li><strong>ID de usuário:</strong> Um identificador exclusivo gerado pelo sistema para vincular seus dados anonimamente.</li>
+              <li data-i18n="sec1_1_li1"><strong>Endereço de e-mail:</strong> Essencial para login e recuperação de conta.</li>
+              <li data-i18n="sec1_1_li2"><strong>Nome de usuário e foto de perfil:</strong> Coletados apenas se fornecidos através do login social (Google Auth) para personalização do perfil.</li>
+              <li data-i18n="sec1_1_li3"><strong>ID de usuário:</strong> Um identificador exclusivo gerado pelo sistema para vincular seus dados anonimamente.</li>
             </ul>
 
-            <h3>1.2. Dados de Conteúdo, Estudos e Simulados</h3>
+            <h3 data-i18n="sec1_2_title">1.2. Dados de Conteúdo, Estudos e Simulados</h3>
             <ul>
-              <li><strong>Conteúdo do Usuário:</strong> Todas as notas, tarefas, eventos da agenda, flashcards e registros de tempo (sessões Pomodoro) que você cria são armazenados em nuvem para permitir a sincronização instantânea.</li>
-              <li><strong>Progresso em Simulados:</strong> Suas respostas, histórico de pontuação e estatísticas de desempenho em questões e simulados (incluindo bancas do ENEM) para acompanhamento da sua evolução nos estudos.</li>
-              <li><strong>Mídia:</strong> Imagens ou arquivos anexados nas suas notas.</li>
-              <li><strong>Interação com IA:</strong> Os textos enviados para a funcionalidade "Mari IA" são processados para gerar respostas contextuais de estudo.</li>
+              <li data-i18n="sec1_2_li1"><strong>Conteúdo do Usuário:</strong> Todas as notas, tarefas, eventos da agenda, flashcards e registros de tempo (sessões Pomodoro) que você cria são armazenados em nuvem para permitir a sincronização instantânea.</li>
+              <li data-i18n="sec1_2_li2"><strong>Progresso em Simulados:</strong> Suas respostas, histórico de pontuação e estatísticas de desempenho em questões e simulados (incluindo bancas do ENEM) para acompanhamento da sua evolução nos estudos.</li>
+              <li data-i18n="sec1_2_li3"><strong>Mídia:</strong> Imagens ou arquivos anexados nas suas notas.</li>
+              <li data-i18n="sec1_2_li4"><strong>Interação com IA:</strong> Os textos enviados para a funcionalidade "Mari IA" são processados para gerar respostas contextuais de estudo.</li>
             </ul>
 
-            <h3>1.3. Dados do Dispositivo e Analytics</h3>
-            <p>Utilizamos o Google Analytics para Firebase para entender como o aplicativo é utilizado e monitorar a estabilidade do sistema:</p>
+            <h3 data-i18n="sec1_3_title">1.3. Dados do Dispositivo e Analytics</h3>
+            <p data-i18n="sec1_3_p">Utilizamos o Google Analytics para Firebase para entender como o aplicativo é utilizado e monitorar a estabilidade do sistema:</p>
             <ul>
-              <li>Modelo do dispositivo, versão do sistema operacional e identificadores anônimos de publicidade (Advertising ID).</li>
-              <li>Logs de erro (Crashlytics) caso o app feche inesperadamente, para correção de bugs.</li>
-              <li>Métricas de engajamento (funcionalidades mais utilizadas, tempo de sessão, simulados concluídos).</li>
+              <li data-i18n="sec1_3_li1">Modelo do dispositivo, versão do sistema operacional e identificadores anônimos de publicidade (Advertising ID).</li>
+              <li data-i18n="sec1_3_li2">Logs de erro (Crashlytics) caso o app feche inesperadamente, para correção de bugs.</li>
+              <li data-i18n="sec1_3_li3">Métricas de engajamento (funcionalidades mais utilizadas, tempo de sessão, simulados concluídos).</li>
             </ul>
           </section>
 
           <section id="anuncios">
-            <h2>2. Anúncios Recompensados (Plano Gratuito)</h2>
-            <p>Para manter o <strong>StudyCap</strong> acessível e gratuito para todos os estudantes, exibimos anúncios publicitários exclusivamente na versão gratuita do aplicativo.</p>
+            <h2 data-i18n="sec2_title">2. Anúncios Recompensados (Plano Gratuito)</h2>
+            <p data-i18n="sec2_p1">Para manter o <strong>StudyCap</strong> acessível e gratuito para todos os estudantes, exibimos anúncios publicitários exclusivamente na versão gratuita do aplicativo.</p>
             
-            <div class="info-box">
+            <div class="info-box" data-i18n="sec2_box">
               <strong>💡 Transparência sobre nossos anúncios:</strong> O StudyCap não utiliza banners intrusivos nem pop-ups automáticos durante o seu tempo de foco ou leitura. Nossos anúncios funcionam estritamente no modelo de <strong>Anúncios Recompensados (Rewarded Ads)</strong>.
             </div>
 
-            <p>Isso significa que anúncios em vídeo só serão exibidos quando <strong>você optar ativamente por assisti-los</strong> para desbloquear benefícios dentro do aplicativo, tais como:</p>
+            <p data-i18n="sec2_p2">Isso significa que anúncios em vídeo só serão exibidos quando <strong>você optar ativamente por assisti-los</strong> para desbloquear benefícios dentro do aplicativo, tais como:</p>
             <ul>
-              <li>Concluir ou pular etapas de uma sessão Pomodoro;</li>
-              <li>Obter créditos extras;</li>
-              <li>Desbloquear novos limites temporários de uso de funcionalidades premium.</li>
+              <li data-i18n="sec2_li1">Concluir ou pular etapas de uma sessão Pomodoro;</li>
+              <li data-i18n="sec2_li2">Obter créditos extras;</li>
+              <li data-i18n="sec2_li3">Desbloquear novos limites temporários de uso de funcionalidades premium.</li>
             </ul>
-            <p>Provedores de anúncios de terceiros (como o <strong>Google AdMob</strong>) podem coletar identificadores anônimos do seu dispositivo (ID de Publicidade do Google/Apple) para servir anúncios relevantes e evitar fraudes. Usuários do plano <strong>Premium (Pago)</strong> têm navegação 100% livre de qualquer exibição de anúncios.</p>
+            <p data-i18n="sec2_p3">Provedores de anúncios de terceiros (como o <strong>Google AdMob</strong>) podem coletar identificadores anônimos do seu dispositivo (ID de Publicidade do Google/Apple) para servir anúncios relevantes e evitar fraudes. Usuários do plano <strong>Premium (Pago)</strong> têm navegação 100% livre de qualquer exibição de anúncios.</p>
           </section>
 
           <section id="enem">
-            <h2>3. Conteúdo do ENEM e Isenção de Vinculo Governamental</h2>
-            <p>O StudyCap disponibiliza um acervo de simulados e questões baseados nos exames oficiais do Exame Nacional do Ensino Médio (ENEM).</p>
+            <h2 data-i18n="sec3_title">3. Conteúdo do ENEM e Isenção de Vinculo Governamental</h2>
+            <p data-i18n="sec3_p1">O StudyCap disponibiliza um acervo de simulados e questões baseados nos exames oficiais do Exame Nacional do Ensino Médio (ENEM).</p>
             <ul>
-              <li><strong>Origem dos Dados:</strong> As provas e questões utilizadas no aplicativo foram extraídas de materiais de domínio público e arquivos PDF disponibilizados oficialmente pelo <strong>INEP (Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira)</strong> e processadas em formato digital (JSON) para execução interativa.</li>
-              <li><strong>Isenção de Responsabilidade (Disclaimer):</strong> O StudyCap é uma ferramenta educacional desenvolvida de forma <strong>independente</strong>. O aplicativo <strong>NÃO é afiliado, endossado, patrocinado ou mantido pelo INEP, pelo Ministério da Educação (MEC) ou por qualquer órgão governamental</strong>.</li>
+              <li data-i18n="sec3_li1"><strong>Origem dos Dados:</strong> As provas e questões utilizadas no aplicativo foram extraídas de materiais de domínio público e arquivos PDF disponibilizados oficialmente pelo <strong>INEP (Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira)</strong> e processadas em formato digital (JSON) para execução interativa.</li>
+              <li data-i18n="sec3_li2"><strong>Isenção de Responsabilidade (Disclaimer):</strong> O StudyCap é uma ferramenta educacional desenvolvida de forma <strong>independente</strong>. O aplicativo <strong>NÃO é afiliado, endossado, patrocinado ou mantido pelo INEP, pelo Ministério da Educação (MEC) ou por qualquer órgão governamental</strong>.</li>
             </ul>
           </section>
 
           <section id="uso">
-            <h2>4. Como Usamos Seus Dados</h2>
-            <p>Utilizamos as informações coletadas estritamente para:</p>
+            <h2 data-i18n="sec4_title">4. Como Usamos Seus Dados</h2>
+            <p data-i18n="sec4_p1">Utilizamos as informações coletadas estritamente para:</p>
             <ul>
-              <li><strong>Fornecer o Serviço:</strong> Sincronizar suas notas, simulados, progresso e configurações em tempo real.</li>
-              <li><strong>Recursos de Inteligência Artificial:</strong> Processar suas perguntas através da API do Google Gemini. <br><em>Importante: Os dados enviados via API para a "Mari IA" não são utilizados pelo Google para treinar seus modelos públicos de IA, garantindo a privacidade do seu conteúdo educacional.</em></li>
-              <li><strong>Melhorias e Manutenção:</strong> Analisar estatísticas anônimas para melhorar a performance e corrigir falhas técnicas.</li>
-              <li><strong>Gestão do Sistema de Recompensas:</strong> Validar o cumprimento de visualização de anúncios antes de liberar recompensas no plano gratuito.</li>
-              <li><strong>Comunicação:</strong> Enviar avisos importantes sobre sua conta, atualizações de segurança ou mudanças nos termos.</li>
+              <li data-i18n="sec4_li1"><strong>Fornecer o Serviço:</strong> Sincronizar suas notas, simulados, progresso e configurações em tempo real.</li>
+              <li data-i18n="sec4_li2"><strong>Recursos de Inteligência Artificial:</strong> Processar suas perguntas através da API do Google Gemini. <br><em>Importante: Os dados enviados via API para a "Mari IA" não são utilizados pelo Google para treinar seus modelos públicos de IA, garantindo a privacidade do seu conteúdo educacional.</em></li>
+              <li data-i18n="sec4_li3"><strong>Melhorias e Manutenção:</strong> Analisar estatísticas anônimas para melhorar a performance e corrigir falhas técnicas.</li>
+              <li data-i18n="sec4_li4"><strong>Gestão do Sistema de Recompensas:</strong> Validar o cumprimento de visualização de anúncios antes de liberar recompensas no plano gratuito.</li>
+              <li data-i18n="sec4_li5"><strong>Comunicação:</strong> Enviar avisos importantes sobre sua conta, atualizações de segurança ou mudanças nos termos.</li>
             </ul>
-            <p><strong>Não vendemos seus dados pessoais para terceiros.</strong> Nosso modelo de negócios baseia-se na oferta de assinaturas premium e anúncios recompensados voluntários.</p>
+            <p data-i18n="sec4_p2"><strong>Não vendemos seus dados pessoais para terceiros.</strong> Nosso modelo de negócios baseia-se na oferta de assinaturas premium e anúncios recompensados voluntários.</p>
           </section>
 
           <section id="armazenamento">
-            <h2>5. Armazenamento e Transferência Internacional</h2>
-            <p>O StudyCap utiliza a infraestrutura de nuvem do <strong>Google Firebase</strong>. Embora operemos no Brasil, alguns dados podem ser processados e armazenados em servidores seguros do Google localizados nos Estados Unidos ou em outras jurisdições.</p>
-            <p>Essa transferência segue rigorosos padrões de segurança internacional e criptografia (tanto em trânsito quanto em repouso) para garantir que seus dados estejam protegidos contra acessos não autorizados.</p>
+            <h2 data-i18n="sec5_title">5. Armazenamento e Transferência Internacional</h2>
+            <p data-i18n="sec5_p1">O StudyCap utiliza a infraestrutura de nuvem do <strong>Google Firebase</strong>. Embora operemos no Brasil, alguns dados podem ser processados e armazenados em servidores seguros do Google localizados nos Estados Unidos ou em outras jurisdições.</p>
+            <p data-i18n="sec5_p2">Essa transferência segue rigorosos padrões de segurança internacional e criptografia (tanto em trânsito quanto em repouso) para garantir que seus dados estejam protegidos contra acessos não autorizados.</p>
           </section>
 
           <section id="terceiros">
-            <h2>6. Serviços de Terceiros</h2>
-            <p>O StudyCap utiliza infraestrutura de terceiros confiáveis para operar. Recomendamos a leitura das políticas de privacidade desses provedores:</p>
+            <h2 data-i18n="sec6_title">6. Serviços de Terceiros</h2>
+            <p data-i18n="sec6_p1">O StudyCap utiliza infraestrutura de terceiros confiáveis para operar. Recomendamos a leitura das políticas de privacidade desses provedores:</p>
             <ul>
-              <li><strong>Google Firebase (Auth, Firestore, Storage):</strong> Para autenticação segura, banco de dados em tempo real e armazenamento de arquivos.</li>
-              <li><strong>Google AdMob:</strong> Para exibição de anúncios recompensados na versão gratuita.</li>
-              <li><strong>Google Gemini API:</strong> Para prover as funcionalidades de Inteligência Artificial e chat educacional.</li>
-              <li><strong>Google Analytics & Crashlytics:</strong> Para análise de dados anônimos e monitoramento de falhas.</li>
+              <li data-i18n="sec6_li1"><strong>Google Firebase (Auth, Firestore, Storage):</strong> Para autenticação segura, banco de dados em tempo real e armazenamento de arquivos.</li>
+              <li data-i18n="sec6_li2"><strong>Google AdMob:</strong> Para exibição de anúncios recompensados na versão gratuita.</li>
+              <li data-i18n="sec6_li3"><strong>Google Gemini API:</strong> Para prover as funcionalidades de Inteligência Artificial e chat educacional.</li>
+              <li data-i18n="sec6_li4"><strong>Google Analytics & Crashlytics:</strong> Para análise de dados anônimos e monitoramento de falhas.</li>
             </ul>
           </section>
 
           <section id="pagamentos">
-            <h2>7. Pagamentos e Assinaturas</h2>
-            <p>O StudyCap oferece planos de assinatura (Premium). <strong>Nós não temos acesso, não processamos e nem armazenamos os dados do seu cartão de crédito.</strong></p>
-            <p>Todas as transações financeiras são processadas diretamente pelas lojas de aplicativos (Google Play Store para Android ou Apple App Store para iOS), que garantem a segurança total e a conformidade PCI dos seus dados bancários.</p>
+            <h2 data-i18n="sec7_title">7. Pagamentos e Assinaturas</h2>
+            <p data-i18n="sec7_p1">O StudyCap oferece planos de assinatura (Premium). <strong>Nós não temos acesso, não processamos e nem armazenamos os dados do seu cartão de crédito.</strong></p>
+            <p data-i18n="sec7_p2">Todas as transações financeiras são processadas diretamente pelas lojas de aplicativos (Google Play Store para Android ou Apple App Store para iOS), que garantem a segurança total e a conformidade PCI dos seus dados bancários.</p>
           </section>
 
           <section id="permissoes">
-            <h2>8. Permissões do Dispositivo</h2>
-            <p>O aplicativo pode solicitar acesso a recursos nativos do seu celular apenas quando necessário para uma funcionalidade específica:</p>
+            <h2 data-i18n="sec8_title">8. Permissões do Dispositivo</h2>
+            <p data-i18n="sec8_p1">O aplicativo pode solicitar acesso a recursos nativos do seu celular apenas quando necessário para uma funcionalidade específica:</p>
             <ul>
-              <li>📸 <strong>Armazenamento/Galeria:</strong> Para que você possa anexar imagens e arquivos às suas notas de estudo.</li>
-              <li>📷 <strong>Câmera:</strong> Para tirar fotos de quadros ou cadernos diretamente no editor de notas.</li>
-              <li>🎤 <strong>Microfone:</strong> Para gravação de notas de áudio (acesso somente enquanto você estiver gravando).</li>
-              <li>🔔 <strong>Notificações:</strong> Para avisos de fim do timer Pomodoro, lembretes de revisão e atualizações importantes.</li>
+              <li data-i18n="sec8_li1">📸 <strong>Armazenamento/Galeria:</strong> Para que você possa anexar imagens e arquivos às suas notas de estudo.</li>
+              <li data-i18n="sec8_li2">📷 <strong>Câmera:</strong> Para tirar fotos de quadros ou cadernos diretamente no editor de notas.</li>
+              <li data-i18n="sec8_li3">🎤 <strong>Microfone:</strong> Para gravação de notas de áudio (acesso somente enquanto você estiver gravando).</li>
+              <li data-i18n="sec8_li4">🔔 <strong>Notificações:</strong> Para avisos de fim do timer Pomodoro, lembretes de revisão e atualizações importantes.</li>
             </ul>
           </section>
 
           <section id="direitos">
-            <h2>9. Seus Direitos (LGPD)</h2>
-            <p>Você tem controle total sobre seus dados. De acordo com a Lei Geral de Proteção de Dados, você tem direito a:</p>
+            <h2 data-i18n="sec9_title">9. Seus Direitos (LGPD)</h2>
+            <p data-i18n="sec9_p1">Você tem controle total sobre seus dados. De acordo com a Lei Geral de Proteção de Dados, você tem direito a:</p>
             <ul>
-              <li><strong>Acesso:</strong> Solicitar uma cópia dos dados que temos sobre você.</li>
-              <li><strong>Correção:</strong> Solicitar a correção de dados incompletos, inexatos ou desatualizados.</li>
-              <li><strong>Exclusão de Conta:</strong> Você pode excluir sua conta e todos os seus dados permanentemente a qualquer momento. Basta acessar as configurações do aplicativo e selecionar a opção "Excluir Conta". Essa ação remove suas informações dos nossos servidores de forma irreversível.</li>
-              <li><strong>Revogação de ConsentIMENTO:</strong> Você pode revogar as permissões dadas ao aplicativo e redefinir o ID de publicidade através das configurações do seu sistema operacional.</li>
+              <li data-i18n="sec9_li1"><strong>Acesso:</strong> Solicitar uma cópia dos dados que temos sobre você.</li>
+              <li data-i18n="sec9_li2"><strong>Correção:</strong> Solicitar a correção de dados incompletos, inexatos ou desatualizados.</li>
+              <li data-i18n="sec9_li3"><strong>Exclusão de Conta:</strong> Você pode excluir sua conta e todos os seus dados permanentemente a qualquer momento. Basta acessar as configurações do aplicativo e selecionar a opção "Excluir Conta". Essa ação remove suas informações dos nossos servidores de forma irreversível.</li>
+              <li data-i18n="sec9_li4"><strong>Revogação de Consentimento:</strong> Você pode revogar as permissões dadas ao aplicativo e redefinir o ID de publicidade através das configurações do seu sistema operacional.</li>
             </ul>
           </section>
 
           <section id="menores">
-            <h2>10. Privacidade de Menores</h2>
-            <p>O StudyCap não é direcionado a crianças menores de 13 anos. Não coletamos intencionalmente informações de identificação pessoal de crianças. Se tomarmos conhecimento de que coletamos dados de uma criança sem verificação do consentimento dos pais, tomaremos medidas para remover essas informações de nossos servidores.</p>
+            <h2 data-i18n="sec10_title">10. Privacidade de Menores</h2>
+            <p data-i18n="sec10_p1">O StudyCap não é direcionado a crianças menores de 13 anos. Não coletamos intencionalmente informações de identificação pessoal de crianças. Se tomarmos conhecimento de que coletamos dados de uma criança sem verificação do consentimento dos pais, tomaremos medidas para remover essas informações de nossos servidores.</p>
           </section>
 
           <section id="alteracoes">
-            <h2>11. Alterações nesta Política</h2>
-            <p>Podemos atualizar nossa Política de Privacidade periodicamente para refletir melhorias no app ou mudanças legais. Recomendamos que você revise esta página regularmente. Notificaremos sobre mudanças significativas através de um aviso no próprio aplicativo.</p>
+            <h2 data-i18n="sec11_title">11. Alterações nesta Política</h2>
+            <p data-i18n="sec11_p1">Podemos atualizar nossa Política de Privacidade periodicamente para refletir melhorias no app ou mudanças legais. Recomendamos que você revise esta página regularmente. Notificaremos sobre mudanças significativas através de um aviso no próprio aplicativo.</p>
           </section>
 
           <section id="contato" style="margin-top: 60px; text-align: center;">
-            <h2>12. Ficou com dúvidas?</h2>
-            <p style="text-align: center; margin-bottom: 30px;">Se você tiver dúvidas sobre esta Política ou sobre seus dados, entre em contato com nosso Encarregado de Proteção de Dados:</p>
-            <a href="mailto:contatos.alif.dev@gmail.com" class="btn-contact">
+            <h2 data-i18n="sec12_title" style="justify-content: center;">12. Ficou com dúvidas?</h2>
+            <p data-i18n="sec12_p" style="text-align: center; margin-bottom: 30px;">Se você tiver dúvidas sobre esta Política ou sobre seus dados, entre em contato com nosso Encarregado de Proteção de Dados:</p>
+            <a href="mailto:contatos.alif.dev@gmail.com" class="btn-contact" data-i18n="btn_email">
               Enviar E-mail
             </a>
           </section>
         </div>
 
         <footer>
-          © 2026 StudyCap • <a href="#intro">Termos de Uso</a>
+          <span data-i18n="footer_copy">© 2026 StudyCap</span> • <a href="#intro" data-i18n="footer_terms">Termos de Uso</a>
         </footer>
       </div>
     </main>
   </div>
 
   <script>
+    const translations = {
+      'pt_BR': {
+        name: 'Português (BR)', flag: '🇧🇷', dir: 'ltr',
+        btn_back_home: 'Início', mobile_nav_btn: '📑 Índice da Política',
+        nav_title: 'Navegação', nav_badge: '12 Seções',
+        nav_intro: 'Introdução', nav_coleta: '1. Informações Coletadas', nav_anuncios: '2. Anúncios Recompensados',
+        nav_enem: '3. Simulados e ENEM', nav_uso: '4. Uso dos Dados', nav_armazenamento: '5. Armazenamento',
+        nav_terceiros: '6. Serviços de Terceiros', nav_pagamentos: '7. Pagamentos', nav_permissoes: '8. Permissões',
+        nav_direitos: '9. Seus Direitos', nav_menores: '10. Menores', nav_alteracoes: '11. Alterações', nav_contato: '12. Contato',
+        doc_title: 'Política de Privacidade', doc_meta: 'Última atualização: 31/01/2026',
+        intro_p1: 'O <strong>StudyCap</strong> valoriza a sua privacidade e está comprometido em proteger seus dados pessoais. Esta Política de Privacidade descreve detalhadamente como coletamos, usamos, armazenamos e protegemos as suas informações ao utilizar nosso aplicativo de produtividade e estudos.',
+        intro_p2: 'Ao utilizar o StudyCap, você concorda com a coleta e uso de informações de acordo com esta política e com as normas de Proteção de Dados (LGPD - Lei nº 13.709/2018).',
+        sec1_title: '1. Informações que Coletamos',
+        sec1_p: 'Para fornecer nossos serviços de sincronização de notas, inteligência artificial, estatísticas de estudo e simulados, coletamos os seguintes tipos de dados:',
+        sec1_1_title: '1.1. Dados de Identificação (Conta)',
+        sec1_1_p: 'Para criar sua conta e permitir o acesso seguro em múltiplos dispositivos, utilizamos serviços de autenticação. Coletamos:',
+        sec1_1_li1: '<strong>Endereço de e-mail:</strong> Essencial para login e recuperação de conta.',
+        sec1_1_li2: '<strong>Nome de usuário e foto de perfil:</strong> Coletados apenas se fornecidos através do login social (Google Auth) para personalização do perfil.',
+        sec1_1_li3: '<strong>ID de usuário:</strong> Um identificador exclusivo gerado pelo sistema para vincular seus dados anonimamente.',
+        sec1_2_title: '1.2. Dados de Conteúdo, Estudos e Simulados',
+        sec1_2_li1: '<strong>Conteúdo do Usuário:</strong> Todas as notas, tarefas, eventos da agenda, flashcards e registros de tempo (sessões Pomodoro) que você cria são armazenados em nuvem para permitir a sincronização instantânea.',
+        sec1_2_li2: '<strong>Progresso em Simulados:</strong> Suas respostas, histórico de pontuação e estatísticas de desempenho em questões e simulados (incluindo bancas do ENEM) para acompanhamento da sua evolução nos estudos.',
+        sec1_2_li3: '<strong>Mídia:</strong> Imagens ou arquivos anexados nas suas notas.',
+        sec1_2_li4: '<strong>Interação com IA:</strong> Os textos enviados para a funcionalidade "Mari IA" são processados para gerar respostas contextuais de estudo.',
+        sec1_3_title: '1.3. Dados do Dispositivo e Analytics',
+        sec1_3_p: 'Utilizamos o Google Analytics para Firebase para entender como o aplicativo é utilizado e monitorar a estabilidade do sistema:',
+        sec1_3_li1: 'Modelo do dispositivo, versão do sistema operacional e identificadores anônimos de publicidade (Advertising ID).',
+        sec1_3_li2: 'Logs de erro (Crashlytics) caso o app feche inesperadamente, para correção de bugs.',
+        sec1_3_li3: 'Métricas de engajamento (funcionalidades mais utilizadas, tempo de sessão, simulados concluídos).',
+        sec2_title: '2. Anúncios Recompensados (Plano Gratuito)',
+        sec2_p1: 'Para manter o <strong>StudyCap</strong> acessível e gratuito para todos os estudantes, exibimos anúncios publicitários exclusivamente na versão gratuita do aplicativo.',
+        sec2_box: '<strong>💡 Transparência sobre nossos anúncios:</strong> O StudyCap não utiliza banners intrusivos nem pop-ups automáticos durante o seu tempo de foco ou leitura. Nossos anúncios funcionam estritamente no modelo de <strong>Anúncios Recompensados (Rewarded Ads)</strong>.',
+        sec2_p2: 'Isso significa que anúncios em vídeo só serão exibidos quando <strong>você optar ativamente por assisti-los</strong> para desbloquear benefícios dentro do aplicativo, tais como:',
+        sec2_li1: 'Concluir ou pular etapas de uma sessão Pomodoro;',
+        sec2_li2: 'Obter créditos extras;',
+        sec2_li3: 'Desbloquear novos limites temporários de uso de funcionalidades premium.',
+        sec2_p3: 'Provedores de anúncios de terceiros (como o <strong>Google AdMob</strong>) podem coletar identificadores anônimos do seu dispositivo (ID de Publicidade do Google/Apple) para servir anúncios relevantes e evitar fraudes. Usuários do plano <strong>Premium (Pago)</strong> têm navegação 100% livre de qualquer exibição de anúncios.',
+        sec3_title: '3. Conteúdo do ENEM e Isenção de Vínculo Governamental',
+        sec3_p1: 'O StudyCap disponibiliza um acervo de simulados e questões baseados nos exames oficiais do Exame Nacional do Ensino Médio (ENEM).',
+        sec3_li1: '<strong>Origem dos Dados:</strong> As provas e questões utilizadas no aplicativo foram extraídas de materiais de domínio público e arquivos PDF disponibilizados oficialmente pelo <strong>INEP</strong> e processadas em formato digital para execução interativa.',
+        sec3_li2: '<strong>Isenção de Responsabilidade (Disclaimer):</strong> O StudyCap é uma ferramenta educacional desenvolvida de forma <strong>independente</strong>. O aplicativo <strong>NÃO é afiliado, endossado, patrocinado ou mantido pelo INEP, pelo MEC ou por qualquer órgão governamental</strong>.',
+        sec4_title: '4. Como Usamos Seus Dados',
+        sec4_p1: 'Utilizamos as informações coletadas estritamente para:',
+        sec4_li1: '<strong>Fornecer o Serviço:</strong> Sincronizar suas notas, simulados, progresso e configurações em tempo real.',
+        sec4_li2: '<strong>Recursos de Inteligência Artificial:</strong> Processar suas perguntas através da API do Google Gemini. <br><em>Importante: Os dados enviados via API para a "Mari IA" não são utilizados pelo Google para treinar seus modelos públicos de IA, garantindo a privacidade do seu conteúdo educacional.</em>',
+        sec4_li3: '<strong>Melhorias e Manutenção:</strong> Analisar estatísticas anônimas para melhorar a performance e corrigir falhas técnicas.',
+        sec4_li4: '<strong>Gestão do Sistema de Recompensas:</strong> Validar o cumprimento de visualização de anúncios antes de liberar recompensas no plano gratuito.',
+        sec4_li5: '<strong>Comunicação:</strong> Enviar avisos importantes sobre sua conta, atualizações de segurança ou mudanças nos termos.',
+        sec4_p2: '<strong>Não vendemos seus dados pessoais para terceiros.</strong> Nosso modelo de negócios baseia-se na oferta de assinaturas premium e anúncios recompensados voluntários.',
+        sec5_title: '5. Armazenamento e Transferência Internacional',
+        sec5_p1: 'O StudyCap utiliza a infraestrutura de nuvem do <strong>Google Firebase</strong>. Embora operemos no Brasil, alguns dados podem ser processados e armazenados em servidores seguros do Google localizados nos Estados Unidos ou em outras jurisdições.',
+        sec5_p2: 'Essa transferência segue rigorosos padrões de segurança internacional e criptografia (tanto em trânsito quanto em repouso) para garantir que seus dados estejam protegidos contra acessos não autorizados.',
+        sec6_title: '6. Serviços de Terceiros',
+        sec6_p1: 'O StudyCap utiliza infraestrutura de terceiros confiáveis para operar. Recomendamos a leitura das políticas de privacidade desses provedores:',
+        sec6_li1: '<strong>Google Firebase (Auth, Firestore, Storage):</strong> Para autenticação segura, banco de dados em tempo real e armazenamento de arquivos.',
+        sec6_li2: '<strong>Google AdMob:</strong> Para exibição de anúncios recompensados na versão gratuita.',
+        sec6_li3: '<strong>Google Gemini API:</strong> Para prover as funcionalidades de Inteligência Artificial e chat educacional.',
+        sec6_li4: '<strong>Google Analytics & Crashlytics:</strong> Para análise de dados anônimos e monitoramento de falhas.',
+        sec7_title: '7. Pagamentos e Assinaturas',
+        sec7_p1: 'O StudyCap oferece planos de assinatura (Premium). <strong>Nós não temos acesso, não processamos e nem armazenamos os dados do seu cartão de crédito.</strong>',
+        sec7_p2: 'Todas as transações financeiras são processadas diretamente pelas lojas de aplicativos (Google Play Store ou Apple App Store), que garantem a segurança total e a conformidade PCI dos seus dados bancários.',
+        sec8_title: '8. Permissões do Dispositivo',
+        sec8_p1: 'O aplicativo pode solicitar acesso a recursos nativos do seu celular apenas quando necessário para uma funcionalidade específica:',
+        sec8_li1: '📸 <strong>Armazenamento/Galeria:</strong> Para que você possa anexar imagens e arquivos às suas notas de estudo.',
+        sec8_li2: '📷 <strong>Câmera:</strong> Para tirar fotos de quadros ou cadernos diretamente no editor de notas.',
+        sec8_li3: '🎤 <strong>Microfone:</strong> Para gravação de notas de áudio (acesso somente enquanto você estiver gravando).',
+        sec8_li4: '🔔 <strong>Notificações:</strong> Para avisos de fim do timer Pomodoro, lembretes de revisão e atualizações importantes.',
+        sec9_title: '9. Seus Direitos (LGPD)',
+        sec9_p1: 'Você tem controle total sobre seus dados. De acordo com a Lei Geral de Proteção de Dados, você tem direito a:',
+        sec9_li1: '<strong>Acesso:</strong> Solicitar uma cópia dos dados que temos sobre você.',
+        sec9_li2: '<strong>Correção:</strong> Solicitar a correção de dados incompletos, inexatos ou desatualizados.',
+        sec9_li3: '<strong>Exclusão de Conta:</strong> Você pode excluir sua conta e todos os seus dados permanentemente a qualquer momento nas configurações do aplicativo. Essa ação remove suas informações dos nossos servidores de forma irreversível.',
+        sec9_li4: '<strong>Revogação de Consentimento:</strong> Você pode revogar as permissões dadas ao aplicativo e redefinir o ID de publicidade através das configurações do seu dispositivo.',
+        sec10_title: '10. Privacidade de Menores',
+        sec10_p1: 'O StudyCap não é direcionado a crianças menores de 13 anos. Não coletamos intencionalmente dados de crianças. Se tomarmos conhecimento de tal coleta sem o consentimento dos responsáveis, tomaremos medidas imediatas para remover essas informações.',
+        sec11_title: '11. Alterações nesta Política',
+        sec11_p1: 'Podemos atualizar nossa Política de Privacidade periodicamente para refletir melhorias no app ou mudanças legais. Recomendamos que você revise esta página regularmente. Notificaremos sobre mudanças significativas através de aviso no aplicativo.',
+        sec12_title: '12. Ficou com dúvidas?',
+        sec12_p: 'Se você tiver dúvidas sobre esta Política ou sobre seus dados, entre em contato com nosso Encarregado de Proteção de Dados:',
+        btn_email: 'Enviar E-mail',
+        footer_copy: '© 2026 StudyCap', footer_terms: 'Termos de Uso'
+      },
+      'pt_PT': {
+        name: 'Português (PT)', flag: '🇵🇹', dir: 'ltr',
+        btn_back_home: 'Início', mobile_nav_btn: '📑 Índice da Política',
+        nav_title: 'Navegação', nav_badge: '12 Secções',
+        nav_intro: 'Introdução', nav_coleta: '1. Dados Recolhidos', nav_anuncios: '2. Anúncios Recompensados',
+        nav_enem: '3. Simulados e Exames', nav_uso: '4. Tratamento de Dados', nav_armazenamento: '5. Armazenamento',
+        nav_terceiros: '6. Serviços de Terceiros', nav_pagamentos: '7. Pagamentos', nav_permissoes: '8. Permissões',
+        nav_direitos: '9. Os Seus Direitos', nav_menores: '10. Menores', nav_alteracoes: '11. Alterações', nav_contato: '12. Contacto',
+        doc_title: 'Política de Privacidade', doc_meta: 'Última atualização: 31/01/2026',
+        intro_p1: 'O <strong>StudyCap</strong> valoriza a sua privacidade e está empenhado em proteger os seus dados pessoais ao utilizar a nossa aplicação de produtividade e estudos.',
+        intro_p2: 'Ao utilizar o StudyCap, concorda com a recolha e tratamento das informações de acordo com esta política e o RGPD.',
+        sec1_title: '1. Informações que Recolhemos',
+        sec1_p: 'Para fornecer os serviços de sincronização de notas, inteligência artificial e estatísticas, recolhemos os seguintes dados:',
+        sec1_1_title: '1.1. Dados de Identificação (Conta)',
+        sec1_1_p: 'Para criar a sua conta e assegurar o acesso seguro em múltiplos dispositivos:',
+        sec1_1_li1: '<strong>Endereço de e-mail:</strong> Essencial para iniciar sessão e recuperar conta.',
+        sec1_1_li2: '<strong>Nome e foto de perfil:</strong> Recolhidos apenas se facultados pelo início de sessão social.',
+        sec1_1_li3: '<strong>Identificador de utilizador:</strong> Um identificador exclusivo gerado pelo sistema.',
+        sec1_2_title: '1.2. Dados de Conteúdo e Estudos',
+        sec1_2_li1: '<strong>Conteúdo do Utilizador:</strong> Apontamentos, tarefas, eventos de calendário, flashcards e registos do Pomodoro.',
+        sec1_2_li2: '<strong>Progresso:</strong> Histórico de respostas e pontuações para acompanhamento do seu rendimento.',
+        sec1_2_li3: '<strong>Multimédia:</strong> Imagens ou ficheiros anexados às suas notas.',
+        sec1_2_li4: '<strong>Interação com IA:</strong> Textos enviados à "Mari IA" são processados exclusivamente para gerar respostas de estudo.',
+        sec1_3_title: '1.3. Dados do Dispositivo e Analítica',
+        sec1_3_p: 'Utilizamos o Google Analytics para Firebase para monitorizar o desempenho da app:',
+        sec1_3_li1: 'Modelo do dispositivo, versão do sistema e identificadores de publicidade anónimos.',
+        sec1_3_li2: 'Relatórios de erro (Crashlytics) para resolução rápida de anomalias.',
+        sec1_3_li3: 'Métricas de utilização e sessões de estudo.',
+        sec2_title: '2. Anúncios Recompensados (Versão Gratuita)',
+        sec2_p1: 'Para mantermos o StudyCap gratuito e acessível, apresentamos publicidade apenas na versão gratuita.',
+        sec2_box: '<strong>💡 Transparência:</strong> O StudyCap não apresenta anúncios intrusivos nem pop-ups automáticos durante o estudo. Funcionamos com o modelo de <strong>Anúncios Recompensados</strong>.',
+        sec2_p2: 'Vídeos só são exibidos quando <strong>decide ativamente assisti-los</strong> para obter vantagens:',
+        sec2_li1: 'Concluir ou avançar etapas do Pomodoro;',
+        sec2_li2: 'Obter créditos adicionais;',
+        sec2_li3: 'Desbloquear limites temporários de ferramentas premium.',
+        sec2_p3: 'Utilizadores com plano <strong>Premium</strong> usufruem de uma experiência totalmente livre de publicidade.',
+        sec3_title: '3. Conteúdos de Exames e Isenção de Vínculo',
+        sec3_p1: 'O StudyCap disponibiliza simulados e questões com base em provas públicas oficiais.',
+        sec3_li1: '<strong>Origem dos Dados:</strong> Materiais de domínio público digitalizados para prática interativa.',
+        sec3_li2: '<strong>Isenção de Responsabilidade:</strong> O StudyCap é um projeto <strong>independente</strong>, sem afiliação a ministérios ou entidades governamentais.',
+        sec4_title: '4. Como Utilizamos os Seus Dados',
+        sec4_p1: 'Os seus dados são tratados exclusivamente para fornecer o serviço, processar dúvidas com IA e aplicar melhorias contínuas.',
+        sec4_li1: '<strong>Prestação do Serviço:</strong> Sincronizar apontamentos e histórico em tempo real.',
+        sec4_li2: '<strong>Inteligência Artificial:</strong> Processar pedidos através da API sem recurso ao treino de modelos públicos.',
+        sec4_li3: '<strong>Manutenção:</strong> Resolver falhas técnicas e otimizar velocidade.',
+        sec4_li4: '<strong>Recompensas:</strong> Validar a atribuição de créditos no plano gratuito.',
+        sec4_li5: '<strong>Comunicação:</strong> Notificar sobre segurança e atualizações vitais.',
+        sec4_p2: '<strong>Não comercializamos os seus dados pessoais a terceiros.</strong>',
+        sec5_title: '5. Armazenamento e Transferência Internacional',
+        sec5_p1: 'Os dados residem na infraestrutura segura da Google Firebase com padrões avançados de encriptação.',
+        sec5_p2: 'Cumprimos normas internacionais rigorosas de proteção de dados tanto em trânsito como em repouso.',
+        sec6_title: '6. Serviços de Terceiros',
+        sec6_p1: 'Recorremos a parceiros tecnológicos fiáveis como Google Firebase, Google AdMob e Google Gemini API.',
+        sec6_li1: '<strong>Google Firebase:</strong> Base de dados e autenticação.',
+        sec6_li2: '<strong>Google AdMob:</strong> Gestão de publicidade recompensada.',
+        sec6_li3: '<strong>Google Gemini API:</strong> Apoio inteligente ao estudante.',
+        sec6_li4: '<strong>Google Analytics:</strong> Estatísticas agregadas de fiabilidade.',
+        sec7_title: '7. Pagamentos e Assinaturas',
+        sec7_p1: '<strong>Não recolhemos nem acedemos aos dados do seu cartão bancário.</strong>',
+        sec7_p2: 'As subscrições são liquidadas com total segurança diretamente pela Google Play ou Apple App Store.',
+        sec8_title: '8. Permissões no Dispositivo',
+        sec8_p1: 'A app solicita autorização apenas quando estritamente necessária:',
+        sec8_li1: '📸 <strong>Ficheiros e Fotos:</strong> Para anexar imagens aos seus apontamentos.',
+        sec8_li2: '📷 <strong>Câmara:</strong> Para fotografar cadernos no editor de notas.',
+        sec8_li3: '🎤 <strong>Microfone:</strong> Para gravação momentânea de áudios.',
+        sec8_li4: '🔔 <strong>Notificações:</strong> Para alertas de temporizadores e lembretes.',
+        sec9_title: '9. Os Seus Direitos (RGPD)',
+        sec9_p1: 'Mantém controlo integral sobre a sua informação:',
+        sec9_li1: '<strong>Acesso e Retificação:</strong> Consultar e corrigir dados registados.',
+        sec9_li2: '<strong>Eliminação de Conta:</strong> Possibilidade de apagar a conta e ficheiros de forma definitiva nas definições.',
+        sec9_li3: '<strong>Revogação:</strong> Retirar autorizações de permissões nas preferências do telemóvel.',
+        sec9_li4: '<strong>Portabilidade:</strong> Solicitar cópia dos registos principais.',
+        sec10_title: '10. Proteção de Menores',
+        sec10_p1: 'Não recolhemos deliberadamente dados de crianças com menos de 13 anos. Mediante conhecimento, os registos serão eliminados.',
+        sec11_title: '11. Alterações a Esta Política',
+        sec11_p1: 'Esta política pode ser revista pontualmente para acompanhar melhorias e requisitos legais.',
+        sec12_title: '12. Tem alguma dúvida?',
+        sec12_p: 'Para qualquer esclarecimento sobre a privacidade dos seus dados, entre em contacto connosco:',
+        btn_email: 'Enviar E-mail',
+        footer_copy: '© 2026 StudyCap', footer_terms: 'Termos de Utilização'
+      },
+      'en': {
+        name: 'English', flag: '🇺🇸', dir: 'ltr',
+        btn_back_home: 'Home', mobile_nav_btn: '📑 Policy Index',
+        nav_title: 'Navigation', nav_badge: '12 Sections',
+        nav_intro: 'Introduction', nav_coleta: '1. Collected Info', nav_anuncios: '2. Rewarded Ads',
+        nav_enem: '3. Practice Exams', nav_uso: '4. Data Usage', nav_armazenamento: '5. Storage & Transfers',
+        nav_terceiros: '6. Third-Party Services', nav_pagamentos: '7. Billing & Payments', nav_permissoes: '8. App Permissions',
+        nav_direitos: '9. Your Rights', nav_menores: '10. Children\'s Privacy', nav_alteracoes: '11. Policy Changes', nav_contato: '12. Contact Us',
+        doc_title: 'Privacy Policy', doc_meta: 'Last updated: January 31, 2026',
+        intro_p1: '<strong>StudyCap</strong> values your privacy and is dedicated to safeguarding your personal information. This Privacy Policy details how we collect, store, utilize, and protect your data when using our study productivity suite.',
+        intro_p2: 'By utilizing StudyCap, you acknowledge and agree to the information handling outlined in this policy and prevailing data protection legislation.',
+        sec1_title: '1. Information We Collect',
+        sec1_p: 'To provide note synchronization, AI assistance, study statistics, and practice tests, we collect the following data points:',
+        sec1_1_title: '1.1. Account & Identification Details',
+        sec1_1_p: 'To enable seamless authentication across devices:',
+        sec1_1_li1: '<strong>Email address:</strong> Vital for secure authentication and account recovery.',
+        sec1_1_li2: '<strong>Display name and avatar:</strong> Retrieved only if provided during social single sign-on.',
+        sec1_1_li3: '<strong>System User ID:</strong> A pseudonymized identifier linking your workspaces.',
+        sec1_2_title: '1.2. Study Content & Interaction Data',
+        sec1_2_li1: '<strong>User Notes & Planner:</strong> Your notebooks, flashcards, Pomodoro records, and assignments stored for multi-device sync.',
+        sec1_2_li2: '<strong>Exam Progress:</strong> Answers, scores, and retention analytics to measure study milestones.',
+        sec1_2_li3: '<strong>Attachments:</strong> Audio memos and images embedded in your notebooks.',
+        sec1_2_li4: '<strong>AI Prompt Exchanges:</strong> Texts sent to "Mari AI" processed exclusively to generate study assistance.',
+        sec1_3_title: '1.3. Device Metrics & Telemetry',
+        sec1_3_p: 'We use Google Analytics for Firebase to maintain application stability:',
+        sec1_3_li1: 'Device model, operating system build, and anonymous advertising IDs.',
+        sec1_3_li2: 'Crash diagnostics (Firebase Crashlytics) to debug software exceptions.',
+        sec1_3_li3: 'Aggregated engagement metrics to enhance application responsiveness.',
+        sec2_title: '2. Rewarded Ads (Free Tier)',
+        sec2_p1: 'To keep StudyCap freely accessible for students globally, non-intrusive ads are shown strictly on the free edition.',
+        sec2_box: '<strong>💡 Ad Transparency:</strong> StudyCap never interrupts your deep focus or reading sessions with intrusive banners or unexpected pop-ups. We operate exclusively on a <strong>Rewarded Ad model</strong>.',
+        sec2_p2: 'Video ads play only when <strong>you voluntarily choose to view them</strong> to unlock specific perks:',
+        sec2_li1: 'Completing or skipping Pomodoro rest intervals;',
+        sec2_li2: 'Accruing bonus credits;',
+        sec2_li3: 'Temporarily boosting daily feature allocations.',
+        sec2_p3: '<strong>Premium Tier</strong> subscribers enjoy an ad-free experience across the entire workspace.',
+        sec3_title: '3. Standardized Exam Content & Disclaimer',
+        sec3_p1: 'StudyCap offers interactive practice exams based on open public curriculum repositories.',
+        sec3_li1: '<strong>Source Materials:</strong> Standardized test questions digitized from public educational archives.',
+        sec3_li2: '<strong>Government Disclaimer:</strong> StudyCap is an <strong>independent</strong> initiative and is <strong>NOT affiliated, endorsed, or operated by any government ministry or agency</strong>.',
+        sec4_title: '4. How We Utilize Your Data',
+        sec4_p1: 'Collected data is processed strictly to maintain workspace sync, answer academic inquiries, and improve stability.',
+        sec4_li1: '<strong>Service Delivery:</strong> Syncing your study blocks and revisions across devices in real time.',
+        sec4_li2: '<strong>Artificial Intelligence:</strong> Passing study prompts via Gemini API without training foundational public models on your proprietary content.',
+        sec4_li3: '<strong>Platform Maintenance:</strong> Monitoring system uptime and resolving edge cases.',
+        sec4_li4: '<strong>Reward Validation:</strong> Verifying ad completion before allocating tier perks.',
+        sec4_li5: '<strong>Security Notices:</strong> Relaying critical security and account updates.',
+        sec4_p2: '<strong>We do not sell personal information to commercial third parties.</strong>',
+        sec5_title: '5. Storage & International Data Routing',
+        sec5_p1: 'StudyCap relies upon Google Firebase cloud infrastructure, utilizing industry-standard cryptographic protocols in transit and at rest.',
+        sec5_p2: 'International routing complies with rigorous security standards to prevent unauthorized disclosure.',
+        sec6_title: '6. Trusted Third-Party Services',
+        sec6_p1: 'We rely on audited enterprise service providers:',
+        sec6_li1: '<strong>Google Firebase:</strong> Cloud data storage, user authentication, and secure backups.',
+        sec6_li2: '<strong>Google AdMob:</strong> Rewarded video ad serving.',
+        sec6_li3: '<strong>Google Gemini API:</strong> AI study assistant calculations.',
+        sec6_li4: '<strong>Firebase Analytics & Crashlytics:</strong> Telemetry and crash debugging.',
+        sec7_title: '7. Payment & Subscription Processing',
+        sec7_p1: '<strong>We never handle, process, or store payment card details directly.</strong>',
+        sec7_p2: 'All subscription billing is mediated exclusively through the Google Play Store or Apple App Store with full PCI-DSS compliance.',
+        sec8_title: '8. Operating System Permissions',
+        sec8_p1: 'Permissions are requested on-demand only when a user activates a relevant feature:',
+        sec8_li1: '📸 <strong>Storage & Gallery:</strong> To attach diagrams or documents to notebooks.',
+        sec8_li2: '📷 <strong>Camera:</strong> To photograph study whiteboards directly inside notes.',
+        sec8_li3: '🎤 <strong>Microphone:</strong> To record spoken audio memos during lectures.',
+        sec8_li4: '🔔 <strong>Notifications:</strong> To chime Pomodoro transitions and planned study reminders.',
+        sec9_title: '9. Your Privacy Rights',
+        sec9_p1: 'You maintain absolute jurisdiction over your records:',
+        sec9_li1: '<strong>Access & Review:</strong> Inquire about your stored telemetry and records.',
+        sec9_li2: '<strong>Account Deletion:</strong> Permanently purge your profile and cloud notes directly via in-app account settings.',
+        sec9_li3: '<strong>Permission Revocation:</strong> Revoke granted hardware authorizations anytime via device settings.',
+        sec9_li4: '<strong>Data Rectification:</strong> Amend incomplete or outdated records seamlessly.',
+        sec10_title: '10. Children\'s Privacy Protection',
+        sec10_p1: 'StudyCap does not knowingly gather identifiers from children under 13 years old. Unverified underage accounts will be expunged promptly upon discovery.',
+        sec11_title: '11. Revisions to this Statement',
+        sec11_p1: 'We may modify this privacy policy periodically to reflect feature upgrades or legal updates. Material revisions will be flagged directly in the app.',
+        sec12_title: '12. Questions or Privacy Inquiries?',
+        sec12_p: 'For queries regarding data handling or privacy controls, reach out directly to our Data Protection team:',
+        btn_email: 'Send Email',
+        footer_copy: '© 2026 StudyCap', footer_terms: 'Terms of Use'
+      },
+      'es': {
+        name: 'Español', flag: '🇪🇸', dir: 'ltr',
+        btn_back_home: 'Inicio', mobile_nav_btn: '📑 Índice de la Política',
+        nav_title: 'Navegación', nav_badge: '12 Secciones',
+        nav_intro: 'Introducción', nav_coleta: '1. Datos Recopilados', nav_anuncios: '2. Anuncios Recompensados',
+        nav_enem: '3. Exámenes y Pruebas', nav_uso: '4. Uso de los Datos', nav_armazenamento: '5. Almacenamiento',
+        nav_terceiros: '6. Servicios de Terceros', nav_pagamentos: '7. Pagos y Suscripción', nav_permissoes: '8. Permisos',
+        nav_direitos: '9. Tus Derechos', nav_menores: '10. Menores', nav_alteracoes: '11. Modificaciones', nav_contato: '12. Contacto',
+        doc_title: 'Política de Privacidad', doc_meta: 'Última actualización: 31/01/2026',
+        intro_p1: '<strong>StudyCap</strong> valora tu privacidad y se compromete a proteger tus datos personales. Esta Política describe detalladamente cómo recopilamos, usamos y salvaguardamos tu información.',
+        intro_p2: 'Al utilizar StudyCap, aceptas el tratamiento de tus datos conforme a esta política y la legislación vigente.',
+        sec1_title: '1. Información que Recopilamos',
+        sec1_p: 'Para sincronizar apuntes, brindar soporte con inteligencia artificial y estadísticas de estudio, recopilamos:',
+        sec1_1_title: '1.1. Datos de Identificación (Cuenta)',
+        sec1_1_p: 'Para crear tu cuenta y habilitar el acceso seguro entre dispositivos:',
+        sec1_1_li1: '<strong>Correo electrónico:</strong> Imprescindible para el inicio de sesión y recuperación.',
+        sec1_1_li2: '<strong>Nombre y foto de perfil:</strong> Obtenidos únicamente mediante el inicio social si lo autorizas.',
+        sec1_1_li3: '<strong>Identificador de usuario:</strong> Clave única generada para enlazar tus datos.',
+        sec1_2_title: '1.2. Datos de Estudio y Contenidos',
+        sec1_2_li1: '<strong>Contenido del Usuario:</strong> Apuntes, tareas, agenda, flashcards y registros de estudio Pomodoro.',
+        sec1_2_li2: '<strong>Progreso:</strong> Respuestas e historial de exámenes para analizar tu progreso académico.',
+        sec1_2_li3: '<strong>Multimedia:</strong> Imágenes y notas de voz adjuntas en tus materias.',
+        sec1_2_li4: '<strong>Consultas de IA:</strong> Los mensajes a "Mari IA" se procesan para responder tus dudas de estudio.',
+        sec1_3_title: '1.3. Datos del Dispositivo y Analítica',
+        sec1_3_p: 'Usamos Firebase Analytics para supervisar la estabilidad de la app:',
+        sec1_3_li1: 'Modelo del móvil, versión de software y código publicitario anónimo.',
+        sec1_3_li2: 'Registros de fallos (Crashlytics) para resolver errores.',
+        sec1_3_li3: 'Métricas agregadas sobre funciones más utilizadas.',
+        sec2_title: '2. Anuncios Recompensados (Versión Gratuita)',
+        sec2_p1: 'Para mantener StudyCap gratis y accesible para estudiantes, mostramos anuncios únicamente en el plan gratuito.',
+        sec2_box: '<strong>💡 Claridad total:</strong> StudyCap no utiliza banners intrusivos durante tu estudio. Funcionamos bajo el formato de <strong>Anuncios Recompensados</strong>.',
+        sec2_p2: 'Solo se visualiza publicidad en vídeo cuando <strong>tú decides voluntariamente verla</strong> para ganar ventajas:',
+        sec2_li1: 'Completar o saltar intervalos Pomodoro;',
+        sec2_li2: 'Obtener créditos extra;',
+        sec2_li3: 'Ampliar temporalmente límites de funciones avanzadas.',
+        sec2_p3: 'Los suscriptores del plan <strong>Premium</strong> disfrutan de una experiencia 100% libre de anuncios.',
+        sec3_title: '3. Simulacros y Descargo Gubernamental',
+        sec3_p1: 'StudyCap incluye preguntas y exámenes procedentes de materiales educativos de dominio público.',
+        sec3_li1: '<strong>Fuente de Datos:</strong> Exámenes públicos digitalizados para estudio interactivo.',
+        sec3_li2: '<strong>Descargo de Responsabilidad:</strong> StudyCap es una app <strong>independiente y NO está afiliada ni avalada por ministerios u organismos gubernamentales</strong>.',
+        sec4_title: '4. Cómo Usamos tus Datos',
+        sec4_p1: 'Utilizamos tus datos para sincronizar notas, responder preguntas académicas y optimizar la app.',
+        sec4_li1: '<strong>Prestación del Servicio:</strong> Sincronizar contenidos en tiempo real.',
+        sec4_li2: '<strong>Inteligencia Artificial:</strong> Procesar consultas vía Gemini API sin entrenar modelos públicos con tus notas personales.',
+        sec4_li3: '<strong>Mantenimiento:</strong> Reparar errores técnicos y acelerar la navegación.',
+        sec4_li4: '<strong>Recompensas:</strong> Validar la concesión de ventajas en la versión gratuita.',
+        sec4_li5: '<strong>Avisos:</strong> Informar sobre actualizaciones relevantes.',
+        sec4_p2: '<strong>No vendemos tus datos a terceros.</strong>',
+        sec5_title: '5. Almacenamiento y Seguridad',
+        sec5_p1: 'Toda la infraestructura descansa en servidores seguros de Google Firebase con cifrado integral.',
+        sec5_p2: 'Aplicamos estrictos protocolos de protección para salvaguardar tu información contra accesos no autorizados.',
+        sec6_title: '6. Servicios de Terceros',
+        sec6_p1: 'Colaboramos con proveedores líderes: Google Firebase, Google AdMob y Gemini API.',
+        sec6_li1: '<strong>Google Firebase:</strong> Base de datos y autenticación de cuentas.',
+        sec6_li2: '<strong>Google AdMob:</strong> Entrega de vídeos recompensados.',
+        sec6_li3: '<strong>Google Gemini API:</strong> Asistencia académica interactiva.',
+        sec6_li4: '<strong>Firebase Analytics:</strong> Telemetría anónima de rendimiento.',
+        sec7_title: '7. Pagos y Suscripciones',
+        sec7_p1: '<strong>Nosotros no tenemos acceso ni almacenamos los datos de tus tarjetas bancarias.</strong>',
+        sec7_p2: 'Las transacciones son gestionadas de forma segura y certificada por Google Play Store y Apple App Store.',
+        sec8_title: '8. Permisos Solicitados',
+        sec8_p1: 'Solo pedimos permisos cuando activas una función que lo requiera:',
+        sec8_li1: '📸 <strong>Almacenamiento:</strong> Para adjuntar documentos e imágenes.',
+        sec8_li2: '📷 <strong>Cámara:</strong> Para fotografiar apuntes directamente.',
+        sec8_li3: '🎤 <strong>Micrófono:</strong> Para grabar notas de voz de estudio.',
+        sec8_li4: '🔔 <strong>Notificaciones:</strong> Para avisos del cronómetro y repasos.',
+        sec9_title: '9. Tus Derechos',
+        sec9_p1: 'Tienes pleno control sobre tu información académica y personal:',
+        sec9_li1: '<strong>Acceso y Rectificación:</strong> Consultar y modificar datos desactualizados.',
+        sec9_li2: '<strong>Eliminación de Cuenta:</strong> Puedes borrar tu cuenta y contenidos de manera definitiva e irreversible desde el menú de ajustes.',
+        sec9_li3: '<strong>Revocación:</strong> Modificar los permisos en cualquier momento desde la configuración de tu teléfono.',
+        sec10_title: '10. Privacidad de Menores',
+        sec10_p1: 'No recopilamos intencionadamente datos de menores de 13 años. Si detectamos una cuenta no autorizada, será eliminada inmediatamente.',
+        sec11_title: '11. Actualizaciones',
+        sec11_p1: 'Podemos modificar esta política para adaptarla a mejoras técnicas o novedades legislativas.',
+        sec12_title: '12. ¿Tienes dudas?',
+        sec12_p: 'Para cualquier consulta relacionada con la privacidad de tus datos, contáctanos:',
+        btn_email: 'Enviar Correo',
+        footer_copy: '© 2026 StudyCap', footer_terms: 'Términos de Uso'
+      },
+      'zh': {
+        name: '简体中文', flag: '🇨🇳', dir: 'ltr',
+        btn_back_home: '首页', mobile_nav_btn: '📑 隐私条款目录',
+        nav_title: '导航目录', nav_badge: '12 个章节',
+        nav_intro: '引言概述', nav_coleta: '1. 信息收集', nav_anuncios: '2. 激励广告',
+        nav_enem: '3. 模考试题与免责', nav_uso: '4. 数据使用', nav_armazenamento: '5. 数据存储',
+        nav_terceiros: '6. 第三方服务', nav_pagamentos: '7. 付费与订阅', nav_permissoes: '8. 系统权限',
+        nav_direitos: '9. 您的权利', nav_menores: '10. 未成年人保护', nav_alteracoes: '11. 条款修订', nav_contato: '12. 联系我们',
+        doc_title: '隐私政策', doc_meta: '最近更新：2026年1月31日',
+        intro_p1: '<strong>StudyCap</strong> 极其重视您的个人隐私，并严格遵循数据合规法规。本政策详细阐述了我们在您使用学习与专注工具时收集、储存与保护信息的方式。',
+        intro_p2: '使用 StudyCap 即表示您知悉并同意本政策及相关个人信息保护法规之条款。',
+        sec1_title: '1. 我们收集的信息',
+        sec1_p: '为实现笔记多端同步、人工智能辅助与学情统计，我们收集以下数据：',
+        sec1_1_title: '1.1. 账户识别信息',
+        sec1_1_p: '用于安全建立账户及跨设备漫游：',
+        sec1_1_li1: '<strong>电子邮箱：</strong> 用于账号登录与身份验证。',
+        sec1_1_li2: '<strong>用户昵称与头像：</strong> 仅在您授权社交快捷登录时读取。',
+        sec1_1_li3: '<strong>系统用户标识：</strong> 自动分配的匿名序列编码。',
+        sec1_2_title: '1.2. 学习内容与资料',
+        sec1_2_li1: '<strong>用户自建内容：</strong> 课堂笔记、日程、记忆抽认卡及番茄钟专注记录。',
+        sec1_2_li2: '<strong>模考答题记录：</strong> 试卷答案与学情报告，辅助复盘备考。',
+        sec1_2_li3: '<strong>媒体附件：</strong> 笔记中插入的照片与语音片段。',
+        sec1_2_li4: '<strong>AI 问答文本：</strong> 发送给“Mari AI”的学术提问。',
+        sec1_3_title: '1.3. 设备信息与运行诊断',
+        sec1_3_p: '借助 Google Analytics for Firebase 监控应用稳定性：',
+        sec1_3_li1: '设备型号、操作系统版本与匿名广告标识符。',
+        sec1_3_li2: '崩溃诊断日志（Crashlytics）以便快速修复异常。',
+        sec1_3_li3: '功能使用频次等匿名统计指标。',
+        sec2_title: '2. 激励视频广告（免费版）',
+        sec2_p1: '为保障广大求学者的免费基础体验，仅在免费版提供轻度激励广告。',
+        sec2_box: '<strong>💡 广告透明度保障：</strong> StudyCap 在您学习与阅读期间绝不弹出任何打扰性插屏。我们严格遵守<strong>自愿观看激励广告机制</strong>。',
+        sec2_p2: '仅在<strong>您主动点击获取权益</strong>时播放视频：',
+        sec2_li1: '快速结算或跳过番茄工作法休息时段；',
+        sec2_li2: '领取额外学习额度；',
+        sec2_li3: '限时体验部分高级功能。',
+        sec2_p3: '<strong>高级版（付费）</strong>用户享有全程纯净无广告体验。',
+        sec3_title: '3. 试题资源与官方免责声明',
+        sec3_p1: 'StudyCap 提供基于公共题库整理的数字化模拟试题。',
+        sec3_li1: '<strong>试题源：</strong> 源自教育部门公开发布之考试材料。',
+        sec3_li2: '<strong>免责声明：</strong> StudyCap 为<strong>独立研发的学习工具，与任何国家教育部或考试院无隶属、赞助或官方背书关系</strong>。',
+        sec4_title: '4. 我们如何使用数据',
+        sec4_p1: '所有信息仅用于保障笔记云同步、解答疑难与提升产品质量。',
+        sec4_li1: '<strong>核心服务：</strong> 多设备实时同步日程与笔记。',
+        sec4_li2: '<strong>AI 助手：</strong> 通过 Gemini API 运算，绝不将您的私有学习资料用于公共大模型训练。',
+        sec4_li3: '<strong>系统维护：</strong> 快速排查 Bug 并提高响应速度。',
+        sec4_li4: '<strong>权益发放：</strong> 验证广告观看状态以发放对应奖励。',
+        sec4_li5: '<strong>重要通告：</strong> 发送安全及账号变更提醒。',
+        sec4_p2: '<strong>我们绝不出售您的个人隐私数据给第三方。</strong>',
+        sec5_title: '5. 数据存储与安全保护',
+        sec5_p1: '数据保存在 Google Firebase 云端，全流程采用金融级数据传输及静态加密算法。',
+        sec5_p2: '严格符合国际数据安全规范，防止未经授权的读取。',
+        sec6_title: '6. 可信第三方服务伙伴',
+        sec6_p1: '仅合作业界领先的技术服务商：',
+        sec6_li1: '<strong>Google Firebase：</strong> 认证、数据库及安全备份。',
+        sec6_li2: '<strong>Google AdMob：</strong> 规范的激励广告组件。',
+        sec6_li3: '<strong>Google Gemini API：</strong> 智能学伴对话推理。',
+        sec6_li4: '<strong>Firebase Analytics：</strong> 稳定性与指标分析。',
+        sec7_title: '7. 付费与订阅处理',
+        sec7_p1: '<strong>我们不直接获取、处理或保留您的信用卡等支付明细。</strong>',
+        sec7_p2: '所有内购均由 Google Play 或 Apple App Store 托管完成，符合 PCI-DSS 国际金融防护准则。',
+        sec8_title: '8. 移动设备系统权限',
+        sec8_p1: '仅在您触发对应功能时按需申请：',
+        sec8_li1: '📸 <strong>存储/相册：</strong> 供您在笔记本中插入文档或图表。',
+        sec8_li2: '📷 <strong>相机：</strong> 供拍摄课堂板书存入笔记。',
+        sec8_li3: '🎤 <strong>麦克风：</strong> 供录制音频笔记。',
+        sec8_li4: '🔔 <strong>通知权限：</strong> 供推送专注时钟完成提醒。',
+        sec9_title: '9. 您的个人权利',
+        sec9_p1: '您享有随时查询、修改及彻底销毁数据的完整权利：',
+        sec9_li1: '<strong>查阅与更正：</strong> 查阅或修改您的账号设置。',
+        sec9_li2: '<strong>注销与销毁：</strong> 在应用“设置”中选择“注销账户”，即可永久彻底抹除云端所有个人数据，该操作不可逆。',
+        sec9_li3: '<strong>权限撤销：</strong> 随时在手机系统设置中重置广告 ID 或关闭授权。',
+        sec10_title: '10. 未成年人隐私条款',
+        sec10_p1: '我们不刻意采集 13 岁以下未成年人的敏感数据。若察觉无监护人许可的记录，将立即采取删除措施。',
+        sec11_title: '11. 政策更新机制',
+        sec11_p1: '我们可能根据产品升级调整本政策，重大变动将通过应用内公告主动通知。',
+        sec12_title: '12. 疑问与反馈',
+        sec12_p: '若对本政策有任何疑问或行使权利，请随时联系我们的隐私合规团队：',
+        btn_email: '发送电子邮件',
+        footer_copy: '© 2026 StudyCap', footer_terms: '使用条款'
+      },
+      'hi': {
+        name: 'हिन्दी', flag: '🇮🇳', dir: 'ltr',
+        btn_back_home: 'होम', mobile_nav_btn: '📑 गोपनीयता अनुक्रमणिका',
+        nav_title: 'मार्गदर्शन', nav_badge: '12 अनुभाग',
+        nav_intro: 'परिचय', nav_coleta: '1. एकत्रित जानकारी', nav_anuncios: '2. पुरस्कृत विज्ञापन',
+        nav_enem: '3. परीक्षा सामग्री', nav_uso: '4. डेटा का उपयोग', nav_armazenamento: '5. भंडारण',
+        nav_terceiros: '6. तृतीय पक्ष सेवाएं', nav_pagamentos: '7. भुगतान', nav_permissoes: '8. अनुमतियां',
+        nav_direitos: '9. आपके अधिकार', nav_menores: '10. बच्चे', nav_alteracoes: '11. संशोधन', nav_contato: '12. संपर्क',
+        doc_title: 'गोपनीयता नीति', doc_meta: 'अंतिम अद्यतन: 31 जनवरी 2026',
+        intro_p1: '<strong>StudyCap</strong> आपकी गोपनीयता का सम्मान करता है और आपकी व्यक्तिगत जानकारी की सुरक्षा के लिए प्रतिबद्ध है।',
+        intro_p2: 'StudyCap का उपयोग करके, आप इस नीति के अनुसार डेटा संग्रह और उपयोग के लिए सहमति देते हैं।',
+        sec1_title: '1. एकत्रित जानकारी',
+        sec1_p: 'नोट्स सिंक करने, एआई सहायता और अध्ययन विश्लेषण के लिए हम निम्नलिखित डेटा एकत्र करते हैं:',
+        sec1_1_title: '1.1. खाता विवरण',
+        sec1_1_p: 'खाता बनाने और सुरक्षित लॉगिन के लिए: ईमेल, उपयोगकर्ता नाम और अद्वितीय सिस्टम आईडी।',
+        sec1_1_li1: '<strong>ईमेल पता:</strong> लॉगिन और खाता पुनर्प्राप्ति के लिए।',
+        sec1_1_li2: '<strong>प्रोफ़ाइल:</strong> सोशल लॉगिन द्वारा प्रदत्त नाम व चित्र।',
+        sec1_1_li3: '<strong>यूजर आईडी:</strong> डेटा को सुरक्षित लिंक करने हेतु विशिष्ट कोड।',
+        sec1_2_title: '1.2. अध्ययन सामग्री',
+        sec1_2_li1: '<strong>उपयोगकर्ता नोट्स:</strong> पोमोडोरो रिकॉर्ड्स, फ्लैशकार्ड्स और कार्य सूची।',
+        sec1_2_li2: '<strong>प्रगति:</strong> अभ्यास टेस्ट और स्कोर का विवरण।',
+        sec1_2_li3: '<strong>मीडिया:</strong> नोट्स में संलग्न चित्र और ऑडियो।',
+        sec1_2_li4: '<strong>एआई चैट:</strong> "Mari AI" को भेजे गए अध्ययन संबंधी प्रश्न।',
+        sec1_3_title: '1.3. डिवाइस एनालिटिक्स',
+        sec1_3_p: 'ऐप की स्थिरता बनाए रखने हेतु क्रैश लॉग और उपयोग आँकड़े।',
+        sec1_3_li1: 'डिवाइस मॉडल और ऑपरेटिंग सिस्टम संस्करण।',
+        sec1_3_li2: 'क्रैश लॉग्स (Firebase Crashlytics)।',
+        sec1_3_li3: 'अध्ययन सत्र की अवधि और उपयोग की गई सुविधाएं।',
+        sec2_title: '2. पुरस्कृत विज्ञापन (निःशुल्क संस्करण)',
+        sec2_p1: 'StudyCap को छात्रों के लिए मुफ़्त रखने हेतु केवल मुफ़्त संस्करण में विज्ञापन दिखाए जाते हैं।',
+        sec2_box: '<strong>💡 पारदर्शी विज्ञापन नीति:</strong> StudyCap पढ़ाई के दौरान रुकावट डालने वाले पॉप-अप नहीं दिखाता। हम केवल <strong>रिवॉर्डेड विज्ञापनों</strong> पर कार्य करते हैं।',
+        sec2_p2: 'वीडियो विज्ञापन केवल तभी चलेंगे जब आप लाभ अनलॉक करने के लिए उन्हें स्वेच्छा से देखेंगे।',
+        sec2_li1: 'पोमोडोरो ब्रेक स्किप करने हेतु;',
+        sec2_li2: 'अतिरिक्त क्रेडिट्स प्राप्त करने हेतु;',
+        sec2_li3: 'प्रीमियम सुविधाओं की सीमा अस्थायी रूप से बढ़ाने हेतु।',
+        sec2_p3: '<strong>प्रीमियम संस्करण</strong> पूर्णतः विज्ञापन-मुक्त है।',
+        sec3_title: '3. परीक्षा सामग्री और अस्वीकरण',
+        sec3_p1: 'ऐप में उपलब्ध अभ्यास प्रश्न सार्वजनिक शैक्षणिक स्रोतों से लिए गए हैं।',
+        sec3_li1: '<strong>डेटा स्रोत:</strong> डिजिटल अभ्यास हेतु उपलब्ध सार्वजनिक प्रश्न पत्र।',
+        sec3_li2: '<strong>अस्वीकरण:</strong> StudyCap एक स्वतंत्र उपकरण है और यह किसी भी सरकारी मंत्रालय अथवा बोर्ड से संबद्ध नहीं है।',
+        sec4_title: '4. डेटा का उपयोग',
+        sec4_p1: 'डेटा का उपयोग केवल सेवाएं प्रदान करने, नोट्स सिंक करने और एआई प्रतिक्रियाएं देने के लिए किया जाता है।',
+        sec4_li1: '<strong>सेवा वितरण:</strong> रीयल-टाइम में अध्ययन नोट्स सिंक करना।',
+        sec4_li2: '<strong>एआई सुरक्षा:</strong> आपके प्रश्नों का उपयोग सार्वजनिक एआई मॉडल को प्रशिक्षित करने में नहीं होता।',
+        sec4_li3: '<strong>तकनीकी सुधार:</strong> ऐप में बग्स और एरर दूर करना।',
+        sec4_li4: '<strong>रिवॉर्ड्स:</strong> रिवॉर्ड क्रेडिट्स का सत्यापन।',
+        sec4_li5: '<strong>अधिसूचना:</strong> महत्वपूर्ण सुरक्षा संदेश प्रेषित करना।',
+        sec4_p2: '<strong>हम आपका व्यक्तिगत डेटा किसी तीसरे पक्ष को नहीं बेचते।</strong>',
+        sec5_title: '5. भंडारण और सुरक्षा',
+        sec5_p1: 'सभी डेटा Google Firebase के सुरक्षित क्लाउड पर एन्क्रिप्शन मानकों के साथ सुरक्षित रखा जाता है।',
+        sec5_p2: 'अनाधिकृत पहुंच से बचाव हेतु उद्योग-अग्रणी सुरक्षा उपाय लागू हैं।',
+        sec6_title: '6. तृतीय पक्ष सेवाएं',
+        sec6_p1: 'हम Google Firebase, AdMob और Gemini API जैसी विश्वसनीय तकनीकों का उपयोग करते हैं।',
+        sec6_li1: '<strong>Google Firebase:</strong> सुरक्षित डेटाबेस और ऑथेंटिकेशन।',
+        sec6_li2: '<strong>Google AdMob:</strong> पुरस्कृत वीडियो विज्ञापन वितरण।',
+        sec6_li3: '<strong>Google Gemini API:</strong> एआई अध्ययन समाधान।',
+        sec6_li4: '<strong>एनालिटिक्स:</strong> सिस्टम प्रदर्शन निगरानी।',
+        sec7_title: '7. भुगतान और सदस्यता',
+        sec7_p1: '<strong>हम आपके क्रेडिट/डेबिट कार्ड का विवरण न तो देखते हैं और न ही संग्रहीत करते हैं।</strong>',
+        sec7_p2: 'सभी भुगतान Google Play अथवा Apple App Store द्वारा सुरक्षित रूप से संसाधित होते हैं।',
+        sec8_title: '8. आवश्यक अनुमतियां',
+        sec8_p1: 'अनुमतियां केवल आवश्यकता पड़ने पर ही मांगी जाती हैं:',
+        sec8_li1: '📸 <strong>स्टोरेज:</strong> नोट्स में इमेज जोड़ने हेतु।',
+        sec8_li2: '📷 <strong>कैमरा:</strong> किताबों और बोर्ड की फोटो खींचने हेतु।',
+        sec8_li3: '🎤 <strong>माइक:</strong> वॉइस नोट्स रिकॉर्ड करने हेतु।',
+        sec8_li4: '🔔 <strong>नोटिफिकेशन:</strong> पोमोडोरो और अध्ययन अलर्ट हेतु।',
+        sec9_title: '9. आपके अधिकार',
+        sec9_p1: 'आपको अपना डेटा देखने, संशोधित करने और पूर्णतः मिटाने का पूरा अधिकार है।',
+        sec9_li1: '<strong>डेटा पहुंच:</strong> संग्रहीत रिकॉर्ड्स की समीक्षा।',
+        sec9_li2: '<strong>खाता हटाना:</strong> ऐप सेटिंग्स में "खाता हटाएं" चुनकर अपने सभी डेटा को स्थायी रूप से नष्ट करें।',
+        sec9_li3: '<strong>अनुमति रद्द करना:</strong> फ़ोन सेटिंग्स से अनुमतियां कभी भी बंद करें।',
+        sec10_title: '10. बच्चों की गोपनीयता',
+        sec10_p1: 'हम 13 वर्ष से कम आयु के बच्चों का डेटा जानबूझकर एकत्र नहीं करते हैं।',
+        sec11_title: '11. नीति में परिवर्तन',
+        sec11_p1: 'समय-समय पर नीति अद्यतन हो सकती है; महत्वपूर्ण बदलावों की सूचना ऐप में दी जाएगी।',
+        sec12_title: '12. कोई प्रश्न या शंका?',
+        sec12_p: 'डेटा गोपनीयता से संबंधित किसी भी प्रश्न के लिए हमारी टीम से संपर्क करें:',
+        btn_email: 'ईमेल भेजें',
+        footer_copy: '© 2026 StudyCap', footer_terms: 'उपयोग की शर्तें'
+      },
+      'id': {
+        name: 'Bahasa Indonesia', flag: '🇮🇩', dir: 'ltr',
+        btn_back_home: 'Beranda', mobile_nav_btn: '📑 Indeks Kebijakan',
+        nav_title: 'Navigasi', nav_badge: '12 Bagian',
+        nav_intro: 'Pengantar', nav_coleta: '1. Data Dikumpulkan', nav_anuncios: '2. Iklan Hadiah',
+        nav_enem: '3. Bank Latihan Ujian', nav_uso: '4. Penggunaan Data', nav_armazenamento: '5. Penyimpanan',
+        nav_terceiros: '6. Layanan Pihak Ketiga', nav_pagamentos: '7. Pembayaran', nav_permissoes: '8. Izin Perangkat',
+        nav_direitos: '9. Hak Pengguna', nav_menores: '10. Privasi Anak', nav_alteracoes: '11. Pembaruan', nav_contato: '12. Kontak',
+        doc_title: 'Kebijakan Privasi', doc_meta: 'Terakhir diperbarui: 31 Januari 2026',
+        intro_p1: '<strong>StudyCap</strong> menghargai privasi Anda dan berdedikasi untuk melindungi data pribadi pengguna aplikasi kami.',
+        intro_p2: 'Dengan menggunakan StudyCap, Anda menyetujui praktik pemrosesan data yang tercantum dalam kebijakan ini.',
+        sec1_title: '1. Informasi yang Kami Kumpulkan',
+        sec1_p: 'Untuk menyediakan sinkronisasi catatan, kecerdasan buatan, dan statistik belajar, kami mengumpulkan:',
+        sec1_1_title: '1.1. Informasi Akun',
+        sec1_1_p: 'Data untuk masuk dengan aman di berbagai perangkat:',
+        sec1_1_li1: '<strong>Email:</strong> Digunakan untuk masuk dan pemulihan akun.',
+        sec1_1_li2: '<strong>Nama & Foto:</strong> Hanya jika Anda memilih login dengan akun Google.',
+        sec1_1_li3: '<strong>User ID:</strong> Tanda pengenal sistem yang dienkripsi.',
+        sec1_2_title: '1.2. Data Catatan dan Belajar',
+        sec1_2_li1: '<strong>Konten:</strong> Catatan, agenda, flashcard, dan riwayat Pomodoro.',
+        sec1_2_li2: '<strong>Ujian:</strong> Hasil latihan soal untuk evaluasi berkala.',
+        sec1_2_li3: '<strong>Lampiran:</strong> Rekaman suara dan gambar di catatan Anda.',
+        sec1_2_li4: '<strong>Pertanyaan AI:</strong> Teks obrolan dengan Mari AI.',
+        sec1_3_title: '1.3. Data Perangkat',
+        sec1_3_p: 'Laporan diagnostik untuk menjaga kestabilan aplikasi (Firebase Crashlytics).',
+        sec1_3_li1: 'Tipe perangkat dan versi sistem operasi.',
+        sec1_3_li2: 'Laporan crash untuk perbaikan bug.',
+        sec1_3_li3: 'Statistik fitur yang sering digunakan.',
+        sec2_title: '2. Iklan Hadiah (Versi Gratis)',
+        sec2_p1: 'Untuk menjaga StudyCap tetap gratis, iklan hanya ditayangkan pada versi gratis.',
+        sec2_box: '<strong>💡 Tanpa Gangguan:</strong> StudyCap tidak menggunakan banner yang mengganggu saat belajar. Kami menerapkan sistem <strong>Iklan Hadiah (Rewarded Ads)</strong>.',
+        sec2_p2: 'Iklan video hanya diputar saat <strong>Anda memilih secara sukarela untuk menontonnya</strong>:',
+        sec2_li1: 'Menyelesaikan sesi Pomodoro;',
+        sec2_li2: 'Mendapatkan kredit ekstra;',
+        sec2_li3: 'Membuka kuota fitur premium sementara.',
+        sec2_p3: 'Pelanggan <strong>Premium</strong> bebas sepenuhnya dari iklan.',
+        sec3_title: '3. Simulasi Ujian & Penafian',
+        sec3_p1: 'Materi soal di aplikasi bersumber dari arsip materi pendidikan domain publik.',
+        sec3_li1: '<strong>Sumber Soal:</strong> Berkas ujian publik yang didigitalkan.',
+        sec3_li2: '<strong>Penafian:</strong> StudyCap adalah inisiatif <strong>independen dan TIDAK berafiliasi dengan lembaga kementerian pemerintah mana pun</strong>.',
+        sec4_title: '4. Penggunaan Informasi',
+        sec4_p1: 'Data dipakai untuk menyinkronkan berkas, menjawab pertanyaan belajar, dan meningkatkan performa.',
+        sec4_li1: '<strong>Sinkronisasi:</strong> Menjaga catatan tersimpan di semua gadget Anda.',
+        sec4_li2: '<strong>Keamanan AI:</strong> Catatan Anda tidak dipakai melatih model publik AI.',
+        sec4_li3: '<strong>Pemberitahuan:</strong> Pesan penting terkait keamanan akun.',
+        sec4_li4: '<strong>Verifikasi:</strong> Memastikan klaim reward iklan valid.',
+        sec4_li5: '<strong>Penyempurnaan:</strong> Memperbaiki stabilitas sistem.',
+        sec4_p2: '<strong>Kami tidak menjual data pribadi Anda kepada pihak mana pun.</strong>',
+        sec5_title: '5. Penyimpanan Cloud',
+        sec5_p1: 'Data tersimpan di infrastruktur cloud Google Firebase dengan enkripsi tinggi.',
+        sec5_p2: 'Kami mematuhi standar internasional guna mencegah akses ilegal.',
+        sec6_title: '6. Mitra Pihak Ketiga',
+        sec6_p1: 'Kami memakai teknologi terpercaya: Google Firebase, AdMob, dan Gemini API.',
+        sec6_li1: '<strong>Google Firebase:</strong> Database dan autentikasi aman.',
+        sec6_li2: '<strong>Google AdMob:</strong> Distribusi iklan reward.',
+        sec6_li3: '<strong>Google Gemini API:</strong> Asisten tanya-jawab akademik.',
+        sec6_li4: '<strong>Firebase Analytics:</strong> Analisis kestabilan sistem.',
+        sec7_title: '7. Pembayaran Berlangganan',
+        sec7_p1: '<strong>Kami tidak pernah menyimpan informasi kartu bank atau pembayaran Anda.</strong>',
+        sec7_p2: 'Transaksi ditangani langsung oleh Google Play Store atau Apple App Store yang tersertifikasi PCI.',
+        sec8_title: '8. Izin Ponsel',
+        sec8_p1: 'Izin hanya diminta ketika fitur terkait hendak dipakai:',
+        sec8_li1: '📸 <strong>Galeri:</strong> Untuk melampirkan foto ke catatan.',
+        sec8_li2: '📷 <strong>Kamera:</strong> Memotret materi papan tulis.',
+        sec8_li3: '🎤 <strong>Mikrofon:</strong> Merekam catatan suara.',
+        sec8_li4: '🔔 <strong>Notifikasi:</strong> Pengingat timer dan jadwal belajar.',
+        sec9_title: '9. Hak Anda',
+        sec9_p1: 'Anda berhak melihat, mengoreksi, dan menghapus seluruh catatan Anda.',
+        sec9_li1: '<strong>Penghapusan Akun:</strong> Anda dapat menghapus akun dan seluruh file cloud secara permanen melalui Pengaturan aplikasi.',
+        sec9_li2: '<strong>Izin:</strong> Cabut izin hardware kapan saja lewat setelan ponsel Anda.',
+        sec9_li3: '<strong>Koreksi Data:</strong> Ubah profil sewaktu-waktu.',
+        sec10_title: '10. Anak di Bawah Umur',
+        sec10_p1: 'Kami tidak sengaja mengumpulkan data anak di bawah usia 13 tahun.',
+        sec11_title: '11. Pembaruan Dokumen',
+        sec11_p1: 'Perubahan penting akan diberitahukan langsung di aplikasi.',
+        sec12_title: '12. Punya Pertanyaan?',
+        sec12_p: 'Jika Anda memiliki pertanyaan seputar kebijakan ini, silakan hubungi tim kami:',
+        btn_email: 'Kirim Email',
+        footer_copy: '© 2026 StudyCap', footer_terms: 'Syarat & Ketentuan'
+      },
+      'ar': {
+        name: 'العربية', flag: '🇸🇦', dir: 'rtl',
+        btn_back_home: 'الرئيسية', mobile_nav_btn: '📑 فهرس السياسة',
+        nav_title: 'التنقل', nav_badge: '12 قسمًا',
+        nav_intro: 'المقدمة', nav_coleta: '1. البيانات المجمعة', nav_anuncios: '2. الإعلانات بمكافأة',
+        nav_enem: '3. بنك الاختبارات', nav_uso: '4. استخدام البيانات', nav_armazenamento: '5. التخزين والحماية',
+        nav_terceiros: '6. خدمات الطرف الثالث', nav_pagamentos: '7. الدفع والاشتراك', nav_permissoes: '8. أذونات الهاتف',
+        nav_direitos: '9. حقوقك', nav_menores: '10. حماية القاصرين', nav_alteracoes: '11. التعديلات', nav_contato: '12. تواصل معنا',
+        doc_title: 'سياسة الخصوصية', doc_meta: 'آخر تحديث: 31 يناير 2026',
+        intro_p1: 'يولي تطبيق <strong>StudyCap</strong> أهمية قصوى لخصوصيتك ويلتزم التزاماً صارماً بحماية بياناتك الشخصية عند استخدامك لمنصتنا التعليمية.',
+        intro_p2: 'باستخدامك لتطبيق StudyCap، فإنك توافق على جمع واستخدام المعلومات وفقًا لهذه السياسة ولأنظمة حماية البيانات.',
+        sec1_title: '1. المعلومات التي نجمعها',
+        sec1_p: 'لتقديم خدمات مزامنة الملاحظات، والمساعد الذكي، وإحصائيات المذاكرة، نقوم بجمع:',
+        sec1_1_title: '1.1. بيانات الحساب',
+        sec1_1_p: 'لإنشاء حسابك وتأمينه عبر مختلف الأجهزة:',
+        sec1_1_li1: '<strong>البريد الإلكتروني:</strong> ضروري لتسجيل الدخول واستعادة الحساب.',
+        sec1_1_li2: '<strong>الاسم والصورة:</strong> تُسحب فقط إذا اخترت تسجيل الدخول عبر Google.',
+        sec1_1_li3: '<strong>معرف المستخدم:</strong> رقم تسلسلي مشفر خاص بالنظام.',
+        sec1_2_title: '1.2. محتوى المذاكرة والملفات',
+        sec1_2_li1: '<strong>محتوى المستخدم:</strong> الدفاتر، والملاحظات، والبطاقات التعليمية، وجلسات بومودورو.',
+        sec1_2_li2: '<strong>نتائج الاختبارات:</strong> إجاباتك ونسب تقدمك لتقييم مستواك.',
+        sec1_2_li3: '<strong>الوسائط:</strong> الصور والمقاطع الصوتية المرفقة في الملاحظات.',
+        sec1_2_li4: '<strong>محادثات الذكاء الاصطناعي:</strong> الأسئلة الموجهة إلى "Mari AI".',
+        sec1_3_title: '1.3. بيانات الجهاز والإحصائيات',
+        sec1_3_p: 'نستخدم Firebase Analytics لرصد استقرار التطبيق وحل الأعطال:',
+        sec1_3_li1: 'طراز الجهاز وإصدار نظام التشغيل.',
+        sec1_3_li2: 'سجلات الأخطاء البرمجية (Crashlytics) لإصلاح الخلل.',
+        sec1_3_li3: 'إحصائيات الميزات الأكثر استخدامًا.',
+        sec2_title: '2. الإعلانات بمكافأة (النسخة المجانية)',
+        sec2_p1: 'لإبقاء التطبيق متاحاً بالمجان لجميع الطلاب، نعرض إعلانات غير مزعجة في النسخة المجانية فقط.',
+        sec2_box: '<strong>💡 شفافية الإعلانات:</strong> لا يعرض StudyCap أي إعلانات مفاجئة أثناء وقت التركيز أو القراءة. نظامنا يعتمد كلياً على <strong>الإعلانات بمكافأة (Rewarded Ads)</strong>.',
+        sec2_p2: 'لا يظهر إعلان الفيديو إلا إذا <strong>اخترت أنت مشاهدته طوعاً</strong> للحصول على ميزة:',
+        sec2_li1: 'تخطي فترات الراحة في مؤقت بومودورو؛',
+        sec2_li2: 'الحصول على رصيد إضافي؛',
+        sec2_li3: 'فتح حدود استخدام إضافية مؤقتاً.',
+        sec2_p3: 'مستخدمو باقة <strong>Premium</strong> يتمتعون بتجربة خالية تماماً من الإعلانات.',
+        sec3_title: '3. نماذج الامتحانات وإخلاء المسؤولية',
+        sec3_p1: 'يوفر التطبيق نماذج أسئلة مأخوذة من مصادر ومستودعات تعليمية عامة متاحة للجمهور.',
+        sec3_li1: '<strong>مصدر الأسئلة:</strong> نماذج امتحانات عامة حُوّلت لصيغة رقمية للتدريب.',
+        sec3_li2: '<strong>إخلاء مسؤولية:</strong> تطبيق StudyCap هو أداة <strong>مستقلة وغير تابعة أو مدعومة من أي وزارة أو جهة حكومية رسمية</strong>.',
+        sec4_title: '4. كيف نستخدم بياناتك',
+        sec4_p1: 'تُعالج البيانات فقط لتوفير المزامنة الفورية، والإجابة عن الأسئلة، وتحسين سرعة الاستجابة.',
+        sec4_li1: '<strong>مزامنة الحساب:</strong> حفظ ومزامنة الملاحظات عبر كل أجهزتك.',
+        sec4_li2: '<strong>خصوصية الذكاء الاصطناعي:</strong> لا تُستخدم أسئلتك لتدريب نماذج الذكاء الاصطناعي العامة لدى Google.',
+        sec4_li3: '<strong>الأمان:</strong> إرسال تنبيهات الأمان وتحديثات الخدمة.',
+        sec4_li4: '<strong>التحقق:</strong> التأكد من إتمام مشاهدة الإعلان لصرف المكافأة.',
+        sec4_li5: '<strong>الصيانة:</strong> إصلاح الأخطاء البرمجية.',
+        sec4_p2: '<strong>نحن لا نبيع بياناتك الشخصية لأي طرف ثالث على الإطلاق.</strong>',
+        sec5_title: '5. التخزين والأمان السحابي',
+        sec5_p1: 'تُحفظ جميع البيانات على خوادم Google Firebase السحابية المشفرة وفق أعلى معايير الحماية الدولية.',
+        sec5_p2: 'نطبق إجراءات تشفير صارمة لحماية معلوماتك من أي وصول غير مصرح به.',
+        sec6_title: '6. شركاء الطرف الثالث',
+        sec6_p1: 'نعتمد على خدمات معتمدة وموثوقة عالمياً: Google Firebase وAdMob وGemini API.',
+        sec6_li1: '<strong>Google Firebase:</strong> قواعد البيانات والمصادقة الآمنة.',
+        sec6_li2: '<strong>Google AdMob:</strong> تشغيل إعلانات المكافأة.',
+        sec6_li3: '<strong>Google Gemini API:</strong> تقديم الدعم الدراسي الذكي.',
+        sec6_li4: '<strong>تحليلات Firebase:</strong> مراقبة استقرار النظام.',
+        sec7_title: '7. الدفع والاشتراكات',
+        sec7_p1: '<strong>نحن لا نصل ولا نخزن أي بيانات خاصة ببطاقاتك الائتمانية أو البنكية.</strong>',
+        sec7_p2: 'تتم كافة المعاملات المالية بأمان تام وتشفير معتمد من خلال متجر Google Play أو متجر Apple App Store.',
+        sec8_title: '8. أذونات الهاتف',
+        sec8_p1: 'نطلب الإذن فقط عند الحاجة لتشغيل ميزة تطلبها أنت:',
+        sec8_li1: '📸 <strong>الملفات والصور:</strong> لإرفاق الملخصات بالدفاتر.',
+        sec8_li2: '📷 <strong>الكاميرا:</strong> لتصوير السبورة والمذكرات الورقية.',
+        sec8_li3: '🎤 <strong>الميكروفون:</strong> لتسجيل الملاحظات الصوتية.',
+        sec8_li4: '🔔 <strong>الإشعارات:</strong> للتنبيه بانتهاء المؤقت ومواعيد المراجعة.',
+        sec9_title: '9. حقوقك القانونية',
+        sec9_p1: 'لك الحق الكامل في التحكم في بياناتك وحذفها متى شئت:',
+        sec9_li1: '<strong>حذف الحساب نهائياً:</strong> يمكنك مسح حسابك وكافة ملفاتك السحابية فوراً وبشكل لا رجعة فيه من خلال إعدادات التطبيق.',
+        sec9_li2: '<strong>تعديل البيانات:</strong> تصحيح أي معلومات غير دقيقة.',
+        sec9_li3: '<strong>إلغاء الأذونات:</strong> إيقاف أي إذن من خلال إعدادات هاتفك في أي وقت.',
+        sec10_title: '10. خصوصية الأطفال',
+        sec10_p1: 'التطبيق غير موجه لمن هم دون سن 13 عاماً، وفي حال علمنا بوجود حساب دون إشراف أسري فسيتم حذفه فوراً.',
+        sec11_title: '11. تحديثات السياسة',
+        sec11_p1: 'قد نحدث هذه السياسة لمواكبة التطورات التقنية؛ وسيتم إشعاركم بأي تغيير رئيسي داخل التطبيق.',
+        sec12_title: '12. هل لديك استفسار؟',
+        sec12_p: 'لأي سؤال متعلق بخصوصية بياناتك، تواصل مع فريق الحماية لدينا:',
+        btn_email: 'إرسال بريد إلكتروني',
+        footer_copy: '© 2026 StudyCap', footer_terms: 'شروط الاستخدام'
+      },
+      'bn': {
+        name: 'বাংলা', flag: '🇧🇩', dir: 'ltr',
+        btn_back_home: 'হোম', mobile_nav_btn: '📑 সূচিপত্র',
+        nav_title: 'ন্যাভিগেশন', nav_badge: '১২টি বিভাগ',
+        nav_intro: 'ভূমিকা', nav_coleta: '১. সংগৃহীত তথ্য', nav_anuncios: '২. রিওয়ার্ড বিজ্ঞাপন',
+        nav_enem: '৩. নমুনা পরীক্ষা', nav_uso: '৪. তথ্যের ব্যবহার', nav_armazenamento: '৫. সংরক্ষণ ও নিরাপত্তা',
+        nav_terceiros: '৬. তৃতীয় পক্ষ সেবা', nav_pagamentos: '৭. পেমেন্ট ও সাবস্ক্রিপশন', nav_permissoes: '৮. ডিভাইসের অনুমতি',
+        nav_direitos: '৯. আপনার অধিকার', nav_menores: '১০. শিশুদের গোপনীয়তা', nav_alteracoes: '১১. নীতিমালার পরিবর্তন', nav_contato: '১২. যোগাযোগ',
+        doc_title: 'গোপনীয়তা নীতিমালা', doc_meta: 'সর্বশেষ আপডেট: ৩১ জানুয়ারি ২০২৬',
+        intro_p1: '<strong>StudyCap</strong> আপনার গোপনীয়তাকে অগ্রাধিকার দেয় এবং আপনার ব্যক্তিগত তথ্য সুরক্ষায় সম্পূর্ণ প্রতিশ্রুতিবদ্ধ।',
+        intro_p2: 'StudyCap ব্যবহারের মাধ্যমে আপনি এই নীতিমালায় বর্ণিত তথ্যের সংগ্রহ ও ব্যবহারের সাথে সম্মতি প্রকাশ করছেন।',
+        sec1_title: '১. যে সকল তথ্য আমরা সংগ্রহ করি',
+        sec1_p: 'নোট সিঙ্ক, এআই সহকারী এবং পড়ার পরিসংখ্যান সচল রাখতে আমরা নিম্নলিখিত তথ্য সংগ্রহ করি:',
+        sec1_1_title: '১.১. অ্যাকাউন্ট তথ্য',
+        sec1_1_p: 'একাধিক ডিভাইসে নিরাপদ লগইনের জন্য: ইমেইল ঠিকানা, প্রোফাইল নাম ও সিস্টেম আইডি।',
+        sec1_1_li1: '<strong>ইমেইল ঠিকানা:</strong> লগইন এবং অ্যাকাউন্ট পুনরুদ্ধারের জন্য।',
+        sec1_1_li2: '<strong>প্রোফাইল:</strong> সোশ্যাল লগইনের মাধ্যমে প্রদত্ত নাম ও ছবি।',
+        sec1_1_li3: '<strong>ইউজার আইডি:</strong> আপনার ডেটা লিংক করার জন্য একটি সুরক্ষিত কোড।',
+        sec1_2_title: '১.২. অধ্যয়নের কনটেন্ট ও ডেটা',
+        sec1_2_li1: '<strong>ইউজার নোটস:</strong> আপনার তৈরি করা নোট, রুটিন, ফ্ল্যাশকার্ড এবং পোমোডোরো সেশন।',
+        sec1_2_li2: '<strong>পরীক্ষার অগ্রগতি:</strong> আপনার অনুশীলনী পরীক্ষার ফলাফল ও স্কোর।',
+        sec1_2_li3: '<strong>মিডিয়া:</strong> নোটে যুক্ত ছবি বা ভয়েস রেকর্ড।',
+        sec1_2_li4: '<strong>এআই কথোপকথন:</strong> "Mari AI" তে পাঠানো প্রশ্নের বিবরণ।',
+        sec1_3_title: '১.৩. ডিভাইসের তথ্য ও ক্র্যাশ রিপোর্ট',
+        sec1_3_p: 'অ্যাপের গতি ও স্থিতিশীলতা বজায় রাখতে Firebase Analytics এর ব্যবহার।',
+        sec1_3_li1: 'ডিভাইস মডেল ও অপারেটিং সিস্টেম ভার্সন।',
+        sec1_3_li2: 'বাগ সমাধানের জন্য ত্রুটির বিবরণ (Crashlytics)।',
+        sec1_3_li3: 'অ্যাপের ফিচার ব্যবহারের সময়সীমা।',
+        sec2_title: '২. রিওয়ার্ড বিজ্ঞাপন (ফ্রি সংস্করণ)',
+        sec2_p1: 'সকল শিক্ষার্থীর জন্য অ্যাপটি সম্পূর্ণ ফ্রি রাখতে কেবল ফ্রি ভার্সনে বিজ্ঞাপন প্রদর্শিত হয়।',
+        sec2_box: '<strong>💡 স্বচ্ছ বিজ্ঞাপন নীতি:</strong> StudyCap পড়ার সময় কোনো পপ-আপ বা বিরক্তিকর ব্যানার দেখায় না। আমরা কেবল <strong>রিওয়ার্ড বিজ্ঞাপনের (Rewarded Ads)</strong> ভিত্তিতে কাজ করি।',
+        sec2_p2: 'ভিডিও বিজ্ঞাপন কেবল তখনই প্রদর্শিত হয় যখন <strong>আপনি নিজে তা দেখার সিদ্ধান্ত নেন</strong>:',
+        sec2_li1: 'পোমোডোরো বিরতি সম্পন্ন বা স্কিপ করতে;',
+        sec2_li2: 'অতিরিক্ত ক্রেডিট বা ফিচার আনলক করতে;',
+        sec2_li3: 'প্রিমিয়াম ফিচারের সাময়িক সীমা বৃদ্ধি করতে।',
+        sec2_p3: '<strong>প্রিমিয়াম</strong> ব্যবহারকারীদের জন্য অ্যাপটি সম্পূর্ণ বিজ্ঞাপনমুক্ত।',
+        sec3_title: '৩. পরীক্ষার প্রশ্ন ও সরকারি দায়মুক্তি',
+        sec3_p1: 'অ্যাপে থাকা পরীক্ষার প্রশ্নগুলো উন্মুক্ত পাবলিক ডোমেইন থেকে সংগৃহীত।',
+        sec3_li1: '<strong>উৎস:</strong> ডিজিটাল অনুশীলনের সুবিধার্থে সংগৃহীত পাবলিক পরীক্ষার প্রশ্ন।',
+        sec3_li2: '<strong>দায়মুক্তি:</strong> StudyCap একটি <strong>স্বাধীন উদ্যোগ এবং এটি কোনো সরকারি মন্ত্রণালয় বা শিক্ষা বোর্ডের সাথে সম্পৃক্ত নয়</strong>।',
+        sec4_title: '৪. তথ্যের ব্যবহার',
+        sec4_p1: 'সংগৃহীত তথ্য কেবল নোট সিঙ্ক, এআই উত্তর তৈরি এবং অ্যাপের মানোন্নয়নে ব্যবহৃত হয়।',
+        sec4_li1: '<strong>সার্ভিস প্রদান:</strong> একাধিক ডিভাইসে রিয়েল-টাইমে নোট সিঙ্ক রাখা।',
+        sec4_li2: '<strong>এআই সুরক্ষা:</strong> আপনার প্রশ্নগুলো পাবলিক এআই প্রশিক্ষণে ব্যবহার করা হয় না।',
+        sec4_li3: '<strong>রক্ষণাবেক্ষণ:</strong> অ্যাপের বাগ ঠিক করা ও স্পিড বৃদ্ধি করা।',
+        sec4_li4: '<strong>বিজ্ঞাপন রিওয়ার্ড:</strong> বোনাস ক্রেডিট যাচাই করা।',
+        sec4_li5: '<strong>নিরাপত্তা বার্তা:</strong> অ্যাকাউন্ট সংক্রান্ত জরুরি আপডেট জানানো।',
+        sec4_p2: '<strong>আমরা কখনোই কোনো তৃতীয় পক্ষের কাছে আপনার ব্যক্তিগত তথ্য বিক্রি করি না।</strong>',
+        sec5_title: '৫. ক্লাউড স্টোরেজ ও নিরাপত্তা',
+        sec5_p1: 'সকল ডেটা Google Firebase এর সুরক্ষিত সার্ভারে আন্তর্জাতিক এনক্রিপশন প্রযুক্তির মাধ্যমে সংরক্ষিত হয়।',
+        sec5_p2: 'অননুমোদিত অ্যাক্সেস রুখতে আমরা সর্বোচ্চ সাইবার নিরাপত্তা নিশ্চিত করি।',
+        sec6_title: '৬. নির্ভরযোগ্য তৃতীয় পক্ষ সেবা',
+        sec6_p1: 'আমরা বিশ্বস্ত প্রযুক্তি ব্যবহার করি: Google Firebase, AdMob এবং Gemini API।',
+        sec6_li1: '<strong>Google Firebase:</strong> ক্লাউড ডাটাবেজ এবং নিরাপত্তা।',
+        sec6_li2: '<strong>Google AdMob:</strong> রিওয়ার্ড বিজ্ঞাপন পরিবেশন।',
+        sec6_li3: '<strong>Google Gemini API:</strong> একাডেমিক প্রশ্ন সমাধান।',
+        sec6_li4: '<strong>Firebase Analytics:</strong> পারফরম্যান্স মনিটরিং।',
+        sec7_title: '৭. পেমেন্ট ও লেনদেন নিরাপত্তা',
+        sec7_p1: '<strong>আমরা কখনোই আপনার ক্রেডিট বা ডেবিট কার্ডের তথ্য সংরক্ষণ করি না।</strong>',
+        sec7_p2: 'সকল লেনদেন Google Play Store বা Apple App Store এর সুরক্ষিত পেমেন্ট গেটওয়ের মাধ্যমে সম্পন্ন হয়।',
+        sec8_title: '৮. ডিভাইসের প্রয়োজনীয় অনুমতিসমূহ',
+        sec8_p1: 'কেবল দরকারি ফিচার চালুর সময় অনুমতি চাওয়া হয়:',
+        sec8_li1: '📸 <strong>স্টোরেজ:</strong> নোটে ছবি ও ফাইল যুক্ত করতে।',
+        sec8_li2: '📷 <strong>ক্যামেরা:</strong> বই বা বোর্ডের ছবি সরাসরি তুলতে।',
+        sec8_li3: '🎤 <strong>মাইক্রোফোন:</strong> ভয়েস নোট রেকর্ড করতে।',
+        sec8_li4: '🔔 <strong>নোটিফিকেশন:</strong> টাইমার শেষ হওয়ার অ্যালার্ম পেতে।',
+        sec9_title: '৯. আপনার অধিকার',
+        sec9_p1: 'আপনার তথ্যের ওপর আপনার সম্পূর্ণ নিয়ন্ত্রণ রয়েছে:',
+        sec9_li1: '<strong>অ্যাকাউন্ট ও ডেটা মোছা:</strong> আপনি অ্যাপের সেটিংস থেকে যেকোনো সময় আপনার অ্যাকাউন্ট এবং সমস্ত ক্লাউড ডেটা স্থায়ীভাবে মুছে ফেলতে পারেন।',
+        sec9_li2: '<strong>তথ্য সংশোধন:</strong> যেকোনো ভুল তথ্য পরিবর্তন করা।',
+        sec9_li3: '<strong>অনুমতি প্রত্যাহার:</strong> ফোনের সেটিংস থেকে অনুমতি বাতিল করা।',
+        sec10_title: '১০. শিশুদের সুরক্ষা',
+        sec10_p1: '১৩ বছরের কম বয়সীদের তথ্য আমরা ইচ্ছাকৃতভাবে সংগ্রহ করি না।',
+        sec11_title: '১১. নীতিমালা পরিবর্তন',
+        sec11_p1: 'অ্যাপের অগ্রগতির সাথে নীতিমালায় কোনো গুরুত্বপূর্ণ পরিবর্তন হলে অ্যাপের ভেতরেই জানিয়ে দেওয়া হবে।',
+        sec12_title: '১২. কোনো প্রশ্ন আছে?',
+        sec12_p: 'তথ্য সুরক্ষা সম্পর্কিত যেকোনো প্রশ্নের জন্য আমাদের যোগাযোগ করুন:',
+        btn_email: 'ইমেইল পাঠান',
+        footer_copy: '© 2026 StudyCap', footer_terms: 'ব্যবহারের শর্তাবলী'
+      },
+      'ur': {
+        name: 'اردو', flag: '🇵🇰', dir: 'rtl',
+        btn_back_home: 'ہوم', mobile_nav_btn: '📑 پالیسی فہرست',
+        nav_title: 'رہنمائی', nav_badge: '12 ابواب',
+        nav_intro: 'تعارف', nav_coleta: '1. معلومات کا مجموعہ', nav_anuncios: '2. انعام یافتہ اشتہارات',
+        nav_enem: '3. امتحانی مواد', nav_uso: '4. ڈیٹا کا استعمال', nav_armazenamento: '5. اسٹوریج اور حفاظت',
+        nav_terceiros: '6. تھرڈ پارٹی سروسز', nav_pagamentos: '7. ادائیگیاں', nav_permissoes: '8. موبائل اجازتیں',
+        nav_direitos: '9. آپ کے حقوق', nav_menores: '10. بچوں کا تحفظ', nav_alteracoes: '11. ترامیم', nav_contato: '12. رابطہ کریں',
+        doc_title: 'رازداری کی پالیسی', doc_meta: 'آخری تجدید: 31 جنوری 2026',
+        intro_p1: '<strong>StudyCap</strong> آپ کی ذاتی رازداری کا احترام کرتا ہے اور آپ کے ذاتی ڈیٹا کے تحفظ کے لیے پوری طرح پرعزم ہے۔',
+        intro_p2: 'StudyCap استعمال کر کے آپ اس پالیسی کے مطابق ڈیٹا کے استعمال اور جمع آوری سے اتفاق کرتے ہیں۔',
+        sec1_title: '1. معلومات جو ہم جمع کرتے ہیں',
+        sec1_p: 'نوٹس، مضامین، مصنوعی ذہانت اور امتحانی تیاری کے لیے ہم درج ذیل ڈیٹا جمع کرتے ہیں:',
+        sec1_1_title: '1.1. شناختی ڈیٹا (اکاؤنٹ)',
+        sec1_1_p: 'محفوظ لاگ ان کے لیے ای میل ایڈریس، نام اور محفوظ سسٹم آئی ڈی۔',
+        sec1_1_li1: '<strong>ای میل ایڈریس:</strong> لاگ ان اور اکاؤنٹ ریکوری کے لیے۔',
+        sec1_1_li2: '<strong>نام اور تصویر:</strong> سوشل لاگ ان کے ذریعے فراہم کردہ۔',
+        sec1_1_li3: '<strong>یوزر آئی ڈی:</strong> ڈیٹا کو گمنام طور پر جوڑنے کے لیے کوڈ۔',
+        sec1_2_title: '1.2. تعلیمی مواد اور نوٹس',
+        sec1_2_li1: '<strong>صارف کا مواد:</strong> نوٹس، فلیش کارڈز اور پومودورو ریکارڈز۔',
+        sec1_2_li2: '<strong>امتحانی پیش رفت:</strong> پریکٹس ٹیسٹ کے اسکور اور تجزیات۔',
+        sec1_2_li3: '<strong>میڈیا فائلز:</strong> نوٹس میں شامل کی گئی تصاویر اور آڈیو نوٹس۔',
+        sec1_2_li4: '<strong>AI چیٹ:</strong> "Mari AI" سے پوچھے گئے سوالات کا متن۔',
+        sec1_3_title: '1.3. ڈیوائس ڈیٹا اور تجزیات',
+        sec1_3_p: 'ایپ کی کارکردگی اور نقائص کو ٹھیک کرنے کے لیے تجزیاتی ڈیٹا۔',
+        sec1_3_li1: 'ڈیوائس ماڈل اور آپریٹنگ سسٹم کا ورژن۔',
+        sec1_3_li2: 'ایپ کریش کی رپورٹیں (Crashlytics)۔',
+        sec1_3_li3: 'استعمال کیے گئے فیچرز کی تفصیل۔',
+        sec2_title: '2. انعام یافتہ اشتہارات (مفت ورژن)',
+        sec2_p1: 'تمام طلبہ کے لیے ایپ کو مفت رکھنے کے لیے صرف مفت ورژن میں غیر دخل انداز اشتہارات دکھائے جاتے ہیں۔',
+        sec2_box: '<strong>💡 شفافیت:</strong> StudyCap پڑھائی کے دوران کسی قسم کے پریشان کن بینرز نہیں دکھاتا۔ ہمارا نظام مکمل طور پر <strong>ریوارڈڈ اشتہارات</strong> پر منحصر ہے۔',
+        sec2_p2: 'ویڈیو اشتہار صرف اسی وقت چلے گا جب <strong>آپ خود فائدہ حاصل کرنے کے لیے اسے دیکھنے کا انتخاب کریں گے</strong>:',
+        sec2_li1: 'پومودورو وقفے کو مکمل یا آگے بڑھانے کے لیے؛',
+        sec2_li2: 'اضافی پوائنٹس اور کریڈٹ حاصل کرنے کے لیے؛',
+        sec2_li3: 'پریمیم فیچرز کی وقتی حد میں اضافہ کرنے کے لیے۔',
+        sec2_p3: '<strong>پریمیم ممبرز</strong> کے لیے ایپ مکمل طور پر اشتہارات سے پاک ہے۔',
+        sec3_title: '3. امتحانی ماڈل اور حکومتی لاتعلقی',
+        sec3_p1: 'ایپ میں شامل سوالات اور ٹیسٹ پبلک ڈومین کے تعلیمی ذخیرے سے لیے گئے ہیں۔',
+        sec3_li1: '<strong>ماخذ:</strong> امتحانی مشق کے لیے تیار کیے گئے ڈیجیٹل سوالات۔',
+        sec3_li2: '<strong>لاتعلقی کا اعلان:</strong> StudyCap ایک <strong>خود مختار تعلیمی ٹول ہے اور اس کا کسی بھی وزارت تعلیم یا سرکاری ادارے سے کوئی تعلق نہیں ہے</strong>۔',
+        sec4_title: '4. ڈیٹا کا استعمال',
+        sec4_p1: 'ڈیٹا صرف نوٹس کو تمام ڈیوائسز پر سنک کرنے اور ایپ کو بہتر بنانے کے لیے استعمال ہوتا ہے۔',
+        sec4_li1: '<strong>سروس کی فراہمی:</strong> تمام آلات پر بیک وقت نوٹس محفوظ رکھنا۔',
+        sec4_li2: '<strong>AI رازداری:</strong> آپ کے نوٹس اور سوالات پبلک AI ماڈلز کی تربیت کے لیے استعمال نہیں ہوتے۔',
+        sec4_li3: '<strong>سافٹ ویئر کی حفاظت:</strong> تکنیکی مسائل اور بگس کا ازالہ۔',
+        sec4_li4: '<strong>اشتہاری انعام:</strong> کریڈٹ بونس کی تصدیق۔',
+        sec4_li5: '<strong>ضروری پیغامات:</strong> اکاؤنٹ سیکیورٹی سے متعلق پیغامات۔',
+        sec4_p2: '<strong>ہم آپ کا ذاتی ڈیٹا کسی بھی تیسری پارٹی کو فروخت نہیں کرتے۔</strong>',
+        sec5_title: '5. اسٹوریج اور بین الاقوامی سیکیورٹی',
+        sec5_p1: 'تمام معلومات Google Firebase کے محفوظ سرورز پر اعلیٰ ترین بین الاقوامی انکرپشن کے ساتھ رکھی جاتی ہیں۔',
+        sec5_p2: 'ہم غیر مجاز رسائی کو روکنے کے لیے مضبوط حفاظتی تدابیر اختیار کرتے ہیں۔',
+        sec6_title: '6. قابل اعتماد پارٹنرز',
+        sec6_p1: 'ہم Google Firebase، AdMob اور Gemini API جیسی قابل اعتماد سروسز استعمال کرتے ہیں۔',
+        sec6_li1: '<strong>Google Firebase:</strong> کلاؤڈ ڈیٹا بیس اور لاگ ان تصدیق۔',
+        sec6_li2: '<strong>Google AdMob:</strong> ریوارڈڈ ویڈیو اشتہارات۔',
+        sec6_li3: '<strong>Google Gemini API:</strong> تعلیمی سوالات کے فوری جوابات۔',
+        sec6_li4: '<strong>Firebase Analytics:</strong> کارکردگی کا تجزیہ۔',
+        sec7_title: '7. ادائیگیوں کا تحفظ',
+        sec7_p1: '<strong>ہم آپ کے بینک یا کریڈٹ کارڈ کی کوئی تفصیل محفوظ نہیں رکھتے۔</strong>',
+        sec7_p2: 'تمام ادائیگیاں Google Play Store یا Apple App Store کے تصدیق شدہ گیٹ ویز سے ہوتی ہیں۔',
+        sec8_title: '8. موبائل اجازت نامے',
+        sec8_p1: 'اجازت صرف اس وقت مانگی جاتی ہے جب آپ متعلقہ فیچر استعمال کریں:',
+        sec8_li1: '📸 <strong>اسٹوریج:</strong> نوٹس میں تصاویر اور فائلز منسلک کرنے کے لیے۔',
+        sec8_li2: '📷 <strong>کیمرہ:</strong> وائٹ بورڈ یا کاپی کی تصویر لینے کے لیے۔',
+        sec8_li3: '🎤 <strong>مائیکروفون:</strong> آواز میں نوٹس ریکارڈ کرنے کے لیے۔',
+        sec8_li4: '🔔 <strong>نوٹیفکیشن:</strong> ٹائمر کے اختتام اور یاد دہانیوں کے لیے۔',
+        sec9_title: '9. صارف کے حقوق',
+        sec9_p1: 'آپ کو اپنے ڈیٹا پر مکمل اختیار حاصل ہے:',
+        sec9_li1: '<strong>اکاؤنٹ حذف کرنا:</strong> آپ ایپ کی ترتیبات میں جا کر کسی بھی وقت اپنا اکاؤنٹ اور تمام کلاؤڈ فائلز ہمیشہ کے لیے مکمل طور پر حذف کر سکتے ہیں۔',
+        sec9_li2: '<strong>ڈیٹا کی تصحیح:</strong> پرانی یا غلط معلومات کی درستگی۔',
+        sec9_li3: '<strong>اجازت منسوخ کرنا:</strong> فون کی سیٹنگز سے اجازتیں واپس لینا۔',
+        sec10_title: '10. بچوں کا تحفظ',
+        sec10_p1: 'یہ ایپ 13 سال سے کم عمر بچوں کے لیے نشانہ نہیں بنائی گئی، اور ایسی معلومات ملنے پر فوری حذف کر دی جاتی ہے۔',
+        sec11_title: '11. پالیسی میں تبدیلیاں',
+        sec11_p1: 'ہم وقتاً فوقتاً پالیسی کو اپ ڈیٹ کر سکتے ہیں، اہم تبدیلیوں کی اطلاع ایپ کے اندر دی جائے گی۔',
+        sec12_title: '12. کوئی سوال ہے؟',
+        sec12_p: 'رازداری سے متعلق کسی بھی سوال کے لیے ہماری ٹیم سے رابطہ کریں:',
+        btn_email: 'ای میل بھیجیں',
+        footer_copy: '© 2026 StudyCap', footer_terms: 'استعمال کی شرائط'
+      },
+      'ja': {
+        name: '日本語', flag: '🇯🇵', dir: 'ltr',
+        btn_back_home: 'ホーム', mobile_nav_btn: '📑 ポリシー目次',
+        nav_title: '目次ナビ', nav_badge: '全12章',
+        nav_intro: 'はじめに', nav_coleta: '1. 収集する情報', nav_anuncios: '2. リワード広告',
+        nav_enem: '3. 演習問題と免責事項', nav_uso: '4. 情報の利用目的', nav_armazenamento: '5. 保存とセキュリティ',
+        nav_terceiros: '6. 第三者サービス', nav_pagamentos: '7. 決済と購読', nav_permissoes: '8. 端末の権限',
+        nav_direitos: '9. 利用者の権利', nav_menores: '10. 年少者の保護', nav_alteracoes: '11. ポリシーの変更', nav_contato: '12. お問い合わせ',
+        doc_title: 'プライバシーポリシー', doc_meta: '最終更新日：2026年1月31日',
+        intro_p1: '<strong>StudyCap</strong> は、利用者の個人情報の保護に最大限の注意を払い、安心できる学習環境の提供をお約束します。',
+        intro_p2: '本アプリを利用することにより、利用者は本ポリシーに基づいた情報の取り扱いとデータ保護規程に同意したものとみなされます。',
+        sec1_title: '1. 収集する情報',
+        sec1_p: 'ノート同期、AI学習アシスタント、進捗分析を提供するため、以下の情報を収集します：',
+        sec1_1_title: '1.1. アカウント識別情報',
+        sec1_1_p: 'アカウント作成と端末間の同期のため：メールアドレス、表示名、プロフィール画像、システムID。',
+        sec1_1_li1: '<strong>メールアドレス：</strong> ログインおよび復旧に必須。',
+        sec1_1_li2: '<strong>表示名・画像：</strong> ソーシャルログイン時に任意で提供。',
+        sec1_1_li3: '<strong>システムID：</strong> データを匿名で関連付ける固有コード。',
+        sec1_2_title: '1.2. 学習コンテンツと利用データ',
+        sec1_2_li1: '<strong>ユーザーノート：</strong> 作成したメモ、暗記カード、ポモドーロ履歴。',
+        sec1_2_li2: '<strong>演習データ：</strong> 模擬テストの解答履歴と成績推移。',
+        sec1_2_li3: '<strong>添付メディア：</strong> ノートに添付された画像や音声データ。',
+        sec1_2_li4: '<strong>AI相談ログ：</strong>「Mari AI」に送信された質問文。',
+        sec1_3_title: '1.3. 端末データおよび診断ログ',
+        sec1_3_p: 'アプリの品質向上のため、Firebase Analyticsによるクラッシュログを収集します。',
+        sec1_3_li1: '端末モデル、OSバージョン、広告識別子。',
+        sec1_3_li2: 'エラーログ（Crashlytics）による不具合修正。',
+        sec1_3_li3: '機能の利用状況に関する統計データ。',
+        sec2_title: '2. リワード広告について（無料版）',
+        sec2_p1: '学生の皆様に無料でアプリを提供するため、無料版でのみ動画広告を表示します。',
+        sec2_box: '<strong>💡 広告ポリシー：</strong> StudyCap は、勉強中に突然ポップアップする邪魔な広告は一切配置していません。完全に<strong>リワード広告（任意視聴）</strong>のみで動作します。',
+        sec2_p2: '動画広告は、<strong>利用者が自ら特典を解除するために再生を選択した場合にのみ</strong>流れます：',
+        sec2_li1: 'ポモドーロの休憩スキップや完了時；',
+        sec2_li2: '追加学習枠の獲得；',
+        sec2_li3: 'プレミアム機能の一時的なアンロック。',
+        sec2_p3: '<strong>プレミアムプラン（有料）</strong>のユーザーには、広告は一切表示されません。',
+        sec3_title: '3. 試験問題コンテンツと政府非提携声明',
+        sec3_p1: '本アプリはパブリックドメインとして公開されている教育資料をもとに模擬試験機能を提供しています。',
+        sec3_li1: '<strong>データ元：</strong> 公式公開されている過去問をアプリ内で学習できるようデジタル化したもの。',
+        sec3_li2: '<strong>免責事項：</strong> StudyCap は<strong>独立した学習支援ツールであり、いかなる政府機関や省庁、試験運営機構とも提携していません</strong>。',
+        sec4_title: '4. 収集した情報の利用目的',
+        sec4_p1: '収集した情報は、ノートのリアルタイム同期、質問回答、機能の安定化にのみ使用されます。',
+        sec4_li1: '<strong>サービスの提供：</strong> 複数端末での確実なデータ同期。',
+        sec4_li2: '<strong>AI機能：</strong> Gemini APIを経由して回答を生成（公開AIモデルの学習には使用されません）。',
+        sec4_li3: '<strong>保守管理：</strong> アプリの高速化およびバグ修正。',
+        sec4_li4: '<strong>リワード判定：</strong> 広告視聴完了の安全な認証。',
+        sec4_li5: '<strong>重要なお知らせ：</strong> セキュリティに関する通知の送付。',
+        sec4_p2: '<strong>利用者の個人データを第三者に販売することは決してありません。</strong>',
+        sec5_title: '5. 保存と国際データ保護',
+        sec5_p1: 'データは Google Firebase のクラウド基盤に安全に保存され、通信時および保存時の両方で強力に暗号化されます。',
+        sec5_p2: '不正アクセスから利用者の大切な学習データを守るため、厳格な国際セキュリティ基準を遵守しています。',
+        sec6_title: '6. 信頼できる第三者サービス',
+        sec6_p1: 'Google Firebase、Google AdMob、Google Gemini API などの定評あるインフラを採用しています。',
+        sec6_li1: '<strong>Google Firebase：</strong> 安全な認証とデータベース同期。',
+        sec6_li2: '<strong>Google AdMob：</strong> リワード動画広告の安全な配信。',
+        sec6_li3: '<strong>Google Gemini API：</strong> AI学習サポート機能の提供。',
+        sec6_li4: '<strong>Firebase Analytics：</strong> 安定稼働の統計診断。',
+        sec7_title: '7. 決済と定期購読',
+        sec7_p1: '<strong>当アプリがクレジットカード情報を直接閲覧・保存・処理することはありません。</strong>',
+        sec7_p2: 'すべての課金処理は Google Play または Apple App Store の安全な決済システムを通じて行われます。',
+        sec8_title: '8. 端末の権限について',
+        sec8_p1: '機能の利用時にのみ、必要な権限をリクエストします：',
+        sec8_li1: '📸 <strong>写真・ストレージ：</strong> ノートに画像や資料を添付するため。',
+        sec8_li2: '📷 <strong>カメラ：</strong> 黒板や参考書を直接撮影して記録するため。',
+        sec8_li3: '🎤 <strong>マイク：</strong> 音声メモを録音するため。',
+        sec8_li4: '🔔 <strong>通知：</strong> タイマー終了や復習予定の通知のため。',
+        sec9_title: '9. 利用者の権利',
+        sec9_p1: '利用者は自身のデータに対して完全な決定権を持っています：',
+        sec9_li1: '<strong>アカウントの完全削除：</strong> アプリ内の設定から「アカウント削除」を選択することで、クラウド上のすべての個人データおよび学習記録をいつでも即座に完全抹消できます。',
+        sec9_li2: '<strong>確認・訂正：</strong> 誤った登録情報の修正。',
+        sec9_li3: '<strong>権限の取り消し：</strong> スマホの本体設定からいつでもアクセス権を解除可能。',
+        sec10_title: '10. 年少者のプライバシー保護',
+        sec10_p1: '13歳未満の児童を対象としておらず、保護者の同意なく収集された事実が判明した場合は即時にデータを削除します。',
+        sec11_title: '11. プライバシーポリシーの改定',
+        sec11_p1: '機能追加や法改正に伴い本ポリシーを改定することがあります。重要な変更はアプリ内でお知らせします。',
+        sec12_title: '12. お問い合わせ窓口',
+        sec12_p: 'プライバシーポリシーに関するご質問やご相談は、以下よりご連絡ください：',
+        btn_email: 'メールを送信する',
+        footer_copy: '© 2026 StudyCap', footer_terms: '利用規約'
+      },
+      'ko': {
+        name: '한국어', flag: '🇰🇷', dir: 'ltr',
+        btn_back_home: '홈', mobile_nav_btn: '📑 정책 목차',
+        nav_title: '목차 탐색', nav_badge: '12개 항목',
+        nav_intro: '소개', nav_coleta: '1. 수집하는 정보', nav_anuncios: '2. 보상형 광고',
+        nav_enem: '3. 모의고사 및 면책', nav_uso: '4. 정보 이용 목적', nav_armazenamento: '5. 저장 및 보안',
+        nav_terceiros: '6. 제3자 서비스', nav_pagamentos: '7. 결제 및 구독', nav_permissoes: '8. 기기 권한',
+        nav_direitos: '9. 이용자의 권리', nav_menores: '10. 아동 보호', nav_alteracoes: '11. 정책 변경', nav_contato: '12. 문의처',
+        doc_title: '개인정보처리방침', doc_meta: '최종 수정일: 2026년 1월 31일',
+        intro_p1: '<strong>StudyCap</strong>은 이용자의 소중한 개인정보를 보호하며 관련 법령을 엄격히 준수합니다. 본 방침은 서비스 이용 시 정보가 어떻게 수집, 처리, 보호되는지 안내합니다.',
+        intro_p2: 'StudyCap을 이용함으로써 이용자는 본 개인정보처리방침에 따른 정보 처리에 동의하게 됩니다.',
+        sec1_title: '1. 수집하는 정보 항목',
+        sec1_p: '학습 노트 동기화, 인공지능 보조, 학습 통계 분석을 위해 다음 정보를 수집합니다:',
+        sec1_1_title: '1.1. 계정 식별 정보',
+        sec1_1_p: '안전한 로그인 및 다중 기기 연동을 위한 이메일, 사용자명, 시스템 식별자.',
+        sec1_1_li1: '<strong>이메일 주소:</strong> 로그인 및 계정 복구에 필수.',
+        sec1_1_li2: '<strong>프로필 정보:</strong> 소셜 로그인 시 제공받은 이름 및 사진.',
+        sec1_1_li3: '<strong>사용자 식별 번호:</strong> 데이터를 익명으로 연결하는 고유 코드.',
+        sec1_2_title: '1.2. 학습 콘텐츠 및 이용 기록',
+        sec1_2_li1: '<strong>사용자 작성 데이터:</strong> 필기 노트, 일정, 플래시카드, 뽀모도로 세션.',
+        sec1_2_li2: '<strong>시험 기록:</strong> 모의고사 답안 및 성적 통계.',
+        sec1_2_li3: '<strong>미디어 첨부:</strong> 노트에 포함된 사진 및 음성 녹음.',
+        sec1_2_li4: '<strong>AI 대화 텍스트:</strong> "Mari AI"에게 질문한 학업 질의 내용.',
+        sec1_3_title: '1.3. 기기 정보 및 진단 로그',
+        sec1_3_p: 'Firebase Analytics를 통한 앱 안정성 관리 및 성능 개선 로그.',
+        sec1_3_li1: '기기 모델명, OS 버전 및 광고 식별자.',
+        sec1_3_li2: '오류 로그(Crashlytics)를 통한 버그 수정.',
+        sec1_3_li3: '자주 사용하는 기능에 대한 통계 분석.',
+        sec2_title: '2. 보상형 광고 안내 (무료 버전)',
+        sec2_p1: '모든 학생이 부담 없이 무료로 공부할 수 있도록 무료 버전에 한해 비간섭형 광고를 제공합니다.',
+        sec2_box: '<strong>💡 광고 투명성:</strong> StudyCap은 집중 시간이나 독서 중 방해되는 팝업 광고를 띄우지 않습니다. 오직 <strong>보상형 광고(Rewarded Ads)</strong> 방식으로만 운영됩니다.',
+        sec2_p2: '이용자가 <strong>혜택을 얻기 위해 자발적으로 시청을 선택할 때에만</strong> 동영상이 재생됩니다:',
+        sec2_li1: '뽀모도로 휴식 시간 즉시 완료 또는 건너뛰기;',
+        sec2_li2: '추가 학습 크레딧 획득;',
+        sec2_li3: '일부 프리미엄 기능 일시 무료 이용.',
+        sec2_p3: '<strong>프리미엄(유료)</strong> 회원은 모든 광고 없이 완전한 몰입 환경을 이용합니다.',
+        sec3_title: '3. 모의고사 콘텐츠 및 정부 비제휴 고지',
+        sec3_p1: '공공 교육 자료로 공개된 시험 문제를 바탕으로 디지털 문제 풀이 기능을 지원합니다.',
+        sec3_li1: '<strong>문제 출처:</strong> 대외 공개된 공공 기출문제를 디지털화한 자료.',
+        sec3_li2: '<strong>면책 고지:</strong> StudyCap은 <strong>독립적인 교육 애플리케이션이며, 정부 부처 및 교육 기관과 제휴되거나 보증받지 않습니다</strong>.',
+        sec4_title: '4. 수집한 정보의 이용 목적',
+        sec4_p1: '노트 실시간 동기화, AI 학업 답변 생성, 시스템 오류 수정에만 데이터를 활용합니다.',
+        sec4_li1: '<strong>핵심 서비스:</strong> 기기 간 실시간 노트 및 일정 동기화.',
+        sec4_li2: '<strong>인공지능 보호:</strong> Gemini API를 거친 데이터는 공용 AI 모델 학습에 사용되지 않습니다.',
+        sec4_li3: '<strong>유지 보수:</strong> 속도 향상 및 오류 조치.',
+        sec4_li4: '<strong>보상 검증:</strong> 광고 시청 완료 확인 후 혜택 지급.',
+        sec4_li5: '<strong>공지 발송:</strong> 필수 보안 업데이트 안내.',
+        sec4_p2: '<strong>이용자의 개인정보를 제3자에게 절대 판매하지 않습니다.</strong>',
+        sec5_title: '5. 클라우드 저장 및 데이터 보안',
+        sec5_p1: '모든 데이터는 Google Firebase 클라우드에 암호화되어 철저히 보관됩니다.',
+        sec5_p2: '국제 표준 보안 프로토콜을 적용하여 허가되지 않은 접근을 차단합니다.',
+        sec6_title: '6. 신뢰할 수 있는 제3자 서비스',
+        sec6_p1: 'Google Firebase, Google AdMob, Google Gemini API 등 검증된 기술을 활용합니다.',
+        sec6_li1: '<strong>Google Firebase:</strong> 계정 인증 및 데이터베이스.',
+        sec6_li2: '<strong>Google AdMob:</strong> 보상형 광고 송출.',
+        sec6_li3: '<strong>Google Gemini API:</strong> AI 학업 지도 도우미.',
+        sec6_li4: '<strong>Firebase Analytics:</strong> 성능 모니터링.',
+        sec7_title: '7. 결제 및 구독 처리',
+        sec7_p1: '<strong>당사는 이용자의 신용카드 결제 정보를 직접 보관하거나 처리하지 않습니다.</strong>',
+        sec7_p2: '모든 구독 결제는 Google Play 스토어 및 Apple App Store의 공인된 결제망을 통해 처리됩니다.',
+        sec8_title: '8. 기기 접근 권한',
+        sec8_p1: '특정 기능을 사용할 때에만 선택적으로 권한을 요청합니다:',
+        sec8_li1: '📸 <strong>저장소:</strong> 노트에 사진 및 학습 자료 첨부 시.',
+        sec8_li2: '📷 <strong>카메라:</strong> 판서나 교재를 바로 촬영하여 첨부 시.',
+        sec8_li3: '🎤 <strong>마이크:</strong> 음성 강의 노트를 녹음할 때.',
+        sec8_li4: '🔔 <strong>알림:</strong> 뽀모도로 타이머 완료 및 학습 일정 알림.',
+        sec9_title: '9. 이용자의 권리 및 행사 방법',
+        sec9_p1: '이용자는 언제든지 자신의 데이터를 열람, 수정하거나 삭제할 권리가 있습니다:',
+        sec9_li1: '<strong>계정 영구 삭제:</strong> 앱 내 설정의 "계정 삭제" 메뉴를 통해 언제든 계정과 클라우드 데이터를 즉시 영구 삭제할 수 있으며, 이는 복구되지 않습니다.',
+        sec9_li2: '<strong>정보 수정:</strong> 프로필 및 기록 업데이트.',
+        sec9_li3: '<strong>권한 철회:</strong> 스마트폰 설정에서 앱 권한을 언제든 해제 가능.',
+        sec10_title: '10. 만 14세 미만 아동의 보호',
+        sec10_p1: '만 14세 미만 아동의 정보를 고의로 수집하지 않으며, 무단 수집 인지 시 즉시 파기합니다.',
+        sec11_title: '11. 방침 변경 안내',
+        sec11_p1: '서비스 개선이나 법령 변경에 따라 본 방침이 수정될 수 있으며 중요 변경 사항은 앱 내 공지합니다.',
+        sec12_title: '12. 개인정보 관련 문의',
+        sec12_p: '개인정보 보호와 관련한 문의 사항은 전담 팀으로 연락해 주시기 바랍니다:',
+        btn_email: '이메일 문의하기',
+        footer_copy: '© 2026 StudyCap', footer_terms: '이용약관'
+      },
+      'de': {
+        name: 'Deutsch', flag: '🇩🇪', dir: 'ltr',
+        btn_back_home: 'Startseite', mobile_nav_btn: '📑 Inhaltsverzeichnis',
+        nav_title: 'Navigation', nav_badge: '12 Abschnitte',
+        nav_intro: 'Einleitung', nav_coleta: '1. Erhobene Daten', nav_anuncios: '2. Belohnte Werbung',
+        nav_enem: '3. Übungsprüfungen', nav_uso: '4. Datennutzung', nav_armazenamento: '5. Speicherung',
+        nav_terceiros: '6. Drittanbieter', nav_pagamentos: '7. Zahlungen', nav_permissoes: '8. Berechtigungen',
+        nav_direitos: '9. Ihre Rechte', nav_menores: '10. Jugendschutz', nav_alteracoes: '11. Änderungen', nav_contato: '12. Kontakt',
+        doc_title: 'Datenschutzerklärung', doc_meta: 'Stand: 31. Januar 2026',
+        intro_p1: '<strong>StudyCap</strong> legt höchsten Wert auf den Schutz Ihrer Privatsphäre und verarbeitet personenbezogene Daten stets nach strengen Datenschutzstandards.',
+        intro_p2: 'Mit der Nutzung von StudyCap stimmen Sie dieser Datenschutzerklärung und den gesetzlichen Vorschriften (DSGVO) zu.',
+        sec1_title: '1. Welche Daten wir erfassen',
+        sec1_p: 'Zur Bereitstellung der Notizen-Synchronisierung, KI-Funktionen und Lernstatistiken erfassen wir:',
+        sec1_1_title: '1.1. Kontodaten',
+        sec1_1_p: 'E-Mail-Adresse, Benutzername, Profilbild und anonyme Benutzer-ID zur sicheren Anmeldung.',
+        sec1_1_li1: '<strong>E-Mail-Adresse:</strong> Notwendig für Authentifizierung und Kontowiederherstellung.',
+        sec1_1_li2: '<strong>Profilname & Bild:</strong> Nur bei Anmeldung über Google erfasst.',
+        sec1_1_li3: '<strong>System-ID:</strong> Eindeutige ID zur pseudonymen Zuordnung.',
+        sec1_2_title: '1.2. Lerninhalte & Notizen',
+        sec1_2_li1: '<strong>Inhalte:</strong> Notizen, Lernkarten, Aufgaben und Pomodoro-Zeiten.',
+        sec1_2_li2: '<strong>Prüfungsdaten:</strong> Antworten und Testergebnisse zur Fortschrittsanalyse.',
+        sec1_2_li3: '<strong>Medien:</strong> Bilder und Sprachaufnahmen in Notizen.',
+        sec1_2_li4: '<strong>KI-Chat:</strong> Texteingaben an "Mari KI" zur Beantwortung von Lernfragen.',
+        sec1_3_title: '1.3. Gerätedaten & Telemetrie',
+        sec1_3_p: 'Nutzungsstatistiken und Absturzberichte über Google Firebase Crashlytics.',
+        sec1_3_li1: 'Gerätemodell, Betriebssystem und Werbe-ID.',
+        sec1_3_li2: 'Fehlerprotokolle zur schnellen Fehlerbehebung.',
+        sec1_3_li3: 'Statistische Nutzungsdaten zur Optimierung der Ladezeiten.',
+        sec2_title: '2. Belohnte Werbeanzeigen (Kostenlose Version)',
+        sec2_p1: 'Um StudyCap dauerhaft kostenfrei anbieten zu können, wird in der Gratis-Version Werbung geschaltet.',
+        sec2_box: '<strong>💡 Volle Transparenz:</strong> StudyCap zeigt während Ihrer Lernphasen keine störenden Pop-ups. Wir nutzen ausschließlich <strong>Rewarded Ads (belohnte Videos)</strong>.',
+        sec2_p2: 'Videoanzeigen werden nur abgespielt, wenn <strong>Sie sich freiwillig dafür entscheiden</strong>, um Vorteile freizuschalten:',
+        sec2_li1: 'Pomodoro-Pausen abschließen oder überspringen;',
+        sec2_li2: 'Zusätzliche Nutzungsguthaben erhalten;',
+        sec2_li3: 'Zeitlich begrenzte Premium-Funktionen aktivieren.',
+        sec2_p3: 'Abonnenten des <strong>Premium-Plans</strong> nutzen StudyCap zu 100% werbefrei.',
+        sec3_title: '3. Prüfungsaufgaben & Haftungsausschluss',
+        sec3_p1: 'In der App enthaltene Übungsfragen basieren auf öffentlich zugänglichen Lehrplanarchiven.',
+        sec3_li1: '<strong>Quelle:</strong> Digitalisierte Prüfungsfragen aus dem gemeinfreien Raum.',
+        sec3_li2: '<strong>Haftungsausschluss:</strong> StudyCap ist ein <strong>unabhängiges Projekt und steht in keiner Verbindung zu Ministerien oder staatlichen Prüfungsstellen</strong>.',
+        sec4_title: '4. Zweck der Datenverarbeitung',
+        sec4_p1: 'Ihre Daten dienen ausschließlich der Bereitstellung der Dienste und der Qualitätssicherung.',
+        sec4_li1: '<strong>Synchronisierung:</strong> Abgleich aller Lernmaterialien in Echtzeit.',
+        sec4_li2: '<strong>KI-Datenschutz:</strong> Eingaben über die Gemini API werden nicht zum Training öffentlicher KI-Modelle genutzt.',
+        sec4_li3: '<strong>Systemstabilität:</strong> Behebung von Bugs und Beschleunigung der App.',
+        sec4_li4: '<strong>Belohnungsprüfung:</strong> Überprüfung von Videoaufrufen im Free-Tier.',
+        sec4_li5: '<strong>Sicherheit:</strong> Versenden wichtiger Kontowarnungen.',
+        sec4_p2: '<strong>Wir verkaufen unter keinen Umständen personenbezogene Daten an Dritte.</strong>',
+        sec5_title: '5. Speicherung & Datensicherheit',
+        sec5_p1: 'Daten werden in der Google Firebase Cloud mit modernen Verschlüsselungsstandards gesichert.',
+        sec5_p2: 'Wir gewährleisten strenge Sicherheitsvorkehrungen gegen unberechtigten Datenzugriff.',
+        sec6_title: '6. Eingebundene Drittanbieter',
+        sec6_p1: 'Zuverlässige Partner: Google Firebase, Google AdMob und Google Gemini API.',
+        sec6_li1: '<strong>Google Firebase:</strong> Sichere Authentifizierung und Cloud-Datenbank.',
+        sec6_li2: '<strong>Google AdMob:</strong> Auslieferung der freiwilligen Videoanzeigen.',
+        sec6_li3: '<strong>Google Gemini API:</strong> Intelligente Beantwortung von Lernfragen.',
+        sec6_li4: '<strong>Firebase Analytics:</strong> Anonymisierte Fehlerdiagnostik.',
+        sec7_title: '7. Zahlungsabwicklung',
+        sec7_p1: '<strong>Wir erfassen oder speichern zu keinem Zeitpunkt Kreditkarten- oder Bankdaten.</strong>',
+        sec7_p2: 'Die Zahlungsabwicklung erfolgt vollständig über den Google Play Store bzw. den Apple App Store.',
+        sec8_title: '8. Geräteberechtigungen',
+        sec8_p1: 'Berechtigungen werden nur nach Bedarf angefordert:',
+        sec8_li1: '📸 <strong>Mediathek:</strong> Zum Einfügen von Bildern in Notizen.',
+        sec8_li2: '📷 <strong>Kamera:</strong> Zum Fotografieren von Tafeln oder Büchern.',
+        sec8_li3: '🎤 <strong>Mikrofon:</strong> Zur Aufnahme von Sprachmemos.',
+        sec8_li4: '🔔 <strong>Benachrichtigungen:</strong> Für Pomodoro-Timer und Lernalarme.',
+        sec9_title: '9. Ihre Rechte nach DSGVO',
+        sec9_p1: 'Sie haben das Recht auf Auskunft, Berichtigung und Löschung Ihrer Daten:',
+        sec9_li1: '<strong>Konto unwiderruflich löschen:</strong> Sie können Ihr Konto und alle Cloud-Notizen jederzeit über die App-Einstellungen dauerhaft und restlos löschen.',
+        sec9_li2: '<strong>Berichtigung:</strong> Korrektur unrichtiger Einträge.',
+        sec9_li3: '<strong>Widerruf:</strong> Berechtigungen können jederzeit in den Telefoneinstellungen entzogen werden.',
+        sec10_title: '10. Schutz von Minderjährigen',
+        sec10_p1: 'StudyCap richtet sich nicht an Kinder unter 13 Jahren; unbefugt erfasste Daten werden umgehend gelöscht.',
+        sec11_title: '11. Änderungen dieser Richtlinie',
+        sec11_p1: 'Etwaige Anpassungen der Richtlinie werden rechtzeitig direkt in der App bekanntgegeben.',
+        sec12_title: '12. Haben Sie Fragen?',
+        sec12_p: 'Bei Fragen zum Datenschutz wenden Sie sich bitte an unser Team:',
+        btn_email: 'E-Mail senden',
+        footer_copy: '© 2026 StudyCap', footer_terms: 'Nutzungsbedingungen'
+      },
+      'fr': {
+        name: 'Français', flag: '🇫🇷', dir: 'ltr',
+        btn_back_home: 'Accueil', mobile_nav_btn: '📑 Sommaire Politique',
+        nav_title: 'Navigation', nav_badge: '12 Sections',
+        nav_intro: 'Introduction', nav_coleta: '1. Données Collectées', nav_anuncios: '2. Annonces Récompensées',
+        nav_enem: '3. Examens Blancs', nav_uso: '4. Utilisation des Données', nav_armazenamento: '5. Stockage',
+        nav_terceiros: '6. Services Tiers', nav_pagamentos: '7. Paiements', nav_permissoes: '8. Permissions',
+        nav_direitos: '9. Vos Droits', nav_menores: '10. Mineurs', nav_alteracoes: '11. Modifications', nav_contato: '12. Contact',
+        doc_title: 'Politique de Confidentialité', doc_meta: 'Dernière mise à jour : 31 janvier 2026',
+        intro_p1: '<strong>StudyCap</strong> attache une importance primordiale à votre vie privée et s\'engage à protéger vos données personnelles.',
+        intro_p2: 'En utilisant StudyCap, vous acceptez les pratiques de traitement des données décrites dans la présente politique et conformes au RGPD.',
+        sec1_title: '1. Informations que Nous Collectons',
+        sec1_p: 'Pour assurer la synchronisation des cours, l\'assistance par IA et le suivi statistique, nous collectons :',
+        sec1_1_title: '1.1. Données d\'Identification',
+        sec1_1_p: 'Adresse e-mail, nom d\'utilisateur, photo et identifiant de compte pour sécuriser vos accès multi-appareils.',
+        sec1_1_li1: '<strong>Adresse e-mail :</strong> Nécessaire pour la connexion et la récupération.',
+        sec1_1_li2: '<strong>Profil :</strong> Nom et avatar transmis via la connexion Google.',
+        sec1_1_li3: '<strong>Identifiant système :</strong> Code unique associant anonymement vos données.',
+        sec1_2_title: '1.2. Données Pédagogiques et Notations',
+        sec1_2_li1: '<strong>Contenus créés :</strong> Fiches, devoirs, sessions Pomodoro et flashcards.',
+        sec1_2_li2: '<strong>Résultats :</strong> Réponses et notes obtenues aux entraînements.',
+        sec1_2_li3: '<strong>Fichiers joints :</strong> Mémos audio et photos intégrés à vos cours.',
+        sec1_2_li4: '<strong>Requêtes IA :</strong> Questions envoyées à "Mari IA".',
+        sec1_3_title: '1.3. Données Techniques et Télémétrie',
+        sec1_3_p: 'Rapports d\'erreurs anonymes via Google Firebase pour assurer la stabilité du logiciel.',
+        sec1_3_li1: 'Modèle de l\'appareil, version de l\'OS et identifiant publicitaire anonyme.',
+        sec1_3_li2: 'Rapports de plantage (Crashlytics) pour résoudre les bugs.',
+        sec1_3_li3: 'Statistiques anonymisées sur l\'usage des outils.',
+        sec2_title: '2. Publicités Récompensées (Version Gratuite)',
+        sec2_p1: 'Afin de préserver la gratuité de l\'application pour tous les étudiants, des annonces sont affichées uniquement sur la formule gratuite.',
+        sec2_box: '<strong>💡 Transparence totale :</strong> StudyCap ne diffuse aucun pop-up intempestif pendant vos révisions. Nous fonctionnons exclusivement sur le modèle des <strong>Annonces Récompensées</strong>.',
+        sec2_p2: 'Une vidéo publicitaire ne se lance que si <strong>vous choisissez volontairement de la regarder</strong> pour débloquer un bonus :',
+        sec2_li1: 'Terminer ou avancer une pause Pomodoro ;',
+        sec2_li2: 'Obtenir des crédits supplémentaires ;',
+        sec2_li3: 'Débloquer temporairement des quotas de fonctions avancées.',
+        sec2_p3: 'Les membres <strong>Premium</strong> profitent d\'une expérience 100% vierge de toute publicité.',
+        sec3_title: '3. Annales d\'Examens et Clause de Non-Affiliation',
+        sec3_p1: 'L\'application met à disposition des questions d\'entraînement issues d\'archives publiques officielles.',
+        sec3_li1: '<strong>Origine :</strong> Épreuves publiques numérisées pour l\'auto-évaluation.',
+        sec3_li2: '<strong>Désengagement :</strong> StudyCap est une initiative <strong>indépendante non affiliée à un ministère ou organisme étatique</strong>.',
+        sec4_title: '4. Utilisation de Vos Informations',
+        sec4_p1: 'Vos informations servent exclusivement à synchroniser vos révisions et à faire fonctionner l\'assistance IA.',
+        sec4_li1: '<strong>Maintien du Service :</strong> Sauvegarde en temps réel de votre espace de travail.',
+        sec4_li2: '<strong>IA Éthique :</strong> Les questions soumises à l\'API Gemini ne servent pas à entraîner les modèles publics de Google.',
+        sec4_li3: '<strong>Stabilité :</strong> Optimisation des temps de réponse.',
+        sec4_li4: '<strong>Validation des Récompenses :</strong> Attribution des avantages gratuits.',
+        sec4_li5: '<strong>Sécurité :</strong> Notifications importantes sur l\'état du compte.',
+        sec4_p2: '<strong>Nous ne vendons aucune donnée personnelle à des tiers.</strong>',
+        sec5_title: '5. Stockage et Sécurité Cloud',
+        sec5_p1: 'Toutes les données sont hébergées sur Google Firebase sous chiffrement de bout en bout.',
+        sec5_p2: 'Nous appliquons des standards de sécurité rigoureux empêchant tout accès illicite.',
+        sec6_title: '6. Prestataires Tiers de Confiance',
+        sec6_p1: 'Partenaires : Google Firebase, Google AdMob et Google Gemini API.',
+        sec6_li1: '<strong>Google Firebase :</strong> Base de données et authentification.',
+        sec6_li2: '<strong>Google AdMob :</strong> Diffusion des vidéos récompensées.',
+        sec6_li3: '<strong>Google Gemini API :</strong> Réponses pédagogiques instantanées.',
+        sec6_li4: '<strong>Firebase Analytics :</strong> Diagnostic de performance.',
+        sec7_title: '7. Facturation et Abonnements',
+        sec7_p1: '<strong>Nous ne collectons ni ne stockons vos coordonnées bancaires.</strong>',
+        sec7_p2: 'Les abonnements sont gérés de façon chiffrée par Google Play Store ou Apple App Store.',
+        sec8_title: '8. Permissions Requises',
+        sec8_p1: 'Les autorisations ne sont sollicitées que lors de l\'activation de la fonctionnalité concernée :',
+        sec8_li1: '📸 <strong>Stockage :</strong> Pour insérer des documents et photos dans vos fiches.',
+        sec8_li2: '📷 <strong>Appareil Photo :</strong> Pour capturer vos notes manuscrites.',
+        sec8_li3: '🎤 <strong>Microphone :</strong> Pour dicter vos résumés oraux.',
+        sec8_li4: '🔔 <strong>Notifications :</strong> Pour sonner la fin des cycles Pomodoro.',
+        sec9_title: '9. Vos Droits',
+        sec9_p1: 'Vous disposez d\'un contrôle absolu sur vos données personnelles :',
+        sec9_li1: '<strong>Suppression Définitive :</strong> Vous pouvez supprimer votre compte et toutes vos données cloud instantanément depuis les paramètres de l\'application.',
+        sec9_li2: '<strong>Rectification :</strong> Mise à jour facile de vos informations.',
+        sec9_li3: '<strong>Révocation :</strong> Désactivation des permissions dans les réglages de votre smartphone.',
+        sec10_title: '10. Vie Privée des Enfants',
+        sec10_p1: 'StudyCap ne cible pas les enfants de moins de 13 ans ; toute donnée recueillie par mégarde sera supprimée.',
+        sec11_title: '11. Évolution de la Politique',
+        sec11_p1: 'Des modifications ponctuelles peuvent intervenir ; les changements majeurs vous seront signalés dans l\'application.',
+        sec12_title: '12. Vous Avez des Questions ?',
+        sec12_p: 'Pour toute demande relative à la protection de vos données, écrivez-nous :',
+        btn_email: 'Envoyer un E-mail',
+        footer_copy: '© 2026 StudyCap', footer_terms: 'Conditions d\'Utilisation'
+      },
+      'it': {
+        name: 'Italiano', flag: '🇮🇹', dir: 'ltr',
+        btn_back_home: 'Home', mobile_nav_btn: '📑 Indice Privacy',
+        nav_title: 'Navigazione', nav_badge: '12 Sezioni',
+        nav_intro: 'Introduzione', nav_coleta: '1. Dati Raccolti', nav_anuncios: '2. Annunci Premiati',
+        nav_enem: '3. Simulazioni ed Esami', nav_uso: '4. Utilizzo dei Dati', nav_armazenamento: '5. Archiviazione',
+        nav_terceiros: '6. Servizi Terzi', nav_pagamentos: '7. Pagamenti', nav_permissoes: '8. Permessi App',
+        nav_direitos: '9. I Tuoi Diritti', nav_menores: '10. Minori', nav_alteracoes: '11. Modifiche', nav_contato: '12. Contatti',
+        doc_title: 'Informativa sulla Privacy', doc_meta: 'Ultimo aggiornamento: 31 gennaio 2026',
+        intro_p1: '<strong>StudyCap</strong> tutela la tua privacy e si impegna a custodire i tuoi dati personali nel pieno rispetto del GDPR.',
+        intro_p2: 'Utilizzando StudyCap accetti le modalità di trattamento dei dati descritte nella presente informativa.',
+        sec1_title: '1. Dati che Raccogliamo',
+        sec1_p: 'Per garantire la sincronizzazione di note, sessioni di studio e supporto con IA raccogliamo:',
+        sec1_1_title: '1.1. Dati dell\'Account',
+        sec1_1_p: 'Email, nome utente, immagine e ID di sistema per consentire l\'accesso su più dispositivi.',
+        sec1_1_li1: '<strong>Indirizzo email:</strong> Indispensabile per login e recupero credenziali.',
+        sec1_1_li2: '<strong>Profilo:</strong> Nome e immagine trasmessi tramite Google login.',
+        sec1_1_li3: '<strong>ID Utente:</strong> Identificativo univoco cifrato per associare i tuoi file.',
+        sec1_2_title: '1.2. Contenuti di Studio',
+        sec1_2_li1: '<strong>Materiali:</strong> Appunti, promemoria, flashcard e sessioni Pomodoro.',
+        sec1_2_li2: '<strong>Risultati:</strong> Cronologia delle risposte alle prove d\'esame.',
+        sec1_2_li3: '<strong>File multimediali:</strong> Note vocali e immagini allegate agli appunti.',
+        sec1_2_li4: '<strong>Query IA:</strong> Testi inviati a "Mari IA" per chiarire quesiti didattici.',
+        sec1_3_title: '1.3. Dati del Dispositivo e Diagnostica',
+        sec1_3_p: 'Rapporti di crash e telemetria per monitorare l\'efficienza dell\'app.',
+        sec1_3_li1: 'Modello del dispositivo e versione software.',
+        sec1_3_li2: 'Log degli errori (Crashlytics) per risolvere bug.',
+        sec1_3_li3: 'Statistiche anonimizzate sulle funzioni più utilizzate.',
+        sec2_title: '2. Annunci Premiati (Piano Gratuito)',
+        sec2_p1: 'Per mantenere l\'app gratuita per tutti gli studenti, gli annunci compaiono solo nella versione base.',
+        sec2_box: '<strong>💡 Trasparenza assoluta:</strong> StudyCap non mostra banner invasivi o pop-up a sorpresa durante lo studio. Funzioniamo unicamente con <strong>Annunci con Ricompensa (Rewarded Ads)</strong>.',
+        sec2_p2: 'I video vengono riprodotti solo quando <strong>scegli tu esplicitamente di guardarli</strong> per ottenere vantaggi:',
+        sec2_li1: 'Completare o saltare pause Pomodoro;',
+        sec2_li2: 'Guadagnare crediti aggiuntivi;',
+        sec2_li3: 'Sbloccare quote temporanee di funzionalità avanzate.',
+        sec2_p3: 'Gli utenti <strong>Premium</strong> godono di un\'esperienza completamente priva di pubblicità.',
+        sec3_title: '3. Simulazioni e Dichiarazione di Non Affiliazione',
+        sec3_p1: 'I quesiti d\'esame disponibili nell\'app provengono da archivi didattici pubblici di pubblico dominio.',
+        sec3_li1: '<strong>Fonte:</strong> Prove d\'esame pubbliche digitalizzate per l\'esercitazione.',
+        sec3_li2: '<strong>Dichiarazione:</strong> StudyCap è un progetto <strong>indipendente e NON è affiliato né approvato da ministeri o enti governativi</strong>.',
+        sec4_title: '4. Come Utilizziamo i Tuoi Dati',
+        sec4_p1: 'I dati servono esclusivamente per sincronizzare il tuo lavoro e ottimizzare la velocità dell\'app.',
+        sec4_li1: '<strong>Sincronizzazione:</strong> Note e planner aggiornati in tempo reale su ogni dispositivo.',
+        sec4_li2: '<strong>Privacy IA:</strong> Le query inviate all\'API Gemini non vengono usate per addestrare modelli IA pubblici.',
+        sec4_li3: '<strong>Manutenzione:</strong> Risoluzione di anomalie software.',
+        sec4_li4: '<strong>Verifica Premi:</strong> Assegnazione corretta dei bonus video.',
+        sec4_li5: '<strong>Avvisi:</strong> Invio di comunicazioni importanti sulla sicurezza.',
+        sec4_p2: '<strong>Non vendiamo i tuoi dati personali a soggetti terzi.</strong>',
+        sec5_title: '5. Archiviazione e Sicurezza',
+        sec5_p1: 'Tutti i file sono salvati sui server Google Firebase con protocolli crittografici avanzati.',
+        sec5_p2: 'Rispettiamo elevati standard internazionali per tutelare la sicurezza dei tuoi dati.',
+        sec6_title: '6. Partner Tecnologici',
+        sec6_p1: 'Ci affidiamo a Google Firebase, Google AdMob e Google Gemini API.',
+        sec6_li1: '<strong>Google Firebase:</strong> Database protetto e autenticazione.',
+        sec6_li2: '<strong>Google AdMob:</strong> Erogazione degli annunci con ricompensa.',
+        sec6_li3: '<strong>Google Gemini API:</strong> Risposte dell\'assistente di studio.',
+        sec6_li4: '<strong>Firebase Analytics:</strong> Telemetria e stabilità.',
+        sec7_title: '7. Pagamenti e Sicurezza Bancaria',
+        sec7_p1: '<strong>Non abbiamo accesso né archiviamo i numeri delle tue carte di pagamento.</strong>',
+        sec7_p2: 'Tutte le transazioni sono elaborate in modo sicuro da Google Play o Apple App Store.',
+        sec8_title: '8. Permessi del Dispositivo',
+        sec8_p1: 'I permessi vengono richiesti solo al momento dell\'effettivo utilizzo:',
+        sec8_li1: '📸 <strong>Archivio:</strong> Per allegare file e immagini agli appunti.',
+        sec8_li2: '📷 <strong>Fotocamera:</strong> Per scattare foto a libri o lavagne.',
+        sec8_li3: '🎤 <strong>Microfono:</strong> Per registrare note vocali durante le lezioni.',
+        sec8_li4: '🔔 <strong>Notifiche:</strong> Per gli allarmi di fine ciclo Pomodoro.',
+        sec9_title: '9. I Tuoi Diritti (GDPR)',
+        sec9_p1: 'Hai il controllo completo sulle tue informazioni personali:',
+        sec9_li1: '<strong>Eliminazione Account:</strong> Puoi cancellare il tuo account e tutti i dati cloud in modo definitivo e irreversibile dalle impostazioni dell\'app.',
+        sec9_li2: '<strong>Rettifica:</strong> Modifica rapida dei dati inesatti.',
+        sec9_li3: '<strong>Revoca:</strong> Disattivazione dei permessi dalle impostazioni del telefono.',
+        sec10_title: '10. Minori di 13 Anni',
+        sec10_p1: 'Non raccogliamo deliberatamente dati di minori di 13 anni senza il consenso dei genitori.',
+        sec11_title: '11. Modifiche all\'Informativa',
+        sec11_p1: 'Questa informativa può subire aggiornamenti; le novità sostanziali verranno segnalate nell\'app.',
+        sec12_title: '12. Hai Domande?',
+        sec12_p: 'Per qualunque quesito relativo al trattamento dei tuoi dati, contatta il nostro team:',
+        btn_email: 'Invia Email',
+        footer_copy: '© 2026 StudyCap', footer_terms: 'Termini di Servizio'
+      },
+      'ru': {
+        name: 'Русский', flag: '🇷🇺', dir: 'ltr',
+        btn_back_home: 'Главная', mobile_nav_btn: '📑 Содержание политики',
+        nav_title: 'Навигация', nav_badge: '12 разделов',
+        nav_intro: 'Введение', nav_coleta: '1. Собираемые данные', nav_anuncios: '2. Вознаграждаемая реклама',
+        nav_enem: '3. Тесты и экзамены', nav_uso: '4. Использование данных', nav_armazenamento: '5. Хранение и защита',
+        nav_terceiros: '6. Сторонние сервисы', nav_pagamentos: '7. Платежи', nav_permissoes: '8. Разрешения устройства',
+        nav_direitos: '9. Ваши права', nav_menores: '10. Защита несовершеннолетних', nav_alteracoes: '11. Изменения политики', nav_contato: '12. Контакты',
+        doc_title: 'Политика конфиденциальности', doc_meta: 'Последнее обновление: 31 января 2026 г.',
+        intro_p1: '<strong>StudyCap</strong> уважает вашу конфиденциальность и гарантирует надежную защиту ваших персональных данных.',
+        intro_p2: 'Используя StudyCap, вы соглашаетесь с условиями сбора и обработки информации в соответствии с данной политикой.',
+        sec1_title: '1. Собираемая информация',
+        sec1_p: 'Для синхронизации заметок, работы ИИ-помощника и аналитики прогресса мы собираем:',
+        sec1_1_title: '1.1. Идентификационные данные',
+        sec1_1_p: 'Email, имя профиля, фото и системный идентификатор для безопасного входа с разных устройств.',
+        sec1_1_li1: '<strong>Электронная почта:</strong> Необходима для авторизации и восстановления доступа.',
+        sec1_1_li2: '<strong>Профиль:</strong> Имя и аватар, полученные при входе через Google.',
+        sec1_1_li3: '<strong>Идентификатор:</strong> Уникальный шифрованный код аккаунта.',
+        sec1_2_title: '1.2. Учебные материалы и конспект',
+        sec1_2_li1: '<strong>Пользовательский контент:</strong> Заметки, расписание, флеш-карточки и таймеры Pomodoro.',
+        sec1_2_li2: '<strong>Прогресс тестирования:</strong> Ответы и баллы для оценки динамики знаний.',
+        sec1_2_li3: '<strong>Медиафайлы:</strong> Прикрепленные к конспектам фото и аудиозаписи.',
+        sec1_2_li4: '<strong>Запросы к ИИ:</strong> Вопросы, отправленные помощнику "Mari AI".',
+        sec1_3_title: '1.3. Диагностика и статистика',
+        sec1_3_p: 'Анонимная телеметрия Firebase для обеспечения бесперебойной работы приложения.',
+        sec1_3_li1: 'Модель смартфона, версия ОС и рекламный идентификатор.',
+        sec1_3_li2: 'Отчеты о сбоях (Crashlytics) для устранения ошибок.',
+        sec1_3_li3: 'Агрегированная статистика использования разделов.',
+        sec2_title: '2. Вознаграждаемая реклама (Бесплатный план)',
+        sec2_p1: 'Чтобы сервис оставался бесплатным и доступным для каждого учащегося, реклама присутствует только в бесплатной версии.',
+        sec2_box: '<strong>💡 Прозрачность:</strong> StudyCap не использует навязчивых баннеров или внезапных всплывающих окон во время учебы. Мы работаем исключительно по модели <strong>вознаграждаемой рекламы (Rewarded Ads)</strong>.',
+        sec2_p2: 'Видеоролик запускается только тогда, когда <strong>вы добровольно решаете посмотреть его</strong> для получения бонуса:',
+        sec2_li1: 'Пропуск или завершение интервала отдыха Pomodoro;',
+        sec2_li2: 'Получение дополнительных бонусных кредитов;',
+        sec2_li3: 'Временное расширение лимитов премиум-функций.',
+        sec2_p3: 'Пользователи с подпиской <strong>Premium</strong> полностью избавлены от рекламы.',
+        sec3_title: '3. Экзаменационные материалы и отказ от ответственности',
+        sec3_p1: 'В приложении представлены тренировочные тесты на базе материалов, находящихся в общественном достоянии.',
+        sec3_li1: '<strong>Источник:</strong> Официальные экзаменационные вопросы, переведенные в интерактивный цифровой формат.',
+        sec3_li2: '<strong>Отказ от ответственности:</strong> StudyCap — это <strong>независимый проект, не связанный ни с какими государственными министерствами или ведомствами</strong>.',
+        sec4_title: '4. Цели обработки данных',
+        sec4_p1: 'Все данные используются исключительно для синхронизации заметок, ответов ИИ и ускорения работы приложения.',
+        sec4_li1: '<strong>Синхронизация:</strong> Мгновенный обмен материалами между всеми вашими устройствами.',
+        sec4_li2: '<strong>Безопасность ИИ:</strong> Запросы к Gemini API не используются для обучения публичных моделей ИИ.',
+        sec4_li3: '<strong>Стабильность:</strong> Исправление сбоев и ускорение отклика интерфейса.',
+        sec4_li4: '<strong>Начисление наград:</strong> Подтверждение просмотра видео для выдачи бонусов.',
+        sec4_li5: '<strong>Уведомления:</strong> Доставка критических сообщений о безопасности.',
+        sec4_p2: '<strong>Мы никогда не продаем ваши персональные данные третьим лицам.</strong>',
+        sec5_title: '5. Хранение и шифрование',
+        sec5_p1: 'Все данные хранятся в защищенном облаке Google Firebase с применением сквозного шифрования.',
+        sec5_p2: 'Мы строго соблюдаем международные нормы безопасности для предотвращения несанкционированного доступа.',
+        sec6_title: '6. Надежные партнеры',
+        sec6_p1: 'Мы применяем проверенные решения: Google Firebase, Google AdMob и Gemini API.',
+        sec6_li1: '<strong>Google Firebase:</strong> Безопасная база данных и авторизация.',
+        sec6_li2: '<strong>Google AdMob:</strong> Показ добровольной видеорекламы.',
+        sec6_li3: '<strong>Google Gemini API:</strong> Интеллектуальный учебный ассистент.',
+        sec6_li4: '<strong>Firebase Analytics:</strong> Диагностика стабильности.',
+        sec7_title: '7. Безопасность платежей',
+        sec7_p1: '<strong>Мы не получаем и не храним реквизиты ваших банковских карт.</strong>',
+        sec7_p2: 'Все платежи обрабатываются через защищенные механизмы Google Play Store или Apple App Store.',
+        sec8_title: '8. Системные разрешения',
+        sec8_p1: 'Разрешения запрашиваются только при непосредственном использовании функции:',
+        sec8_li1: '📸 <strong>Файлы и галерея:</strong> Чтобы прикреплять изображения к конспектам.',
+        sec8_li2: '📷 <strong>Камера:</strong> Чтобы фотографировать страницы учебников и доску.',
+        sec8_li3: '🎤 <strong>Микрофон:</strong> Для записи голосовых заметок.',
+        sec8_li4: '🔔 <strong>Уведомления:</strong> Для сигналов таймера Pomodoro и напоминаний.',
+        sec9_title: '9. Ваши права',
+        sec9_p1: 'Вы сохраняете полный контроль над своей личной информацией:',
+        sec9_li1: '<strong>Полное удаление аккаунта:</strong> В настройках приложения вы можете в любой момент навсегда и безвозвратно стереть свой профиль и все сохраненные в облаке данные.',
+        sec9_li2: '<strong>Исправление:</strong> Изменение устаревших данных профиля.',
+        sec9_li3: '<strong>Отзыв разрешений:</strong> Отключение доступа к функциям в настройках телефона.',
+        sec10_title: '10. Несовершеннолетние',
+        sec10_p1: 'Приложение не предназначено для детей младше 13 лет. При обнаружении несогласованных данных они немедленно удаляются.',
+        sec11_title: '11. Изменения политики',
+        sec11_p1: 'Политика может обновляться; о ключевых изменениях мы уведомим непосредственно в приложении.',
+        sec12_title: '12. Остались вопросы?',
+        sec12_p: 'По любым вопросам конфиденциальности и защиты данных обращайтесь к нашей команде:',
+        btn_email: 'Написать на Email',
+        footer_copy: '© 2026 StudyCap', footer_terms: 'Условия использования'
+      }
+    };
+
+    const availableLanguages = [
+      { code: 'pt_BR', name: 'Português', native: 'Brasil', flag: '🇧🇷' },
+      { code: 'pt_PT', name: 'Português', native: 'Portugal', flag: '🇵🇹' },
+      { code: 'en', name: 'English', native: 'English', flag: '🇺🇸' },
+      { code: 'es', name: 'Español', native: 'Español', flag: '🇪🇸' },
+      { code: 'zh', name: 'Mandarim', native: '简体中文', flag: '🇨🇳' },
+      { code: 'hi', name: 'Hindi', native: 'हिन्दी', flag: '🇮🇳' },
+      { code: 'id', name: 'Indonésio', native: 'Bahasa Indonesia', flag: '🇮🇩' },
+      { code: 'ar', name: 'Árabe', native: 'العربية', flag: '🇸🇦' },
+      { code: 'bn', name: 'Bengali', native: 'বাংলা', flag: '🇧🇩' },
+      { code: 'ur', name: 'Urdu', native: 'اردو', flag: '🇵🇰' },
+      { code: 'ja', name: 'Japonês', native: '日本語', flag: '🇯🇵' },
+      { code: 'ko', name: 'Coreano', native: '한국어', flag: '🇰🇷' },
+      { code: 'de', name: 'Alemão', native: 'Deutsch', flag: '🇩🇪' },
+      { code: 'fr', name: 'Francês', native: 'Français', flag: '🇫🇷' },
+      { code: 'it', name: 'Italiano', native: 'Italiano', flag: '🇮🇹' },
+      { code: 'ru', name: 'Russo', native: 'Русский', flag: '🇷🇺' }
+    ];
+
+    let currentSelectedLang = 'pt_BR';
+
+    function setLanguage(langCode) {
+      if (!translations[langCode]) langCode = 'pt_BR';
+      currentSelectedLang = langCode;
+
+      try {
+        localStorage.setItem('studycap_language', langCode);
+      } catch(e) {}
+
+      const langData = translations[langCode];
+      document.documentElement.lang = langCode.replace('_', '-');
+      document.documentElement.dir = langData.dir || 'ltr';
+
+      // Atualizar textos dos elementos com data-i18n
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (langData[key]) {
+          el.innerHTML = langData[key];
+        }
+      });
+
+      // Atualizar botão do seletor
+      const flagEl = document.getElementById('currentLangFlag');
+      const nameEl = document.getElementById('currentLangName');
+      if (flagEl) flagEl.textContent = langData.flag;
+      if (nameEl) nameEl.textContent = langData.name;
+
+      // Atualizar item ativo
+      document.querySelectorAll('.lang-option-item').forEach(btn => {
+        if (btn.getAttribute('data-code') === langCode) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+    }
+
+    function initLanguageSelector() {
+      const menu = document.getElementById('langDropdownMenu');
+      const wrapper = document.getElementById('langSelectorWrapper');
+      const btn = document.getElementById('langDropdownBtn');
+
+      if (!menu || !wrapper || !btn) return;
+
+      // Montar lista de 16 idiomas
+      menu.innerHTML = availableLanguages.map(item => `
+        <button type="button" class="lang-option-item ${item.code === currentSelectedLang ? 'active' : ''}" data-code="${item.code}">
+          <span class="lang-flag">${item.flag}</span>
+          <span>${item.name}</span>
+          <span class="lang-native">${item.native}</span>
+        </button>
+      `).join('');
+
+      // Abrir/Fechar dropdown
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = wrapper.classList.toggle('open');
+        btn.setAttribute('aria-expanded', isOpen);
+      });
+
+      // Seleção de idioma
+      menu.querySelectorAll('.lang-option-item').forEach(itemBtn => {
+        itemBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const code = itemBtn.getAttribute('data-code');
+          setLanguage(code);
+          wrapper.classList.remove('open');
+          btn.setAttribute('aria-expanded', 'false');
+        });
+      });
+
+      // Fechar ao clicar fora
+      document.addEventListener('click', (e) => {
+        if (!wrapper.contains(e.target)) {
+          wrapper.classList.remove('open');
+          btn.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      // Carregar idioma salvo
+      let saved = 'pt_BR';
+      try {
+        saved = localStorage.getItem('studycap_language') || 'pt_BR';
+      } catch(e) {}
+      setLanguage(saved);
+    }
+  </script>
+
+  <script>
     document.addEventListener('DOMContentLoaded', () => {
-      
+      // Inicializar o seletor de idiomas
+      initLanguageSelector();
+
       // 1. BARRA DE PROGRESSO DE LEITURA
       const progressBar = document.getElementById('progressBar');
       const updateProgressBar = () => {

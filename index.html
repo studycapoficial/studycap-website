@@ -176,7 +176,19 @@
     .logo-area { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 1.4rem; letter-spacing: -0.5px; }
     .logo-img { width: 36px; height: 36px; border-radius: 8px; box-shadow: 0 0 15px var(--primary-glow); }
 
-    .nav-links { display: flex; align-items: center; gap: 24px; }
+    .nav-center-and-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .nav-links { display: flex; align-items: center; gap: 20px; }
 
     .nav-links a {
       color: var(--text-muted);
@@ -186,6 +198,127 @@
       transition: all 0.3s ease;
     }
     .nav-links a:hover { color: var(--text-main); text-shadow: 0 0 8px rgba(255,255,255,0.3); }
+
+    .lang-selector-wrapper {
+      position: relative;
+      display: inline-block;
+    }
+
+    .lang-dropdown-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 7px 13px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #ffffff;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      backdrop-filter: blur(12px);
+      transition: all 0.3s ease;
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    .lang-dropdown-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--primary);
+      box-shadow: 0 0 14px var(--primary-glow);
+    }
+
+    .lang-flag {
+      font-size: 1.15rem;
+      line-height: 1;
+    }
+
+    .lang-arrow {
+      width: 14px;
+      height: 14px;
+      transition: transform 0.3s ease;
+      stroke: var(--text-muted);
+      flex-shrink: 0;
+    }
+
+    .lang-selector-wrapper.open .lang-arrow {
+      transform: rotate(180deg);
+    }
+
+    .lang-dropdown-menu {
+      display: none;
+      position: absolute;
+      top: calc(100% + 10px);
+      right: 0;
+      width: 250px;
+      max-height: 340px;
+      overflow-y: auto;
+      background: rgba(15, 6, 28, 0.95);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(167, 139, 250, 0.25);
+      border-radius: 16px;
+      padding: 8px;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.7), 0 0 20px rgba(124, 58, 237, 0.2);
+      z-index: 1100;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(167, 139, 250, 0.4) transparent;
+    }
+
+    .lang-dropdown-menu::-webkit-scrollbar {
+      width: 5px;
+    }
+    .lang-dropdown-menu::-webkit-scrollbar-thumb {
+      background: rgba(167, 139, 250, 0.4);
+      border-radius: 10px;
+    }
+
+    .lang-selector-wrapper.open .lang-dropdown-menu {
+      display: block;
+      animation: menuFadeIn 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes menuFadeIn {
+      from { opacity: 0; transform: translateY(-8px) scale(0.96); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .lang-option-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      padding: 8px 12px;
+      border: none;
+      background: transparent;
+      border-radius: 10px;
+      cursor: pointer;
+      text-align: left;
+      color: var(--text-main);
+      font-size: 0.86rem;
+      transition: all 0.2s ease;
+    }
+
+    .lang-option-item:hover {
+      background: rgba(124, 58, 237, 0.25);
+      color: #ffffff;
+    }
+
+    .lang-option-item.active {
+      background: rgba(124, 58, 237, 0.4);
+      border: 1px solid rgba(167, 139, 250, 0.45);
+      font-weight: 700;
+    }
+
+    .lang-native {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-left: auto;
+    }
+
+    .lang-option-item.active .lang-native {
+      color: #c084fc;
+    }
 
     /* BOTÃO MENU MOBILE */
     .mobile-menu-btn {
@@ -238,13 +371,13 @@
     }
 
     .hero { 
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      align-items: center;
-      gap: 40px;
+      display: grid; 
+      grid-template-columns: 1.2fr 0.8fr; 
+      align-items: center; 
+      gap: 40px; 
       padding: 60px 0 80px; 
-      text-align: left;
-      position: relative;
+      text-align: left; 
+      position: relative; 
     }
 
     .hero-content {
@@ -388,7 +521,6 @@
       font-size: 1.05rem;
     }
 
-    /* --- FEATURES & SCROLL REVEAL --- */
     .features { 
       display: grid; 
       grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); 
@@ -494,7 +626,6 @@
     .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; transition: 0.2s; }
     .footer-links a:hover { color: white; }
 
-    /* --- DESIGN RESPONSIVO COMPLETO --- */
     @media (max-width: 968px) {
       .hero {
         grid-template-columns: 1fr;
@@ -514,10 +645,30 @@
     @media (max-width: 640px) {
       .container { padding: 0 16px; }
       header { top: 12px; padding: 0; margin-bottom: 20px; }
-      nav { justify-content: space-between; height: 60px; padding: 0 16px; position: relative; }
+      nav { justify-content: space-between; height: 60px; padding: 0 14px; position: relative; }
       
       .mobile-menu-btn { display: block; }
-      
+      .nav-center-and-right { gap: 8px; }
+      .nav-actions { gap: 8px; }
+
+      /* O seletor fica compacto e perfeitamente visível de cara na barra superior */
+      .lang-dropdown-btn {
+        padding: 6px 10px;
+        font-size: 0.8rem;
+        gap: 6px;
+      }
+      .lang-name {
+        max-width: 105px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .lang-dropdown-menu {
+        width: 225px;
+        max-height: 290px;
+        top: calc(100% + 8px);
+      }
+
       .nav-links {
         display: none;
         position: absolute;
@@ -545,7 +696,11 @@
       .footer-links { flex-direction: column; gap: 16px; }
     }
 
-    @media (max-width: 380px) {
+    @media (max-width: 400px) {
+      .logo-area { font-size: 1.15rem; gap: 8px; }
+      .logo-img { width: 30px; height: 30px; }
+      .lang-name { max-width: 72px; }
+      .lang-dropdown-btn { padding: 5px 8px; font-size: 0.76rem; }
       h1 { font-size: 1.95rem; }
       .section-title-center h2 { font-size: 1.75rem; }
       .btn-store { padding: 12px 16px; font-size: 0.85rem; }
@@ -598,43 +753,61 @@
           StudyCap
         </div>
 
-        <button class="mobile-menu-btn" id="menuToggle" aria-label="Abrir Menu">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
-        </button>
+        <div class="nav-center-and-right">
+          <!-- Links de navegação desktop e menu colapsável mobile -->
+          <div class="nav-links" id="navLinks">
+            <a href="sobre-app/" data-i18n="nav_about">Sobre</a>
+            <a href="#features" data-i18n="nav_features">Funcionalidades</a>
+            <a href="#support" data-i18n="nav_support">Suporte</a>
+            <a href="https://www.instagram.com/studycapoficial?igsh=MTMyNGZvY3BncWFueQ==" target="_blank" rel="noopener noreferrer" class="btn-instagram" title="Siga nosso Instagram">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+              </svg>
+              <span>Instagram</span>
+            </a>
+          </div>
 
-        <div class="nav-links" id="navLinks">
-          <a href="sobre-app/">Sobre</a>
-          <a href="#features">Funcionalidades</a>
-          <a href="#support">Suporte</a>
-          <a href="https://www.instagram.com/studycapoficial?igsh=MTMyNGZvY3BncWFueQ==" target="_blank" rel="noopener noreferrer" class="btn-instagram" title="Siga nosso Instagram">
-            <svg viewBox="0 0 24 24">
-              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-            </svg>
-            <span>Instagram</span>
-          </a>
+          <!-- Ações da barra: Seletor de Idioma Visível + Botão de Menu -->
+          <div class="nav-actions">
+            <!-- BANDEJA DE IDIOMAS INTEGRADA (VISÍVEL NO TOPO INCLUSIVE NO CELULAR) -->
+            <div class="lang-selector-wrapper" id="langSelectorWrapper">
+              <button class="lang-dropdown-btn" id="langDropdownBtn" type="button" aria-haspopup="true" aria-expanded="false">
+                <span class="lang-flag" id="currentLangFlag">🇧🇷</span>
+                <span class="lang-name" id="currentLangName">Português (BR)</span>
+                <svg class="lang-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+              </button>
+              <div class="lang-dropdown-menu" id="langDropdownMenu" role="menu">
+                <!-- Opções de idioma inseridas dinamicamente via JavaScript -->
+              </div>
+            </div>
+
+            <button class="mobile-menu-btn" id="menuToggle" aria-label="Abrir Menu">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+            </button>
+          </div>
         </div>
       </nav>
     </header>
 
     <section class="hero">
       <div class="hero-content">
-        <h1>Estude de forma<br>inteligente.</h1>
-        <p class="subtitle">Organize suas notas, use Inteligência Artificial e domine o método Pomodoro. Tudo em um só lugar.</p>
+        <h1 data-i18n="hero_title">Estude de forma<br>inteligente.</h1>
+        <p class="subtitle" data-i18n="hero_subtitle">Organize suas notas, use Inteligência Artificial e domine o método Pomodoro. Tudo em um só lugar.</p>
         
         <div class="store-buttons">
           <a href="https://play.google.com/store/apps/details?id=com.alifdevstudio.studycap" class="btn-store" target="_blank">
             <img src="play_store.png" alt="Google Play" class="store-icon">
-            Google Play (Em Teste fechado)
+            <span data-i18n="btn_google_play">Google Play (Em Teste fechado)</span>
           </a>
           
           <a class="btn-store coming-soon">
             <img src="app_store.png" alt="App Store" class="store-icon">
-            App Store (Em Breve)
+            <span data-i18n="btn_app_store">App Store (Em Breve)</span>
           </a>
 
           <a class="btn-store coming-soon">
             <img src="windows.png" alt="Windows" class="store-icon">
-            Windows (Em Breve)
+            <span data-i18n="btn_windows">Windows (Em Breve)</span>
           </a>
         </div>
       </div>
@@ -649,8 +822,8 @@
     </section>
 
     <div class="section-title-center reveal">
-      <h2>Recursos Principais</h2>
-      <p>Tudo o que você precisa para alcançar seus objetivos acadêmicos</p>
+      <h2 data-i18n="features_title">Recursos Principais</h2>
+      <p data-i18n="features_subtitle">Tudo o que você precisa para alcançar seus objetivos acadêmicos</p>
     </div>
 
     <section id="features" class="features">
@@ -663,8 +836,8 @@
             <path class="star-blink-2" d="M4 16l.8 2.4h2.2l-1.8 1.4.8 2.4-1.8-1.4-1.8 1.4.8-2.4-1.8-1.4h2.2z" style="transform: scale(0.5); transform-origin: 4px 16px;"/>
           </svg>
         </div>
-        <h3>Mari IA</h3>
-        <p>Tire dúvidas acadêmicas instantaneamente com nossa inteligência artificial integrada ao StudyCap.</p>
+        <h3 data-i18n="feat1_title">Mari IA</h3>
+        <p data-i18n="feat1_desc">Tire dúvidas acadêmicas instantaneamente com nossa inteligência artificial integrada ao StudyCap.</p>
       </div>
 
       <div class="card reveal">
@@ -675,89 +848,878 @@
             <path d="m9 15 2 2 4-4"/>
           </svg>
         </div>
-        <h3>Provas e questões do ENEM</h3>
-        <p>Acesse provas dentro do aplicativo e responda às questões para praticar, revisar conteúdos e se familiarizar com o formato do exame.</p>
+        <h3 data-i18n="feat2_title">Provas e questões do ENEM</h3>
+        <p data-i18n="feat2_desc">Acesse provas dentro do aplicativo e responda às questões para praticar, revisar conteúdos e se familiarizar com o formato do exame.</p>
       </div>
 
       <div class="card reveal">
         <div class="card-icon">
           <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M8 14h4"/><path d="M8 18h8"/></svg>
         </div>
-        <h3>Cronograma de estudos</h3>
-        <p>Planeje matérias, atividades e sessões de estudo ao longo dos dias, criando uma visão mais organizada da sua rotina e dos seus objetivos.</p>
+        <h3 data-i18n="feat3_title">Cronograma de estudos</h3>
+        <p data-i18n="feat3_desc">Planeje matérias, atividades e sessões de estudo ao longo dos dias, criando uma visão mais organizada da sua rotina e dos seus objetivos.</p>
       </div>
 
       <div class="card reveal">
         <div class="card-icon">
           <svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
         </div>
-        <h3>Visualização em lista ou tabela</h3>
-        <p>Escolha como deseja visualizar suas tarefas e planejamentos. O modo lista oferece uma leitura direta, enquanto o modo tabela facilita a comparação e a organização das informações.</p>
+        <h3 data-i18n="feat4_title">Visualização em lista ou tabela</h3>
+        <p data-i18n="feat4_desc">Escolha como deseja visualizar suas tarefas e planejamentos. O modo lista oferece uma leitura direta, enquanto o modo tabela facilita a comparação e a organização das informações.</p>
       </div>
 
       <div class="card reveal">
         <div class="card-icon">
           <svg viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
         </div>
-        <h3>Notas & Mídias</h3>
-        <p>Separe suas anotações por matérias, anexe áudios e imagens, ou arquive conteúdos antigos para manter o foco.</p>
+        <h3 data-i18n="feat5_title">Notas & Mídias</h3>
+        <p data-i18n="feat5_desc">Separe suas anotações por matérias, anexe áudios e imagens, ou arquive conteúdos antigos para manter o foco.</p>
       </div>
 
       <div class="card reveal">
         <div class="card-icon">
           <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
         </div>
-        <h3>Foco Absoluto</h3>
-        <p>Método Pomodoro com tempos customizáveis para maximizar sua produtividade diária.</p>
+        <h3 data-i18n="feat6_title">Foco Absoluto</h3>
+        <p data-i18n="feat6_desc">Método Pomodoro com tempos customizáveis para maximizar sua produtividade diária.</p>
       </div>
 
       <div class="card reveal">
         <div class="card-icon">
           <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
         </div>
-        <h3>Agenda</h3>
-        <p>Anote e marque seus compromissos, provas e prazos de entrega em um calendário intuitivo e prático.</p>
+        <h3 data-i18n="feat7_title">Agenda</h3>
+        <p data-i18n="feat7_desc">Anote e marque seus compromissos, provas e prazos de entrega em um calendário intuitivo e prático.</p>
       </div>
 
       <div class="card reveal">
         <div class="card-icon">
           <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
         </div>
-        <h3>Estatísticas</h3>
-        <p>Veja seu progresso detalhado e acompanhe suas conquistas de estudo durante todo o mês.</p>
+        <h3 data-i18n="feat8_title">Estatísticas</h3>
+        <p data-i18n="feat8_desc">Veja seu progresso detalhado e acompanhe suas conquistas de estudo durante todo o mês.</p>
       </div>
 
       <div class="card reveal">
         <div class="card-icon">
           <svg viewBox="0 0 24 24"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
         </div>
-        <h3>Cloud Sync</h3>
-        <p>Seus dados salvos localmente com futura integração para acessar de qualquer lugar.</p>
+        <h3 data-i18n="feat9_title">Cloud Sync</h3>
+        <p data-i18n="feat9_desc">Seus dados salvos localmente com futura integração para acessar de qualquer lugar.</p>
       </div>
 
     </section>
 
     <section id="support" class="support-section reveal">
-      <h2 style="font-size: 2.2rem; font-weight: 800; margin-bottom: 12px; letter-spacing: -1px;">Dúvidas ou Feedback?</h2>
-      <p style="color: var(--text-muted); max-width: 500px; margin: 0 auto;">Estamos em constante evolução para oferecer o melhor para seus estudos.</p>
-      <a href="mailto:studycapoficial@gmail.com" class="btn-primary">Falar com Suporte</a>
+      <h2 style="font-size: 2.2rem; font-weight: 800; margin-bottom: 12px; letter-spacing: -1px;" data-i18n="support_title">Dúvidas ou Feedback?</h2>
+      <p style="color: var(--text-muted); max-width: 500px; margin: 0 auto;" data-i18n="support_subtitle">Estamos em constante evolução para oferecer o melhor para seus estudos.</p>
+      <a href="mailto:studycapoficial@gmail.com" class="btn-primary" data-i18n="btn_support">Falar com Suporte</a>
     </section>
 
     <footer>
       <div class="footer-links">
-        <a href="sobre-app/">Sobre o App</a>
-        <a href="#features">Funcionalidades</a>
-        <a href="./privacidade/">Privacidade</a>
-        <a href="./deletar-conta/">Exclusão de Conta</a>
-        <a href="#">Termos de Uso</a>
+        <a href="sobre-app/" data-i18n="footer_about">Sobre o App</a>
+        <a href="#features" data-i18n="footer_features">Funcionalidades</a>
+        <a href="./privacidade/" data-i18n="footer_privacy">Privacidade</a>
+        <a href="./deletar-conta/" data-i18n="footer_delete">Exclusão de Conta</a>
+        <a href="#" data-i18n="footer_terms">Termos de Uso</a>
       </div>
-      <p style="color: #475569; font-size: 0.85rem;">© 2026 StudyCap. Elevando sua produtividade ao máximo.</p>
+      <p style="color: #475569; font-size: 0.85rem;" data-i18n="footer_copy">© 2026 StudyCap. Elevando sua produtividade ao máximo.</p>
     </footer>
 
   </div>
 
   <script>
-    // --- MOTOR DE PARTÍCULAS INTERATIVAS (CANVAS) ---
+    const translations = {
+      'pt_BR': {
+        name: 'Português (BR)',
+        flag: '🇧🇷',
+        dir: 'ltr',
+        nav_about: 'Sobre',
+        nav_features: 'Funcionalidades',
+        nav_support: 'Suporte',
+        hero_title: 'Estude de forma<br>inteligente.',
+        hero_subtitle: 'Organize suas notas, use Inteligência Artificial e domine o método Pomodoro. Tudo em um só lugar.',
+        btn_google_play: 'Google Play (Em Teste fechado)',
+        btn_app_store: 'App Store (Em Breve)',
+        btn_windows: 'Windows (Em Breve)',
+        features_title: 'Recursos Principais',
+        features_subtitle: 'Tudo o que você precisa para alcançar seus objetivos acadêmicos',
+        feat1_title: 'Mari IA',
+        feat1_desc: 'Tire dúvidas acadêmicas instantaneamente com nossa inteligência artificial integrada ao StudyCap.',
+        feat2_title: 'Provas e questões do ENEM',
+        feat2_desc: 'Acesse provas dentro do aplicativo e responda às questões para praticar, revisar conteúdos e se familiarizar com o formato do exame.',
+        feat3_title: 'Cronograma de estudos',
+        feat3_desc: 'Planeje matérias, atividades e sessões de estudo ao longo dos dias, criando uma visão mais organizada da sua rotina e dos seus objetivos.',
+        feat4_title: 'Visualização em lista ou tabela',
+        feat4_desc: 'Escolha como deseja visualizar suas tarefas e planejamentos. O modo lista oferece uma leitura direta, enquanto o modo tabela facilita a comparação e a organização das informações.',
+        feat5_title: 'Notas & Mídias',
+        feat5_desc: 'Separe suas anotações por matérias, anexe áudios e imagens, ou arquive conteúdos antigos para manter o foco.',
+        feat6_title: 'Foco Absoluto',
+        feat6_desc: 'Método Pomodoro com tempos customizáveis para maximizar sua produtividade diária.',
+        feat7_title: 'Agenda',
+        feat7_desc: 'Anote e marque seus compromissos, provas e prazos de entrega em um calendário intuitivo e prático.',
+        feat8_title: 'Estatísticas',
+        feat8_desc: 'Veja seu progresso detalhado e acompanhe suas conquistas de estudo durante todo o mês.',
+        feat9_title: 'Cloud Sync',
+        feat9_desc: 'Seus dados salvos localmente com futura integração para acessar de qualquer lugar.',
+        support_title: 'Dúvidas ou Feedback?',
+        support_subtitle: 'Estamos em constante evolução para oferecer o melhor para seus estudos.',
+        btn_support: 'Falar com Suporte',
+        footer_about: 'Sobre o App',
+        footer_features: 'Funcionalidades',
+        footer_privacy: 'Privacidade',
+        footer_delete: 'Exclusão de Conta',
+        footer_terms: 'Termos de Uso',
+        footer_copy: '© 2026 StudyCap. Elevando sua produtividade ao máximo.'
+      },
+      'pt_PT': {
+        name: 'Português (PT)',
+        flag: '🇵🇹',
+        dir: 'ltr',
+        nav_about: 'Sobre',
+        nav_features: 'Funcionalidades',
+        nav_support: 'Suporte',
+        hero_title: 'Estude de forma<br>inteligente.',
+        hero_subtitle: 'Organize as suas notas, use Inteligência Artificial e domine o método Pomodoro. Tudo num só lugar.',
+        btn_google_play: 'Google Play (Em Teste fechado)',
+        btn_app_store: 'App Store (Em Breve)',
+        btn_windows: 'Windows (Em Breve)',
+        features_title: 'Recursos Principais',
+        features_subtitle: 'Tudo o que precisa para alcançar os seus objetivos académicos',
+        feat1_title: 'Mari IA',
+        feat1_desc: 'Tire dúvidas académicas instantaneamente com a nossa inteligência artificial integrada no StudyCap.',
+        feat2_title: 'Exames e questões',
+        feat2_desc: 'Aceda a exames na aplicação e responda a questões para praticar, rever matérias e familiarizar-se com os formatos.',
+        feat3_title: 'Horário de estudos',
+        feat3_desc: 'Planeie disciplinas, atividades e sessões de estudo ao longo dos dias, obtendo uma rotina organizada.',
+        feat4_title: 'Visualização em lista ou tabela',
+        feat4_desc: 'Escolha como deseja visualizar tarefas. O modo lista oferece leitura direta, enquanto o modo tabela facilita comparações.',
+        feat5_title: 'Notas & Multimédia',
+        feat5_desc: 'Separe anotações por disciplinas, anexe áudios e imagens, ou arquive apontamentos para manter o foco.',
+        feat6_title: 'Foco Absoluto',
+        feat6_desc: 'Método Pomodoro com tempos personalizáveis para maximizar o seu rendimento diário.',
+        feat7_title: 'Agenda',
+        feat7_desc: 'Registe e acompanhe compromissos, frequências e prazos de entrega num calendário prático.',
+        feat8_title: 'Estatísticas',
+        feat8_desc: 'Consulte o seu progresso detalhado e avalie o seu desempenho de estudo ao longo do mês.',
+        feat9_title: 'Cloud Sync',
+        feat9_desc: 'Os seus dados guardados localmente com sincronização futura para aceder em qualquer lugar.',
+        support_title: 'Dúvidas ou Sugestões?',
+        support_subtitle: 'Estamos em constante evolução para proporcionar a melhor experiência de estudo.',
+        btn_support: 'Falar com Suporte',
+        footer_about: 'Sobre a Aplicação',
+        footer_features: 'Funcionalidades',
+        footer_privacy: 'Privacidade',
+        footer_delete: 'Eliminação de Conta',
+        footer_terms: 'Termos de Utilização',
+        footer_copy: '© 2026 StudyCap. Elevando a sua produtividade ao máximo.'
+      },
+      'en': {
+        name: 'English',
+        flag: '🇺🇸',
+        dir: 'ltr',
+        nav_about: 'About',
+        nav_features: 'Features',
+        nav_support: 'Support',
+        hero_title: 'Study smarter,<br>not harder.',
+        hero_subtitle: 'Organize your notes, leverage Artificial Intelligence, and master the Pomodoro method. All in one place.',
+        btn_google_play: 'Google Play (Closed Beta)',
+        btn_app_store: 'App Store (Coming Soon)',
+        btn_windows: 'Windows (Coming Soon)',
+        features_title: 'Key Features',
+        features_subtitle: 'Everything you need to reach your academic goals',
+        feat1_title: 'Mari AI',
+        feat1_desc: 'Clear academic doubts instantly with our built-in artificial intelligence in StudyCap.',
+        feat2_title: 'Exams & Practice Questions',
+        feat2_desc: 'Access exam papers directly inside the app, practice questions, and review core subjects with ease.',
+        feat3_title: 'Study Schedule',
+        feat3_desc: 'Plan subjects, tasks, and study sessions throughout the week for a well-structured daily routine.',
+        feat4_title: 'List or Table View',
+        feat4_desc: 'Choose how to view your study plans: list view for rapid overview or table view for structured comparison.',
+        feat5_title: 'Notes & Media',
+        feat5_desc: 'Organize notes by subject, attach audio and pictures, or archive older notes to stay clutter-free.',
+        feat6_title: 'Laser Focus',
+        feat6_desc: 'Customizable Pomodoro timer tailored to maximize your daily study workflow.',
+        feat7_title: 'Calendar & Agenda',
+        feat7_desc: 'Track assignments, upcoming tests, and project deadlines in an intuitive interactive planner.',
+        feat8_title: 'Detailed Analytics',
+        feat8_desc: 'Review comprehensive study stats and milestones accomplished throughout the entire month.',
+        feat9_title: 'Cloud Sync',
+        feat9_desc: 'Local-first privacy with planned seamless cloud sync to access your workspace anywhere.',
+        support_title: 'Questions or Feedback?',
+        support_subtitle: 'We are constantly evolving to deliver the finest study workspace for you.',
+        btn_support: 'Contact Support',
+        footer_about: 'About App',
+        footer_features: 'Features',
+        footer_privacy: 'Privacy Policy',
+        footer_delete: 'Delete Account',
+        footer_terms: 'Terms of Use',
+        footer_copy: '© 2026 StudyCap. Maximizing your academic productivity.'
+      },
+      'es': {
+        name: 'Español',
+        flag: '🇪🇸',
+        dir: 'ltr',
+        nav_about: 'Acerca de',
+        nav_features: 'Funciones',
+        nav_support: 'Soporte',
+        hero_title: 'Estudia de forma<br>inteligente.',
+        hero_subtitle: 'Organiza tus notas, usa Inteligencia Artificial y domina el método Pomodoro. Todo en un solo lugar.',
+        btn_google_play: 'Google Play (Prueba cerrada)',
+        btn_app_store: 'App Store (Próximamente)',
+        btn_windows: 'Windows (Próximamente)',
+        features_title: 'Funciones Principales',
+        features_subtitle: 'Todo lo que necesitas para alcanzar tus metas académicas',
+        feat1_title: 'Mari IA',
+        feat1_desc: 'Resuelve dudas al instante con nuestra inteligencia artificial integrada en StudyCap.',
+        feat2_title: 'Exámenes y Preguntas',
+        feat2_desc: 'Accede a exámenes dentro de la app y practica preguntas para repasar contenidos y adaptarte al formato.',
+        feat3_title: 'Cronograma de estudios',
+        feat3_desc: 'Planifica materias, tareas y sesiones de estudio para tener una rutina perfectamente organizada.',
+        feat4_title: 'Vista en lista o tabla',
+        feat4_desc: 'Elige cómo visualizar tus planes: lista para lectura rápida o tabla para comparar información fácilmente.',
+        feat5_title: 'Notas y Archivos',
+        feat5_desc: 'Organiza apuntes por materia, adjunta notas de voz e imágenes, o archiva lo antiguo para no distraerte.',
+        feat6_title: 'Enfoque Total',
+        feat6_desc: 'Técnica Pomodoro con intervalos ajustables para maximizar tu productividad diaria.',
+        feat7_title: 'Agenda',
+        feat7_desc: 'Apunta compromisos, exámenes y fechas límite en un calendario claro y dinámico.',
+        feat8_title: 'Estadísticas',
+        feat8_desc: 'Analiza tu progreso y visualiza tus logros de estudio a lo largo de todo el mes.',
+        feat9_title: 'Cloud Sync',
+        feat9_desc: 'Datos guardados localmente con sincronización en la nube para acceder desde donde quieras.',
+        support_title: '¿Preguntas o sugerencias?',
+        support_subtitle: 'Mejoramos constantemente para ofrecer la mejor herramienta a tus estudios.',
+        btn_support: 'Contactar Soporte',
+        footer_about: 'Acerca de la App',
+        footer_features: 'Funciones',
+        footer_privacy: 'Privacidad',
+        footer_delete: 'Eliminar Cuenta',
+        footer_terms: 'Términos de Uso',
+        footer_copy: '© 2026 StudyCap. Elevando tu productividad al máximo.'
+      },
+      'zh': {
+        name: '简体中文',
+        flag: '🇨🇳',
+        dir: 'ltr',
+        nav_about: '关于',
+        nav_features: '主要功能',
+        nav_support: '技术支持',
+        hero_title: '更智能地<br>开启学习之旅。',
+        hero_subtitle: '整理课堂笔记，借助人工智能解答疑惑，掌握番茄工作法。一站式高效学习空间。',
+        btn_google_play: 'Google Play (内测版)',
+        btn_app_store: 'App Store (即将推出)',
+        btn_windows: 'Windows (即将推出)',
+        features_title: '核心功能',
+        features_subtitle: '助您达成学业目标所需的一切工具',
+        feat1_title: 'Mari 人工智能',
+        feat1_desc: '内置 AI 学习助手随时随地为您即时解答各类学术疑问。',
+        feat2_title: '模拟真题与练习',
+        feat2_desc: '在应用内直接查看历年考卷和习题，随时巩固复习核心知识点。',
+        feat3_title: '智能学习计划',
+        feat3_desc: '科学规划科目与学习日程，轻松打造井井有条的学习习惯。',
+        feat4_title: '列表或表格视图',
+        feat4_desc: '自由切换任务展现形式：列表模式简洁直观，表格模式便于全景对比。',
+        feat5_title: '多媒体笔记',
+        feat5_desc: '按科目细分笔记，支持添加音频与图片，随时归档旧内容专注当下。',
+        feat6_title: '沉浸专注',
+        feat6_desc: '支持自定义时长的番茄钟，全方位提升您的每日学习效率。',
+        feat7_title: '日程日历',
+        feat7_desc: '直观实用的日历让作业交期、复习阶段与考试日期一目了然。',
+        feat8_title: '数据统计',
+        feat8_desc: '全方位统计图表助您深入复盘整月的专注时间与学习成果。',
+        feat9_title: '云端同步',
+        feat9_desc: '本地离线存储安全可靠，后续支持云同步让您随时随地继续学习。',
+        support_title: '遇到问题或有反馈建议？',
+        support_subtitle: '我们持续优化迭代，致力于为您打造卓越的学习环境。',
+        btn_support: '联系客服支持',
+        footer_about: '关于应用',
+        footer_features: '功能介绍',
+        footer_privacy: '隐私政策',
+        footer_delete: '注销账户',
+        footer_terms: '使用条款',
+        footer_copy: '© 2026 StudyCap。助您的专注与学习效率更上一层楼。'
+      },
+      'hi': {
+        name: 'हिन्दी',
+        flag: '🇮🇳',
+        dir: 'ltr',
+        nav_about: 'हमारे बारे में',
+        nav_features: 'सुविधाएं',
+        nav_support: 'सहायता',
+        hero_title: 'स्मार्ट तरीके से<br>पढ़ाई करें।',
+        hero_subtitle: 'अपने नोट्स व्यवस्थित करें, आर्टिफिशियल इंटेलिजेंस का उपयोग करें और पोमोडोरो तकनीक अपनाएं। सब कुछ एक ही जगह।',
+        btn_google_play: 'Google Play (परीक्षण में)',
+        btn_app_store: 'App Store (जल्द आ रहा है)',
+        btn_windows: 'Windows (जल्द आ रहा है)',
+        features_title: 'मुख्य विशेषताएं',
+        features_subtitle: 'अपने शैक्षणिक लक्ष्यों को प्राप्त करने के लिए आवश्यक सब कुछ',
+        feat1_title: 'Mari AI',
+        feat1_desc: 'StudyCap में शामिल AI की मदद से अपनी शैक्षणिक शंकाओं का तुरंत समाधान पाएं।',
+        feat2_title: 'परीक्षाएं और अभ्यास प्रश्न',
+        feat2_desc: 'ऐप में सीधे मॉक टेस्ट हल करें, रिवीजन करें और परीक्षा पैटर्न से अच्छी तरह परिचित हों।',
+        feat3_title: 'अध्ययन समय सारणी',
+        feat3_desc: 'अपनी दिनचर्या को सुव्यवस्थित रखने के लिए विषयों और अध्ययन सत्रों की योजना बनाएं।',
+        feat4_title: 'सूची या तालिका दृश्य',
+        feat4_desc: 'अपनी योजनाओं को सूची या तालिका में देखें ताकि तुलना करना और समझना बेहद आसान हो।',
+        feat5_title: 'नोट्स और मीडिया',
+        feat5_desc: 'विषयवार नोट्स बनाएं, ऑडियो और तस्वीरें संलग्न करें और पुराने नोट्स संग्रहीत करें।',
+        feat6_title: 'पूर्ण एकाग्रता',
+        feat6_desc: 'दैनिक उत्पादकता को उच्चतम स्तर पर ले जाने के लिए अनुकूलन योग्य पोमोडोरो टाइमर।',
+        feat7_title: 'कैलेंडर और कार्य सूची',
+        feat7_desc: 'परीक्षा की तारीखों और असाइनमेंट की समय सीमा को कैलेंडर पर आसानी से ट्रैक करें।',
+        feat8_title: 'विस्तृत आंकड़े',
+        feat8_desc: 'महीने भर की अध्ययन प्रगति और उपलब्धियों की विस्तृत जानकारी देखें।',
+        feat9_title: 'क्लाउड सिंक',
+        feat9_desc: 'सुरक्षित स्थानीय डेटा और आगामी क्लाउड सिंक जिससे आप कभी भी कहीं से भी पढ़ सकें।',
+        support_title: 'कोई प्रश्न या सुझाव?',
+        support_subtitle: 'हम आपकी पढ़ाई को और बेहतर बनाने के लिए निरंतर प्रयासरत हैं।',
+        btn_support: 'सहायता टीम से संपर्क करें',
+        footer_about: 'ऐप के बारे में',
+        footer_features: 'सुविधाएं',
+        footer_privacy: 'गोपनीयता नीति',
+        footer_delete: 'खाता हटाएं',
+        footer_terms: 'उपयोग की शर्तें',
+        footer_copy: '© 2026 StudyCap. अपनी उत्पादकता को नई ऊंचाइयों पर ले जाएं।'
+      },
+      'id': {
+        name: 'Bahasa Indonesia',
+        flag: '🇮🇩',
+        dir: 'ltr',
+        nav_about: 'Tentang',
+        nav_features: 'Fitur',
+        nav_support: 'Dukungan',
+        hero_title: 'Belajar secara<br>cerdas.',
+        hero_subtitle: 'Atur catatan, gunakan Kecerdasan Buatan, dan kuasai metode Pomodoro. Semua dalam satu aplikasi.',
+        btn_google_play: 'Google Play (Uji Tertutup)',
+        btn_app_store: 'App Store (Segera Hadir)',
+        btn_windows: 'Windows (Segera Hadir)',
+        features_title: 'Fitur Utama',
+        features_subtitle: 'Semua yang Anda butuhkan untuk meraih tujuan akademis',
+        feat1_title: 'Mari AI',
+        feat1_desc: 'Selesaikan pertanyaan akademis secara instan dengan kecerdasan buatan terintegrasi.',
+        feat2_title: 'Ujian & Latihan Soal',
+        feat2_desc: 'Akses ujian langsung di aplikasi dan jawab soal untuk mengulang materi pelajaran.',
+        feat3_title: 'Jadwal Belajar',
+        feat3_desc: 'Rencanakan mata pelajaran dan sesi belajar harian demi rutinitas yang teratur.',
+        feat4_title: 'Tampilan Daftar atau Tabel',
+        feat4_desc: 'Pilih tampilan daftar yang praktis atau mode tabel untuk kemudahan perbandingan tugas.',
+        feat5_title: 'Catatan & Media',
+        feat5_desc: 'Kelompokkan catatan berdasarkan mata pelajaran, lampirkan audio, dan gambar.',
+        feat6_title: 'Fokus Maksimal',
+        feat6_desc: 'Metode Pomodoro dengan durasi yang dapat diatur untuk produktivitas optimal.',
+        feat7_title: 'Agenda & Kalender',
+        feat7_desc: 'Catat tugas, jadwal ujian, dan tenggat waktu pada kalender interaktif.',
+        feat8_title: 'Statistik Belajar',
+        feat8_desc: 'Pantau perkembangan dan pencapaian waktu belajar Anda sepanjang bulan.',
+        feat9_title: 'Sinkronisasi Cloud',
+        feat9_desc: 'Data tersimpan lokal dengan integrasi cloud mendatang untuk akses fleksibel.',
+        support_title: 'Pertanyaan atau Masukan?',
+        support_subtitle: 'Kami terus berinovasi untuk memberikan pengalaman belajar terbaik.',
+        btn_support: 'Hubungi Dukungan',
+        footer_about: 'Tentang Aplikasi',
+        footer_features: 'Fitur',
+        footer_privacy: 'Privasi',
+        footer_delete: 'Hapus Akun',
+        footer_terms: 'Syarat & Ketentuan',
+        footer_copy: '© 2026 StudyCap. Maksimalkan produktivitas belajar Anda.'
+      },
+      'ar': {
+        name: 'العربية',
+        flag: '🇸🇦',
+        dir: 'rtl',
+        nav_about: 'حول التطبيق',
+        nav_features: 'المميزات',
+        nav_support: 'الدعم',
+        hero_title: 'ادرس بذكاء<br>وليس بجهد أكبر.',
+        hero_subtitle: 'نظّم ملاحظاتك، واستعن بالذكاء الاصطناعي، وأتقن تقنية بومودورو. كل ذلك في مكان واحد.',
+        btn_google_play: 'Google Play (تجريبي)',
+        btn_app_store: 'App Store (قريباً)',
+        btn_windows: 'Windows (قريباً)',
+        features_title: 'الميزات الرئيسية',
+        features_subtitle: 'كل ما تحتاجه لتحقيق أهدافك الأكاديمية بنجاح',
+        feat1_title: 'Mari AI',
+        feat1_desc: 'أجب على الأسئلة والاستفسارات الدراسية فوراً عبر مساعد الذكاء الاصطناعي.',
+        feat2_title: 'الامتحانات والأسئلة',
+        feat2_desc: 'تدرّب على نماذج الامتحانات والأسئلة لتثبيت المفاهيم والاستعداد التام.',
+        feat3_title: 'جدول الدراسة',
+        feat3_desc: 'نظّم المواد وجلسات المذاكرة بمرونة على مدار الأسبوع لتحقيق أفضل النتائج.',
+        feat4_title: 'عرض القائمة أو الجدول',
+        feat4_desc: 'اختر طريقة العرض المفضلة لمهامك الدراسية إما كقائمة واضحة أو كجدول منظم.',
+        feat5_title: 'الملاحظات والوسائط',
+        feat5_desc: 'قسّم ملاحظاتك حسب المادة مع إمكانية إرفاق تسجيلات صوتية وصور.',
+        feat6_title: 'تركيز فائق',
+        feat6_desc: 'مؤقت بومودورو قابل للتخصيص لرفع إنتاجيتك واستيعابك اليومي.',
+        feat7_title: 'التقويم والمواعيد',
+        feat7_desc: 'سجّل مواعيد الاختبارات وتسليم الواجبات في تقويم ميسر وبديهي.',
+        feat8_title: 'الإحصائيات',
+        feat8_desc: 'تابع تفاصيل تقدمك الأكاديمي وساعات دراستك على مدار الشهر بدقة.',
+        feat9_title: 'المزامنة السحابية',
+        feat9_desc: 'حفظ آمن للبيانات محلياً مع دعم المزامنة السحابية لتصل لمحتواك من أي مكان.',
+        support_title: 'هل لديك استفسار أو اقتراح؟',
+        support_subtitle: 'نعمل دوماً على التطوير لتقديم الأفضل لمسيرتك الدراسية.',
+        btn_support: 'تواصل مع الدعم',
+        footer_about: 'عن التطبيق',
+        footer_features: 'المميزات',
+        footer_privacy: 'الخصوصية',
+        footer_delete: 'حذف الحساب',
+        footer_terms: 'شروط الاستخدام',
+        footer_copy: '© 2026 StudyCap. ارتقِ بإنتاجيتك إلى أقصى الحدود.'
+      },
+      'bn': {
+        name: 'বাংলা',
+        flag: '🇧🇩',
+        dir: 'ltr',
+        nav_about: 'সম্পর্কে',
+        nav_features: 'বৈশিষ্ট্যসমূহ',
+        nav_support: 'সাপোর্ট',
+        hero_title: 'স্মার্ট উপায়ে<br>পড়াশোনা করুন।',
+        hero_subtitle: 'নোট সাজিয়ে রাখুন, কৃত্রিম বুদ্ধিমত্তা ব্যবহার করুন এবং পোমোডোরো পদ্ধতিতে মনোনিবেশ করুন। সবকিছু এক সাথে।',
+        btn_google_play: 'Google Play (পরীক্ষামূলক)',
+        btn_app_store: 'App Store (শীঘ্রই আসছে)',
+        btn_windows: 'Windows (শীঘ্রই আসছে)',
+        features_title: 'প্রধান বৈশিষ্ট্যসমূহ',
+        features_subtitle: 'আপনার একাডেমিক লক্ষ্য অর্জনে যা কিছু প্রয়োজন',
+        feat1_title: 'Mari AI',
+        feat1_desc: 'অ্যাপে যুক্ত এআই সহকারীর সাহায্যে তাৎক্ষণিকভাবে আপনার পড়াশোনার প্রশ্নগুলোর সমাধান পান।',
+        feat2_title: 'পরীক্ষা ও নমুনা প্রশ্ন',
+        feat2_desc: 'অ্যাপের ভেতর প্রশ্ন অনুশীলন করুন, রিভিশন দিন এবং পরীক্ষার প্রস্তুতির সাথে পরিচিত হোন।',
+        feat3_title: 'পড়ার রুটিন',
+        feat3_desc: 'নিয়মিত পড়ার অভ্যাস তৈরি করতে বিষয় ও অধ্যয়নের সময়সূচি সুন্দরভাবে সাজিয়ে নিন।',
+        feat4_title: 'তালিকা বা টেবিল ভিউ',
+        feat4_desc: 'পছন্দমতো তালিকা কিংবা টেবিল ভিউ নির্বাচন করে সহজে কাজের তুলনা ও পরিকল্পনা করুন।',
+        feat5_title: 'নোট ও মিডিয়া',
+        feat5_desc: 'বিষয়ভিত্তিক নোট তৈরি করুন, অডিও ও ছবি যুক্ত করুন অথবা আগের ফাইল সংরক্ষণ করুন।',
+        feat6_title: 'গভীর মনোযোগ',
+        feat6_desc: 'কাস্টমাইজযোগ্য পোমোডোরো টাইমার যা আপনার দৈনন্দিন উৎপাদনশীলতা বহুগুণ বাড়িয়ে দেবে।',
+        feat7_title: 'ক্যালেন্ডার ও সূচি',
+        feat7_desc: 'পরীক্ষার সময়সূচি ও অ্যাসাইনমেন্ট জমার শেষ তারিখ একটি সাধারণ ক্যালেন্ডারে চিহ্নিত রাখুন।',
+        feat8_title: 'পরিসংখ্যান',
+        feat8_desc: 'মাসব্যাপী আপনার অধ্যয়নের অগ্রগতি এবং অর্জিত লক্ষ্যগুলোর বিস্তারিত রিপোর্ট দেখুন।',
+        feat9_title: 'ক্লাউড সিঙ্ক',
+        feat9_desc: 'নিরাপদ লোকাল সেভ এবং ভবিষ্যতে যে কোনো জায়গা থেকে ডেটা ব্যবহারের ক্লাউড সুবিধা।',
+        support_title: 'কোনো প্রশ্ন বা প্রতিক্রিয়া আছে?',
+        support_subtitle: 'আপনার পড়াশোনাকে আরো সহজ করতে আমরা প্রতিনিয়ত অ্যাপটি উন্নত করছি।',
+        btn_support: 'সাপোর্টের সাথে যোগাযোগ',
+        footer_about: 'অ্যাপ সম্পর্কে',
+        footer_features: 'বৈশিষ্ট্য',
+        footer_privacy: 'গোপনীয়তা',
+        footer_delete: 'অ্যাকাউন্ট মুছুন',
+        footer_terms: 'ব্যবহারের শর্তাবলী',
+        footer_copy: '© 2026 StudyCap. আপনার একাডেমিক দক্ষতাকে সর্বোচ্চ মাত্রায় নিয়ে যান।'
+      },
+      'ur': {
+        name: 'اردو',
+        flag: '🇵🇰',
+        dir: 'rtl',
+        nav_about: 'تعارف',
+        nav_features: 'خصوصیات',
+        nav_support: 'مدد',
+        hero_title: 'ہوشمندی سے<br>پڑھائی کریں۔',
+        hero_subtitle: 'اپنے نوٹس ترتیب دیں، مصنوعی ذہانت کا استعمال کریں اور پومودورو تکنیک اپنائیں۔ سب کچھ ایک جگہ۔',
+        btn_google_play: 'Google Play (ٹیسٹنگ میں)',
+        btn_app_store: 'App Store (جلد آرہا ہے)',
+        btn_windows: 'Windows (جلد آرہا ہے)',
+        features_title: 'اہم خصوصیات',
+        features_subtitle: 'آپ کے تعلیمی اہداف کی تکمیل کے لیے تمام ضروری ٹولز',
+        feat1_title: 'Mari AI',
+        feat1_desc: 'ایپ میں شامل مصنوعی ذہانت کے ذریعے تعلیمی سوالات کے فوری جوابات حاصل کریں۔',
+        feat2_title: 'امتحانات اور پریکٹس',
+        feat2_desc: 'ایپ کے اندر سوالات حل کریں، اسباق کا اعادہ کریں اور امتحانی پیٹرن سمجھیں۔',
+        feat3_title: 'اسٹڈی شیڈول',
+        feat3_desc: 'منظم روٹین بنانے کے لیے مضامین اور پڑھائی کے اوقات کی باقاعدہ منصوبہ بندی کریں۔',
+        feat4_title: 'فہرست یا ٹیبل ویو',
+        feat4_desc: 'آسان تقابل اور جائزے کے لیے فہرست یا ٹیبل کے انداز میں شیڈول دیکھیں۔',
+        feat5_title: 'نوٹس اور میڈیا',
+        feat5_desc: 'مضامین کے حساب سے نوٹس تیار کریں، آڈیو اور تصاویر شامل کریں تاکہ فوکس برقرار رہے۔',
+        feat6_title: 'مکمل توجہ',
+        feat6_desc: 'روزانہ کی صلاحیتوں کو نکھارنے کے لیے حسب ضرورت پومودورو ٹائمر۔',
+        feat7_title: 'کیلنڈر اور ڈیڈ لائنز',
+        feat7_desc: 'امتحانی تاریخوں اور اہم کاموں کو ایک آسان کیلنڈر پر واضح دیکھیں۔',
+        feat8_title: 'تفصیلی اعدادوشمار',
+        feat8_desc: 'پورے مہینے کی پڑھائی کی پیش رفت اور کامیابیوں کا جائزہ لیں۔',
+        feat9_title: 'کلاؤڈ سنک',
+        feat9_desc: 'محفوظ لوکل ڈیٹا اور مستقبل کی کلاؤڈ سروس جس سے آپ کہیں بھی رسائی حاصل کرسکیں۔',
+        support_title: 'کوئی سوال یا تجویز ہے؟',
+        support_subtitle: 'ہم آپ کی پڑھائی کو آسان ترین بنانے کے لیے مسلسل کوشاں ہیں۔',
+        btn_support: 'سپورٹ ٹیم سے رابطہ کریں',
+        footer_about: 'ایپ کے بارے میں',
+        footer_features: 'خصوصیات',
+        footer_privacy: 'رازداری',
+        footer_delete: 'اکاؤنٹ ڈیلیٹ کریں',
+        footer_terms: 'شرائط استعمال',
+        footer_copy: '© 2026 StudyCap. اپنی کارکردگی کو عروج پر لے جائیں۔'
+      },
+      'ja': {
+        name: '日本語',
+        flag: '🇯🇵',
+        dir: 'ltr',
+        nav_about: '概要',
+        nav_features: '機能',
+        nav_support: 'サポート',
+        hero_title: 'もっとスマートに<br>学習しよう。',
+        hero_subtitle: 'ノートを整理し、AIを活用し、ポモドーロ法をマスター。学習に必要なすべてがここに。',
+        btn_google_play: 'Google Play (クローズドテスト)',
+        btn_app_store: 'App Store (近日公開)',
+        btn_windows: 'Windows (近日公開)',
+        features_title: '主な機能',
+        features_subtitle: '学業の目標を達成するための最適な学習ツール',
+        feat1_title: 'Mari AI',
+        feat1_desc: 'StudyCap搭載のAIアシスタントが、勉強の疑問にいつでも即座に回答します。',
+        feat2_title: '過去問と演習問題',
+        feat2_desc: 'アプリ内で試験問題に取り組み、復習を行いながら出題形式に慣れることができます。',
+        feat3_title: '学習スケジュール',
+        feat3_desc: '科目や日々の勉強時間を計画し、メリハリのある学習習慣を構築できます。',
+        feat4_title: 'リスト・テーブル表示',
+        feat4_desc: '好みに応じて表示を切り替え可能。直感的なリストと見比べやすいテーブルを用意。',
+        feat5_title: 'ノート＆メディア',
+        feat5_desc: '科目別にノートを管理し、音声や画像を添付。古い記録のアーカイブも可能です。',
+        feat6_title: '究極の集中力',
+        feat6_desc: '時間を自由に設定できるポモドーロタイマーで、日々の生産性を最大限に引き出します。',
+        feat7_title: 'カレンダー＆予定表',
+        feat7_desc: 'テストの日程や課題の提出期限を分かりやすいカレンダーでスマートに管理。',
+        feat8_title: '学習統計データ',
+        feat8_desc: '月ごとの学習時間や進捗状況をグラフで細かく振り返ることができます。',
+        feat9_title: 'クラウド同期',
+        feat9_desc: '安全なローカル保存に加え、どこからでもアクセスできるクラウド機能を予定。',
+        support_title: 'ご質問・フィードバック',
+        support_subtitle: '最高の学習体験をお届けするため、私たちは常に進化を続けています。',
+        btn_support: 'サポートへ問い合わせる',
+        footer_about: 'アプリについて',
+        footer_features: '機能一覧',
+        footer_privacy: 'プライバシーポリシー',
+        footer_delete: 'アカウント削除',
+        footer_terms: '利用規約',
+        footer_copy: '© 2026 StudyCap. 学習の生産性を最大化するパートナー。'
+      },
+      'ko': {
+        name: '한국어',
+        flag: '🇰🇷',
+        dir: 'ltr',
+        nav_about: '소개',
+        nav_features: '기능',
+        nav_support: '지원',
+        hero_title: '더 똑똑하게<br>공부하세요.',
+        hero_subtitle: '노트를 정리하고, AI를 활용하며, 뽀모도로 기법으로 집중하세요. 모든 것이 하나의 앱에.',
+        btn_google_play: 'Google Play (테스트 중)',
+        btn_app_store: 'App Store (출시 예정)',
+        btn_windows: 'Windows (출시 예정)',
+        features_title: '주요 기능',
+        features_subtitle: '학업 목표 달성을 위해 필요한 모든 도구',
+        feat1_title: 'Mari AI',
+        feat1_desc: 'StudyCap에 내장된 AI를 통해 학습 중 생기는 궁금증을 즉시 해결하세요.',
+        feat2_title: '시험 및 기출 문제',
+        feat2_desc: '앱 내에서 문제를 풀고 복습하며 시험 유형을 완벽하게 대비할 수 있습니다.',
+        feat3_title: '학습 플래너',
+        feat3_desc: '과목과 일일 학습 세션을 계획하여 체계적인 공부 습관을 만드세요.',
+        feat4_title: '목록 또는 표 보기',
+        feat4_desc: '일정을 한눈에 보는 목록 모드와 비교가 쉬운 표 모드를 선택할 수 있습니다.',
+        feat5_title: '노트 & 미디어',
+        feat5_desc: '과목별로 노트를 분류하고 음성과 이미지를 첨부하여 집중력을 유지하세요.',
+        feat6_title: '몰입 집중',
+        feat6_desc: '시간 조절이 가능한 뽀모도로 타이머로 하루 공부 효율을 극대화합니다.',
+        feat7_title: '캘린더 일정',
+        feat7_desc: '시험 날짜와 과제 마감일을 직관적인 캘린더에서 한눈에 확인하세요.',
+        feat8_title: '상세 통계',
+        feat8_desc: '한 달 동안의 학습 시간과 성취도를 그래프로 상세히 확인하세요.',
+        feat9_title: '클라우드 동기화',
+        feat9_desc: '로컬 안전 저장 및 어디서든 접근할 수 있는 클라우드 연동이 지원될 예정입니다.',
+        support_title: '궁금한 점이나 의견이 있으신가요?',
+        support_subtitle: '최고의 학습 환경을 제공하기 위해 지속적으로 발전하고 있습니다.',
+        btn_support: '고객 지원 문의',
+        footer_about: '앱 소개',
+        footer_features: '기능',
+        footer_privacy: '개인정보처리방침',
+        footer_delete: '계정 삭제',
+        footer_terms: '이용약관',
+        footer_copy: '© 2026 StudyCap. 당신의 학습 생산성을 최고로 끌어올립니다.'
+      },
+      'de': {
+        name: 'Deutsch',
+        flag: '🇩🇪',
+        dir: 'ltr',
+        nav_about: 'Über uns',
+        nav_features: 'Funktionen',
+        nav_support: 'Support',
+        hero_title: 'Lerne smarter,<br>nicht härter.',
+        hero_subtitle: 'Organisiere deine Notizen, nutze Künstliche Intelligenz und meistere die Pomodoro-Methode. Alles an einem Ort.',
+        btn_google_play: 'Google Play (Geschlossener Test)',
+        btn_app_store: 'App Store (Demnächst)',
+        btn_windows: 'Windows (Demnächst)',
+        features_title: 'Hauptfunktionen',
+        features_subtitle: 'Alles, was du brauchst, um deine akademischen Ziele zu erreichen',
+        feat1_title: 'Mari KI',
+        feat1_desc: 'Kläre akademische Fragen blitzschnell mit unserer integrierten KI in StudyCap.',
+        feat2_title: 'Prüfungen & Übungsfragen',
+        feat2_desc: 'Bearbeite Prüfungen in der App und vertiefe Unterrichtsinhalte praxisnah.',
+        feat3_title: 'Studienplan',
+        feat3_desc: 'Plane Fächer, Aufgaben und Lerneinheiten für eine strukturierte Routine.',
+        feat4_title: 'Listen- oder Tabellenansicht',
+        feat4_desc: 'Wähle deinen Ansichtsmodus: Direkt in der Liste oder übersichtlich in der Tabelle.',
+        feat5_title: 'Notizen & Medien',
+        feat5_desc: 'Sortiere Notizen nach Fächern, füge Audios und Bilder hinzu und archiviere Altes.',
+        feat6_title: 'Voller Fokus',
+        feat6_desc: 'Pomodoro-Methode mit anpassbaren Intervallen für maximale Tagesproduktivität.',
+        feat7_title: 'Kalender & Termine',
+        feat7_desc: 'Behalte Prüfungen, Fristen und Abgaben im intuitiven Kalender immer im Blick.',
+        feat8_title: 'Lernstatistiken',
+        feat8_desc: 'Verfolge deinen detaillierten Fortschritt und analysiere deine Monatsleistungen.',
+        feat9_title: 'Cloud Sync',
+        feat9_desc: 'Lokale Datenspeicherung mit künftiger Cloud-Anbindung für flexiblen Zugriff.',
+        support_title: 'Fragen oder Feedback?',
+        support_subtitle: 'Wir entwickeln uns ständig weiter, um dein Lernerlebnis noch besser zu machen.',
+        btn_support: 'Support kontaktieren',
+        footer_about: 'Über die App',
+        footer_features: 'Funktionen',
+        footer_privacy: 'Datenschutz',
+        footer_delete: 'Konto löschen',
+        footer_terms: 'Nutzungsbedingungen',
+        footer_copy: '© 2026 StudyCap. Hebe deine Produktivität auf das nächste Level.'
+      },
+      'fr': {
+        name: 'Français',
+        flag: '🇫🇷',
+        dir: 'ltr',
+        nav_about: 'À propos',
+        nav_features: 'Fonctionnalités',
+        nav_support: 'Support',
+        hero_title: 'Étudiez de façon<br>intelligente.',
+        hero_subtitle: 'Organisez vos notes, utilisez l\'Intelligence Artificielle et maîtrisez la méthode Pomodoro. Le tout en un seul endroit.',
+        btn_google_play: 'Google Play (Test fermé)',
+        btn_app_store: 'App Store (Bientôt disponible)',
+        btn_windows: 'Windows (Bientôt disponible)',
+        features_title: 'Fonctionnalités Clés',
+        features_subtitle: 'Tout ce dont vous avez besoin pour atteindre vos objectifs d\'études',
+        feat1_title: 'Mari IA',
+        feat1_desc: 'Posez vos questions scolaires et obtenez des réponses instantanées grâce à notre IA.',
+        feat2_title: 'Examens & Questions',
+        feat2_desc: 'Accédez aux examens au sein de l\'application pour vous entraîner et réviser sereinement.',
+        feat3_title: 'Emploi du temps d\'études',
+        feat3_desc: 'Planifiez vos matières et sessions de travail pour une organisation quotidienne optimale.',
+        feat4_title: 'Vue en liste ou tableau',
+        feat4_desc: 'Choisissez entre la vue liste claire et la vue tableau pratique pour comparer vos tâches.',
+        feat5_title: 'Notes & Médias',
+        feat5_desc: 'Classez vos cours par matière, ajoutez des audios ou images, et archivez l\'ancien.',
+        feat6_title: 'Concentration Totale',
+        feat6_desc: 'Technique Pomodoro avec minuteries modulables pour maximiser votre rendement journalier.',
+        feat7_title: 'Agenda',
+        feat7_desc: 'Notez vos échéances, examens et devoirs sur un calendrier clair et ergonomique.',
+        feat8_title: 'Statistiques',
+        feat8_desc: 'Consultez l\'évolution de vos heures de révision et vos progrès au fil des semaines.',
+        feat9_title: 'Cloud Sync',
+        feat9_desc: 'Données stockées localement avec synchronisation cloud à venir pour tout retrouver partout.',
+        support_title: 'Des questions ou des retours ?',
+        support_subtitle: 'Nous perfectionnons constamment StudyCap pour vous offrir le meilleur.',
+        btn_support: 'Contacter le Support',
+        footer_about: 'À propos de l\'app',
+        footer_features: 'Fonctionnalités',
+        footer_privacy: 'Confidentialité',
+        footer_delete: 'Suppression de Compte',
+        footer_terms: 'Conditions d\'Utilisation',
+        footer_copy: '© 2026 StudyCap. Portez votre productivité à son plus haut niveau.'
+      },
+      'it': {
+        name: 'Italiano',
+        flag: '🇮🇹',
+        dir: 'ltr',
+        nav_about: 'Chi siamo',
+        nav_features: 'Funzionalità',
+        nav_support: 'Supporto',
+        hero_title: 'Studia in modo<br>intelligente.',
+        hero_subtitle: 'Organizza i tuoi appunti, sfrutta l\'Intelligenza Artificiale e padroneggia il metodo Pomodoro. Tutto in un unico posto.',
+        btn_google_play: 'Google Play (Test chiuso)',
+        btn_app_store: 'App Store (In arrivo)',
+        btn_windows: 'Windows (In arrivo)',
+        features_title: 'Funzionalità Principali',
+        features_subtitle: 'Tutto ciò di cui hai bisogno per raggiungere i tuoi traguardi accademici',
+        feat1_title: 'Mari IA',
+        feat1_desc: 'Risolvi dubbi accademici istantaneamente grazie alla nostra IA integrata in StudyCap.',
+        feat2_title: 'Esami e Domande',
+        feat2_desc: 'Accedi alle prove d\'esame nell\'app e rispondi alle domande per esercitarti e ripassare.',
+        feat3_title: 'Piano di studio',
+        feat3_desc: 'Pianifica materie, scadenze e sessioni di studio per una routine perfettamente organizzata.',
+        feat4_title: 'Visualizzazione elenco o tabella',
+        feat4_desc: 'Scegli la modalità che preferisci: elenco per una lettura rapida o tabella per comparare.',
+        feat5_title: 'Appunti e Media',
+        feat5_desc: 'Separa le note per disciplina, allega audio e immagini, o archivia per rimanere concentrato.',
+        feat6_title: 'Focus Assoluto',
+        feat6_desc: 'Metodo Pomodoro con intervalli su misura per moltiplicare la tua produttività quotidiana.',
+        feat7_title: 'Agenda',
+        feat7_desc: 'Segna appuntamenti, esami e consegne in un calendario chiaro e funzionale.',
+        feat8_title: 'Statistiche',
+        feat8_desc: 'Visualizza i tuoi progressi nel dettaglio e monitora gli obiettivi raggiunti durante il mese.',
+        feat9_title: 'Cloud Sync',
+        feat9_desc: 'Dati salvati in locale con sincronizzazione cloud in arrivo per accedere ovunque.',
+        support_title: 'Domande o feedback?',
+        support_subtitle: 'Siamo in costante evoluzione per offrirti sempre il massimo nello studio.',
+        btn_support: 'Contatta il Supporto',
+        footer_about: 'Info sull\'App',
+        footer_features: 'Funzionalità',
+        footer_privacy: 'Privacy',
+        footer_delete: 'Elimina Account',
+        footer_terms: 'Termini di Servizio',
+        footer_copy: '© 2026 StudyCap. Massimizza la tua produttività nello studio.'
+      },
+      'ru': {
+        name: 'Русский',
+        flag: '🇷🇺',
+        dir: 'ltr',
+        nav_about: 'О приложении',
+        nav_features: 'Возможности',
+        nav_support: 'Поддержка',
+        hero_title: 'Учитесь с умом,<br>а не силой.',
+        hero_subtitle: 'Организуйте конспекты, используйте искусственный интеллект и метод Pomodoro. Всё в одном месте.',
+        btn_google_play: 'Google Play (Тестирование)',
+        btn_app_store: 'App Store (Скоро)',
+        btn_windows: 'Windows (Скоро)',
+        features_title: 'Ключевые функции',
+        features_subtitle: 'Все необходимые инструменты для достижения академических целей',
+        feat1_title: 'Mari AI',
+        feat1_desc: 'Мгновенно находите ответы на учебные вопросы с помощью встроенного в StudyCap ИИ.',
+        feat2_title: 'Тесты и экзаменационные вопросы',
+        feat2_desc: 'Решайте экзаменационные задания прямо в приложении для повторения и практики.',
+        feat3_title: 'Расписание занятий',
+        feat3_desc: 'Планируйте предметы и учебные часы для поддержания идеального распорядка дня.',
+        feat4_title: 'Список или таблица',
+        feat4_desc: 'Выбирайте удобный формат: компактный список для быстрого чтения или наглядная таблица.',
+        feat5_title: 'Заметки и медиа',
+        feat5_desc: 'Группируйте записи по предметам, прикрепляйте аудиозаписи и фото, архивируйте старое.',
+        feat6_title: 'Полная концентрация',
+        feat6_desc: 'Таймер Pomodoro с настраиваемыми интервалами для максимальной продуктивности.',
+        feat7_title: 'Календарь и дедлайны',
+        feat7_desc: 'Отмечайте даты контрольных, экзаменов и сдачи работ в удобном календаре.',
+        feat8_title: 'Статистика учебы',
+        feat8_desc: 'Следите за подробной динамикой и личными рекордами продуктивности за весь месяц.',
+        feat9_title: 'Синхронизация Cloud',
+        feat9_desc: 'Локальное хранение данных с готовящейся синхронизацией для доступа с любых устройств.',
+        support_title: 'Вопросы или предложения?',
+        support_subtitle: 'Мы постоянно совершенствуем приложение для максимального удобства вашей учебы.',
+        btn_support: 'Связаться с поддержкой',
+        footer_about: 'О приложении',
+        footer_features: 'Функции',
+        footer_privacy: 'Конфиденциальность',
+        footer_delete: 'Удаление аккаунта',
+        footer_terms: 'Условия использования',
+        footer_copy: '© 2026 StudyCap. Повышайте свою продуктивность до максимума.'
+      }
+    };
+
+    const availableLanguages = [
+      { code: 'pt_BR', name: 'Português', native: 'Brasil', flag: '🇧🇷' },
+      { code: 'pt_PT', name: 'Português', native: 'Portugal', flag: '🇵🇹' },
+      { code: 'en', name: 'English', native: 'English', flag: '🇺🇸' },
+      { code: 'es', name: 'Español', native: 'Español', flag: '🇪🇸' },
+      { code: 'zh', name: 'Mandarim', native: '简体中文', flag: '🇨🇳' },
+      { code: 'hi', name: 'Hindi', native: 'हिन्दी', flag: '🇮🇳' },
+      { code: 'id', name: 'Indonésio', native: 'Bahasa Indonesia', flag: '🇮🇩' },
+      { code: 'ar', name: 'Árabe', native: 'العربية', flag: '🇸🇦' },
+      { code: 'bn', name: 'Bengali', native: 'বাংলা', flag: '🇧🇩' },
+      { code: 'ur', name: 'Urdu', native: 'اردو', flag: '🇵🇰' },
+      { code: 'ja', name: 'Japonês', native: '日本語', flag: '🇯🇵' },
+      { code: 'ko', name: 'Coreano', native: '한국어', flag: '🇰🇷' },
+      { code: 'de', name: 'Alemão', native: 'Deutsch', flag: '🇩🇪' },
+      { code: 'fr', name: 'Francês', native: 'Français', flag: '🇫🇷' },
+      { code: 'it', name: 'Italiano', native: 'Italiano', flag: '🇮🇹' },
+      { code: 'ru', name: 'Russo', native: 'Русский', flag: '🇷🇺' }
+    ];
+
+    let currentSelectedLang = 'pt_BR';
+
+    function setLanguage(langCode) {
+      if (!translations[langCode]) langCode = 'pt_BR';
+      currentSelectedLang = langCode;
+
+      try {
+        localStorage.setItem('studycap_language', langCode);
+      } catch(e) {}
+
+      const langData = translations[langCode];
+      document.documentElement.lang = langCode.replace('_', '-');
+      document.documentElement.dir = langData.dir || 'ltr';
+
+      // Atualizar textos dos elementos
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (langData[key]) {
+          el.innerHTML = langData[key];
+        }
+      });
+
+      // Atualizar botão da bandeja
+      const flagEl = document.getElementById('currentLangFlag');
+      const nameEl = document.getElementById('currentLangName');
+      if (flagEl) flagEl.textContent = langData.flag;
+      if (nameEl) nameEl.textContent = langData.name;
+
+      // Atualizar classe ativa nas opções
+      document.querySelectorAll('.lang-option-item').forEach(btn => {
+        if (btn.getAttribute('data-code') === langCode) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+    }
+
+    function initLanguageSelector() {
+      const menu = document.getElementById('langDropdownMenu');
+      const wrapper = document.getElementById('langSelectorWrapper');
+      const btn = document.getElementById('langDropdownBtn');
+      const navLinks = document.getElementById('navLinks');
+
+      if (!menu || !wrapper || !btn) return;
+
+      // Monta as opções na bandeja
+      menu.innerHTML = availableLanguages.map(item => `
+        <button type="button" class="lang-option-item ${item.code === currentSelectedLang ? 'active' : ''}" data-code="${item.code}">
+          <span class="lang-flag">${item.flag}</span>
+          <span>${item.name}</span>
+          <span class="lang-native">${item.native}</span>
+        </button>
+      `).join('');
+
+      // Alternar abertura da bandeja (fecha o menu mobile se estiver aberto)
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (navLinks && navLinks.classList.contains('active')) {
+          navLinks.classList.remove('active');
+        }
+        const isOpen = wrapper.classList.toggle('open');
+        btn.setAttribute('aria-expanded', isOpen);
+      });
+
+      // Seleção de idioma
+      menu.querySelectorAll('.lang-option-item').forEach(itemBtn => {
+        itemBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const code = itemBtn.getAttribute('data-code');
+          setLanguage(code);
+          wrapper.classList.remove('open');
+          btn.setAttribute('aria-expanded', 'false');
+        });
+      });
+
+      // Fechar ao clicar fora
+      document.addEventListener('click', (e) => {
+        if (!wrapper.contains(e.target)) {
+          wrapper.classList.remove('open');
+          btn.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      // Carregar idioma salvo previamente
+      let saved = 'pt_BR';
+      try {
+        saved = localStorage.getItem('studycap_language') || 'pt_BR';
+      } catch(e) {}
+      setLanguage(saved);
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      initLanguageSelector();
+    });
+
     const canvas = document.getElementById("particle-canvas");
     const ctx = canvas ? canvas.getContext("2d") : null;
 
@@ -857,7 +1819,6 @@
       animateParticles();
     }
 
-    // --- MOTOR DE SCROLL REVEAL ---
     const revealElements = document.querySelectorAll('.reveal');
     const scrollInd = document.getElementById('scrollInd');
 
@@ -887,6 +1848,12 @@
     if (menuToggle && navLinks) {
       menuToggle.addEventListener('click', (e) => {
         e.stopPropagation();
+        // Fecha o dropdown de idioma se estiver aberto ao clicar no menu hambúrguer
+        const wrapper = document.getElementById('langSelectorWrapper');
+        if (wrapper && wrapper.classList.contains('open')) {
+          wrapper.classList.remove('open');
+          document.getElementById('langDropdownBtn')?.setAttribute('aria-expanded', 'false');
+        }
         navLinks.classList.toggle('active');
       });
 
