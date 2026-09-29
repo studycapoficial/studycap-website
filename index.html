@@ -145,8 +145,8 @@
     }
 
     .container { 
-      position: relative;
-      z-index: 1;
+      position: relative; 
+      z-index: 1; 
       max-width: 1200px; 
       margin: 0 auto; 
       padding: 0 24px; 
@@ -617,6 +617,7 @@
       margin-top: 24px;
       box-shadow: 0 10px 25px var(--primary-glow);
       transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
     }
     .btn-primary:hover { transform: translateY(-4px); background: var(--primary-hover); box-shadow: 0 15px 30px rgba(139, 92, 246, 0.5); }
 
@@ -913,7 +914,7 @@
     <section id="support" class="support-section reveal">
       <h2 style="font-size: 2.2rem; font-weight: 800; margin-bottom: 12px; letter-spacing: -1px;" data-i18n="support_title">Dúvidas ou Feedback?</h2>
       <p style="color: var(--text-muted); max-width: 500px; margin: 0 auto;" data-i18n="support_subtitle">Estamos em constante evolução para oferecer o melhor para seus estudos.</p>
-      <a href="mailto:studycapoficial@gmail.com" class="btn-primary" data-i18n="btn_support">Falar com Suporte</a>
+      <a href="mailto:suporte.studycap@gmail.com" class="btn-primary" onclick="openSupportEmail(event)" data-i18n="btn_support">Falar com Suporte</a>
     </section>
 
     <footer>
@@ -930,6 +931,15 @@
   </div>
 
   <script>
+    function openSupportEmail(e) {
+      const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+      if (!isMobile) {
+        if (e) e.preventDefault();
+        const gmailUrl = "https://mail.google.com/mail/?view=cm&fs=1&to=suporte.studycap@gmail.com&su=" + encodeURIComponent("Suporte - StudyCap");
+        window.open(gmailUrl, "_blank", "noopener,noreferrer");
+      }
+    }
+
     const translations = {
       'pt_BR': {
         name: 'Português (BR)',
